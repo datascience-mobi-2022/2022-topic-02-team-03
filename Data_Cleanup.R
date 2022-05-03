@@ -1,8 +1,8 @@
-# Please set working directory to folder containing the following folders with the datasets
-tcga_exp <- readRDS("./RNA-SeqAllTumors/tcga_tumor_log2TPM.RDS")
-tcga_anno <- readRDS("./RNA-SeqAllTumors/tcga_tumor_annotation.RDS")
-tumor_vs_norm <- readRDS("./tumorvsnormal/tcga_tumor_normal_datascience_proj_2022.RDS")
-genesets <- readRDS("./hallmarkGenes/hallmarks_genesets.rds")
+# load data beforehand
+#tcga_exp <- readRDS("./RNA-SeqAllTumors/tcga_tumor_log2TPM.RDS")
+#tcga_anno <- readRDS("./RNA-SeqAllTumors/tcga_tumor_annotation.RDS")
+#tumor_vs_norm <- readRDS("./tumorvsnormal/tcga_tumor_normal_datascience_proj_2022.RDS")
+#genesets <- readRDS("./hallmarkGenes/hallmarks_genesets.rds")
 
 tcga_exp_copy <- tcga_exp
 
