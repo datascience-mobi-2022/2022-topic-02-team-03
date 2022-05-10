@@ -10,22 +10,26 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Load all needed packages:
+
 ```{r, include = FALSE}
 library(msigdbr)
 library(dplyr)
 ```
 
 Get human specific, canonical genesets from KEGG:
+
 ```{r}
 canonical_pathways_KEGG = msigdbr(species = "human", category = "C2", subcategory = "CP:KEGG")
 ```
 
 Filtering for all genesets related to metabolism:
+
 ```{r}
 metabolism_pathways_KEGG = canonical_pathways_KEGG[which(grepl("METABOLISM", canonical_pathways_KEGG$gs_name)==TRUE),]
 ```
 
 Creating a list with all characters for each pathway containing the human_gene_symbol of each related genes:
+
 ```{r}
 metabolism_list = list()
 
@@ -37,4 +41,23 @@ for (gene.name in unique(metabolism_pathways_KEGG$gs_name))
 metabolism_list
 
 rm(gene.name, pathway)
+```
+
+### Let's compute the Jaccard similarity for our list of gene sets \[metabolism_list\] and the given list of hallmark gene sets \[hallmarks_genesets\]
+
+create a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
+
+```{r}
+jaccard <- function(a, b) {
+    intersection = length(intersect(a, b))
+    union = length(a) + length(b) - intersection
+    return (intersection/union)
+}
+```
+
+calculate the Jaccard Coefficient for our gene sets
+
+```{r}
+Jaccard_coefficients = jaccard(genesets, metabolism_list)
+Jaccard_coefficients
 ```
