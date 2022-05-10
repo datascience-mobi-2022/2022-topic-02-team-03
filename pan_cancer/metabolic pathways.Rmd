@@ -66,3 +66,16 @@ Jaccard_coefficients = for (i in (1:length(metabolism_list))){
 #create a matrix, wo jeder Jaccard Wert mit Position ij eingespeichert wird
 matrix(c(Jaccard_coefficients) ,nrow = 41)
 ```
+### Correlation and heatmap
+```{r}
+library(pheatmap)
+
+correlation.mat = sapply(1:ncol(metabolism_list),function(i) {
+  sapply(1:ncol(genesets),function(j) {
+  cor(metabolism_list[,i],genesets[,j])
+})})
+
+pheatmap(correlation.mat)
+```
+zu obrigen Chunk: egal ob man über nrow oder ncol kommz immer argument of length 0, ich denk wir müssen unsere Listen erst mergen und/oder in ein anderes Format überführen
+
