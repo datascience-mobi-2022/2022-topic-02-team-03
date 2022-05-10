@@ -4,16 +4,13 @@ author: "Marie Kleinert"
 date: "10 5 2022"
 output: html_document
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 Load all needed packages:
 
 ```{r, include = FALSE}
 library(msigdbr)
-library(dplyr)
+library(pheatmap)
+library(grid)
+genesets = readRDS("./data/hallmarks_genesets.rds")
 ```
 
 Get human specific, canonical genesets from KEGG:
@@ -43,39 +40,43 @@ metabolism_list
 rm(gene.name, pathway)
 ```
 
-### Let's compute the Jaccard similarity for our list of gene sets \[metabolism_list\] and the given list of hallmark gene sets \[hallmarks_genesets\]
+Computing the Jaccard similarity for our list of gene sets "metabolism_list" and the given list of hallmark gene sets "hallmarks_genesets":
 
-create a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
+Creating a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
 
 ```{r}
-jaccard <- function(a, b) {                         #a und b sind Vektoren
+jaccard = function(a, b) {                         #a und b sind Vektoren
     intersection = length(intersect(a, b))          #Schnittmenge
     union = length(a) + length(b) - intersection    #Vereinigungsmenge
     return (intersection/union)
 }
 ```
 
-calculate the Jaccard Coefficient for our gene sets
-
+Calculating the Jaccard-Coefficient for our gene sets:
 ```{r}
-Jaccard_coefficients = for (i in (1:length(metabolism_list))){
-  for (j in (1:length(genesets))){
-       jaccard(metabolism_list[[i]], genesets[[1]][[j]])
+Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list), byrow = TRUE)
+for (i in (1:length(metabolism_list))){
+  for (j in (1:length(genesets[[1]]))){
+       j_value = jaccard(metabolism_list[[i]], genesets[[1]][[j]])
+    Jaccard_coefficients[i, j] = j_value 
   }}
 
-#create a matrix, wo jeder Jaccard Wert mit Position ij eingespeichert wird
-matrix(c(Jaccard_coefficients) ,nrow = 41)
+colnames(Jaccard_coefficients) = names(genesets[[1]])
+rownames(Jaccard_coefficients) = names(metabolism_list)
+
+Jaccard_coefficients
+
+rm(i, j, j_value)
 ```
-### Correlation and heatmap
+
+Visualizing the similarity using a heatmap:
 ```{r}
-library(pheatmap)
+setHook("grid.newpage", function() pushViewport(viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
 
-correlation.mat = sapply(1:ncol(metabolism_list),function(i) {
-  sapply(1:ncol(genesets),function(j) {
-  cor(metabolism_list[,i],genesets[,j])
-})})
-
-pheatmap(correlation.mat)
+pheatmap(Jaccard_coefficients, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 5, color = colorRampPalette(c("cadetblue2", "red4"))(100))
+setHook("grid.newpage", NULL, "replace")
+grid.text("hallmarks_genesets", y=1, x=0.3, gp = gpar(fontsize=8))
+grid.text("metabolism_list", x=0, y=0.6, rot=90, gp = gpar(fontsize=8))
 ```
-zu obrigen Chunk: egal ob man über nrow oder ncol kommz immer argument of length 0, ich denk wir müssen unsere Listen erst mergen und/oder in ein anderes Format überführen
+
 
