@@ -48,9 +48,9 @@ rm(gene.name, pathway)
 create a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
 
 ```{r}
-jaccard <- function(a, b) {
-    intersection = length(intersect(a, b))
-    union = length(a) + length(b) - intersection
+jaccard <- function(a, b) {                         #a und b sind Vektoren
+    intersection = length(intersect(a, b))          #Schnittmenge
+    union = length(a) + length(b) - intersection    #Vereinigungsmenge
     return (intersection/union)
 }
 ```
@@ -58,6 +58,11 @@ jaccard <- function(a, b) {
 calculate the Jaccard Coefficient for our gene sets
 
 ```{r}
-Jaccard_coefficients = jaccard(genesets, metabolism_list)
-Jaccard_coefficients
+Jaccard_coefficients = for (i in (1:length(metabolism_list))){
+  for (j in (1:length(genesets))){
+       jaccard(metabolism_list[[i]], genesets[[1]][[j]])
+  }}
+
+#create a matrix, wo jeder Jaccard Wert mit Position ij eingespeichert wird
+matrix(c(Jaccard_coefficients) ,nrow = 41)
 ```
