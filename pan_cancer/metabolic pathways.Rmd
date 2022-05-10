@@ -1,0 +1,40 @@
+---
+title: "metabolic Genesets"
+author: "Marie Kleinert"
+date: "10 5 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load all needed packages:
+```{r, include = FALSE}
+library(msigdbr)
+library(dplyr)
+```
+
+Get human specific, canonical genesets from KEGG:
+```{r}
+canonical_pathways_KEGG = msigdbr(species = "human", category = "C2", subcategory = "CP:KEGG")
+```
+
+Filtering for all genesets related to metabolism:
+```{r}
+metabolism_pathways_KEGG = canonical_pathways_KEGG[which(grepl("METABOLISM", canonical_pathways_KEGG$gs_name)==TRUE),]
+```
+
+Creating a list with all characters for each pathway containing the human_gene_symbol of each related genes:
+```{r}
+metabolism_list = list()
+
+for (gene.name in unique(metabolism_pathways_KEGG$gs_name))
+  {pathway = c(metabolism_pathways_KEGG[metabolism_pathways_KEGG$gs_name == gene.name, 7])
+  names(pathway) = substring(gene.name, 6)
+  metabolism_list[substring(gene.name, 6)] = pathway}
+
+metabolism_list
+
+rm(gene.name, pathway)
+```
