@@ -4,6 +4,7 @@ author: "Marie Kleinert"
 date: "10 5 2022"
 output: html_document
 ---
+
 Load all needed packages:
 
 ```{r, include = FALSE}
@@ -12,6 +13,8 @@ library(pheatmap)
 library(grid)
 genesets = readRDS("./data/hallmarks_genesets.rds")
 ```
+
+## Creating a list of our chosen metabolism gene sets
 
 Get human specific, canonical genesets from KEGG:
 
@@ -40,12 +43,12 @@ metabolism_list
 rm(gene.name, pathway)
 ```
 
-Computing the Jaccard similarity for our list of gene sets "metabolism_list" and the given list of hallmark gene sets "hallmarks_genesets":
+## Computing the Jaccard similarity for our list of gene sets "metabolism_list" and the given list of hallmark gene sets "hallmarks_genesets":
 
 Creating a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
 
 ```{r}
-jaccard = function(a, b) {                         #a und b sind Vektoren
+jaccard = function(a, b) {                          #a und b sind Vektoren
     intersection = length(intersect(a, b))          #Schnittmenge
     union = length(a) + length(b) - intersection    #Vereinigungsmenge
     return (intersection/union)
@@ -53,6 +56,7 @@ jaccard = function(a, b) {                         #a und b sind Vektoren
 ```
 
 Calculating the Jaccard-Coefficient for our gene sets:
+
 ```{r}
 Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list), byrow = TRUE)
 for (i in (1:length(metabolism_list))){
@@ -70,6 +74,7 @@ rm(i, j, j_value)
 ```
 
 Visualizing the similarity using a heatmap:
+
 ```{r}
 setHook("grid.newpage", function() pushViewport(viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
 
@@ -79,4 +84,31 @@ grid.text("hallmarks_genesets", y=1, x=0.3, gp = gpar(fontsize=8))
 grid.text("metabolism_list", x=0, y=0.6, rot=90, gp = gpar(fontsize=8))
 ```
 
+### inoffiziell: Überprüfung mit Wangs Metabolischen Pathways
 
+```{r}
+Jaccard_coefficients_W = matrix(ncol = length(genesets[[1]]), nrow = length(metabolic_pathways_Wangjun), byrow = TRUE)
+for (i in (1:length(metabolic_pathways_Wangjun))){
+  for (j in (1:length(genesets[[1]]))){
+       j_value_W = jaccard(metabolic_pathways_Wangjun[[i]], genesets[[1]][[j]])
+    Jaccard_coefficients_W[i, j] = j_value_W 
+  }}
+
+colnames(Jaccard_coefficients_W) = names(genesets[[1]])
+rownames(Jaccard_coefficients_W) = names(metabolic_pathways_Wangjun)
+
+Jaccard_coefficients_W
+
+rm(i, j, j_value_W)
+```
+
+heatmap:
+
+```{r}
+setHook("grid.newpage", function() pushViewport(viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
+
+pheatmap(Jaccard_coefficients_W, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 5, color = colorRampPalette(c("lightskyblue1", "firebrick"))(100))
+setHook("grid.newpage", NULL, "replace")
+grid.text("hallmarks_genesets", y=1, x=0.3, gp = gpar(fontsize=8))
+grid.text("metabolism_list", x=0, y=0.6, rot=90, gp = gpar(fontsize=8))
+```
