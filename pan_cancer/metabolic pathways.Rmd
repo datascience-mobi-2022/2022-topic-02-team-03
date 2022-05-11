@@ -110,5 +110,5 @@ setHook("grid.newpage", function() pushViewport(viewport(x=1,y=1,width=0.9, heig
 pheatmap(Jaccard_coefficients_W, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 5, color = colorRampPalette(c("lightskyblue1", "firebrick"))(100))
 setHook("grid.newpage", NULL, "replace")
 grid.text("hallmarks_genesets", y=1, x=0.3, gp = gpar(fontsize=8))
-grid.text("metabolism_list", x=0, y=0.6, rot=90, gp = gpar(fontsize=8))
+grid.text("metabolic_pathways_Wangjun", x=0, y=0.6, rot=90, gp = gpar(fontsize=8))
 ```
