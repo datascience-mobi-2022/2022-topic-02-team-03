@@ -10,23 +10,21 @@ Load all needed packages:
 library(msigdbr)
 library(pheatmap)
 library(grid)
+library(bayesbio)
 genesets = readRDS("./data/hallmarks_genesets.rds")
 ```
 
 Get human specific, canonical genesets from KEGG:
-
 ```{r}
 canonical_pathways_KEGG = msigdbr(species = "human", category = "C2", subcategory = "CP:KEGG")
 ```
 
 Filtering for all genesets related to metabolism:
-
 ```{r}
 metabolism_pathways_KEGG = canonical_pathways_KEGG[which(grepl("METABOLISM", canonical_pathways_KEGG$gs_name)==TRUE),]
 ```
 
 Creating a list with all characters for each pathway containing the human_gene_symbol of each related genes:
-
 ```{r}
 metabolism_list = list()
 
@@ -40,10 +38,52 @@ metabolism_list
 rm(gene.name, pathway)
 ```
 
+Extracting the hallmark genesets from KEGG into a list:
+```{r}
+hallmark_pathways_KEGG = msigdbr(species = "human", category = "H")
+
+hallmark_list = list()
+
+for (gene.name in unique(hallmark_pathways_KEGG$gs_name))
+  {pathway = c(hallmark_pathways_KEGG[hallmark_pathways_KEGG$gs_name == gene.name, 7])
+  names(pathway) = substring(gene.name, 10)
+  hallmark_list[substring(gene.name, 10)] = pathway}
+
+hallmark_list
+
+rm(gene.name, pathway)
+```
+
+Calculating the Jaccard Coefficients with our metabolism_genesets:
+```{r}
+Jaccard_coefficients_hallmark = matrix(ncol = length(hallmark_list), nrow = length(metabolism_list), byrow = TRUE)
+
+for (i in 1:length(metabolism_list))
+  {for (j in 1:length(hallmark_list))
+    {j_value = jaccardSets(metabolism_list[[i]], hallmark_list[[j]])
+    Jaccard_coefficients_hallmark[i, j] = j_value 
+  }}
+
+colnames(Jaccard_coefficients_hallmark) = names(hallmark_list)
+rownames(Jaccard_coefficients_hallmark) = names(metabolism_list)
+
+Jaccard_coefficients_hallmark
+
+rm(i, j, j_value)
+```
+
+Visualizing the similarity using a heatmap:
+```{r}
+pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 4, color = colorRampPalette(c("lightskyblue1", "firebrick"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets")
+setHook("grid.newpage", NULL, "replace")
+```
+
+
+
+-------------------------------------------------------------------------------------
 Computing the Jaccard similarity for our list of gene sets "metabolism_list" and the given list of hallmark gene sets "hallmarks_genesets":
 
 Creating a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
-
 ```{r}
 jaccard = function(a, b) {                         #a und b sind Vektoren
     intersection = length(intersect(a, b))          #Schnittmenge
