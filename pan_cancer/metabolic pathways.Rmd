@@ -75,7 +75,6 @@ rm(i, j, j_value)
 Visualizing the similarity using a heatmap:
 ```{r}
 pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 4, color = colorRampPalette(c("lightskyblue1", "firebrick"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets")
-setHook("grid.newpage", NULL, "replace")
 ```
 
 
@@ -92,7 +91,7 @@ jaccard = function(a, b) {                         #a und b sind Vektoren
 }
 ```
 
-Calculating the Jaccard-Coefficient for our gene sets:
+Calculating the Jaccard-Coefficient for the metabolism genesets and the provided genesets of cancer hallmarks:
 ```{r}
 Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list), byrow = TRUE)
 for (i in (1:length(metabolism_list))){
