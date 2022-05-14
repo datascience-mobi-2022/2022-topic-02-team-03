@@ -2,7 +2,9 @@
 title: "metabolic Genesets"
 author: "Marie Kleinert"
 date: "10 5 2022"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 Load all needed packages:
 ```{r, include = FALSE}
@@ -51,12 +53,13 @@ jaccard = function(a, b) {                         #a und b sind Vektoren
 
 Calculating the Jaccard-Coefficient for the metabolism genesets and the provided genesets of cancer hallmarks:
 ```{r}
-Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list_gs), byrow = TRUE) #creating an empty matrix 
+Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list_gs), byrow = TRUE) 
+
 for (i in (1:length(metabolism_list_gs))){
   for (j in (1:length(genesets[[1]]))){
        j_value = jaccard(metabolism_list_gs[[i]], genesets[[1]][[j]])
     Jaccard_coefficients[i, j] = j_value 
-  }} #storing the jaccard coefficients in the matrix
+  }} 
 
 colnames(Jaccard_coefficients) = names(genesets[[1]])
 rownames(Jaccard_coefficients) = names(metabolism_list_gs) 
@@ -66,7 +69,7 @@ rm(i, j, j_value)
 
 Visualizing the similarity using a heatmap:
 ```{r}
-pheatmap(Jaccard_coefficients, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 4, color = colorRampPalette(brewer.pal(n = 7, name ="BuPu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets")
+pheatmap(Jaccard_coefficients, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
 
@@ -105,7 +108,7 @@ rm(i, j, j_value)
 
 Visualizing the similarity using a heatmap:
 ```{r}
-pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 4, color = colorRampPalette(brewer.pal(n = 7, name ="BuPu"))(100), main = "Jaccard Coefficients of given and hallmark genesets")
+pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of given and hallmark genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
 
@@ -126,7 +129,8 @@ rm(gene.name, pathway)
 
 Converting the genesets list so it contains ensembl ids, as well:
 ```{r}
-genesets_id = list() #creating an empty list
+genesets_id = list() 
+
 for (path in 1:length(genesets[[1]]))
 {id = getBM(mart = ensembl, values = genesets[[1]][[path]], attributes = c("hgnc_symbol", "ensembl_gene_id"), filters = "hgnc_symbol")
   genesets_id[[path]] = id[[2]]} #path runs over the given geneset and with getBM we extract the ensembl id for each gene symbol of each pathway 
@@ -141,7 +145,7 @@ Calculating the jaccard coefficient between the metabolism genesets and the give
 Jaccard_coefficients_id = matrix(ncol = length(genesets_id), nrow = length(metabolism_list_id), byrow = TRUE)
 for (i in (1:length(metabolism_list_id))){
   for (j in (1:length(genesets_id))){
-       j_value = jaccardSets(metabolism_list_id[[i]], genesets_id[[j]])
+       j_value = jaccard(metabolism_list_id[[i]], genesets_id[[j]])
     Jaccard_coefficients_id[i, j] = j_value 
   }}
 
@@ -153,5 +157,6 @@ rm(i, j, j_value)
 
 Plotting the similarity as a heatmap:
 ```{r}
-pheatmap(Jaccard_coefficients_id, cluster_rows = FALSE, cluster_cols = FALSE, fontsize = 4, color = colorRampPalette(brewer.pal(n = 7, name ="BuPu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble id")
+pheatmap(Jaccard_coefficients_id, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble ID", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
+
