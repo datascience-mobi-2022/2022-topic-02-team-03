@@ -3,6 +3,8 @@ library(ggplot2) # wichtig!!
 library(scales)
 install.packages("gridExtra")               # Install gridExtra package
 library("gridExtra")
+install.packages("gtools")
+library(gtools)
 #------------------------------
 
 
@@ -28,7 +30,7 @@ tumor_vs_norm <- readRDS("./data/tcga_tumor_normal_datascience_proj_2022.RDS")
 
 #-----------reorganizing and cleaning tumor_vs_norm---------------------
 
-#reorganize (Speicherung aller dataframes der LUAD Patienten in seperate dataframes)
+#reorganize (Speicherung aller dataframes der LUAD Patienten in separate dataframes)
 
 luad = tumor_vs_norm[["LUAD"]] # im vektor sind nur die infos zu "LUAD" gespeichert (siehe liste)
 luad.tumor = luad[["tumor"]]
@@ -100,7 +102,7 @@ med.tn = ggplot(mmv_df, aes( x = med.tumor, y = med.normal))+
   geom_hline(yintercept = c(1,-1), col = "tan4")+
   geom_vline(xintercept = c(1,-1), col = "tan4")
 
-med.tn # Meian aller exprimierten Gene im normalen Gewebe gegen Median aller expr. Gene im tumor Gewebe
+med.tn # Median aller exprimierten Gene im normalen Gewebe gegen Median aller expr. Gene im tumor Gewebe
 #
 #
 #
@@ -123,7 +125,7 @@ q = quantile(mmv_df$diff, probs = p, names = F) # definition des quantils,  name
 #qk = # alle Werte unter dem unteren quantil (q_k_leiner)
 
 
-qd = c(1:length(mmv_df$diff)) # q_uantil_d_ifferenz veketor mit der läne aller gene, dieser wird nach durchführung
+qd = c(1:length(mmv_df$diff)) # quantil_differenz vektor mit der länge aller gene, dieser wird nach durchführung
 # eines Loopes die information enthalten, ob ein gen über dem oberen quantil, unter dem unteren quantil oder zwischen beiden liegt...
 
 for(i in 1:length(mmv_df$diff)){ 
@@ -133,7 +135,7 @@ for(i in 1:length(mmv_df$diff)){
                 qd[i] <- "drüber", # ..."drüber". wenn nein, dann...
                 qd[i] <- "zw")) #... "zwischen"
 }
-rm(i) # i bracuht man ja nicht mehr
+rm(i) # i braucht man ja nicht mehr
 
 qd # qd hat die info über jedes gen gespeichert, ob der wert Über dem oberen quantil, unter dem unteren oder dazwischen liegt...
 # Visualisiert:
@@ -164,8 +166,19 @@ med.tn.diff # plot differenz median.tumor-median.normal
 
 
 
+#----------------- Fold change und log2 Fold Change berechnen ------------------------------
+# traditional foldchange
+fc_med = foldchange(mmv_df$med.tumor, mmv_df$med.normal)
 
+#foldchange mit Logarithmus Base 2
+# Begründung: FC ist unverlässlich bei Vorzeichenwechsel der Expressionslevels
+              # wenn die Differenz X-Y groß ist aber das Verhältnis X/Y klein
 
+#Step 1: create a matrix of log-ratio values of the medians
+logratio_normal = log2(abs(mmv_df$med.normal)) #wir müssen Absolutwert nehmen um keine NAs zu produzieren
+logratio_tumor = log2(abs(mmv_df$med.tumor))
+logratio = logratio_tumor - logratio_normal #log(X/Y) = log(x) - log(Y)
+log_fc_med = logratio2foldchange(logratio, base =2)
 
 
 
