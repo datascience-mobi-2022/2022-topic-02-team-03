@@ -168,7 +168,7 @@ med.tn.diff # plot differenz median.tumor-median.normal
 
 #----------------- Fold change und log2 Fold Change berechnen ------------------------------
 # traditional foldchange
-foldchange(mmv_df$med.tumor, mmv_df$med.normal)
+fc_med = foldchange(mmv_df$med.tumor, mmv_df$med.normal)
 
 #foldchange mit Logarithmus Base 2
 # Begründung: FC ist unverlässlich bei Vorzeichenwechsel der Expressionslevels
@@ -177,8 +177,8 @@ foldchange(mmv_df$med.tumor, mmv_df$med.normal)
 #Step 1: create a matrix of log-ratio values of the medians
 logratio_normal = log2(abs(mmv_df$med.normal)) #wir müssen Absolutwert nehmen um keine NAs zu produzieren
 logratio_tumor = log2(abs(mmv_df$med.tumor))
-logratio = logratio_tumor / logratio_normal
-log_foldchange = logratio2foldchange(logratio)
+logratio = logratio_tumor - logratio_normal #log(X/Y) = log(x) - log(Y)
+log_fc_med = logratio2foldchange(logratio, base =2)
 
 
 
