@@ -3,6 +3,7 @@
 
 library(ggplot2)
 library(reshape2)
+library(gtools)
 
 
 exp_highvar <- readRDS("./data/tcga_exp_small.RDS")

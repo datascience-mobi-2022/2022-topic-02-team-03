@@ -37,20 +37,34 @@ print(paste0("There are " , sum(is.na(tcga_anno)) , " NAs in tcga_anno"))
 
 # where do these NAs come from?
 NA_sources <- sort(apply(tcga_anno, 2, function(x){sum(is.na(x))}))
+NA_sources <- data.frame("sum" = NA_sources, "variable" = names(NA_sources))
 print(paste0("There are " , sum(is.na(tcga_anno$cancer_type_abbreviation)) , " NAs in cancer types"))
-par(mar=c(12,4,4,2)+.1)
-barplot(NA_sources[-which(NA_sources < 200)], ylim = c(0, 10000), main = "distribution of NA sources in anno data", las=2, names.arg = )
 
-# histogram of mean of genes for LUAD patients 
-hist(apply(LUAD_patients, 2, mean),  breaks = 20, xlab = "mean expression over all genes", main="distribution of gene expression in LUAD")
+ggplot(NA_sources, aes(x=reorder(variable, sum), y = sum))+
+  geom_col(color = "dodgerblue3")+
+  coord_flip()+
+  xlab("")+
+  ylab("sum of NAs in anno")
+
 
 # max and min expressed genes in LUAD
 LUAD_means <- apply(LUAD_patients, 2, mean)
 LUAD_means_desc <- sort(LUAD_means, decreasing = TRUE)
 LUAD_means_asc <- sort(LUAD_means, decreasing = FALSE)
 LUAD_means <- data.frame("name" = names(LUAD_means_desc), "desc"=LUAD_means_desc)
-rm(LUAD_means_asc, LUAD_means_desc)
+all_means <- apply(tcga_exp_copy, 2, mean)
+all_means <- data.frame("name" = names(all_means), "desc" = sort(all_means, decreasing = TRUE))
+# histogram of mean of genes for LUAD patients 
+#hist(apply(LUAD_patients, 2, mean),  breaks = 20, xlab = "mean expression over all genes", main="distribution of gene expression in LUAD")
 
+ggplot(all_means, aes(x = desc))+
+  geom_histogram(bins=30, color = "grey")+
+  scale_y_log10()+
+  xlab("mean expression of gene")+
+  ylab("log10 count")+
+  ggtitle("distribution of mean gene expression in all patients")
+
+rm(LUAD_means_asc, LUAD_means_desc)
 # get biotypes of exp-genes with biomart
 ensemble_noVersion <- c()
 for (element in ensemble) {
@@ -61,10 +75,6 @@ ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
 biotypes <- getBM(mart = ensembl, values = ensemble_noVersion, filters = "ensembl_gene_id", attributes = c("gene_biotype", "ensembl_gene_id"))
 
 genes_with_biotypes <- list()
-#for (gene in biotypes$ensembl_gene_id) {
-#  genes_with_biotypes <- append(genes_with_biotypes,grep(gene, rownames(tcga_exp)))
-#  
-#}
 genes_with_biotypes <- mclapply(biotypes$ensembl_gene_id, function(gene){grep(gene, rownames(tcga_exp))}, mc.cores = detectCores())
 genes_with_biotypes <- unlist(genes_with_biotypes)
 
@@ -91,12 +101,12 @@ colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
 
 # finding the max variance genes
 gene_variances <- sort(apply(tcga_exp_copy, 2, var), decreasing = TRUE)
-plot(gene_variances, type="l", xlab = "genes", ylab="variance")
+#plot(gene_variances, type="l", xlab = "genes", ylab="variance")
 
 #delete the lowest 50% of genes 
 exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.5))]
 gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
-plot(gene_variances_highvar, type="l", xlab = "genes", ylab="variance")
+
 
 grob <- grobTree(textGrob("AL162151.3", x=0.88,  y=0.09, hjust=0, gp=gpar(col="red", fontsize=10, fontface="italic")))
 
