@@ -3,7 +3,7 @@ library(ggplot2) # wichtig!!
 library(scales)
 install.packages("gridExtra")               # Install gridExtra package
 library("gridExtra")
-install.packages("gtools")
+install.packages("gtools")                  #gtools package used for foldchange & logratio2foldchange function
 library(gtools)
 #------------------------------
 
