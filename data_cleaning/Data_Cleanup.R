@@ -3,6 +3,8 @@
 #-------------------------------------------
 library(ggplot2) 
 library(biomaRt)
+library(parallel)
+
 
 #loading data from data folder + making a copy
 tcga_exp <- readRDS("./data/tcga_tumor_log2TPM.RDS")
@@ -23,6 +25,7 @@ for (element in rownames(tcga_exp)) {
   ensemble <- c(ensemble, strsplit(element, "|", fixed = TRUE)[[1]][1])
 }
 
+rm(element)
 # setting row names to gene IDs; enumerate duplicates
 colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
 
@@ -37,15 +40,6 @@ print(paste0("There are " , sum(is.na(tcga_anno$cancer_type_abbreviation)) , " N
 par(mar=c(12,4,4,2)+.1)
 barplot(NA_sources[-which(NA_sources < 200)], ylim = c(0, 10000), main = "distribution of NA sources in anno data", las=2, names.arg = )
 
-# finding the max variance genes
-gene_variances <- sort(apply(tcga_exp_copy, 2, var), decreasing = TRUE)
-plot(gene_variances, type="l", xlab = "genes", ylab="variance")
-
-#delete the lowest 40% of genes 
-exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.4))]
-gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
-plot(gene_variances_highvar, type="l", xlab = "genes", ylab="variance")
-
 # histogram of mean of genes for LUAD patients 
 hist(apply(LUAD_patients, 2, mean),  breaks = 20, xlab = "mean expression over all genes", main="distribution of gene expression in LUAD")
 
@@ -56,17 +50,53 @@ LUAD_means_asc <- sort(LUAD_means, decreasing = FALSE)
 LUAD_means <- data.frame("name" = names(LUAD_means_desc), "desc"=LUAD_means_desc)
 rm(LUAD_means_asc, LUAD_means_desc)
 
-# get biotypes with biomart
+# get biotypes of exp-genes with biomart
 ensemble_noVersion <- c()
 for (element in ensemble) {
   ensemble_noVersion <- c(ensemble_noVersion, strsplit(element, ".", fixed = TRUE)[[1]][1])
 }
+rm(element)
 ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
 biotypes <- getBM(mart = ensembl, values = ensemble_noVersion, filters = "ensembl_gene_id", attributes = c("gene_biotype", "ensembl_gene_id"))
 
-biotypes_paired <- data.frame()
-for (gene in biotypes$ensembl_gene_id) {
-  biotypes_paired <- rbind(biotypes_paired, tcga_exp[grep(gene, rownames(tcga_exp)),])
-  print(grep(toString(gene), rownames(tcga_exp)))
-  
+genes_with_biotypes <- list()
+#for (gene in biotypes$ensembl_gene_id) {
+#  genes_with_biotypes <- append(genes_with_biotypes,grep(gene, rownames(tcga_exp)))
+#  
+#}
+genes_with_biotypes <- mclapply(biotypes$ensembl_gene_id, function(gene){grep(gene, rownames(tcga_exp))}, mc.cores = detectCores())
+genes_with_biotypes <- unlist(genes_with_biotypes)
+
+genes_and_biotypes <- data.frame("ensembl_ID" = ensemble[genes_with_biotypes], "gene_name" = colnames(tcga_exp_copy)[genes_with_biotypes], "biotype" = biotypes$gene_biotype)
+
+# looking up biotypes of the hallmarks to delete all genes that do not fit biotype
+biotypes_hallmarks <- getBM(mart = ensembl, values = unique(unlist(genesets$genesets, use.names = FALSE)), filters = "hgnc_symbol", attributes = c("gene_biotype", "ensembl_gene_id", "hgnc_symbol"))
+relevant_biotypes <- levels(as.factor(biotypes_hallmarks$gene_biotype))
+
+biotypes_metabol <- getBM(mart = ensembl, values = unique(unlist(metabolism_list_gs, use.names = FALSE)), filters = "hgnc_symbol", attributes = c("gene_biotype", "ensembl_gene_id", "hgnc_symbol"))
+relevant_biotypes <- unique(append(relevant_biotypes, levels(as.factor(biotypes_metabol$gene_biotype))))
+
+# delete all genes that do not fit biotype in biotypes df
+biotypes <- biotypes[which(biotypes$gene_biotype %in% relevant_biotypes),]
+
+#make tcga_copy smaller by deleting wrong biotype genes
+tcga_exp_copy <- tcga_exp_copy[,which(ensemble_noVersion %in% biotypes$ensembl_gene_id)]
+IDs <- c()
+for (element in colnames(tcga_exp_copy)) {
+  IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
 }
+rm(element)
+colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
+
+# finding the max variance genes
+gene_variances <- sort(apply(tcga_exp_copy, 2, var), decreasing = TRUE)
+plot(gene_variances, type="l", xlab = "genes", ylab="variance")
+
+#delete the lowest 50% of genes 
+exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.5))]
+gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
+plot(gene_variances_highvar, type="l", xlab = "genes", ylab="variance")
+
+saveRDS(exp_highvar, "./data/tcga_exp_small.RDS")
+
+
