@@ -4,6 +4,7 @@
 library(ggplot2) 
 library(biomaRt)
 library(parallel)
+library(grid)
 
 
 #loading data from data folder + making a copy
@@ -96,6 +97,16 @@ plot(gene_variances, type="l", xlab = "genes", ylab="variance")
 exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.5))]
 gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
 plot(gene_variances_highvar, type="l", xlab = "genes", ylab="variance")
+
+grob <- grobTree(textGrob("AL162151.3", x=0.88,  y=0.09, hjust=0, gp=gpar(col="red", fontsize=10, fontface="italic")))
+
+ggplot(as.data.frame(gene_variances_highvar), aes(gene_variances_highvar))+
+  geom_freqpoly(bins=50) +
+  scale_y_log10() +
+  ggtitle("Distribution of variances in TCGA_exp")+
+  xlab("variance of gene")+
+  annotation_custom(grob)
+  
 
 saveRDS(exp_highvar, "./data/tcga_exp_small.RDS")
 
