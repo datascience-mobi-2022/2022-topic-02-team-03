@@ -11,7 +11,7 @@ genesets <- readRDS("./data/hallmarks_genesets.rds")
 
 
 # create subset for LUAD patients only
-LUAD_patients <- exp_highvar[which(tcga_anno$cancer_type_abbreviation == "LUAD"),]
+LUAD_patients <- tcga_exp_copy[which(tcga_anno$cancer_type_abbreviation == "LUAD"),]
 
 gene_means_LUAD <- apply(LUAD_patients, 2, mean)
 
