@@ -113,7 +113,7 @@ grob <- grobTree(textGrob("AL162151.3", x=0.88,  y=0.09, hjust=0, gp=gpar(col="r
 ggplot(as.data.frame(gene_variances_highvar), aes(gene_variances_highvar))+
   geom_freqpoly(bins=50) +
   scale_y_log10() +
-  ggtitle("Distribution of variances in TCGA_exp")+
+  ggtitle("Distribution of variances in TCGA_exp after cutoff")+
   xlab("variance of gene")+
   annotation_custom(grob)
   
