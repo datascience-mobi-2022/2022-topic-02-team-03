@@ -69,7 +69,51 @@ rm(i, j, j_value)
 
 Visualizing the similarity using a heatmap:
 ```{r}
-pheatmap(Jaccard_coefficients, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
+pheatmap(Jaccard_coefficients, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
+```
+
+
+Calculating the Jaccard-Coefficient for the metabolism genesets to each other:
+```{r}
+Jaccard_coefficients_met = matrix(ncol = length(metabolism_list_gs), nrow = length(metabolism_list_gs), byrow = TRUE) 
+
+for (i in (1:length(metabolism_list_gs))){
+  for (j in (1:length(metabolism_list_gs))){
+       j_value = jaccard(metabolism_list_gs[[i]], metabolism_list_gs[[j]])
+    Jaccard_coefficients_met[i, j] = j_value 
+  }} 
+
+colnames(Jaccard_coefficients_met) = names(metabolism_list_gs)
+rownames(Jaccard_coefficients_met) = names(metabolism_list_gs) 
+
+rm(i, j, j_value)
+```
+
+Visualizing the similarity using a heatmap:
+```{r}
+pheatmap(Jaccard_coefficients_met, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of metabolism genesets to each other", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
+```
+
+
+Calculating the Jaccard-Coefficient for the provided genesets of cancer hallmarks to each other:
+```{r}
+Jaccard_coefficients_hall = matrix(ncol = length(genesets[[1]]), nrow = length(genesets[[1]]), byrow = TRUE) 
+
+for (i in (1:length(genesets[[1]]))){
+  for (j in (1:length(genesets[[1]]))){
+       j_value = jaccard(genesets[[1]][[i]], genesets[[1]][[j]])
+    Jaccard_coefficients_hall[i, j] = j_value 
+  }} 
+
+colnames(Jaccard_coefficients_hall) = names(genesets[[1]])
+rownames(Jaccard_coefficients_hall) = names(genesets[[1]]) 
+
+rm(i, j, j_value)
+```
+
+Visualizing the similarity using a heatmap:
+```{r}
+pheatmap(Jaccard_coefficients_hall, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets to each other", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
 
