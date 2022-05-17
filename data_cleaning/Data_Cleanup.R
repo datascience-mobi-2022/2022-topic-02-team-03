@@ -92,15 +92,15 @@ biotypes <- biotypes[which(biotypes$gene_biotype %in% relevant_biotypes),]
 
 #make tcga_copy smaller by deleting wrong biotype genes
 tcga_exp_copy <- tcga_exp_copy[,which(ensemble_noVersion %in% biotypes$ensembl_gene_id)]
-IDs <- c()
-for (element in colnames(tcga_exp_copy)) {
-  IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
-}
-rm(element)
-colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
+#IDs <- c()
+#for (element in colnames(tcga_exp_copy)) {
+#  IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
+#}
+#rm(element)
+#colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
 
 # finding the max variance genes
-gene_variances <- sort(apply(tcga_exp_copy, 2, var), decreasing = TRUE)
+gene_variances <- apply(tcga_exp_copy, 2, var)
 #plot(gene_variances, type="l", xlab = "genes", ylab="variance")
 
 #delete the lowest 50% of genes 
@@ -113,11 +113,20 @@ grob <- grobTree(textGrob("AL162151.3", x=0.88,  y=0.09, hjust=0, gp=gpar(col="r
 ggplot(as.data.frame(gene_variances_highvar), aes(gene_variances_highvar))+
   geom_freqpoly(bins=50) +
   scale_y_log10() +
-  ggtitle("Distribution of variances in TCGA_exp")+
+  ggtitle("Distribution of variances in TCGA_exp after cutoff")+
   xlab("variance of gene")+
   annotation_custom(grob)
   
 
 saveRDS(exp_highvar, "./data/tcga_exp_small.RDS")
 
+all_means_highvar <- apply(exp_highvar, 2, mean)
+all_means_highvar <- data.frame("name" = names(all_means_highvar), "desc" = sort(all_means_highvar, decreasing = TRUE))
+
+ggplot(all_means_highvar, aes(x = desc))+
+  geom_histogram(bins=30, color = "grey")+
+  scale_y_log10()+
+  xlab("mean expression of gene")+
+  ylab("log10 count")+
+  ggtitle("distribution of mean gene expression in all patients")
 
