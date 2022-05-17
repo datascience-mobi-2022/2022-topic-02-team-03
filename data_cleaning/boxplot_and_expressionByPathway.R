@@ -38,3 +38,18 @@ ggplot(melted_pathways, aes(x = value, y = pathway )) +
   geom_vline(xintercept = 0)+
   theme(legend.position="none")+
   ggtitle("pathway activities by mean expression in LUAD patients")
+
+
+means <- apply(tcga_exp_copy, 2, mean)
+variances <- apply(tcga_exp_copy, 2, var)
+mv_quotient <- variances / means
+mean_variance_df <- data.frame("names" = colnames(exp_highvar), "means" = means, "variances" = variances, "quotient" = mv_quotient)
+
+ggplot(mean_variance_df, aes(x = means, y = variances))+
+  geom_point(aes(colour = cut(quotient, c(-Inf, -1, 1, Inf))))+
+  scale_color_manual(name = "quotient",
+                     values = c("(-Inf,-1]" = "blue",
+                                "(-1,1]" = "grey",
+                                "(1, Inf]" = "red"))+
+  ggtitle("mean vs variance plot of all genes")
+  
