@@ -6,9 +6,7 @@ output:
   html_document: default
   word_document: default
 ---
-
 Load all needed packages:
-
 ```{r, include = FALSE}
 library(msigdbr)
 library(pheatmap)
@@ -21,19 +19,16 @@ ensembl = useMart("ensembl", dataset = "hsapiens_gene_ensembl")
 ```
 
 Get human specific, canonical genesets from KEGG:
-
 ```{r}
 canonical_pathways_KEGG = msigdbr(species = "human", category = "C2", subcategory = "CP:KEGG") 
 ```
 
 Filtering for all genesets related to metabolism:
-
 ```{r}
 metabolism_pathways_KEGG = canonical_pathways_KEGG[which(grepl("METABOLISM", canonical_pathways_KEGG$gs_name)==TRUE),]
 ```
 
 Creating a list with all characters for each pathway containing the human_gene_symbol of each related genes:
-
 ```{r}
 metabolism_list_gs = list() #this creates an empty list to store the for loop in
 
@@ -48,7 +43,6 @@ rm(gene.name, pathway) #this removes the selected vectors like pathways from the
 Computing the Jaccard similarity for our list of gene sets "metabolism_list" and the given list of hallmark gene sets "hallmarks_genesets":
 
 Creating a function that returns the Jaccard coefficient, considering that **Jaccard Similarity = (number of observations in both sets) / (number in either set)**
-
 ```{r}
 jaccard = function(a, b) {                         #a und b sind Vektoren
     intersection = length(intersect(a, b))          #Schnittmenge
@@ -58,7 +52,6 @@ jaccard = function(a, b) {                         #a und b sind Vektoren
 ```
 
 Calculating the Jaccard-Coefficient for the metabolism genesets and the provided genesets of cancer hallmarks:
-
 ```{r}
 Jaccard_coefficients = matrix(ncol = length(genesets[[1]]), nrow = length(metabolism_list_gs), byrow = TRUE) 
 
@@ -76,11 +69,11 @@ rm(i, j, j_value)
 
 Visualizing the similarity using a heatmap:
 ```{r}
-pheatmap(Jaccard_coefficients, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
+pheatmap(Jaccard_coefficients, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
-Calculating the Jaccard-Coefficient for the metabolism genesets to each other:
 
+Calculating the Jaccard-Coefficient for the metabolism genesets to each other:
 ```{r}
 Jaccard_coefficients_met = matrix(ncol = length(metabolism_list_gs), nrow = length(metabolism_list_gs), byrow = TRUE) 
 
@@ -97,13 +90,12 @@ rm(i, j, j_value)
 ```
 
 Visualizing the similarity using a heatmap:
-
 ```{r}
-pheatmap(Jaccard_coefficients_met, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of metabolism genesets to each other", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
+pheatmap(Jaccard_coefficients_met, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of metabolism genesets to each other", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
-Calculating the Jaccard-Coefficient for the provided genesets of cancer hallmarks to each other:
 
+Calculating the Jaccard-Coefficient for the provided genesets of cancer hallmarks to each other:
 ```{r}
 Jaccard_coefficients_hall = matrix(ncol = length(genesets[[1]]), nrow = length(genesets[[1]]), byrow = TRUE) 
 
@@ -120,15 +112,15 @@ rm(i, j, j_value)
 ```
 
 Visualizing the similarity using a heatmap:
-
 ```{r}
-pheatmap(Jaccard_coefficients_hall, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets to each other", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
+pheatmap(Jaccard_coefficients_hall, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets to each other", fontsize_row = 5.25, fontsize_col = 6, fontsize = 10, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
-------------------------------------------------------------------------
+
+---
+
 
 Extracting the hallmark genesets from KEGG into a list with the same approach as above:
-
 ```{r}
 hallmark_pathways_KEGG = msigdbr(species = "human", category = "H")
 
@@ -143,7 +135,6 @@ rm(gene.name, pathway)
 ```
 
 Calculating the Jaccard Coefficients with our metabolism_genesets:
-
 ```{r}
 Jaccard_coefficients_hallmark = matrix(ncol = length(hallmark_list), nrow = length(genesets[[1]]), byrow = TRUE) #this creates an empty matrix to store the for loop in
 
@@ -160,15 +151,15 @@ rm(i, j, j_value)
 ```
 
 Visualizing the similarity using a heatmap:
-
 ```{r}
 pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of given and hallmark genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
 
-------------------------------------------------------------------------
+
+---
+
 
 Extracting the metabolism_list but with the human ensembl id of each gene instead of gene symbols:
-
 ```{r}
 metabolism_list_id = list()
 
@@ -181,7 +172,6 @@ rm(gene.name, pathway)
 ```
 
 Converting the genesets list so it contains ensembl ids, as well:
-
 ```{r}
 genesets_id = list() 
 
@@ -195,7 +185,6 @@ rm(path, id)
 ```
 
 Calculating the jaccard coefficient between the metabolism genesets and the given hallmark genesets btu both with the ensembl id:
-
 ```{r}
 Jaccard_coefficients_id = matrix(ncol = length(genesets_id), nrow = length(metabolism_list_id), byrow = TRUE)
 for (i in (1:length(metabolism_list_id))){
@@ -211,7 +200,7 @@ rm(i, j, j_value)
 ```
 
 Plotting the similarity as a heatmap:
-
 ```{r}
 pheatmap(Jaccard_coefficients_id, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble ID", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
 ```
+
