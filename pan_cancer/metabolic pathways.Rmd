@@ -86,9 +86,12 @@ Jaccard_coefficients_met = matrix(ncol = length(metabolism_list_gs), nrow = leng
 
 for (i in (1:length(metabolism_list_gs))){
   for (j in (1:length(metabolism_list_gs))){
-       j_value = jaccard(metabolism_list_gs[[i]], metabolism_list_gs[[j]])
+       if (i == j){
+         Jaccard_coefficients_met[i, j] = NA
+       } else {
+         j_value = jaccard(metabolism_list_gs[[i]], metabolism_list_gs[[j]])
     Jaccard_coefficients_met[i, j] = j_value 
-  }} 
+  }}} 
 
 colnames(Jaccard_coefficients_met) = names(metabolism_list_gs)
 rownames(Jaccard_coefficients_met) = names(metabolism_list_gs) 
@@ -99,7 +102,7 @@ rm(i, j, j_value)
 Visualizing the similarity using a heatmap:
 
 ```{r}
-pheatmap(Jaccard_coefficients_met, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of metabolism genesets to each other", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
+pheatmap(Jaccard_coefficients_met, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of metabolism genesets to each other", angle_col = "315", fontsize_row = 4.5, fontsize_col = 6)
 ```
 
 Calculating the Jaccard-Coefficient for the provided genesets of cancer hallmarks to each other:
@@ -109,9 +112,12 @@ Jaccard_coefficients_hall = matrix(ncol = length(genesets[[1]]), nrow = length(g
 
 for (i in (1:length(genesets[[1]]))){
   for (j in (1:length(genesets[[1]]))){
-       j_value = jaccard(genesets[[1]][[i]], genesets[[1]][[j]])
+       if (i == j){
+         Jaccard_coefficients_hall[i, j] = NA
+       } else {
+         j_value = jaccard(genesets[[1]][[i]], genesets[[1]][[j]])
     Jaccard_coefficients_hall[i, j] = j_value 
-  }} 
+  }}} 
 
 colnames(Jaccard_coefficients_hall) = names(genesets[[1]])
 rownames(Jaccard_coefficients_hall) = names(genesets[[1]]) 
@@ -125,47 +131,8 @@ Visualizing the similarity using a heatmap:
 pheatmap(Jaccard_coefficients_hall, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets to each other", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
 ```
 
-------------------------------------------------------------------------
 
-Extracting the hallmark genesets from KEGG into a list with the same approach as above:
-
-```{r}
-hallmark_pathways_KEGG = msigdbr(species = "human", category = "H")
-
-hallmark_list = list()
-
-for (gene.name in unique(hallmark_pathways_KEGG$gs_name))
-  {pathway = c(hallmark_pathways_KEGG[hallmark_pathways_KEGG$gs_name == gene.name, 7])
-  names(pathway) = substring(gene.name, 10)
-  hallmark_list[substring(gene.name, 10)] = pathway}
-
-rm(gene.name, pathway)
-```
-
-Calculating the Jaccard Coefficients with our metabolism_genesets:
-
-```{r}
-Jaccard_coefficients_hallmark = matrix(ncol = length(hallmark_list), nrow = length(genesets[[1]]), byrow = TRUE) #this creates an empty matrix to store the for loop in
-
-for (i in 1:length(genesets[[1]]))
-  {for (j in 1:length(hallmark_list))
-    {j_value = jaccardSets(genesets[[1]][[i]], hallmark_list[[j]])
-    Jaccard_coefficients_hallmark[i, j] = j_value 
-  }}
-
-colnames(Jaccard_coefficients_hallmark) = names(hallmark_list)
-rownames(Jaccard_coefficients_hallmark) = names(genesets[[1]])
-
-rm(i, j, j_value)
-```
-
-Visualizing the similarity using a heatmap:
-
-```{r}
-pheatmap(Jaccard_coefficients_hallmark, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of given and hallmark genesets", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
-```
-
-------------------------------------------------------------------------
+Will using the ensembl ID change anything in the similarity compared to gene symbols?
 
 Extracting the metabolism_list but with the human ensembl id of each gene instead of gene symbols:
 
@@ -194,7 +161,7 @@ names(genesets_id) = names(genesets[[1]])
 rm(path, id)
 ```
 
-Calculating the jaccard coefficient between the metabolism genesets and the given hallmark genesets btu both with the ensembl id:
+Calculating the jaccard coefficient between the metabolism genesets and the given hallmark genesets but both with the ensembl id:
 
 ```{r}
 Jaccard_coefficients_id = matrix(ncol = length(genesets_id), nrow = length(metabolism_list_id), byrow = TRUE)
@@ -213,5 +180,5 @@ rm(i, j, j_value)
 Plotting the similarity as a heatmap:
 
 ```{r}
-pheatmap(Jaccard_coefficients_id, cluster_rows = FALSE, cluster_cols = FALSE, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble ID", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315", cellwidth = 10, cellheight = 5)
+pheatmap(Jaccard_coefficients_id, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble ID", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315")
 ```
