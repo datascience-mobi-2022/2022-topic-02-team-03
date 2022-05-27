@@ -30,7 +30,7 @@ luad.tumor = luad[["tumor"]]
 luad.normal = luad[["normal"]]
 luad.anno = luad[["clinical"]]
 luad.tumor = as.data.frame(t(luad.tumor)) # transponieren der dataframe, sodass (cols = Gene) und (rows = Patienten)
-luad.normal = as.data.frame(t(luad.normal)) # ...PCA erkennt cols als varriablen und cols als samples
+luad.normal = as.data.frame(t(luad.normal)) # ...PCA erkennt cols als variablen und rows als samples
 
 rm(tumor_vs_norm)
 ```
@@ -39,14 +39,12 @@ rm(tumor_vs_norm)
 sum(is.na(luad.normal)) # 0 NA´s
 sum(is.na(luad.tumor)) # "-"
 sum(is.na(luad.anno)) # 148 NA´s
-NA_sources <- sort(apply(luad.anno, 2, function(x){sum(is.na(x))}))
-which(NA_sources > 0)
-NA_sources = NA_sources[31:37]
+NA_sources <- apply(luad.anno, 2, function(x){sum(is.na(x))})
+NA_sources = NA_sources[which(NA_sources > 0)]
 NA_sources # NA sources not sign.
 
 
 rm(luad, NA_sources)
-
 ```
 
 
@@ -69,35 +67,35 @@ View(head(mmv_df))# rows = gen ID´s, cols =conditions
 ```
 ```{r remove low var. genes}
 
-# 1: removing all low varriance gens, below p% quantile from mmv_df_new
+# 1: removing all low variance genes, below p% quantile from mmv_df_new
 p = c(.5, .9)
 x = quantile(mmv_df$var.normal, probs = p[1], names = F)
 mmv_df_new = mmv_df[mmv_df$var.normal > x,]
 
-#2: removing all the gens under 50% quantile from luad.normal and luad . tumor:
+#2: removing all the gens under 50% quantile from luad.normal and luad.tumor:
 genenames = rownames(mmv_df_new)
 luad.normal.new = luad.normal[,genenames]# new df with removed 50% quantile values
 dim(luad.normal.new)#  58 9812
 
 luad.tumor.new = luad.tumor[,genenames]
 
-#3: removing all gens with varr = 0 (otherwise shapiro test won´t work)
-rows = c(which(mmv_df_new$var.tumor != 0))
-zero.varr = rownames(mmv_df_new[rows,])
+#3: removing all genes with var = 0 (otherwise shapiro test won´t work)
+zero.var = rownames(mmv_df_new[which(mmv_df_new$var.tumor != 0),])
 
-luad.normal.cut = luad.normal.new[,zero.varr]# luad. normal without the varr =0 gens from tumor
-luad.tumor.cut = luad.tumor.new[,zero.varr]# luad. tumor without the varr = 0 gens
-mmv_df_cut = mmv_df_new[zero.varr,]# mmv_df without the varr = 0 gens
+luad.normal.cut = luad.normal.new[,zero.var]# luad.normal without the var =0 gens from tumor
+luad.tumor.cut = luad.tumor.new[,zero.var]# luad.tumor without the var = 0 gens
+mmv_df_cut = mmv_df_new[zero.var,]# mmv_df without the var = 0 gens
 
-#checking for remaining 0 var. genes
-paste("there are", sum(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
-paste("there are", sum(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
+#checking for remaining 0 var.genes
+paste("there are", sum(which(mmv_df_cut$var.normal == 0)), "zero var.genes remaining")
+paste("there are", sum(which(mmv_df_cut$var.tumor == 0)), "zero var.genes remaining")
 
-rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.varr, rows, luad.normal.new, luad.tumor.new, mmv_df_new)
+rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.var, luad.normal.new, luad.tumor.new, mmv_df_new)
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
-# please save: saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS") taken from metabolic.pathways.Rmd
+# please save: saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS")
+#taken from metabolic.pathways.Rmd
 #---------------------------------------------#
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS") 
 

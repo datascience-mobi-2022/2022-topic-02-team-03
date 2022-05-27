@@ -30,6 +30,8 @@ Filtering for all genesets related to metabolism:
 
 ```{r}
 metabolism_pathways_KEGG = canonical_pathways_KEGG[which(grepl("METABOLISM", canonical_pathways_KEGG$gs_name)==TRUE),]
+
+rm(canonical_pathways_KEGG)
 ```
 
 Creating a list with all characters for each pathway containing the human_gene_symbol of each related genes:
@@ -174,11 +176,13 @@ for (i in (1:length(metabolism_list_id))){
 colnames(Jaccard_coefficients_id) = names(genesets_id)
 rownames(Jaccard_coefficients_id) = names(metabolism_list_id)
 
-rm(i, j, j_value)
+rm(i, j, j_value, genesets_id, metabolism_list_id, metabolism_pathways_KEGG)
 ```
 
 Plotting the similarity as a heatmap:
 
 ```{r}
 pheatmap(Jaccard_coefficients_id, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets with ensemble ID", fontsize_row = 5.25, fontsize_col = 6, fontsize = 8, angle_col = "315")
+
+rm(Jaccard_coefficients_id, jaccard)
 ```
