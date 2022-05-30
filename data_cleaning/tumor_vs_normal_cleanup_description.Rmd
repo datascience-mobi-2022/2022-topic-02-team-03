@@ -65,8 +65,9 @@ mmv_df$diff.mean = c(mmv_df$mean.tumor-mmv_df$mean.normal)
 View(head(mmv_df))# rows = gen ID´s, cols =conditions
 
 ```
-```{r remove low var. genes}
+```{r remove 0 var. genes}
 
+<<<<<<< Updated upstream
 # 1: removing all low variance genes, below p% quantile from mmv_df_new
 p = c(.5, .9)
 x = quantile(mmv_df$var.normal, probs = p[1], names = F)
@@ -76,9 +77,21 @@ mmv_df_new = mmv_df[mmv_df$var.normal > x,]
 genenames = rownames(mmv_df_new)
 luad.normal.new = luad.normal[,genenames]# new df with removed 50% quantile values
 dim(luad.normal.new)#  58 9812
+=======
+# 1: removing all low varriance gens, below p% quantile from mmv_df_new
+#p = c(.5, .9)
+#x = quantile(mmv_df$var.normal, probs = p[1], names = F)
+#mmv_df_new = mmv_df[mmv_df$var.normal > x,]
 
-luad.tumor.new = luad.tumor[,genenames]
+#2: removing all the gens under 50% quantile from luad.normal and luad . tumor:
+#genenames = rownames(mmv_df_new)
+#luad.normal.new = luad.normal[,genenames]# new df with removed 50% quantile values
+#dim(luad.normal.new)#  58 9812
+>>>>>>> Stashed changes
 
+#luad.tumor.new = luad.tumor[,genenames]
+
+<<<<<<< Updated upstream
 #3: removing all genes with var = 0 (otherwise shapiro test won´t work)
 zero.var = rownames(mmv_df_new[which(mmv_df_new$var.tumor != 0),])
 
@@ -91,6 +104,36 @@ paste("there are", sum(which(mmv_df_cut$var.normal == 0)), "zero var.genes remai
 paste("there are", sum(which(mmv_df_cut$var.tumor == 0)), "zero var.genes remaining")
 
 rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.var, luad.normal.new, luad.tumor.new, mmv_df_new)
+=======
+#3: removing all gens with varr = 0 (otherwise shapiro test won´t work)
+#3.1: tumor
+rows = c(which(mmv_df$var.tumor != 0))
+zero.var = rownames(mmv_df[rows,])
+length(zero.var)
+
+luad.normal.cut = luad.normal[,zero.var]# luad. normal without the varr =0 gens from tumor
+luad.tumor.cut = luad.tumor[,zero.var]# luad. tumor without the varr = 0 gens
+mmv_df_cut = mmv_df[zero.var,]# mmv_df without the varr = 0 gens
+
+#3.2: normal
+rows = c(which(mmv_df_cut$var.normal != 0))
+zero.var = rownames(mmv_df_cut[rows,])
+length(zero.var)
+
+luad.normal.cut = luad.normal.cut[,zero.var]# luad. normal without the varr =0 gens from tumor
+luad.tumor.cut = luad.tumor.cut[,zero.var]# luad. tumor without the varr = 0 gens
+mmv_df_cut = mmv_df_cut[zero.var,]# mmv_df without the varr = 0 gens
+
+
+
+
+
+#checking for remaining 0 var. genes
+paste("there are", length(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
+paste("there are", length(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
+
+rm(mmv_df, luad.normal, luad.tumor, zero.var, rows)
+>>>>>>> Stashed changes
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
@@ -127,6 +170,7 @@ relevant_biotypes <- unique(append(relevant_biotypes, levels(as.factor(biotypes_
 
 #lets get the biotypes that are relevant for us
 biotypes.cut = biotypes[which(biotypes$gene_biotype %in% relevant_biotypes),]
+
 head(biotypes.cut)
 left.genes = biotypes.cut$external_gene_name
 head(left.genes)#these are the gens we want 
@@ -140,7 +184,19 @@ mmv_df_clean = mmv_df_cut[colnames,]
 dim(mmv_df_clean)
 View(head(mmv_df_clean))
 
-rm(biotypes, biotypes_hallmarks, biotypes_metabol, biotypes.cut, genesets, luad.normal.cut, luad.tumor.cut, mmv_df_cut, colnames, i, IDs.cut, left.genes, relevant_biotypes, metabolism_list_gs)
+#view biotypes
+biotype.freq = as.data.frame(sort(table(biotypes.cut$gene_biotype)))
+
+ggplot(biotype.freq, aes(x=Var1, y = Freq))+
+  geom_col()+
+  coord_flip()+
+  xlab("biotypes")+
+  ylab("Frequency") +
+  scale_y_continuous(trans = 'log10')+
+  annotation_logticks(sides="b") # logticks on the b_ottom
+
+
+rm(biotypes, biotypes_hallmarks, biotypes_metabol, biotypes.cut, genesets, luad.normal.cut, luad.tumor.cut, mmv_df_cut, colnames, i, IDs.cut, left.genes, relevant_biotypes, metabolism_list_gs, biotype.freq)
 ```
 
 ##2.2 descriptive
@@ -223,20 +279,20 @@ rm(defaultW, i, p.wilc)
 ```{r vulcano plots}
 alpha = 0.05 #punkt, ab dem die p Values signifikant werden
 #alpha muss noch angepasst werden, da der test über große datenmenge durchgeführt wurde alpha.corr = alpha * 1/#gene
-alpha.corr = -log10(alpha/nrow(mmv_df_clean))
+alpha.corr = alpha/nrow(mmv_df_clean)
 
 for (i in 1:nrow(mmv_df_clean)){ #setting up expression
-  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ), mmv_df_clean$expr[i] <- "up",
-         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ),mmv_df_clean$expr[i] <- "down",
+  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > -log10(alpha.corr))   ), mmv_df_clean$expr[i] <- "up",
+         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > -log10(alpha.corr))   ),mmv_df_clean$expr[i] <- "down",
                 mmv_df_clean$expr[i] <- "not sign."))
 }
 
-alpha.corr
+-log10(alpha.corr)
 # plot for corrected alpha
 volcano1 = ggplot(mmv_df_clean, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
   geom_point(size = .5)+
   labs(title = "volcano plot of high varicance genes -> corrected alpha", y = "-log10(p.value)", x = "log2(Foldchange)")+
-  geom_hline(yintercept = alpha.corr,
+  geom_hline(yintercept = -log10(alpha.corr),
              linetype = "dashed")+
   scale_color_manual(values=c("blue", "gray", "red"))
 
@@ -247,37 +303,61 @@ volcano1
 
 # plot for ___NOT___ corrected alpha
 for (i in 1:nrow(mmv_df_clean)){ #setting up expression
-  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha)   ), mmv_df_clean$expr[i] <- "up",
-         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha)   ),mmv_df_clean$expr[i] <- "down",
+  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > -log10(alpha))   ), mmv_df_clean$expr[i] <- "up",
+         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > -log10(alpha))   ),mmv_df_clean$expr[i] <- "down",
                 mmv_df_clean$expr[i] <- "not sign."))
 }
 
 volcano2 = ggplot(mmv_df_clean, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
   geom_point(size = .5)+
   labs(title = "volcano plot of high varicance genes -> not corrected alpha ", y = "-log10(p.value)", x = "log2(Foldchange)")+
-  geom_hline(yintercept = alpha,
+  geom_hline(yintercept = -log10(alpha),
              linetype = "dashed")+
   scale_color_manual(values=c("blue", "gray", "red"))
 grid.arrange(volcano2, volcano1, nrow = 1)
 
-rm(alpha, alpha.corr, i, volcano1, volcano2)
+rm(alpha, i, volcano1, volcano2)
+```
+
+
+```{r remove low diff genes and retain high diff genes}
+hd = rownames(mmv_df_clean[c(mmv_df_clean$p.wilc < alpha.corr),]) # take all genes with p value < alpha.corr
+length(hd)
+
+mmv_df_end = mmv_df_clean[hd,]
+luad.normal.end = luad.normal.clean[,hd]
+luad.tumor.end = luad.tumor.clean[,hd]
+
+rm(luad.normal.clean, luad.tumor.clean, hd, mmv_df_clean)
+
+ggplot(mmv_df_end, aes(mean.normal, var.normal))+
+  geom_point()# we see there are also low var genes with a significant diff in the gene expr. btw the two tissues
+```
+```{r volcano with remaining genes}
+ggplot(mmv_df_end, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
+  geom_point(size = .5)+
+  labs(title = "volcano plot of high varicance genes -> corrected alpha", y = "-log10(p.value)", x = "log2(Foldchange)")+
+  geom_hline(yintercept = -log10(alpha.corr),
+             linetype = "dashed")+
+  scale_color_manual(values=c("blue", "red"))
 ```
 
 ```{r saving & end & clean env.}
 
-LUAD_tumor_vs_norm_clean = list(luad.normal.clean = luad.normal.clean,
-                           luad.tumor.clean = luad.tumor.clean,
-                           infomatrix = mmv_df_clean,
+LUAD_tumor_vs_norm_clean = list(luad.normal.clean = luad.normal.end,
+                           luad.tumor.clean = luad.tumor.end,
+                           infomatrix = mmv_df_end,
                            luad.anno = luad.anno)
 View(LUAD_tumor_vs_norm_clean)
 
 saveRDS(LUAD_tumor_vs_norm_clean, "./data/LUAD_tumor_vs_norm_clean.RDS")
 
 # now that the biotypes are removed:
-paste( "There are", dim(luad.normal.clean)[2], "genes left after cleaning")
+paste( "There are", dim(luad.normal.end)[2], "genes left after cleaning")
 
 rm(list=ls())
 ```
+
 
 
 
