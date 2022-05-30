@@ -66,42 +66,8 @@ View(head(mmv_df))# rows = gen ID´s, cols =conditions
 
 ```
 ```{r remove 0 var. genes}
-
-# 1: removing all low variance genes, below p% quantile from mmv_df_new
-p = c(.5, .9)
-x = quantile(mmv_df$var.normal, probs = p[1], names = F)
-mmv_df_new = mmv_df[mmv_df$var.normal > x,]
-
-#2: removing all the gens under 50% quantile from luad.normal and luad.tumor:
-genenames = rownames(mmv_df_new)
-luad.normal.new = luad.normal[,genenames]# new df with removed 50% quantile values
-dim(luad.normal.new)#  58 9812
-# 1: removing all low varriance gens, below p% quantile from mmv_df_new
-#p = c(.5, .9)
-#x = quantile(mmv_df$var.normal, probs = p[1], names = F)
-#mmv_df_new = mmv_df[mmv_df$var.normal > x,]
-
-#2: removing all the gens under 50% quantile from luad.normal and luad . tumor:
-#genenames = rownames(mmv_df_new)
-#luad.normal.new = luad.normal[,genenames]# new df with removed 50% quantile values
-#dim(luad.normal.new)#  58 9812
-
-#luad.tumor.new = luad.tumor[,genenames]
-
-#3: removing all genes with var = 0 (otherwise shapiro test won´t work)
-zero.var = rownames(mmv_df_new[which(mmv_df_new$var.tumor != 0),])
-
-luad.normal.cut = luad.normal.new[,zero.var]# luad.normal without the var =0 gens from tumor
-luad.tumor.cut = luad.tumor.new[,zero.var]# luad.tumor without the var = 0 gens
-mmv_df_cut = mmv_df_new[zero.var,]# mmv_df without the var = 0 gens
-
-#checking for remaining 0 var.genes
-paste("there are", sum(which(mmv_df_cut$var.normal == 0)), "zero var.genes remaining")
-paste("there are", sum(which(mmv_df_cut$var.tumor == 0)), "zero var.genes remaining")
-
-rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.var, luad.normal.new, luad.tumor.new, mmv_df_new)
-#3: removing all gens with varr = 0 (otherwise shapiro test won´t work)
-#3.1: tumor
+#1: removing all gens with varr = 0 (otherwise shapiro test won´t work)
+#1.1: tumor
 rows = c(which(mmv_df$var.tumor != 0))
 zero.var = rownames(mmv_df[rows,])
 length(zero.var)
@@ -118,9 +84,6 @@ length(zero.var)
 luad.normal.cut = luad.normal.cut[,zero.var]# luad. normal without the varr =0 gens from tumor
 luad.tumor.cut = luad.tumor.cut[,zero.var]# luad. tumor without the varr = 0 gens
 mmv_df_cut = mmv_df_cut[zero.var,]# mmv_df without the varr = 0 gens
-
-
-
 
 
 #checking for remaining 0 var. genes
