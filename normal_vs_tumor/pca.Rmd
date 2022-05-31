@@ -10,26 +10,52 @@ knitr::opts_chunk$set(echo = TRUE, cache = F)
 ```
 
 ```{r load packages & data}
+#install.packages("Seurat")
+
 library(ggplot2)
 library(scales)
 library("gridExtra")
 library(gtools)
 library(parallel)
 library(grid)
+library(Seurat)
+library(uwot)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.tumor = LUAD_tumor_vs_norm_clean[["luad.tumor.clean"]]
 luad.normal = LUAD_tumor_vs_norm_clean[["luad.normal.clean"]]
+luad.anno = LUAD_tumor_vs_norm_clean[["luad.anno"]]
 ```
 
 ```{r PCA}
-pca = prcomp(t(luad.tumor), scale = T)
+pca = RunPCA(t(luad.tumor))
 summary(pca)
+dim(pca)
+pc_tumor = as.data.frame(pca@cell.embeddings)
+
+g.anno.gender = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$gender)) + 
+  geom_point(size=0.5)
+g.anno.gender
+
+g.anno.stage = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$clinical_stage)) + 
+  geom_point(size=0.5)
+g.anno.stage
+
+g.anno.age = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$age_at_initial_pathologic_diagnosis)) + 
+  geom_point(size=2)
+g.anno.age
+
+umap = as.data.frame(umap(pc_tumor))
+class(umap)
+View(umap)
+
+ggplot(umap, aes(V1, V2, colour = luad.anno$gender)) + 
+  geom_point(size=2)
 
 
-pca.var = pca$sdev^2
-pca.var.per = pca.var/sum(pca.var)*100
-barplot(pca.var.per, xlab = "PCs", ylab = "Percent variation")
-plot(pca$x[,1], pca$x[,2], pch = 20, size = .2)
+
+#pca.var = pca$sdev^2
+#pca.var.per = pca.var/sum(pca.var)*100
+#barplot(pca.var.per, xlab = "PCs", ylab = "Percent variation")
+#plot(pca$x[,1], pca$x[,2], pch = 20, size = .2)
 ```
-
