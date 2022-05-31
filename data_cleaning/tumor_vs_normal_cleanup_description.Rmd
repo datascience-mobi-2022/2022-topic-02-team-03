@@ -19,6 +19,7 @@ library(gtools)
 library(biomaRt)
 library(parallel)
 library(grid)
+library(FactoMineR)
 ```
 ```{r loading data & extraction}
 #load data
@@ -94,7 +95,8 @@ rm(mmv_df, luad.normal, luad.tumor, zero.var, rows)
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
-# please save: saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS")
+# please save: 
+saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS")
 #taken from metabolic.pathways.Rmd
 #---------------------------------------------#
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS") 
@@ -174,7 +176,7 @@ mean.varr = grid.arrange(g3, g4, nrow = 1)
 
 rm(g3, g4, mean.varr)
 ```
-```{r shapiro wilcon test}
+```{r shapiro wilcoxon test}
 # #1 test auf normalverteilung der gene: shapiro-wilcon test
 
 #shapiro.test(luad.tumor.cut$RAB4B)$p.value # p value of one gen in tumor tissue
@@ -314,6 +316,8 @@ paste( "There are", dim(luad.normal.end)[2], "genes left after cleaning")
 
 rm(list=ls())
 ```
+
+
 
 
 
