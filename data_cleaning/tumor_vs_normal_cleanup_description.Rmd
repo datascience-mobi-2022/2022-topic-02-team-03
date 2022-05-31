@@ -19,7 +19,6 @@ library(gtools)
 library(biomaRt)
 library(parallel)
 library(grid)
-library(FactoMineR)
 ```
 ```{r loading data & extraction}
 #load data
