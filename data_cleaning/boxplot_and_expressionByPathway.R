@@ -4,6 +4,7 @@
 library(ggplot2)
 library(reshape2)
 library(gtools)
+library(Seurat)
 
 
 exp_highvar <- readRDS("./data/tcga_exp_small.RDS")
@@ -46,10 +47,18 @@ mv_quotient <- variances / means
 mean_variance_df <- data.frame("names" = colnames(exp_highvar), "means" = means, "variances" = variances, "quotient" = mv_quotient)
 
 ggplot(mean_variance_df, aes(x = means, y = variances))+
-  geom_point(aes(colour = cut(quotient, c(-Inf, -1, 1, Inf))))+
-  scale_color_manual(name = "quotient",
-                     values = c("(-Inf,-1]" = "blue",
-                                "(-1,1]" = "grey",
-                                "(1, Inf]" = "red"))+
-  ggtitle("mean vs variance plot of all genes")
+  geom_point()+
+  ggtitle("mean vs variance plot of all genes")+
+  geom_smooth()
+
+
+LUAD_df <- data.frame("means" = gene_means_LUAD, "names" = names(gene_means_LUAD))
+ggplot(LUAD_df, aes(x = means, y = names))+
+  geom_violin()
   
+
+
+seurat_tcga <- CreateSeuratObject(tcga_exp_copy, project = "data exploration", min.cells = 3, min.features = 200)
+seurat_tcga <- FindVariableFeatures(tcga_exp, selection.method = "vst", nfeatures = 500)
+seurat_var_plot <- VariableFeaturePlot(seurat_tcga)
+var_plot_labels <- LabelPoints(plot = seurat_var_plot, points = head(VariableFeatures(seurat_tcga), repel = TRUE))

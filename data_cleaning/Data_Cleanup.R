@@ -104,7 +104,7 @@ gene_variances <- apply(tcga_exp_copy, 2, var)
 #plot(gene_variances, type="l", xlab = "genes", ylab="variance")
 
 #delete the lowest 50% of genes 
-exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.5))]
+exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.65))]
 gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
 
 
