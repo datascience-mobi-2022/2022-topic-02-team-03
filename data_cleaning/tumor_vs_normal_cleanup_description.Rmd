@@ -1,5 +1,5 @@
 ---
-title: "tumor_vs_normal_cleanup_desription"
+title: "tumor_vs_normal_cleanup_description"
 author: "Felipe Stünkel"
 date: "21 5 2022"
 output: html_document
