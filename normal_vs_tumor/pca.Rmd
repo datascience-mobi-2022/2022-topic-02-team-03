@@ -1,0 +1,35 @@
+---
+title: "focussed"
+author: "Felipe Stünkel"
+date: "30 5 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = F)
+```
+
+```{r load packages & data}
+library(ggplot2)
+library(scales)
+library("gridExtra")
+library(gtools)
+library(parallel)
+library(grid)
+
+LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
+luad.tumor = LUAD_tumor_vs_norm_clean[["luad.tumor.clean"]]
+luad.normal = LUAD_tumor_vs_norm_clean[["luad.normal.clean"]]
+```
+
+```{r PCA}
+pca = prcomp(t(luad.tumor), scale = T)
+summary(pca)
+
+
+pca.var = pca$sdev^2
+pca.var.per = pca.var/sum(pca.var)*100
+barplot(pca.var.per, xlab = "PCs", ylab = "Percent variation")
+plot(pca$x[,1], pca$x[,2], pch = 20, size = .2)
+```
+
