@@ -1,5 +1,5 @@
 ---
-title: "tumor_vs_normal_cleanup_description"
+title: "tumor_vs_normal_cleanup_desription"
 author: "Felipe Stünkel"
 date: "21 5 2022"
 output: html_document
@@ -94,8 +94,7 @@ rm(mmv_df, luad.normal, luad.tumor, zero.var, rows)
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
-# please save: 
-#saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS")
+# please save: saveRDS(metabolism_list_gs, "./data/metabolism_list_gs.RDS")
 #taken from metabolic.pathways.Rmd
 #---------------------------------------------#
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS") 
@@ -175,7 +174,7 @@ mean.varr = grid.arrange(g3, g4, nrow = 1)
 
 rm(g3, g4, mean.varr)
 ```
-```{r shapiro wilcoxon test}
+```{r shapiro wilcon test}
 # #1 test auf normalverteilung der gene: shapiro-wilcon test
 
 #shapiro.test(luad.tumor.cut$RAB4B)$p.value # p value of one gen in tumor tissue
@@ -315,8 +314,6 @@ paste( "There are", dim(luad.normal.end)[2], "genes left after cleaning")
 
 rm(list=ls())
 ```
-
-
 
 
 
