@@ -1,5 +1,5 @@
 ---
-title: "focussed"
+title: "focused analysis"
 author: "Felipe Stünkel"
 date: "30 5 2022"
 output: html_document
@@ -16,20 +16,32 @@ library("gridExtra")
 library(gtools)
 library(parallel)
 library(grid)
+library(FactoMineR)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.tumor = LUAD_tumor_vs_norm_clean[["luad.tumor.clean"]]
 luad.normal = LUAD_tumor_vs_norm_clean[["luad.normal.clean"]]
+df = rbind(luad.normal, luad.tumor)
+dim(df)
 ```
 
 ```{r PCA}
-pca = prcomp(t(luad.tumor), scale = T)
+pca = prcomp((df), scale = T)
 summary(pca)
 
 
 pca.var = pca$sdev^2
 pca.var.per = pca.var/sum(pca.var)*100
 barplot(pca.var.per, xlab = "PCs", ylab = "Percent variation")
+pca = cbind(pca$x[,1], pca$x[,2])
 plot(pca$x[,1], pca$x[,2], pch = 20, size = .2)
+ggplot(pca, aes([,1], [,2]))+
+  goem_point()
 ```
+
+```{r}
+luad.normal.pca = PCA(luad.normal, ncp = 10, graph = FALSE)
+
+```
+
 
