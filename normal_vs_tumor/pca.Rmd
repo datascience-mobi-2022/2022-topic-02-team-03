@@ -33,21 +33,24 @@ summary(pca)
 dim(pca)
 pc_tumor = as.data.frame(pca@cell.embeddings)
 
+#check for genderspecific clustering in PC1 and PC 2
 g.anno.gender = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$gender)) + 
-  geom_point(size=0.5)
+  geom_point(size=2)
 g.anno.gender
 
-g.anno.stage = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$clinical_stage)) + 
-  geom_point(size=0.5)
-g.anno.stage
+#check for race specific clustering
+g.anno.race = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$race)) + 
+  geom_point(size=2)
+g.anno.race
 
+#check for age specific clustering
 g.anno.age = ggplot(pc_tumor, aes(PC_1, PC_2, colour = luad.anno$age_at_initial_pathologic_diagnosis)) + 
   geom_point(size=2)
 g.anno.age
 
 umap = as.data.frame(umap(pc_tumor))
 class(umap)
-View(umap)
+#View(umap)
 
 ggplot(umap, aes(V1, V2, colour = luad.anno$gender)) + 
   geom_point(size=2)
