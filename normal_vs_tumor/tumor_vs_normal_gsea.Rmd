@@ -27,13 +27,20 @@ knitr::opts_chunk$set(echo = TRUE)
 #BiocManager::install("edgeR")
 
 #install.packages("cinaR")
+
+#to install enrichplot, first run
+#if (!require("BiocManager", quietly = TRUE))
+ #   install.packages("BiocManager")
+
+#BiocManager::install("enrichplot")
+
 library(limma)
 library(edgeR)
 library(cinaR)
 library(fgsea)
 library(ggplot2)
 library(biomaRt)
-
+library(enrichplot)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
@@ -47,15 +54,15 @@ rm(LUAD_tumor_vs_norm_clean)
 ```{r ranked p-values}
 
 #create a sorted list of p-values from wilcoxon test (see also: data cleanup)
-sort = sort(luad.info$p.wilc, decreasing = F)
-head(sort)
+sorted_p = sort(luad.info$p.wilc, decreasing = F)
+head(sorted_p)
 
 #finalise ranked p-values dataframe
-ranked.pvalues = data.frame(p.wilc = sort)
+ranked.pvalues = data.frame(p.wilc = sorted_p)
 rownames(ranked.pvalues) = make.names(rownames(luad.info))
 head(ranked.pvalues)
 
-rm(sort)
+rm(sorted_p)
 ```
 
 ## run GSEA
@@ -68,19 +75,29 @@ length(which(is.na(entrezgene_id)))
 length(entrezgene_id$entrezgene_id)
 ```
 
-```{r}
+```{r prepare and run GSEA}
 #load genesets
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS")
 genesets <- readRDS("./data/hallmarks_genesets.rds")
 
-#stats argument (ranked p values) needs to be a numeric
-num.ranked.pvalues = as.numeric()
+#stats argument (ranked p values) needs to be the right format
+Names = rownames(ranked.pvalues)
+Values = ranked.pvalues$p.wilc
+names(Values) = Names
 
+GSEA = fgsea(pathways = genesets$genesets, stats = Values)
 
-fgsea = fgsea(pathways = genesets$genesets[1], stats = rownames(ranked.pvalues))
+#View(GSEA)
+```
 
-#for(i in 1:length(genesets$genesets)){
-#  fgsea = fgsea(pathways = genesets$genesets[[i]], stats = ranked.pvalues)
-#}
+Fehlermeldung beim obrigen Chunk: 81,35% der Liste sind ties
 
+```{r Einschub: Überprüfung der Warnmeldung beim obrigen Chunk}
+length(unique(ranked.pvalues$p.wilc)) #gibt die Anzahl der einzigartigen Werte in unserer Liste
+
+#Berechnung des Anteils von einzigartigen p Values
+length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc) 
+#18,65% der p values sind einzigartig
+
+tail(sort(table(ranked.pvalues$p.wilc)),5) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
 ```
