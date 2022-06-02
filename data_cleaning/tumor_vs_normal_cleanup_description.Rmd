@@ -99,9 +99,6 @@ rm(mmv_df, luad.normal, luad.tumor, zero.var, rows)
 #---------------------------------------------#
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS") 
 
-
-
-
 IDs.cut = c()
 for(i in colnames(luad.tumor.cut)){
   IDs.cut = c(IDs.cut, strsplit(i, "|", fixed = T)[[1]][2])
@@ -298,6 +295,7 @@ ggplot(mmv_df_end, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
              linetype = "dashed")+
   scale_color_manual(values=c("blue", "red"))
 ```
+
 
 ```{r saving & end & clean env.}
 
