@@ -67,12 +67,12 @@ rm(sorted_p)
 
 ## run GSEA
 
-```{r chamnge external_gene_name -> entrezgene_id}
-ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
-entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
-head(entrezgene_id)
-length(which(is.na(entrezgene_id)))
-length(entrezgene_id$entrezgene_id)
+```{r change external_gene_name -> entrezgene_id}
+#ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+#entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
+#head(entrezgene_id)
+#length(which(is.na(entrezgene_id)))
+#length(entrezgene_id$entrezgene_id)
 ```
 
 ```{r prepare and run GSEA}
@@ -87,10 +87,12 @@ names(Values) = Names
 
 GSEA = fgsea(pathways = genesets$genesets, stats = Values)
 
+rm(Names)
+
 #View(GSEA)
 ```
 
-Fehlermeldung beim obrigen Chunk: 81,35% der Liste sind ties
+Fehlermeldung beim obrigen Chunk: 81.35% der Liste sind ties
 
 ```{r Einschub: Überprüfung der Warnmeldung beim obrigen Chunk}
 length(unique(ranked.pvalues$p.wilc)) #gibt die Anzahl der einzigartigen Werte in unserer Liste
@@ -100,4 +102,10 @@ length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc)
 #18,65% der p values sind einzigartig
 
 tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
+```
+
+### Dot plot
+
+```{r dot plot}
+dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
 ```
