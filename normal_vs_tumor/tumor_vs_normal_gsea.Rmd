@@ -99,5 +99,5 @@ length(unique(ranked.pvalues$p.wilc)) #gibt die Anzahl der einzigartigen Werte i
 length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc) 
 #18,65% der p values sind einzigartig
 
-tail(sort(table(ranked.pvalues$p.wilc)),5) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
+tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
 ```
