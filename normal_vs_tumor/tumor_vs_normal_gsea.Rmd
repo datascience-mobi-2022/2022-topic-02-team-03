@@ -109,3 +109,50 @@ tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vor
 ```{r dot plot}
 dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
 ```
+
+
+```{r}
+
+order = GSEA[order(GSEA$size)]$pathway # sort pathways by size
+ggplot(gsea.order[1:10,], aes(y=factor(pathway, level = order),
+                       x = size,
+                       col=padj,
+                       size = NES)) + #y: is sorted by size
+  geom_point()+
+  labs(title = "dotplot", x ="GSEA: size", y = "pathways in LUAD")
+
+```
+
+
+
+```{r test dotplot...}
+#(so stehts im beispiel): https://rdrr.io/bioc/enrichplot/man/dotplot.html
+
+library(DOSE)
+data(geneList)
+de <- names(geneList)[1:100]
+x <- enrichDO(de)
+dotplot(x)
+```
+
+```{r unser dotplot...}
+# wir wollen die "entrezgene_id`s" unsrer gene, damit enrichDO funktioniert
+ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
+
+
+gene_ids = as.character(entrezgene_id$entrezgene_id)
+View(gene_ids)
+x <- enrichDO(gene_ids)
+dotplot(x)
+
+```
+
+```{r gsea plot}
+data(geneList)
+x <- gseDO(geneList)
+gseaplot(x, geneSetID=1)
+
+```
+
+
