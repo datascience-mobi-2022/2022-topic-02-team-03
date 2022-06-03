@@ -90,8 +90,8 @@ luad.tumor.cut = luad.tumor[,zero.varr]# luad. tumor without the varr = 0 gens
 mmv_df_cut = mmv_df[zero.varr,]# mmv_df without the varr = 0 gens
 
 #checking for remaining 0 var. genes
-paste("there are", sum(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
-paste("there are", sum(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
+paste("there are", length(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
+paste("there are", length(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
 
 rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.varr, rows, luad.normal.new, luad.tumor.new, mmv_df_new)
 ```

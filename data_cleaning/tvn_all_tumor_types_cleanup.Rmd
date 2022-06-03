@@ -1,0 +1,125 @@
+---
+title: "Cleaning, FC, PCA for other tumor types"
+author: "Felipe Stünkel"
+date: "3 6 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r lead data & packages}
+### Packages ###
+
+### Data ###
+tumor_vs_norm <- readRDS("./data/tcga_tumor_normal_datascience_proj_2022.RDS")
+```
+# BRCA
+```{r extract & cleaning}
+
+
+### extract info from list ###
+brca = tumor_vs_norm[["BRCA"]]
+brca.tumor = brca[["tumor"]]
+brca.normal = brca[["normal"]]
+brca.anno = brca[["clinical"]]
+brca.tumor = as.data.frame(t(brca.tumor))
+brca.normal = as.data.frame(t(brca.normal))
+
+rm(tumor_vs_norm, brca)
+
+
+### mmv ###
+brca_mmv_df = data.frame(med.normal = apply(brca.normal, 2, median),
+                    med.tumor = apply(brca.tumor, 2, median),
+                    mean.normal = colMeans(brca.normal),
+                    mean.tumor = colMeans(brca.tumor),
+                    var.normal = apply(brca.normal, 2, var),
+                    var.tumor = apply(brca.tumor, 2, var)
+                    )
+brca_mmv_df$diff.med = c(brca_mmv_df$med.tumor-brca_mmv_df$med.normal)
+brca_mmv_df$diff.mean = c(brca_mmv_df$mean.tumor-brca_mmv_df$mean.normal)
+
+
+### remove 0 var. genes ###
+# tumor tissue
+x = rownames((brca_mmv_df[which(brca_mmv_df$var.tumor != 0),]))
+brca.normal.cut = brca.normal[,x]
+brca.tumor.cut = brca.tumor[,x]
+brca_mmv_df_cut = brca_mmv_df[x,]
+
+# normal tissue
+y = rownames((brca_mmv_df_cut[which(brca_mmv_df_cut$var.normal != 0),]))
+brca.normal.cut = brca.normal.cut[,y]
+brca.tumor.cut = brca.tumor.cut[,y]
+brca_mmv_df_cut = brca_mmv_df_cut[y,]
+
+rm(x, y, brca.tumor, brca.tumor, brca_mmv_df, brca.normal)
+
+```
+
+```{r rm biotypes}
+### rm biotypes ###
+metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS") 
+
+IDs.cut = c()
+for(i in colnames(brca.tumor.cut)){
+  IDs.cut = c(IDs.cut, strsplit(i, "|", fixed = T)[[1]][2])
+}
+colnames(brca.tumor.cut) = make.names(IDs.cut, unique = T)
+colnames(brca.normal.cut) = make.names(IDs.cut, unique = T)
+rownames(brca_mmv_df_cut) = make.names(IDs.cut, unique = T)
+
+ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+biotypes <- getBM(mart = ensembl,
+                  values = IDs.cut,
+                  filters = "external_gene_name",
+                  attributes = c("gene_biotype","external_gene_name"))
+
+#biotypes in our genesets
+genesets <- readRDS("./data/hallmarks_genesets.rds")
+biotypes_hallmarks <- getBM(ensembl, values =
+                              unique(unlist(genesets$genesets,
+                                            use.names=FALSE)),
+                            filters = "hgnc_symbol", attributes =
+                              c("gene_biotype",
+                                "ensembl_gene_id",
+                                "hgnc_symbol"))
+relevant_biotypes <- levels(as.factor(biotypes_hallmarks$gene_biotype))
+
+#relevant biotypes
+biotypes.cut = biotypes[which(biotypes$gene_biotype %in% relevant_biotypes),]
+head(biotypes.cut)
+left.genes = biotypes.cut$external_gene_name
+head(left.genes)#these are the gens we want 
+
+#get them out of brca.normal & brca.tumor
+colnames = colnames(brca.normal.cut)[which(colnames(brca.normal.cut) %in% left.genes)]
+brca.normal.clean = brca.normal.cut[,colnames]
+brca.tumor.clean = brca.tumor.cut[,colnames]
+brca_mmv_df_clean = brca_mmv_df_cut[colnames,]
+
+dim(brca_mmv_df_clean)
+View(head(brca_mmv_df_clean))
+
+#view biotypes
+biotype.freq = as.data.frame(sort(table(biotypes.cut$gene_biotype)))
+
+ggplot(biotype.freq, aes(x=Var1, y = Freq))+
+  geom_col()+
+  coord_flip()+
+  xlab("biotypes")+
+  ylab("Frequency") +
+  scale_y_continuous(trans = 'log10')+
+  annotation_logticks(sides="b") # logticks on the b_ottom
+
+
+rm(biotypes, biotypes_hallmarks, biotypes_metabol, biotypes.cut, genesets, brca.normal.cut, brca.tumor.cut, brca_mmv_df_cut, colnames, i, IDs.cut, left.genes, relevant_biotypes, metabolism_list_gs, biotype.freq)
+```
+```{r}
+ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+biotypes <- getBM(mart = ensembl, values = IDs.cut, filters =
+                    "external_gene_name", attributes =
+                    c("gene_biotype","external_gene_name"))
+```
+
