@@ -110,7 +110,6 @@ tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vor
 dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
 ```
 
-
 ```{r}
 
 order = GSEA[order(GSEA$size)]$pathway # sort pathways by size
@@ -122,8 +121,6 @@ ggplot(gsea.order[1:10,], aes(y=factor(pathway, level = order),
   labs(title = "dotplot", x ="GSEA: size", y = "pathways in LUAD")
 
 ```
-
-
 
 ```{r test dotplot...}
 #(so stehts im beispiel): https://rdrr.io/bioc/enrichplot/man/dotplot.html
@@ -152,7 +149,4 @@ dotplot(x)
 data(geneList)
 x <- gseDO(geneList)
 gseaplot(x, geneSetID=1)
-
 ```
-
-
