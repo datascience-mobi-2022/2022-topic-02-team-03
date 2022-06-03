@@ -74,7 +74,8 @@ ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
 biotypes <- getBM(mart = ensembl,
                   values = IDs.cut,
                   filters = "external_gene_name",
-                  attributes = c("gene_biotype","external_gene_name"))
+                  attributes = c("gene_biotype","external_gene_name"),
+                  mirror2html(www))
 
 #biotypes in our genesets
 genesets <- readRDS("./data/hallmarks_genesets.rds")
@@ -105,21 +106,25 @@ View(head(brca_mmv_df_clean))
 #view biotypes
 biotype.freq = as.data.frame(sort(table(biotypes.cut$gene_biotype)))
 
-ggplot(biotype.freq, aes(x=Var1, y = Freq))+
-  geom_col()+
-  coord_flip()+
-  xlab("biotypes")+
-  ylab("Frequency") +
-  scale_y_continuous(trans = 'log10')+
-  annotation_logticks(sides="b") # logticks on the b_ottom
+rm(biotypes, biotypes_hallmarks, biotypes.cut, genesets, brca.normal.cut, brca.tumor.cut, brca_mmv_df_cut, colnames, i, IDs.cut, left.genes, relevant_biotypes, metabolism_list_gs, biotype.freq)
 
 
-rm(biotypes, biotypes_hallmarks, biotypes_metabol, biotypes.cut, genesets, brca.normal.cut, brca.tumor.cut, brca_mmv_df_cut, colnames, i, IDs.cut, left.genes, relevant_biotypes, metabolism_list_gs, biotype.freq)
+### p. wilc ###
+defaultW <- getOption("warn")
+options(warn = -1)
+
+p.wilc = c(1: ncol(brca.normal.clean))
+for(i in 1: ncol(brca.normal.clean)){
+  p.wilc[i] = c(wilcox.test(brca.tumor.clean[,i],brca.normal.clean[,i], paired = TRUE, alternative = "two.sided" )$p.value)
+  }
+brca_mmv_df_clean$p.wilc = p.wilc
+
+rm(defaultW, i, p.wilc)
+options(warn = defaultW)
+
+
 ```
 ```{r}
-ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
-biotypes <- getBM(mart = ensembl, values = IDs.cut, filters =
-                    "external_gene_name", attributes =
-                    c("gene_biotype","external_gene_name"))
+
 ```
 
