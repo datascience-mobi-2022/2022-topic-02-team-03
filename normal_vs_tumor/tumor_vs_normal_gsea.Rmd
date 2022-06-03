@@ -34,6 +34,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #BiocManager::install("enrichplot")
 
+#install.packages("tidyverse")
+
 library(limma)
 library(edgeR)
 library(cinaR)
@@ -41,6 +43,7 @@ library(fgsea)
 library(ggplot2)
 library(biomaRt)
 library(enrichplot)
+library(tidyverse)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
@@ -111,15 +114,23 @@ dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title =
 ```
 
 ```{r}
+# adding col containing generatio information (hits/gens )
 
-order = GSEA[order(GSEA$size)]$pathway # sort pathways by size
-ggplot(gsea.order[1:10,], aes(y=factor(pathway, level = order),
+order = GSEA[order(GSEA$NES)]$pathway # sort pathways by size
+ggplot(GSEA, aes(y=factor(pathway, level = order),
+                       x = NES,
+                       col= -log10(padj),
+                       size = size)) + #y: is sorted by size
+  geom_point()+
+  labs(title = "dotplot", x ="GSEA: NES", y = "pathways in LUAD")
+
+
+ggplot(GSEA[1:10,], aes(y=pathway,
                        x = size,
                        col=padj,
                        size = NES)) + #y: is sorted by size
   geom_point()+
   labs(title = "dotplot", x ="GSEA: size", y = "pathways in LUAD")
-
 ```
 
 ```{r test dotplot...}
