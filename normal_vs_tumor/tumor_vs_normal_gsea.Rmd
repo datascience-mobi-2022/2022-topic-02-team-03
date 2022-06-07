@@ -68,7 +68,23 @@ head(ranked.pvalues)
 rm(sorted_p)
 ```
 
+### Create a ranked list of log2 FC values
+
+```{r}
+#create a sorted list of log2 FC values from most upregulated to most downregulated (see also: data cleanup)
+sorted_fc = sort(luad.info$diff.mean, decreasing = T)
+head(sorted_fc)
+
+ranked_fc = data.frame(diff.mean = sorted_fc)
+rownames(ranked_fc) = make.names(rownames(luad.info))
+head(ranked_fc)
+
+rm(sorted_fc)
+```
+
 ## run GSEA
+
+#### GSEA mit p-Werten
 
 ```{r change external_gene_name -> entrezgene_id}
 #ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
@@ -88,7 +104,7 @@ Names = rownames(ranked.pvalues)
 Values = ranked.pvalues$p.wilc
 names(Values) = Names
 
-GSEA = fgsea(pathways = genesets$genesets, stats = Values)
+GSEA_p = fgsea(pathways = genesets$genesets, stats = Values)
 
 rm(Names)
 
@@ -107,10 +123,24 @@ length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc)
 tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
 ```
 
+#### GSEA mit log2 FC
+
+```{r}
+# gleicher Code wir davor
+
+Names_fc = rownames(ranked_fc)
+Values_fc = ranked_fc$diff.mean
+names(Values_fc) = Names_fc
+
+GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values)
+
+rm(Names_fc)
+```
+
 ### Dot plot
 
 ```{r dot plot}
-dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
+#dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
 ```
 
 ```{r}
