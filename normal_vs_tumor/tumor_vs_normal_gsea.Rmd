@@ -86,14 +86,6 @@ rm(sorted_fc)
 
 #### GSEA mit p-Werten
 
-```{r change external_gene_name -> entrezgene_id}
-#ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
-#entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
-#head(entrezgene_id)
-#length(which(is.na(entrezgene_id)))
-#length(entrezgene_id$entrezgene_id)
-```
-
 ```{r prepare and run GSEA}
 #load genesets
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS")
@@ -104,7 +96,7 @@ Names = rownames(ranked.pvalues)
 Values = ranked.pvalues$p.wilc
 names(Values) = Names
 
-GSEA_p = fgsea(pathways = genesets$genesets, stats = Values)
+GSEA_p = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
 rm(Names)
 
@@ -132,7 +124,7 @@ Names_fc = rownames(ranked_fc)
 Values_fc = ranked_fc$diff.mean
 names(Values_fc) = Names_fc
 
-GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values)
+GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
 rm(Names_fc)
 ```
@@ -190,4 +182,10 @@ dotplot(x)
 data(geneList)
 x <- gseDO(geneList)
 gseaplot(x, geneSetID=1)
+```
+
+### Plotting using plot enrichment
+
+```{r}
+plotEnrichment(pathway = genesets$genesets, stats = Values)
 ```
