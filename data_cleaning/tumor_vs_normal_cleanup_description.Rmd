@@ -89,7 +89,19 @@ luad.normal.cut = luad.normal[,zero.varr]# luad. normal without the varr =0 gens
 luad.tumor.cut = luad.tumor[,zero.varr]# luad. tumor without the varr = 0 gens
 mmv_df_cut = mmv_df[zero.varr,]# mmv_df without the varr = 0 gens
 
+
+rows = c(which(mmv_df_cut$var.normal != 0))
+zero.varr = rownames(mmv_df_cut[rows,])
+
+luad.normal.cut = luad.normal.cut[,zero.varr]# luad. normal without the varr =0 gens from tumor
+luad.tumor.cut = luad.tumor.cut[,zero.varr]# luad. tumor without the varr = 0 gens
+mmv_df_cut = mmv_df_cut[zero.varr,]# mmv_df without the varr = 0 gens
 #checking for remaining 0 var. genes
+
+View(head(mmv_df_cut))
+View(luad.normal.cut[1:10,1:10])
+View(luad.tumor.cut[1:10,1:10])
+
 paste("there are", length(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
 paste("there are", length(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
 
@@ -213,27 +225,15 @@ rm(p, qn, qt, a1, a2, normality.gens)
 ```
 ```{r wilcoxon test, }
 
-
-
-##############################################################################################
 p.wilc = c(1: ncol(luad.normal.clean))
 for(i in 1: ncol(luad.normal.clean)){
   p.wilc[i] = c(wilcox.test(luad.tumor.clean[,i],luad.normal.clean[,i], paired = TRUE, alternative = "two.sided", exact = FALSE )$p.value)
 }
 
-
-defaultW <- getOption("warn")# don´t show warnings
-options(warn = -1)
-
 mmv_df_clean$p.wilc = p.wilc #-log10 tranformierte p werte, damit sie auf dem plot leichter zu sehen sind
 View(head(mmv_df_clean))
-##############################################################################################
 
-
-
-options(warn = defaultW) # don´t show warnings off
-
-rm(defaultW, i, p.wilc)
+rm(i, p.wilc)
 ```
 ```{r vulcano plots}
 alpha = 0.05 #punkt, ab dem die p Values signifikant werden
