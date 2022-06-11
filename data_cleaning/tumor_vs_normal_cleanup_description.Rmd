@@ -212,9 +212,6 @@ normality.gens = grid.arrange(a1, a2, nrow = 1)
 rm(p, qn, qt, a1, a2, normality.gens)
 ```
 ```{r wilcoxon test, }
-defaultW <- getOption("warn")# don´t show warnings
-options(warn = -1)
-
 
 
 
@@ -222,7 +219,11 @@ options(warn = -1)
 p.wilc = c(1: ncol(luad.normal.clean))
 for(i in 1: ncol(luad.normal.clean)){
   p.wilc[i] = c(wilcox.test(luad.tumor.clean[,i],luad.normal.clean[,i], paired = TRUE, alternative = "two.sided", exact = FALSE )$p.value)
-  }
+}
+
+
+defaultW <- getOption("warn")# don´t show warnings
+options(warn = -1)
 
 mmv_df_clean$p.wilc = p.wilc #-log10 tranformierte p werte, damit sie auf dem plot leichter zu sehen sind
 View(head(mmv_df_clean))
