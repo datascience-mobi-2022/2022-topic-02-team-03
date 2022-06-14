@@ -374,6 +374,8 @@ total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
     geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "gainsboro", high = "black")
 
+grid.arrange(up.reg, down.reg)
+total_genes
 grid.arrange(up.reg, down.reg, total_genes)
 ```
 
