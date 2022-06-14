@@ -1,4 +1,4 @@
-
+library(parallel)
 
 
 
@@ -12,7 +12,7 @@ for (i in 1:length(cancers)){
 #function die einen krebstypen df und genesets als input nimmt und ein df mit pvalues ausgibt
 enrichment = function(expressiondata, genesets = genesets_ids){
   ESmatrix = sapply(genesets, FUN = function(x){
-    ins = na.omit(expressiondata[which(x %in% rownames(expressiondata))])#indices der gene im aktuellen set
+    ins = na.omit(match(x,rownames(expressiondata)))#indices der gene im aktuellen set
     outs = -ins#indices der gene nicht im aktuellen set
     #gibt einen vektor der für jeden patienten den pval für das aktuelle gene enthält
     res = NULL
@@ -23,4 +23,4 @@ enrichment = function(expressiondata, genesets = genesets_ids){
   })
   row.names(ESmatrix) = colnames(expressiondata); return(ESmatrix)
 }
-pvalueslist = lapply(exp_highvar, FUN = function(x){return(enrichment(x,metabolism_list_gs))})
+pvalueslist = mclapply(tumor_type_dfs, FUN = function(x){return(enrichment(x,metabolism_list_gs))}, mc.cores = 8)
