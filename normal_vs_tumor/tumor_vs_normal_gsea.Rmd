@@ -365,13 +365,15 @@ up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "plum2", high = "red4")+
   labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
-  scale_color_manual(name = "up")
+  scale_color_manual(name = "up")+
+  xlim(0,60)
 
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "paleturquoise1", high = "blue")+
   labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
-  scale_color_manual(name = "down")
+  scale_color_manual(name = "down")+
+  xlim(0,60)
 
 total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
                               y=rownames(reg))) + 
