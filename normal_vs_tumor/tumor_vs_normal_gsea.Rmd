@@ -237,9 +237,14 @@ alpha.corr = -log10(alpha/nrow(luad.info))
 
 
 z = 46
-plots = list()
+pw.v.plots = list()
+pw.sv.plots = list()
+pw.grad.plots = list()
 name = c()
-
+regulation = data.frame(up = c(1:z),
+                        down = c(1:z),
+                        not_sign = c(1:z),
+                        number_of_genes = c(1:z))
 
 
 for(i in 1:z){
@@ -259,60 +264,161 @@ positions
 selection = luad.info[pw.genes,] # select rows from data frame
 selection$pathway = pw # make new column, called like the pw
 
-col = c("slateblue4", "slategray1", "gray84", "lightcoral") # choosing the colours
+col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
 
 
-#normaler v.plot
-plot <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
+#calculate % genes by up or down regulation
+hits = paste(dim(selection)[1], "genes in", pw)
+p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
+p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
+
+hits
+percent.down = paste(round(p.down, digits = 2), "% down")
+percent.up = paste(round(p.up, digits = 2), "% up")
+rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
+ns = paste(rest, "% not sign.")
+
+###plots
+#1 ) normaler v.plot
+plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
   geom_point(size = .2)+
   labs(title = paste("volcano plot pw: ", pw), x = "fc", y = "pwilc")+
   scale_color_manual(name = "title",
-                     breaks = c(pw, "down", "not sign.", "up"),
-                     labels = c(pw, "down", "not significant", "up"),
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
              aes(y = abs(spval), diff.mean, color = pathway), size = .7)
+#2 ) singed volcano plot
+plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(y = spval, diff.mean, color = pathway), size = 1)
+#3 ) gradient plot
+plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("gradient volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(spval, abs(diff.mean), color = pathway), size = 1)
 
-plots[[i]] <- plot #save the plot in the list element
+
+
+###saving
+pw.v.plots[[i]] <- plot.v #save the plot in the list element
+pw.sv.plots[[i]] <- plot.s
+pw.grad.plots[[i]] <- plot.g
 message("plot saved")
+
+regulation$up[i] = round(p.up, digits = 2)
+regulation$down[i] = round(p.down, digits = 2)
+regulation$not_sign[i] = rest
+regulation$number_of_genes[i] = dim(selection)[1]
+message("regulation filled")
 
 name[i] <- paste(pw) #names for list elements
 message("name saved")
 
+
+
 }
 
 #rename list elements
-names(plots) <- paste0(name, 1:length(plots))
-pw.v.plots = plots
+names(pw.v.plots) <- paste0(name, 1:length(pw.v.plots))
+names(pw.sv.plots) <- paste0(name, 1:length(pw.sv.plots))
+names(pw.grad.plots) <- paste0(name, 1:length(pw.grad.plots))
+
+#new list object with all plots
+plots = list(pw.v.plots = pw.v.plots, 
+             pw.sv.plots = pw.sv.plots,
+             pw.grad.plots = pw.grad.plots,
+               description = list("1" = "vcolcano plots",
+                                  "2" = "signed pvals volc plots",
+                                  "3" = "gradient plots"),
+             regulation = regulation)
+rownames(plots$regulation) <- name
+
+View(plots$regulation)
 
 
 
-View(pw.v.plots)
-
-
-
-rm(plots, z, x, pw, pw.genes, name, genes, positions, selection, col, i)
+rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g)
 ```
 
-```{r print plot}
-grid.arrange(grobs = (pw.v.plots[1:15]))
-grid.arrange(grobs = (pw.v.plots[16:30]))
-grid.arrange(grobs = (pw.v.plots[31:46]))
+```{r print plots}
+grid.arrange(grobs = (plots$pw.sv.plots[1:15]))
+grid.arrange(grobs = (plots$pw.v.plots[16:30]))
+grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
+
+
+reg = plots$regulation
+
+up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "plum2", high = "red4")
+
+down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "turquoise", high = "blue")
+
+total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
+                              y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "gainsboro", high = "black")
+
+grid.arrange(up.reg, down.reg, total_genes)
 ```
 
 
 ```{r backup plots}
 
+x = 1 # choose pathway by position
+
+pw = GSEA_p$pathway[x] 
+pw
+
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+genes = luad.info$name #all genes
+
+positions = sort(match(pw.genes, genes))#compare to get positions
+positions
+
+selection = luad.info[pw.genes,] # select rows from data frame
+selection$pathway = pw # make new column, called like the pw
+
+col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
+
+hits = paste(dim(selection)[1], "genes in", pw)
+p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
+p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
+
+hits
+precent.down = paste(round(p.down, digits = 2), "% down")
+percent.up = paste(round(p.up, digits = 2), "% up")
+rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
+ns = paste(rest, "% not sign.")
 #singed volcano plot
 pw.volc2 = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
   geom_point(size = .5)+
   labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
   scale_color_manual(name = "title",
-                     breaks = c(pw, "down", "not sign.", "up"),
-                     labels = c(pw, "down", "not significant", "up"),
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, precent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
              aes(y = spval, diff.mean, color = pathway), size = 1)
+pw.volc2
+
+
+
 
 pw.volc3 = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
   geom_point(size = .5)+
@@ -326,6 +432,7 @@ pw.volc3 = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
 
 
 rm(x, pw, pw.genes, genes, positions, selection, col)
+
 
 ```
 
