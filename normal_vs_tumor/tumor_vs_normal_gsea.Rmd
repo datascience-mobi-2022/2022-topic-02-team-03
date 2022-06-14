@@ -3,6 +3,8 @@ title: "tumor_vs_normal_gsea"
 author: "Chloé"
 date: "31/05/2022"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -52,7 +54,7 @@ luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
 rm(LUAD_tumor_vs_norm_clean)
 ```
 
-## create a sorted list of p-values from fold change
+## create a sorted list of p-values
 
 ```{r ranked p-values}
 
@@ -86,14 +88,6 @@ rm(sorted_fc)
 
 #### GSEA mit p-Werten
 
-```{r change external_gene_name -> entrezgene_id}
-#ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
-#entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
-#head(entrezgene_id)
-#length(which(is.na(entrezgene_id)))
-#length(entrezgene_id$entrezgene_id)
-```
-
 ```{r prepare and run GSEA}
 #load genesets
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS")
@@ -104,14 +98,14 @@ Names = rownames(ranked.pvalues)
 Values = ranked.pvalues$p.wilc
 names(Values) = Names
 
-GSEA_p = fgsea(pathways = genesets$genesets, stats = Values)
+GSEA_p = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
-rm(Names)
+rm(Names, Values)
 
 #View(GSEA)
 ```
 
-Fehlermeldung beim obrigen Chunk: 81.35% der Liste sind ties
+Fehlermeldung beim obrigen Chunk: 70.51% der Liste sind ties
 
 ```{r Einschub: Überprüfung der Warnmeldung beim obrigen Chunk}
 length(unique(ranked.pvalues$p.wilc)) #gibt die Anzahl der einzigartigen Werte in unserer Liste
@@ -132,7 +126,7 @@ Names_fc = rownames(ranked_fc)
 Values_fc = ranked_fc$diff.mean
 names(Values_fc) = Names_fc
 
-GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values)
+GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
 rm(Names_fc)
 ```
@@ -162,7 +156,7 @@ ggplot(GSEA[1:10,], aes(y=pathway,
   geom_point()+
   labs(title = "dotplot", x ="GSEA: size", y = "pathways in LUAD")
 ```
-
+##test
 ```{r test dotplot...}
 #(so stehts im beispiel): https://rdrr.io/bioc/enrichplot/man/dotplot.html
 
@@ -191,3 +185,298 @@ data(geneList)
 x <- gseDO(geneList)
 gseaplot(x, geneSetID=1)
 ```
+
+### Plotting using plot enrichment
+
+```{r}
+plotEnrichment(pathway = genesets$genesets, stats = Values)
+```
+
+
+
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+#volcano anfärben
+
+
+```{r hoch expr gene ansehen}
+LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
+luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+rm(LUAD_tumor_vs_norm_clean)
+
+
+#naming the top over or under expressed genes
+sp4 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
+  geom_point(size = .5)+
+  scale_color_manual(values=c("blue", "gray", "red"))+
+  labs(title = "normal volcano plot", y = "fc", x = "pwilc")+
+  geom_text(aes(label =
+                  ifelse(abs(spval)>9 & abs(diff.mean)>5, as.character(name),""))
+            )
+sp4 # look at the highest fc genes
+
+#x = grep("CA9", genesets$genesets) # example gene which is highly overexpressed
+#names = names(genesets$genesets[x])
+#names[1]
+```
+
+
+```{r pathways im volcano plot anfärben, saving all plots in a vector}
+
+alpha = 0.05
+alpha.corr = -log10(alpha/nrow(luad.info))
+
+
+z = 46
+pw.v.plots = list()
+pw.sv.plots = list()
+pw.grad.plots = list()
+name = c()
+regulation = data.frame(up = c(1:z),
+                        down = c(1:z),
+                        not_sign = c(1:z),
+                        number_of_genes = c(1:z))
+
+
+for(i in 1:z){
+  # select genes from one pwathway
+unique(GSEA_p$pathway) #all pathways
+x = i # choose pathway by position
+
+pw = GSEA_p$pathway[x] 
+pw
+
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+genes = luad.info$name #all genes
+
+positions = sort(match(pw.genes, genes))#compare to get positions
+positions
+
+selection = luad.info[pw.genes,] # select rows from data frame
+selection$pathway = pw # make new column, called like the pw
+
+col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
+
+
+#calculate % genes by up or down regulation
+hits = paste(dim(selection)[1], "genes in", pw)
+p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
+p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
+
+hits
+percent.down = paste(round(p.down, digits = 2), "% down")
+percent.up = paste(round(p.up, digits = 2), "% up")
+rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
+ns = paste(rest, "% not sign.")
+
+###plots
+#1 ) normaler v.plot
+plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
+  geom_point(size = .2)+
+  labs(title = paste("volcano plot pw: ", pw), x = "fc", y = "pwilc")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = .7)
+#2 ) singed volcano plot
+plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(y = spval, diff.mean, color = pathway), size = 1)
+#3 ) gradient plot
+plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("gradient volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, percent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(spval, abs(diff.mean), color = pathway), size = 1)
+
+
+
+###saving
+pw.v.plots[[i]] <- plot.v #save the plot in the list element
+pw.sv.plots[[i]] <- plot.s
+pw.grad.plots[[i]] <- plot.g
+message("plot saved")
+
+regulation$up[i] = round(p.up, digits = 2)
+regulation$down[i] = round(p.down, digits = 2)
+regulation$not_sign[i] = rest
+regulation$number_of_genes[i] = dim(selection)[1]
+message("regulation filled")
+
+name[i] <- paste(pw) #names for list elements
+message("name saved")
+
+
+
+}
+
+#rename list elements
+names(pw.v.plots) <- paste0(name, 1:length(pw.v.plots))
+names(pw.sv.plots) <- paste0(name, 1:length(pw.sv.plots))
+names(pw.grad.plots) <- paste0(name, 1:length(pw.grad.plots))
+
+#new list object with all plots
+plots = list(pw.v.plots = pw.v.plots, 
+             pw.sv.plots = pw.sv.plots,
+             pw.grad.plots = pw.grad.plots,
+               description = list("1" = "vcolcano plots",
+                                  "2" = "signed pvals volc plots",
+                                  "3" = "gradient plots"),
+             regulation = regulation)
+rownames(plots$regulation) <- name
+
+View(plots$regulation)
+
+
+
+rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g)
+```
+
+```{r print plots}
+grid.arrange(grobs = (plots$pw.sv.plots[1:15]))
+grid.arrange(grobs = (plots$pw.v.plots[16:30]))
+grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
+
+
+reg = plots$regulation
+
+up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "plum2", high = "red4")
+
+down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "turquoise", high = "blue")
+
+total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
+                              y=rownames(reg))) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "gainsboro", high = "black")
+
+grid.arrange(up.reg, down.reg)
+total_genes
+grid.arrange(up.reg, down.reg, total_genes)
+```
+
+
+```{r backup plots}
+
+x = 1 # choose pathway by position
+
+pw = GSEA_p$pathway[x] 
+pw
+
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+genes = luad.info$name #all genes
+
+positions = sort(match(pw.genes, genes))#compare to get positions
+positions
+
+selection = luad.info[pw.genes,] # select rows from data frame
+selection$pathway = pw # make new column, called like the pw
+
+col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
+
+hits = paste(dim(selection)[1], "genes in", pw)
+p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
+p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
+
+hits
+precent.down = paste(round(p.down, digits = 2), "% down")
+percent.up = paste(round(p.up, digits = 2), "% up")
+rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
+ns = paste(rest, "% not sign.")
+#singed volcano plot
+pw.volc2 = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "up", "down", "not sign."),
+                     labels = c(hits, percent.up, precent.down, ns),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(y = spval, diff.mean, color = pathway), size = 1)
+pw.volc2
+
+
+
+
+pw.volc3 = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
+  geom_point(size = .5)+
+  labs(title = paste("gradient volcano plot pw: ", pw), x = "fc", y = "spval")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "down", "not sign.", "up"),
+                     labels = c(pw, "down", "not significant", "up"),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(spval, abs(diff.mean), color = pathway), size = 1)
+
+
+rm(x, pw, pw.genes, genes, positions, selection, col)
+
+
+```
+
+```{r saving plots on desktop!!}
+### ACHTUNG!! for loop speichert plots! ###
+####z = c(1:46)
+####for(i in 1:length(z)){
+    
+  # select genes from one pwathway
+unique(GSEA_p$pathway) #all pathways
+x = i # choose pathway by position
+
+pw = GSEA_p$pathway[x] 
+pw
+
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+genes = luad.info$name #all genes
+
+positions = sort(match(pw.genes, genes))#compare to get positions
+positions
+
+selection = luad.info[pw.genes,] # select rows from data frame
+selection$pathway = pw # make new column, called like the pw
+
+col = c("slateblue4", "slategray1", "gray84", "lightcoral") # choosing the colours
+
+
+#normaler v.plot
+pw.volc = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
+  geom_point(size = .5)+
+  labs(title = paste("volcano plot pw: ", pw), x = "fc", y = "pwilc")+
+  scale_color_manual(name = "title",
+                     breaks = c(pw, "down", "not sign.", "up"),
+                     labels = c(pw, "down", "not significant", "up"),
+                     values = col )+ 
+  geom_point(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = 1)
+
+
+####ggsave(path = "C:/Users/felip/Desktop/plots", filename = paste(pw, "_volcano.png"), plot = pw.volc)
+
+####}
+
+```
+

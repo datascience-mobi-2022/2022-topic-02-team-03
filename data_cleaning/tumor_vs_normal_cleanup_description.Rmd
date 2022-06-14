@@ -3,6 +3,8 @@ title: "tumor_vs_normal_cleanup_desription"
 author: "Felipe Stünkel"
 date: "21 5 2022"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -63,7 +65,6 @@ mmv_df = data.frame(med.normal = apply(luad.normal, 2, median),
                     )
 mmv_df$diff.med = c(mmv_df$med.tumor-mmv_df$med.normal)
 mmv_df$diff.mean = c(mmv_df$mean.tumor-mmv_df$mean.normal)
-
 View(head(mmv_df))# rows = gen ID´s, cols =conditions
 
 ```
@@ -89,11 +90,23 @@ luad.normal.cut = luad.normal[,zero.varr]# luad. normal without the varr =0 gens
 luad.tumor.cut = luad.tumor[,zero.varr]# luad. tumor without the varr = 0 gens
 mmv_df_cut = mmv_df[zero.varr,]# mmv_df without the varr = 0 gens
 
+
+rows = c(which(mmv_df_cut$var.normal != 0))
+zero.varr = rownames(mmv_df_cut[rows,])
+
+luad.normal.cut = luad.normal.cut[,zero.varr]# luad. normal without the varr =0 gens from tumor
+luad.tumor.cut = luad.tumor.cut[,zero.varr]# luad. tumor without the varr = 0 gens
+mmv_df_cut = mmv_df_cut[zero.varr,]# mmv_df without the varr = 0 gens
 #checking for remaining 0 var. genes
+
+View(head(mmv_df_cut))
+View(luad.normal.cut[1:10,1:10])
+View(luad.tumor.cut[1:10,1:10])
+
 paste("there are", length(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
 paste("there are", length(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
 
-rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.varr, rows, luad.normal.new, luad.tumor.new, mmv_df_new)
+rm(mmv_df, luad.normal, luad.tumor, zero.varr, rows)
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
@@ -212,50 +225,21 @@ normality.gens = grid.arrange(a1, a2, nrow = 1)
 rm(p, qn, qt, a1, a2, normality.gens)
 ```
 ```{r wilcoxon test, }
-defaultW <- getOption("warn")# don´t show warnings
-options(warn = -1)
 
-
-
-
-##############################################################################################
 p.wilc = c(1: ncol(luad.normal.clean))
 for(i in 1: ncol(luad.normal.clean)){
-  p.wilc[i] = c(wilcox.test(luad.tumor.clean[,i],luad.normal.clean[,i], paired = TRUE, alternative = "two.sided" )$p.value)
-  }
+  p.wilc[i] = c(wilcox.test(luad.tumor.clean[,i],luad.normal.clean[,i], paired = TRUE, alternative = "two.sided", exact = FALSE )$p.value)
+}
 
 mmv_df_clean$p.wilc = p.wilc #-log10 tranformierte p werte, damit sie auf dem plot leichter zu sehen sind
 View(head(mmv_df_clean))
-##############################################################################################
 
-
-
-options(warn = defaultW) # don´t show warnings off
-
-rm(defaultW, i, p.wilc)
+rm(i, p.wilc)
 ```
 ```{r vulcano plots}
 alpha = 0.05 #punkt, ab dem die p Values signifikant werden
 #alpha muss noch angepasst werden, da der test über große datenmenge durchgeführt wurde alpha.corr = alpha * 1/#gene
 alpha.corr = -log10(alpha/nrow(mmv_df_clean))
-
-for (i in 1:nrow(mmv_df_clean)){ #setting up expression
-  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ), mmv_df_clean$expr[i] <- "up",
-         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ),mmv_df_clean$expr[i] <- "down",
-                mmv_df_clean$expr[i] <- "not sign."))
-}
-
-alpha.corr
-# plot for corrected alpha
-volcano1 = ggplot(mmv_df_clean, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
-  geom_point(size = .5)+
-  labs(title = "volcano plot of high varicance genes -> corrected alpha", y = "-log10(p.value)", x = "log2(Foldchange)")+
-  geom_hline(yintercept = alpha.corr,
-             linetype = "dashed")+
-  scale_color_manual(values=c("blue", "gray", "red"))
-
-volcano1
-
 
 
 
@@ -272,26 +256,98 @@ volcano2 = ggplot(mmv_df_clean, aes(diff.mean, -log10(p.wilc), col = expr))+ #pl
   geom_hline(yintercept = alpha,
              linetype = "dashed")+
   scale_color_manual(values=c("blue", "gray", "red"))
+
+
+
+# plot for corrected alpha
+for (i in 1:nrow(mmv_df_clean)){ #setting up expression
+  ifelse((   (mmv_df_clean$diff.mean[i] > 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ), mmv_df_clean$expr[i] <- "up",
+         ifelse((   (mmv_df_clean$diff.mean[i] < 0) & (-log10(mmv_df_clean$p.wilc[i]) > alpha.corr)   ),mmv_df_clean$expr[i] <- "down",
+                mmv_df_clean$expr[i] <- "not sign."))
+}
+
+alpha.corr
+
+volcano1 = ggplot(mmv_df_clean, aes(diff.mean, -log10(p.wilc), col = expr))+ #plot
+  geom_point(size = .5)+
+  labs(title = "volcano plot of high varicance genes -> corrected alpha", y = "-log10(p.value)", x = "log2(Foldchange)")+
+  geom_hline(yintercept = alpha.corr,
+             linetype = "dashed")+
+  scale_color_manual(values=c("blue", "gray", "red"))
+
+volcano1
+
 grid.arrange(volcano2, volcano1, nrow = 1)
 
 rm(alpha, alpha.corr, i, volcano1, volcano2)
 ```
 
-```{r saving & end & clean env.}
 
+
+# adding singed p-values
+```{r LUAD and signed pvals}
+# for all pos fc the p.values will get a -log10 transformation (pos values)
+# for all neg fc  the p.values will get a log10 transformation (neg values)
+
+
+for (i in 1:nrow(mmv_df_clean)){ #setting up expression
+  ifelse((   (mmv_df_clean$diff.mean[i] > 0)   ),
+         mmv_df_clean$spval[i] <- -log10(mmv_df_clean$p.wilc[i]),
+         mmv_df_clean$spval[i] <- log10(mmv_df_clean$p.wilc[i]))
+}
+rm(i)
+View(mmv_df_clean)
+
+mmv_df_clean$name = rownames(mmv_df_clean)
 LUAD_tumor_vs_norm_clean = list(luad.normal.clean = luad.normal.clean,
                            luad.tumor.clean = luad.tumor.clean,
                            infomatrix = mmv_df_clean,
                            luad.anno = luad.anno)
 View(LUAD_tumor_vs_norm_clean)
 
-saveRDS(LUAD_tumor_vs_norm_clean, "./data/LUAD_tumor_vs_norm_clean.RDS")
-
 # now that the biotypes are removed:
 paste( "There are", dim(luad.normal.clean)[2], "genes left after cleaning")
+```
+
+```{r save file}
+saveRDS(LUAD_tumor_vs_norm_clean, "./data/LUAD_tumor_vs_norm_clean.RDS")
+rm(list=ls())
+```
+
+```{r volcano plot varriations}
+LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
+luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+rm(LUAD_tumor_vs_norm_clean)
+
+#volcanoplot
+sp1 = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
+  geom_point(size = .5)+
+  scale_color_manual(values=c("blue", "gray", "red"))+
+  labs(title = "gradient plot of s.pvalues", y = "abs(fc)", x = "expression gradient (spval)")
+sp1
+
+sp2 = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
+  geom_point(size = .5)+
+  scale_color_manual(values=c("blue", "gray", "red"))+
+  labs(title = "volcano plot of s.pvalues", y = "spval", x = "fc")
+sp2
+
+sp3 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr))+
+  geom_point(size = .5)+
+  scale_color_manual(values=c("blue", "gray", "red"))+
+  labs(title = "normal volcano plot", y = "fc", x = "pwilc")
+sp3
+
+grid.arrange(sp3, sp2, sp1, nrow=1)
 
 rm(list=ls())
 ```
+
+
+
+
+
+
 
 
 
