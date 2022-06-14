@@ -106,7 +106,7 @@ View(luad.tumor.cut[1:10,1:10])
 paste("there are", length(which(mmv_df_cut$var.normal == 0)), "zero var. genes remaining")
 paste("there are", length(which(mmv_df_cut$var.tumor == 0)), "zero var. genes remaining")
 
-rm(mmv_df, luad.normal, luad.tumor, genenames, p, x, zero.varr, rows, luad.normal.new, luad.tumor.new, mmv_df_new)
+rm(mmv_df, luad.normal, luad.tumor, zero.varr, rows)
 ```
 ```{r remove biotypes}
 #---------------------------------------------#
@@ -282,7 +282,22 @@ grid.arrange(volcano2, volcano1, nrow = 1)
 rm(alpha, alpha.corr, i, volcano1, volcano2)
 ```
 
-```{r LUAD}
+
+
+# adding singed p-values
+```{r LUAD and signed pvals}
+# for all pos fc the p.values will get a -log10 transformation (pos values)
+# for all neg fc  the p.values will get a log10 transformation (neg values)
+
+
+for (i in 1:nrow(mmv_df_clean)){ #setting up expression
+  ifelse((   (mmv_df_clean$diff.mean[i] > 0)   ),
+         mmv_df_clean$spval[i] <- -log10(mmv_df_clean$p.wilc[i]),
+         mmv_df_clean$spval[i] <- log10(mmv_df_clean$p.wilc[i]))
+}
+rm(i)
+View(mmv_df_clean)
+
 mmv_df_clean$name = rownames(mmv_df_clean)
 LUAD_tumor_vs_norm_clean = list(luad.normal.clean = luad.normal.clean,
                            luad.tumor.clean = luad.tumor.clean,
@@ -294,18 +309,15 @@ View(LUAD_tumor_vs_norm_clean)
 paste( "There are", dim(luad.normal.clean)[2], "genes left after cleaning")
 ```
 
-# adding singed p-values
-```{r singed p-values}
-# for all pos fc the p.values will get a -log10 transformation (pos values)
-# for all neg fc  the p.values will get a log10 transformation (neg values)
-luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+```{r save file}
+saveRDS(LUAD_tumor_vs_norm_clean, "./data/LUAD_tumor_vs_norm_clean.RDS")
+rm(list=ls())
+```
 
-for (i in 1:nrow(luad.info)){ #setting up expression
-  ifelse((   (luad.info$diff.mean[i] > 0)   ),
-         luad.info$spval[i] <- -log10(luad.info$p.wilc[i]),
-         luad.info$spval[i] <- log10(luad.info$p.wilc[i]))
-}
-View(luad.info)
+```{r volcano plot varriations}
+LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
+luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+rm(LUAD_tumor_vs_norm_clean)
 
 #volcanoplot
 sp1 = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
@@ -327,56 +339,11 @@ sp3 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr))+
 sp3
 
 grid.arrange(sp3, sp2, sp1, nrow=1)
-```
 
-```{r pathways im volcano plot anfärben}
-genesets <- readRDS("./data/hallmarks_genesets.rds")
-
-
-#naming the top over or under expressed genes
-sp4 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
-  geom_point(size = .5)+
-  scale_color_manual(values=c("blue", "gray", "red"))+
-  labs(title = "normal volcano plot", y = "fc", x = "pwilc")+
-  geom_text(aes(label =
-                  ifelse(abs(spval)>9 & abs(diff.mean)>5, as.character(name),""))
-            )
-sp4 # look at the highest fc genes
-
-x = grep("CA9", genesets$genesets) # example gene which is highly overexpressed
-names(genesets$genesets[x])
-# select genes from one pwathway
-x = which((GSEA_p$pathway) == "Meta_AACR")
-pathway = unlist(GSEA_p$leadingEdge[x], use.names = F)
-genes = luad.info$name
-pw.genes = sort(match(pathway, genes))
-pw.genes
-selection = luad.info[pw.genes,]
-selection$pathway = "Meta_AACR"
-
-
-sp5 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
-  geom_point(alpha = .5)+
-  scale_color_manual(values=c("lightblue", "lightgray", "lightblue") )+
-  labs(title = paste("normal volcano plot pw: ", "Meta_AACR"), y = "fc", x = "pwilc")+ 
-  geom_point(data = selection,
-             aes(y = abs(spval), diff.mean), color = "red", size = 3)
-sp5 
-
-
-
-luad.info$number = c(1:dim(luad.info)[1])
-
-
-View(luad.info[is.element(luad.info$name, GSEA_p$leadingEdge[1]),])
-View(luad.info[rownames(luad.info) %in% GSEA_p$leadingEdge[1], ])
-filter(luad.info, name %in% GSEA_p$leadingEdge[1])
-```
-
-```{r save file}
-saveRDS(LUAD_tumor_vs_norm_clean, "./data/LUAD_tumor_vs_norm_clean.RDS")
 rm(list=ls())
 ```
+
+
 
 
 
