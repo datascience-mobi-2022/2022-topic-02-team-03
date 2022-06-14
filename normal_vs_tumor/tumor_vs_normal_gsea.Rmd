@@ -283,7 +283,7 @@ ns = paste(rest, "% not sign.")
 plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
   geom_point(size = .2)+
   labs(title = paste("volcano plot pw: ", pw), x = "fc", y = "pwilc")+
-  scale_color_manual(name = "title",
+  scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
@@ -293,7 +293,7 @@ plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
 plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
   geom_point(size = .5)+
   labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
-  scale_color_manual(name = "title",
+  scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
@@ -303,7 +303,7 @@ plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
 plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
   geom_point(size = .5)+
   labs(title = paste("gradient volcano plot pw: ", pw), x = "fc", y = "spval")+
-  scale_color_manual(name = "title",
+  scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
@@ -361,18 +361,24 @@ grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
 
 reg = plots$regulation
 
-up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) + 
-    geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "plum2", high = "red4")
+up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
+  geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "plum2", high = "red4")+
+  labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
+  scale_color_manual(name = "up")
 
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
-    geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "turquoise", high = "blue")
+  geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "paleturquoise1", high = "blue")+
+  labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
+  scale_color_manual(name = "down")
 
 total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
                               y=rownames(reg))) + 
-    geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "gainsboro", high = "black")
+  geom_bar(position="dodge", stat="identity")+
+  scale_fill_gradient(low = "gainsboro", high = "black")+
+  labs(title = paste("comparison in nuber of 'hits'"), x = "number of genes", y = "pathways")+
+  scale_color_manual(name = "count")
 
 grid.arrange(up.reg, down.reg)
 total_genes
