@@ -181,7 +181,7 @@ for(type in names(tumor_type_kmeans)){
       }
     }
     names(distance_up) <- names_up
-    vulcano_list[[paste("upregulated_genes",j)]][[type]] <- sort(distance_up)[1:5]
+    vulcano_list[[paste("upregulated_genes",j)]][[type]] <- sort(distance_up)[1:10]
    }
 }
 
@@ -196,6 +196,6 @@ for(type in names(tumor_type_kmeans)){
       }
     }
     names(distance_down) <- names_down
-    vulcano_list[[paste("downregulated_genes",j)]][[type]] <- sort(distance_down)[1:5]
+    vulcano_list[[paste("downregulated_genes",j)]][[type]] <- sort(distance_down)[1:10]
   }
 }
