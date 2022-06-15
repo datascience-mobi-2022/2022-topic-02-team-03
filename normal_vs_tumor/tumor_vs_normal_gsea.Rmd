@@ -277,6 +277,7 @@ percent.down = paste(round(p.down, digits = 2), "% down")
 percent.up = paste(round(p.up, digits = 2), "% up")
 rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
 ns = paste(rest, "% not sign.")
+vh = round(p.up/p.down, digits = 2)
 
 ###plots
 #1 ) normaler v.plot
@@ -321,7 +322,9 @@ message("plot saved")
 regulation$up[i] = round(p.up, digits = 2)
 regulation$down[i] = round(p.down, digits = 2)
 regulation$not_sign[i] = rest
+regulation$up_div_down[i] = vh
 regulation$number_of_genes[i] = dim(selection)[1]
+
 message("regulation filled")
 
 name[i] <- paste(pw) #names for list elements
@@ -346,6 +349,7 @@ plots = list(pw.v.plots = pw.v.plots,
              regulation = regulation)
 rownames(plots$regulation) <- name
 
+
 View(plots$regulation)
 
 
@@ -363,14 +367,14 @@ reg = plots$regulation
 
 up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
   geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "plum2", high = "red4")+
+  scale_fill_gradient(low = "thistle1", high = "violetred4")+
   labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
   scale_color_manual(name = "up")+
   xlim(0,60)
 
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "paleturquoise1", high = "blue")+
+  scale_fill_gradient(low = "lightblue", high = "purple4")+
   labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
   scale_color_manual(name = "down")+
   xlim(0,60)
@@ -378,12 +382,39 @@ down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) +
 total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
                               y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "gainsboro", high = "black")+
-  labs(title = paste("comparison in nuber of 'hits'"), x = "number of genes", y = "pathways")+
+  scale_fill_gradient(low = "paleturquoise1", high = "slategray")+
+  labs(title = paste("comparison in number of 'hits'"), x = "number of genes", y = "pathways")+
   scale_color_manual(name = "count")
 
-grid.arrange(up.reg, down.reg)
+
+#log10 tf
+reg$singed_ratio = c(1:46)
+for(i in 1:46){
+  ifelse(1 > reg$up_div_down[i] & reg$up_div_down[i] > 0,
+         reg$singed_ratio[i] <- reg$up_div_down[i]*(-10),
+         reg$singed_ratio[i] <- reg$up_div_down[i]
+         )
+  }
+reg$singed_ratio[which(reg$singed_ratio == 0)] <- -Inf
+
+
+reg$regulation[which(reg$singed_ratio > 0)] <- "über.expr"
+reg$regulation[which(reg$singed_ratio < 0)] <- "unter.expr"
+reg$regulation[which(reg$singed_ratio == Inf)] <- "nur.über.expr"
+reg$regulation[which(reg$singed_ratio == -Inf)] <- "nur.unter.expr"
+View(reg)
+s = ggplot(reg, aes(fill= regulation, x= singed_ratio,
+                              y=rownames(reg)))+ 
+  scale_fill_manual(breaks = c("nur.über.expr", "über.expr", "nur.unter.expr", "unter.expr"),
+                      values = c("violetred4", "thistle1", "purple4", "lightblue"))+
+  geom_bar(position="dodge", stat="identity")+
+  labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")
+
+
+grid.arrange(arrangeGrob(up.reg, down.reg), arrangeGrob(total_genes, s), ncol = 2)
+
 total_genes
+div_up_down
 grid.arrange(up.reg, down.reg, total_genes)
 ```
 
