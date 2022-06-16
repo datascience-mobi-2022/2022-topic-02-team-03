@@ -93,6 +93,8 @@ rm(sorted_fc)
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS")
 genesets <- readRDS("./data/hallmarks_genesets.rds")
 
+genesets$genesets = append(genesets$genesets, metabolism_list_gs)
+
 #stats argument (ranked p values) needs to be the right format
 Names = rownames(ranked.pvalues)
 Values = ranked.pvalues$p.wilc
@@ -236,7 +238,7 @@ alpha = 0.05
 alpha.corr = -log10(alpha/nrow(luad.info))
 
 
-z = 46
+z = length(genesets$genesets)
 pw.v.plots = list()
 pw.sv.plots = list()
 pw.grad.plots = list()
@@ -264,6 +266,9 @@ positions
 selection = luad.info[pw.genes,] # select rows from data frame
 selection$pathway = pw # make new column, called like the pw
 
+sel = luad.info$diff.mean[positions]#calculate mean expr of each pw
+mean = mean(sel)  
+
 col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
 
 
@@ -278,6 +283,16 @@ percent.up = paste(round(p.up, digits = 2), "% up")
 rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
 ns = paste(rest, "% not sign.")
 vh = round(p.up/p.down, digits = 2)
+
+#calculate for each pw the menan expression of the genes
+
+
+#
+##
+####
+##
+#
+
 
 ###plots
 #1 ) normaler v.plot
@@ -324,6 +339,7 @@ regulation$down[i] = round(p.down, digits = 2)
 regulation$not_sign[i] = rest
 regulation$up_div_down[i] = vh
 regulation$number_of_genes[i] = dim(selection)[1]
+regulation$mean[i] = mean
 
 message("regulation filled")
 
@@ -370,26 +386,29 @@ up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
   scale_fill_gradient(low = "thistle1", high = "violetred4")+
   labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
   scale_color_manual(name = "up")+
-  xlim(0,60)
+  xlim(0,60)+
+  theme(axis.text = element_text(size = 5)) 
 
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "lightblue", high = "purple4")+
   labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
   scale_color_manual(name = "down")+
-  xlim(0,60)
+  xlim(0,60)+
+  theme(axis.text = element_text(size = 5))
 
 total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
                               y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
-  scale_fill_gradient(low = "paleturquoise1", high = "slategray")+
+  scale_fill_gradient(low = "lightblue", high = "slategray")+
   labs(title = paste("comparison in number of 'hits'"), x = "number of genes", y = "pathways")+
-  scale_color_manual(name = "count")
+  scale_color_manual(name = "count")+
+  theme(axis.text = element_text(size = 5))
 
 
 #log10 tf
-reg$singed_ratio = c(1:46)
-for(i in 1:46){
+reg$singed_ratio = c(1:dim(reg)[1])
+for(i in 1:dim(reg)[1]){
   ifelse(1 > reg$up_div_down[i] & reg$up_div_down[i] > 0,
          reg$singed_ratio[i] <- -(reg$up_div_down[i]^(-1)),
          reg$singed_ratio[i] <- reg$up_div_down[i]
@@ -397,25 +416,40 @@ for(i in 1:46){
   }
 reg$singed_ratio[which(reg$singed_ratio == 0)] <- -Inf
 
+r = c("über.expr", "unter.expr","nur.über.expr", "nur.unter.expr","gleich")# regulation info
+col = c("orange","lightblue","violetred4",  "royalblue3",  "green")
 
-reg$regulation[which(reg$singed_ratio > 0)] <- "über.expr"
-reg$regulation[which(reg$singed_ratio < 0)] <- "unter.expr"
-reg$regulation[which(reg$singed_ratio == Inf)] <- "nur.über.expr"
-reg$regulation[which(reg$singed_ratio == -Inf)] <- "nur.unter.expr"
-reg$regulation[which(reg$singed_ratio == 1)] <- "gleich"
+reg$regulation[which(reg$singed_ratio > 0)] <- r[1]
+reg$regulation[which(reg$singed_ratio < 0)] <- r[2]
+reg$regulation[which(reg$singed_ratio == Inf)] <- r[3]
+reg$regulation[which(reg$singed_ratio == -Inf)] <- r[4]
+reg$regulation[which(reg$singed_ratio == 1)] <- r[5]
 View(reg)
 s = ggplot(reg, aes(fill= regulation, x= singed_ratio,
                               y=rownames(reg)))+ 
-  scale_fill_manual(breaks = c("nur.über.expr", "über.expr", "nur.unter.expr", "unter.expr", "gleich"),
-                      values = c("royalblue4", "orangered", "royalblue4", "royalblue1", "green"))+
+  scale_fill_manual(breaks = r, # regulation information
+                      values = col)+
   geom_bar(position="dodge", stat="identity")+
-  labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")
+  labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")+
+  theme(axis.text = element_text(size = 5))
 
 grid.arrange(arrangeGrob(up.reg, down.reg), arrangeGrob(total_genes, s), ncol = 2)
 
+up.reg
+down.reg
 total_genes
-div_up_down
-grid.arrange(up.reg, down.reg, total_genes)
+s
+```
+
+```{r dotplot}
+#calculate the mean expression of each pathway
+ggplot(reg, aes(x = number_of_genes, rownames(reg), size = mean, col = regulation))+
+  geom_point()+
+  scale_color_manual(breaks = r,
+                     values = col)+
+  labs(title = paste("dotplot"), x = "mean expr of pw", y = "pathways")+
+  theme(axis.text = element_text(size = 5))
+
 ```
 
 
