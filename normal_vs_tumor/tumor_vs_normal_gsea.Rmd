@@ -304,7 +304,7 @@ View(plots$regulation)
 rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g)
 ```
 
-```{r print plots}
+```{r print plots information in volcano plots etc}
 #grid.arrange(grobs = (plots$pw.sv.plots[1:15]))
 #grid.arrange(grobs = (plots$pw.v.plots[16:30]))
 #grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
@@ -375,7 +375,7 @@ total_genes
 s
 ```
 
-```{r dotplot}
+```{r dotplot and barplot}
 #calculate the mean expression of each pathway
 
 reg2 = reg[order(reg$mean),]
@@ -383,7 +383,7 @@ reg2$order = c(1:87)
 View(reg2)
 
 
-x = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regulation))+
+dot = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regulation))+
   geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
@@ -391,22 +391,22 @@ x = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regulati
   theme(axis.text = element_text(size = 7))+
   scale_y_discrete(limits = rownames(reg2))# to get the pws in the correct order somehow...
 
-y = ggplot(reg2, aes(fill= regulation, x = mean,
+bar = ggplot(reg2, aes(fill= regulation, x = mean,
                               y=order))+ 
   scale_fill_manual(breaks = r, # regulation information
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
   labs(title = paste("more up or more down reg"))+
-  theme(axis.text = element_text(size = 5))+
+  theme(axis.text = element_text(size =7))+
   labs(title = paste("barplot"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
   scale_y_discrete(limits = rownames(reg2))
 
 
-grid.arrange(x, y, ncol = 2)
+grid.arrange(dot, bar, ncol = 2)
 
 ```
 
-```{r boxplot mean of pws}
+```{r boxplot with mean of pws}
 
 
 
@@ -442,7 +442,7 @@ p <- ggplot(boxplot_df, aes(x=gene_expr, y=pathway)) +
   geom_boxplot(fill = "lightskyblue", col="midnightblue",
                outlier.colour="red4", outlier.shape=20,
                outlier.size=2)+
-  labs(title = paste("boxplot"), subtitle = "some genes are highlighted", x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("boxplot"), subtitle = "some genes are highlighted", x = "mean expression rates between tumor and normal tissue (fold changes) ", y = "pathways")+
   coord_flip()+ # flipping the plot
   theme(axis.text.x = element_text(size = 10, angle=90))
 
