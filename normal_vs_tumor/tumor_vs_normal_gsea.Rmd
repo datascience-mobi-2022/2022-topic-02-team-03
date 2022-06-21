@@ -46,6 +46,11 @@ library(ggplot2)
 library(biomaRt)
 library(enrichplot)
 library(tidyverse)
+library(scales)
+library("gridExtra")
+library(gtools)
+library(parallel)
+library(grid)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
@@ -133,81 +138,7 @@ GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 rm(Names_fc)
 ```
 
-### Dot plot
-
-```{r dot plot}
-#dotplot(object = GSEA, x = ,color = ranked.pvalues$p.wilc, size = count, title = "tumor vs normal GSEA results")
-```
-
-```{r}
-# adding col containing generatio information (hits/gens )
-
-order = GSEA[order(GSEA$NES)]$pathway # sort pathways by size
-ggplot(GSEA, aes(y=factor(pathway, level = order),
-                       x = NES,
-                       col= -log10(padj),
-                       size = size)) + #y: is sorted by size
-  geom_point()+
-  labs(title = "dotplot", x ="GSEA: NES", y = "pathways in LUAD")
-
-
-ggplot(GSEA[1:10,], aes(y=pathway,
-                       x = size,
-                       col=padj,
-                       size = NES)) + #y: is sorted by size
-  geom_point()+
-  labs(title = "dotplot", x ="GSEA: size", y = "pathways in LUAD")
-```
-##test
-```{r test dotplot...}
-#(so stehts im beispiel): https://rdrr.io/bioc/enrichplot/man/dotplot.html
-
-library(DOSE)
-data(geneList)
-de <- names(geneList)[1:100]
-x <- enrichDO(de)
-dotplot(x)
-```
-
-```{r unser dotplot...}
-# wir wollen die "entrezgene_id`s" unsrer gene, damit enrichDO funktioniert
-ensembl <- useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
-entrezgene_id <- getBM(mart = ensembl, values = rownames(luad.info), filters = "external_gene_name", attributes = c("entrezgene_id", "external_gene_name"))
-
-
-gene_ids = as.character(entrezgene_id$entrezgene_id)
-View(gene_ids)
-x <- enrichDO(gene_ids)
-dotplot(x)
-
-```
-
-```{r gsea plot}
-data(geneList)
-x <- gseDO(geneList)
-gseaplot(x, geneSetID=1)
-```
-
-### Plotting using plot enrichment
-
-```{r}
-plotEnrichment(pathway = genesets$genesets, stats = Values)
-```
-
-
-
-
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-####################################################################################
-#volcano anfärben
+###volcano anfärben
 
 
 ```{r hoch expr gene ansehen}
@@ -374,9 +305,9 @@ rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, 
 ```
 
 ```{r print plots}
-grid.arrange(grobs = (plots$pw.sv.plots[1:15]))
-grid.arrange(grobs = (plots$pw.v.plots[16:30]))
-grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
+#grid.arrange(grobs = (plots$pw.sv.plots[1:15]))
+#grid.arrange(grobs = (plots$pw.v.plots[16:30]))
+#grid.arrange(grobs = (plots$pw.grad.plots[31:46]))
 
 
 reg = plots$regulation
@@ -433,6 +364,9 @@ s = ggplot(reg, aes(fill= regulation, x= singed_ratio,
   labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")+
   theme(axis.text = element_text(size = 5))
 
+
+
+
 grid.arrange(arrangeGrob(up.reg, down.reg), arrangeGrob(total_genes, s), ncol = 2)
 
 up.reg
@@ -443,14 +377,103 @@ s
 
 ```{r dotplot}
 #calculate the mean expression of each pathway
-ggplot(reg, aes(x = number_of_genes, rownames(reg), size = mean, col = regulation))+
-  geom_point()+
+
+reg2 = reg[order(reg$mean),]
+reg2$order = c(1:87)
+View(reg2)
+
+
+x = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regulation))+
+  geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
-  labs(title = paste("dotplot"), x = "mean expr of pw", y = "pathways")+
-  theme(axis.text = element_text(size = 5))
+  labs(title = paste("dotplot"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  theme(axis.text = element_text(size = 7))+
+  scale_y_discrete(limits = rownames(reg2))# to get the pws in the correct order somehow...
+
+y = ggplot(reg2, aes(fill= regulation, x = mean,
+                              y=order))+ 
+  scale_fill_manual(breaks = r, # regulation information
+                      values = col)+
+  geom_bar(position="dodge", stat="identity")+
+  labs(title = paste("more up or more down reg"))+
+  theme(axis.text = element_text(size = 5))+
+  labs(title = paste("barplot"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  scale_y_discrete(limits = rownames(reg2))
+
+
+grid.arrange(x, y, ncol = 2)
 
 ```
+
+```{r boxplot mean of pws}
+
+
+
+gene_expr = c()
+pathway = c()
+n = c() #gonna be our vector for the gene names
+for(i in 1 :length(genesets$genesets)){
+
+x = i # choose pathway by position
+
+pw = GSEA_p$pathway[x] 
+pw
+
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+genes = luad.info$name #all genes
+
+positions = sort(match(pw.genes, genes))#compare to get positions
+positions
+
+selection = luad.info[pw.genes,] # select rows from data frame
+selection$pathway = pw # make new column, called like the pw
+gene_expr = append(gene_expr, selection$diff.mean)
+pathway = append(pathway, selection$pathway)
+#save the genenames into a new vector
+n = append(n, rownames(selection))
+}
+
+boxplot_df = data.frame(genes = n,
+                        gene_expr = gene_expr,
+                        pw = pathway)
+
+p <- ggplot(boxplot_df, aes(x=gene_expr, y=pathway)) + 
+  geom_boxplot(fill = "lightskyblue", col="midnightblue",
+               outlier.colour="red4", outlier.shape=20,
+               outlier.size=2)+
+  labs(title = paste("boxplot"), subtitle = "some genes are highlighted", x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  coord_flip()+ # flipping the plot
+  theme(axis.text.x = element_text(size = 10, angle=90))
+
+
+
+###now we want to label the outliers:
+
+#1 get outliers from plot
+outliers <- ggplot_build(p)[["data"]][[1]][["outliers"]]
+#2 name the outlyers by pathway
+names(outliers) <- levels(factor(boxplot_df$pw))
+#3 convert to tidy data
+tidy_out <- purrr::map_df(outliers, tibble::as_tibble, .id = "pw")
+#4 look for our genes
+g = boxplot_df$genes[match(tidy_out$value, boxplot_df$gene_expr)]
+#5 rename tidyout df
+tidy_out$gene_names = g
+t2 = tidy_out
+t3 = t2[match(unique(tidy_out$gene_names), t2$gene_names),]
+t3 = t3[order(t3$value),]
+dim(t3)
+#lets pick the top 10 over-expressed and under-expresssed genes
+t4 = rbind(t3[1:10,], t3[174:183,])
+
+
+p2 = p + geom_text(data = t4, aes(value, pw, label = gene_names), 
+              hjust = -.3, size = 3, col = "red")+
+  geom_point(data = t4, aes(value, pw ), col = "red")
+p2
+```
+
 
 
 ```{r backup plots}
