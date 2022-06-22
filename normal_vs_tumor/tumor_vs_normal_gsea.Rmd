@@ -438,16 +438,17 @@ boxplot_df = data.frame(genes = n,
                         gene_expr = gene_expr,
                         pw = pathway)
 
-p <- ggplot(boxplot_df, aes(x=gene_expr, y=pathway)) + 
-  geom_boxplot(fill = "lightskyblue", col="midnightblue",
+p <- ggplot(boxplot_df, aes(x=gene_expr, y=pathway))+
+  geom_boxplot(fill = "lightskyblue", col="gray31",
                outlier.colour="red4", outlier.shape=20,
                outlier.size=2)+
   labs(title = paste("boxplot"), subtitle = "some genes are highlighted", x = "mean expression rates between tumor and normal tissue (fold changes) ", y = "pathways")+
   coord_flip()+ # flipping the plot
-  theme(axis.text.x = element_text(size = 10, angle=90))
+  theme(axis.text.x = element_text(size = 10, angle=90))+
+  geom_vline(xintercept = 0, col = "red", lty = 1)
 
 
-
+p
 ###now we want to label the outliers:
 
 #1 get outliers from plot
@@ -578,7 +579,7 @@ pw.volc = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
 
 
 ```{r informationen über die gene}
-g = "TP53"
+g = "EDN"
 pos = grep(g,rownames(luad.info))
 View(luad.info[pos,])
 
