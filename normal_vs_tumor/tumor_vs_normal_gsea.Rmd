@@ -474,6 +474,14 @@ p2 = p + geom_text(data = t4, aes(value, pw, label = gene_names),
   geom_point(data = t4, aes(value, pw ), col = "red")
 p2
 ```
+```{r heatmap}
+#were gonn plot a heatmap containing the expression rates for each gene in each pathway
+library(pheatmap)
+
+#our data:
+head(boxplot_df)
+length(unique(boxplot_df$genes))
+```
 
 
 
