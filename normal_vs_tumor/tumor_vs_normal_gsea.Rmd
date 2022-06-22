@@ -199,6 +199,7 @@ selection$pathway = pw # make new column, called like the pw
 
 sel = luad.info$diff.mean[positions]#calculate mean expr of each pw
 mean = mean(sel)  
+median = median(sel)
 
 col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
 
@@ -271,6 +272,7 @@ regulation$not_sign[i] = rest
 regulation$up_div_down[i] = vh
 regulation$number_of_genes[i] = dim(selection)[1]
 regulation$mean[i] = mean
+regulation$median[i] = median
 
 message("regulation filled")
 
@@ -387,7 +389,7 @@ dot = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regula
   geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
-  labs(title = paste("dotplot"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("dotplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
   theme(axis.text = element_text(size = 7))+
   scale_y_discrete(limits = rownames(reg2))# to get the pws in the correct order somehow...
 
@@ -396,13 +398,41 @@ bar = ggplot(reg2, aes(fill= regulation, x = mean,
   scale_fill_manual(breaks = r, # regulation information
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
-  labs(title = paste("more up or more down reg"))+
   theme(axis.text = element_text(size =7))+
-  labs(title = paste("barplot"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("barplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
   scale_y_discrete(limits = rownames(reg2))
 
 
 grid.arrange(dot, bar, ncol = 2)
+
+#same with medians:
+reg3 = reg[order(reg$median),]
+reg3$order = c(1:87)
+View(reg2)
+
+
+dot2 = ggplot(reg3, aes(x = median, y = order, size = number_of_genes, col = regulation))+
+  geom_point(stat = "identity")+
+  scale_color_manual(breaks = r,
+                     values = col)+
+  labs(title = paste("dotplot (median)"), x = "median expression rate (fold changes) of each pw", y = "pathways")+
+  theme(axis.text = element_text(size = 7))+
+  scale_y_discrete(limits = rownames(reg3))# to get the pws in the correct order somehow...
+
+bar2 = ggplot(reg3, aes(fill= regulation, x = median,
+                              y=order))+ 
+  scale_fill_manual(breaks = r, # regulation information
+                      values = col)+
+  geom_bar(position="dodge", stat="identity")+
+  theme(axis.text = element_text(size =7))+
+  labs(title = paste("barplot (median)"), x = "median expression rate (fold changes) of each pw", y = "pathways")+
+  scale_y_discrete(limits = rownames(reg3))
+
+
+grid.arrange(dot2, bar2, ncol = 2)
+
+grid.arrange(dot, dot2, ncol = 2)
+grid.arrange(bar, bar2, ncol = 2)
 
 ```
 
