@@ -474,7 +474,7 @@ p <- ggplot(boxplot_df, aes(x=gene_expr, y=pathway))+
                outlier.size=2)+
   labs(title = paste("boxplot"), subtitle = "some genes are highlighted", x = "mean expression rates between tumor and normal tissue (fold changes) ", y = "pathways")+
   coord_flip()+ # flipping the plot
-  theme(axis.text.x = element_text(size = 10, angle=90))+
+  theme(axis.text.x = element_text(size = 10, angle=90, hjust = 0.95, vjust = 0))+
   geom_vline(xintercept = 0, col = "red", lty = 1)
 
 
