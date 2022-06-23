@@ -59,7 +59,7 @@ for(types in tumor_types){
 
 ggplots <- list()
 for(plot in 1:length(tumor_type_umap)){
-  print(ggplot(tumor_type_umap[[plot]], aes(x = V1, y=V2, color=anno_tumortypes[[plot]]$gender))+
+  print(ggplot(tumor_type_umap[[plot]], aes(x = V1, y=V2))+
                       geom_point()+
                       ggtitle(names(tumor_type_umap)[plot]))
 }
