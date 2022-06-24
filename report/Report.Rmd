@@ -3,7 +3,7 @@ title: "Final Report"
 author: "Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler"
 date: "16/06/2022"
 output: html_document
-bibliography: [packages.bib, references.bib]
+bibliography: [packages.bib, Citations.bib]
 ---
 
 # Abstract
@@ -72,13 +72,13 @@ bibliography: [packages.bib, references.bib]
 
 : **Tab. 1: Used packages in alphabetical order.**
 
-## UMAP
+## Principal Component Analysis (PCA)
 
-## PCA
+## Uniform Manifold Approximation and Projection (UMAP)
 
-## GSEA
+## Gene Set Enrichment Analysis (GSEA)
 
-## GSVA
+## Gene Set Variation Analysis (GSVA)
 
 # Results
 
