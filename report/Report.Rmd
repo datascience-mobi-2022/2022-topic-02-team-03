@@ -114,7 +114,7 @@ UMAP is a newer method tan PCA and it is generally believed to be easier to inte
 
 ## Gene Set Enrichment Analysis (GSEA)
 
-Gene set enrichment analysis (GSEA) is a supervised and population-based computational method that is used to determine whether two gene expression states are significantly different from each other or not. In this project we compared gene expression profiles from different tumor types with each other as well as gene expression profiles between healthy and tumorous tissue of the same cancer type \[@hanzelmann2013\]\[@subramanian2007\].
+Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two gene expression states are significantly different from each other or not. In this project we compared gene expression profiles from different tumor types with each other as well as gene expression profiles between healthy and tumorous tissue of the same cancer type [@subramanian2007].
 
 Two data sets are compared and the genes are sorted from the most to the least differential expression between the data sets according to their p-values. This creates a ranked list L.
 
