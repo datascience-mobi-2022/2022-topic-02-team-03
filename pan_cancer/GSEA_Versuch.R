@@ -13,7 +13,9 @@ library(RColorBrewer)
 library(msigdbr)
 library(ComplexHeatmap)
 library(grid)
-
+library(gplots)
+library(gtools)
+library(EnhancedVolcano)
 
 
 ######################## enrichment test using ssGSVA
@@ -68,6 +70,7 @@ for (element in rownames(tcga_exp)) {
 }
 rownames(tcga_exp) <- make.names(IDs, unique = TRUE)
 
+tcga_exp_clean <- tcga_exp[,]
 
 for(types in tumor_types){
   big_tumor_dfs[[types]] <- as.data.frame(tcga_exp[,which(tcga_anno$cancer_type_abbreviation == types)])
@@ -95,19 +98,19 @@ ggarrange(plotlist = big_ggplots)
 big_gsva_list <- list()
 big_gsva_list <- mclapply(big_tumor_dfs, function(x){gsva(as.matrix(x), all_genesets, method = "zscore")}, mc.cores = 6)
 
-big_gsva_umap <- list()
-for(types in tumor_types){
-  big_gsva_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(big_gsva_list[[types]]))@cell.embeddings, metric = "cosine"))
+all_gsva_umap <- list()
+for(types in names(all_gsva_devided)){
+  all_gsva_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_devided[[types]]), npcs = 25, assay = "RNA-Seq")@cell.embeddings, metric = "cosine"))
 }
 
-big_ggplots_gsva <- list()
-for(plot in names(big_gsva_umap)){
-  big_ggplots_gsva[[plot]] <- ggplot(big_gsva_umap[[plot]], aes(x = V1, y=V2))+
+all_ggplots_gsva <- list()
+for(plot in names(all_gsva_umap)){
+  all_ggplots_gsva[[plot]] <- ggplot(all_gsva_umap[[plot]], aes(x = V1, y=V2))+
     geom_point(size = 0.8)+
     ggtitle(plot)
 }
 
-ggarrange(plotlist = big_ggplots_gsva)
+ggarrange(plotlist = all_ggplots_gsva)
 
 
 ################################################## pathway activity heatmap
@@ -129,14 +132,14 @@ dev.off()
 
 
 #################################### GSVA for all Tumor types
-all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp))@cell.embeddings, metric = "cosine"))
+all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short))@cell.embeddings, metric = "cosine"))
 
 ggplot(all_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()
 
 all_gsva <- gsva(as.matrix(tcga_exp),all_genesets, method = "zscore", min.sz = 5)
 
-
+umap()
 
 #################################### Intersections for Troubleshooting
 
@@ -208,7 +211,11 @@ dev.off()
 
 ######################### GSVA for all tumor types at once
 
-all_gsva <- gsva(as.matrix(tcga_exp_short), all_genesets_copy, method = "zscore")
+all_gsva <- as.data.frame(gsva(as.matrix(tcga_exp_short), all_genesets_copy, method = "zscore"))
+
+whole_gsva_umap <- as.data.frame(umap(t(all_gsva), metric = "cosine"))
+ggplot(whole_gsva_umap, aes(x=V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
+  geom_point()
 
 patients_heatmap <- pheatmap(all_gsva[, 1:200], color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
 png(filename = "./output/patientsenrichmentHeatmap.png", height = 30000, width = 5000, units = "px")
@@ -238,8 +245,8 @@ rownames(pathway_enrichment_means) <- rownames(short_gsva_list[["LUAD"]])
 SDs <- apply(pathway_enrichment_means, 1, sd)
 pathway_enrichment_means_highSD <- pathway_enrichment_means[which(SDs > 3),]
 
-heatmap_try <-  pheatmap(as.matrix(pathway_enrichment_means_highSD[1:200,]), color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 12, fontsize = 12 )
-png(filename = "./output/enrichmentHeatmapTry.png", height = 4000, width = 2000, units = "px")
+heatmap_try <-  pheatmap(as.matrix(pathway_enrichment_means_highSD[1:200,]), color = gplots::bluered(10), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 12, fontsize = 12 )
+png(filename = "./output/enrichmentHeatmapTryTest.png", height = 4000, width = 2000, units = "px")
 heatmap_try
 dev.off()
 
@@ -248,3 +255,42 @@ heatmap_try2 <- Heatmap(as.matrix(pathway_enrichment_means_highSD[1:200,]), colu
 png(filename = "./output/enrichmentHeatmapTry2.png", height = 5200, width = 5500, units = "px", res = 500)
 heatmap_try2
 dev.off()
+
+
+# extract LUADS most over and under-expressed pathways
+LUAD_underexpressed <- rownames(pathway_enrichment_means_highSD[1:46,])[which(pathway_enrichment_means_highSD$LUAD[1:46] %in% sort(pathway_enrichment_means_highSD$LUAD[1:46])[1:20])]
+LUAD_overexpressed <- rownames(pathway_enrichment_means_highSD[1:46,])[which(pathway_enrichment_means_highSD$LUAD[1:46] %in% sort(pathway_enrichment_means_highSD$LUAD[1:46], decreasing = TRUE)[1:20])]
+
+
+# compare top 20 under and overexpressed genesets with other tumor types to find specific pathways
+rest_means <- apply(pathway_enrichment_means_highSD[,-4], 1, mean)
+
+rest_underexpressed <- rownames(pathway_enrichment_means_highSD[1:46,])[which(rest_means[1:46] %in% sort(rest_means[1:46])[1:20])]
+specific_underexpressed_LUAD <- LUAD_underexpressed[which(!(LUAD_underexpressed %in% rest_underexpressed))]
+
+rest_overexpressed <- rownames(pathway_enrichment_means_highSD[1:46,])[which(rest_means[1:46] %in% sort(rest_means[1:46], decreasing = TRUE)[1:20])]
+specific_overexpressed_LUAD <- LUAD_overexpressed[which(!(LUAD_overexpressed %in% rest_overexpressed))]
+
+# plot results and compare plots
+LUAD_expression_df <- data.frame("expressions" = c(sort(pathway_enrichment_means_highSD$LUAD[1:46])[1:20], sort(pathway_enrichment_means_highSD$LUAD[1:46], decreasing = TRUE)[1:20]))
+LUAD_expression_df$genes <- c(LUAD_underexpressed, LUAD_overexpressed)
+
+ggplot(LUAD_expression_df, aes( y = expressions, x = reorder(genes, expressions)))+
+  geom_bar(stat="identity")+
+  theme(axis.text.x = element_text(angle = 45))
+
+# calculate fold change between LUAD and all other cancer types and perform a vulcano plot
+
+foldchange_LUADvsRest <- foldchange(rest_means, pathway_enrichment_means_highSD$LUAD)
+foldchange_LUADvsRest <- sapply(foldchange_LUADvsRest, function(x){log2(x)})
+
+all_gsva_rest <- as.data.frame(all_gsva[,which(tcga_anno$cancer_type_abbreviation != "LUAD")])
+
+pvalues_LUADvsRest <- vector()
+for(geneset in rownames(pathway_enrichment_means_highSD)){
+  pvalues_LUADvsRest <- append(pvalues_LUADvsRest, wilcox.test(as.numeric(all_gsva_devided$LUAD[geneset,]), as.numeric(all_gsva_rest[geneset,]), alternative = "two.sided")$p.value)
+}
+
+volcano_df <- data.frame("genset" = rownames(pathway_enrichment_means_highSD), "pvalues" = pvalues_LUADvsRest, "foldchange" = foldchange_LUADvsRest)
+volcano_df_small <- volcano_df[1:50,]
+EnhancedVolcano(volcano_df_small, lab = volcano_df_small$genset, x = "foldchange", y="pvalues", pointSize = 1.5, labSize = 4)
