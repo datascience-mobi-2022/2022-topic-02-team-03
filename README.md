@@ -8,6 +8,14 @@
 
 # Folder structure
 
-## Data
+## data cleaning
 
-## 
+## descriptive analysis
+
+## pan cancer
+
+## normal vs tumor
+
+## output
+
+## report
