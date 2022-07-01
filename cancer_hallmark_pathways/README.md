@@ -1,1 +1,1 @@
-# Scripts for basic descriptive data analysis
+# Scripts for cancer hallmark pathways
