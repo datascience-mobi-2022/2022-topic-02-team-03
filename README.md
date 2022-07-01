@@ -20,4 +20,4 @@
 
 - **[report](/report):** our final report and .bib files of our citations
 
-- **[data](/data):** stores raw data locally
+- **data:** stores raw data locally
