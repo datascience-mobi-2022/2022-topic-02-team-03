@@ -8,17 +8,14 @@
 
 # Folder structure
 
-## data cleaning
+- **[data cleaning](/data_cleaning):** 
 
+- **cancer hallmark pathways:**
 
-## cancer hallmark pathways
+- **pan cancer:**
 
-## pan cancer
+- **normal vs tumor:**
 
-## normal vs tumor
+- **output:**
 
-## output
-
-## report
-
-# Raw Data
+- **report:**
