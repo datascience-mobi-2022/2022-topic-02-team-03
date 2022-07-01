@@ -10,12 +10,12 @@
 
 - **[data cleaning](/data_cleaning):** 
 
-- **cancer hallmark pathways:**
+- **[cancer hallmark pathways](/cancer_hallmark_pathways):**
 
-- **pan cancer:**
+- **[pan cancer](/pan_cancer):**
 
-- **normal vs tumor:**
+- **[normal vs tumor](/normal_vs_tumor):**
 
-- **output:**
+- **[output](/output):**
 
-- **report:**
+- **[report](/report):**
