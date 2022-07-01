@@ -4,4 +4,10 @@
 <br/> **Supervisor:** PD. Dr. Carl Herrmann
 <br/> **Tutor:** Wangjun Hu
 
-# Introduction
+# Abstract 
+
+# Folder structure
+
+## Data
+
+## 
