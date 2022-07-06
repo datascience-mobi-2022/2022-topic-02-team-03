@@ -1,0 +1,145 @@
+---
+title: "Final Report"
+author: "Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler"
+date: "20/07/2022"
+output:
+  pdf_document: default
+  html_document: default
+bibliography:
+- packages.bib
+- Citations.bib
+csl: cell.csl
+---
+
+# Abstract
+
+# Abbreviations
+
+|      |                                               |
+|------|-----------------------------------------------|
+| GSEA | gene set enrichment analysis                  |
+| GSVA | gene set variation analysis                   |
+| LUAD | lung adenocarcinoma                           |
+| PC   | principal component                           |
+| PCA  | principal component analysis                  |
+| UMAP | uniform manifold approximation and projection |
+|      |                                               |
+|      |                                               |
+|      |                                               |
+|      |                                               |
+|      |                                               |
+|      |                                               |
+
+# Introduction
+
+# Methods
+
+## Overview of used packages
+
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| Package Name | Application                                                                                | **Reference**   |
++==============+============================================================================================+=================+
+| babyplots    | create interactive 3D visualizations                                                       | @babyplots      |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| base         | basic R functions                                                                          | @R-base         |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| bayesbio     | calculate Jaccard coefficients                                                             | @bayesbio       |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| biomaRt      | access to genome databases                                                                 | @biomaRt2009    |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| cinaR        | combination of different packages                                                          | @cinaR          |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| cluster      | cluster analysis of data                                                                   | @cluster        |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| edgeR        | assess differential expression in gene expression profiles                                 | @edgeR          |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| enrichplot   | visualization of gene set enrichment results (GSEA)                                        | @enrichplot     |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| FactoMineR   | perform principal component analysis (PCA)                                                 | @FactoMineR     |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| fgsea        | Run GSEA on a pre-ranked list                                                              | @fgsea          |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| ggplot2      | visualization of results in dot plots, bar plots and box plots                             | @ggplot2        |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| ggpubr       | formatting of ggplot2-based graphs                                                         | @ggpubr         |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| grid         | implements the primitive graphical functions that underlie the ggplot2 plotting system     | @grid           |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| gridExtra    | arrange multiple plots on a page                                                           | @gridExtra      |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| GSVA         | Run GSVA on a data set                                                                     | @GSVA           |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| gtools       | calculate foldchange, find NAs,                                                            | @R-gtools       |
+|              |                                                                                            |                 |
+|              | logratio2foldchange                                                                        |                 |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| knitr        | creation of citations using write_bib                                                      | @knitr2014      |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| limma        | "linear models for microarray data"                                                        | @limma2015      |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| msigdbr      | provides the 'Molecular Signatures Database' (MSigDB) gene sets                            | @msigdbr        |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| parallel     | allows for parallel computation through multi core processing                              | @parallel       |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| pheatmap     | draw clustered heatmaps                                                                    | @pheatmap       |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| RColorBrewer | provides color schemes for maps                                                            | @RColorBrewer   |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| scales       | helps in visualization: r automatically determines breaks and labels for axes and legends  | @scales         |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| Seurat       | visualize gene set enrichment results in dot plots                                         | @R-SeuratObject |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| tidyverse    | collection of R packages, including ggplot2                                                | @tidyverse      |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+| uwot         | performs dimensionality reduction and Uniform Manifold Approxiamtion and Projection (UMAP) | @uwot           |
++--------------+--------------------------------------------------------------------------------------------+-----------------+
+
+: **Tab. 1: Used packages in alphabetical order.**
+
+## Principal Component Analysis (PCA)
+
+Principal component analysis (PCA) is a procedure used to perform linear dimension reduction. The goal is to reduce the dimension of a given data set whilst losing as little information as possible by retaining a maximum of the standardized data set's variation [@ringner2008].
+
+Principal components (PC) are a set of new orthogonal variables that are made up of a linear combination of the original variables. Principal components display the pattern of similarity of the observations and of the variables as points in maps [@abdi2010]. By convention, the PCs are ordered in decreasing  order according to the amount of variation they explain of the original data [@ringner2008]. It is important to note that all PCs are uncorrelated.
+
+PCA is a useful tool for genome-wide expression studies and often serves as a first step before clustering or classification of the data. Dimension reduction is a necessary step for easy data exploration and visualization [@ringner2008].
+
+## Uniform Manifold Approximation and Projection (UMAP)
+
+Uniform manifold approximation and projection (UMAP) is a k-neighbour graph based algorithm that is used for nonlinear dimension reduction [@smets2019] [@mcinnes2018].
+
+After data normalization, the Euclidean distances between points in a two-dimensional space of the graph are calculated and a local radius is determined [@VERMEULEN2021119547]. In general the closer two points are to each other, the more similar they are. UMAP makes a density estimation to find the right local radius. This variable radius is smaller in high density regions of data points and larger in low density regions. In general, the density is higher when the k-nearest neighbour is close and vice versa. The number of k-nearest neighbours controls the number of neighbours whose local topology is preserved. Precisely, a large number of neighbours will ensure that more global structure is preserved whereas a smaller number of neighbours will ensure the preservation of more local structure [@mcinnes2018].
+
+UMAP is a newer method tan PCA and it is generally believed to be easier to interpret and group data than by using PCA. Furthmore, UMAP has the advantage of not requiring linear data [@milosevic2022].
+
+## Gene Set Enrichment Analysis (GSEA)
+
+Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two gene expression states are significantly different from each other or not. In this project we compared gene expression profiles between healthy and tumorous tissue of LUAD[@subramanian2007].
+
+Two data sets are compared and the genes are sorted from the most to the least differential expression between the data sets according to their p-values. This creates a ranked list L.
+
+Referring to an *a priori* defined set of gene sets S, the goal is to locate for each pathway of S where its corresponding genes fall in L and find a discerning trend. If the genes of a given pathway are randomly distributed in L then the pathway is assumed to not significantly contribute to the particular tumor's phenotype. However if the genes are primarily clustered at the top or the bottom of L then a phenotypic significance of the given pathway can be assumed.
+
+To determine the location of the genes, an enrichment score is calculated for each pathway. For this, a running-sum statistic is calculated as the list L is ran through. The running-sum is increased every time a gene belonging to the pathway in question is encountered and decreased otherwise. An enrichment score is thus calculated for each pathway. The enrichment score is defined as the maximum deviation from zero of the running-sum.
+
+Lastly, adjustment for multiple hypothesis testing is performed by normalizing the enrichment score for each pathway to account for its size and a normalized enrichment score is obtained.
+
+GSEA is a useful tool for interpretation of gene expression data.
+
+[@subramanian2005]
+
+## Gene Set Variation Analysis (GSVA)
+
+Gene set variation analysis (GSVA) is an unsupervised method used for characterising pathways from a gene expression data set. Contrarily to the aforementioned GSEA, GSVA does not rely on phenotypic characterisation of the datasets into two categories but rather quantifies enrichment on a sample by sample basis which makes GSVA the better choice to perform on the tcga_exp data set.
+
+Firstly, the genes are ranked according to their cumulative distribution function for each sample. Next, the genes are classified into two distributions and a Komogorow-Smirnow statistic is calculated to judge how similar the distributions are to each other. In our case the first distribution is chosen as all the genes belonging to a particular gene set and the second distribution are all the genes not in said gene set. A Klimigrov random walk statistic is performed twice over the ranked list of genes for a given sample and a given pathway and the running sum is calculated. The first random walk analyses all the genes lying in the observed gene set and the second random walk analyses all the genes not lying in the gene set.
+
+The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set and it is assumed that that gene set is not involved in the development of LUAD.
+
+\[ @hanzelmann2013 \]
+
+# Results
+
+# Conclusion
+
+# References

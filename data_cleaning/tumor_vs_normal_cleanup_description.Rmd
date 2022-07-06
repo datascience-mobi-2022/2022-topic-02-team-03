@@ -237,10 +237,10 @@ View(head(mmv_df_clean))
 rm(i, p.wilc)
 ```
 ```{r vulcano plots}
-alpha = 0.05 #punkt, ab dem die p Values signifikant werden
+alpha = 0.7#punkt, ab dem die p Values signifikant werden
 #alpha muss noch angepasst werden, da der test über große datenmenge durchgeführt wurde alpha.corr = alpha * 1/#gene
 alpha.corr = -log10(alpha/nrow(mmv_df_clean))
-
+alpha.corr
 
 
 # plot for ___NOT___ corrected alpha
