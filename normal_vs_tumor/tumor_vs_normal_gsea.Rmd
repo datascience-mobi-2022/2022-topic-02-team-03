@@ -75,19 +75,7 @@ head(ranked.pvalues)
 rm(sorted_p)
 ```
 
-### Create a ranked list of log2 FC values
 
-```{r}
-#create a sorted list of log2 FC values from most upregulated to most downregulated (see also: data cleanup)
-sorted_fc = sort(luad.info$diff.mean, decreasing = T)
-head(sorted_fc)
-
-ranked_fc = data.frame(diff.mean = sorted_fc)
-rownames(ranked_fc) = make.names(rownames(luad.info))
-head(ranked_fc)
-
-rm(sorted_fc)
-```
 
 ## run GSEA
 
@@ -109,7 +97,13 @@ GSEA_p = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
 rm(Names, Values)
 
-#View(GSEA)
+#View(GSEA_p)
+
+#sort GSA by pvalues:
+
+GSEA_p$rank = 1:dim(GSEA_p)[1]
+ggplot(GSEA_p, aes(padj, reorder(pathway, padj)))+
+  geom_point()
 ```
 
 Fehlermeldung beim obrigen Chunk: 70.51% der Liste sind ties
@@ -124,19 +118,6 @@ length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc)
 tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
 ```
 
-#### GSEA mit log2 FC
-
-```{r}
-# gleicher Code wir davor
-
-Names_fc = rownames(ranked_fc)
-Values_fc = ranked_fc$diff.mean
-names(Values_fc) = Names_fc
-
-GSEA_fc = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
-
-rm(Names_fc)
-```
 
 ###volcano anfärben
 
@@ -157,6 +138,16 @@ sp4 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = na
             )
 sp4 # look at the highest fc genes
 
+
+#show names of the top min or max expressed genes
+names = c()
+for (i in 1:dim(luad.info)[1]){
+ifelse(abs(luad.info$spval)[i] >9 & abs(luad.info$diff.mean)[i] >5,
+       names[i] <- (luad.info$name)[i], "")
+}
+names <- names[!is.na(names)]
+length(names)
+names
 #x = grep("CA9", genesets$genesets) # example gene which is highly overexpressed
 #names = names(genesets$genesets[x])
 #names[1]
@@ -617,10 +608,25 @@ pw.volc = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
 
 
 ```{r informationen über die gene}
-g = "EDN"
-pos = grep(g,rownames(luad.info))
-View(luad.info[pos,])
+for (i in 1:dim(luad.info)[1]){
+  ifelse(luad.info$diff.mean[i] > 0,
+         luad.info$hoch_runter[i] <- "hoch",
+         ifelse(luad.info$diff.mean[i] < 0,
+         luad.info$hoch_runter[i] <- "runter",
+         luad.info$hoch_runter[i] <- "kein unterschied"))
+}
 
+
+
+g = c("UGT1A1", "UGT1A3", "UGT1A6", "UGT1A7", "UGT1A10", "SRD5A1")
+
+for (i in 1:length(g)) {
+pos = grep(g[i],rownames(luad.info))
+print(luad.info[pos, 15])
+}
+
+pos = grep("ADH7",rownames(luad.info))
+View(luad.info[pos,])
 
 ```
 
