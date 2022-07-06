@@ -5,9 +5,7 @@ date: "20/07/2022"
 output:
   pdf_document: default
   html_document: default
-bibliography:
-- packages.bib
-- Citations.bib
+bibliography: [packages.bib, Citations.bib]
 csl: cell.csl
 ---
 
@@ -23,12 +21,6 @@ csl: cell.csl
 | PC   | principal component                           |
 | PCA  | principal component analysis                  |
 | UMAP | uniform manifold approximation and projection |
-|      |                                               |
-|      |                                               |
-|      |                                               |
-|      |                                               |
-|      |                                               |
-|      |                                               |
 
 # Introduction
 
@@ -36,63 +28,71 @@ csl: cell.csl
 
 ## Overview of used packages
 
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| Package Name | Application                                                                                | **Reference**   |
-+==============+============================================================================================+=================+
-| babyplots    | create interactive 3D visualizations                                                       | @babyplots      |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| base         | basic R functions                                                                          | @R-base         |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| bayesbio     | calculate Jaccard coefficients                                                             | @bayesbio       |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| biomaRt      | access to genome databases                                                                 | @biomaRt2009    |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| cinaR        | combination of different packages                                                          | @cinaR          |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| cluster      | cluster analysis of data                                                                   | @cluster        |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| edgeR        | assess differential expression in gene expression profiles                                 | @edgeR          |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| enrichplot   | visualization of gene set enrichment results (GSEA)                                        | @enrichplot     |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| FactoMineR   | perform principal component analysis (PCA)                                                 | @FactoMineR     |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| fgsea        | Run GSEA on a pre-ranked list                                                              | @fgsea          |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| ggplot2      | visualization of results in dot plots, bar plots and box plots                             | @ggplot2        |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| ggpubr       | formatting of ggplot2-based graphs                                                         | @ggpubr         |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| grid         | implements the primitive graphical functions that underlie the ggplot2 plotting system     | @grid           |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| gridExtra    | arrange multiple plots on a page                                                           | @gridExtra      |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| GSVA         | Run GSVA on a data set                                                                     | @GSVA           |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| gtools       | calculate foldchange, find NAs,                                                            | @R-gtools       |
-|              |                                                                                            |                 |
-|              | logratio2foldchange                                                                        |                 |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| knitr        | creation of citations using write_bib                                                      | @knitr2014      |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| limma        | "linear models for microarray data"                                                        | @limma2015      |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| msigdbr      | provides the 'Molecular Signatures Database' (MSigDB) gene sets                            | @msigdbr        |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| parallel     | allows for parallel computation through multi core processing                              | @parallel       |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| pheatmap     | draw clustered heatmaps                                                                    | @pheatmap       |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| RColorBrewer | provides color schemes for maps                                                            | @RColorBrewer   |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| scales       | helps in visualization: r automatically determines breaks and labels for axes and legends  | @scales         |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| Seurat       | visualize gene set enrichment results in dot plots                                         | @R-SeuratObject |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| tidyverse    | collection of R packages, including ggplot2                                                | @tidyverse      |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
-| uwot         | performs dimensionality reduction and Uniform Manifold Approxiamtion and Projection (UMAP) | @uwot           |
-+--------------+--------------------------------------------------------------------------------------------+-----------------+
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| Package Name    | Application                                                                                | **Reference**      |
++=================+============================================================================================+====================+
+| babyplots       | create interactive 3D visualizations                                                       | @babyplots         |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| base            | basic R functions                                                                          | @R-base            |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| bayesbio        | calculate Jaccard coefficients                                                             | @bayesbio          |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| BiocParallel    | novel implementations of functions for parallel evaluation                                 | [@biocparallel]    |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| biomaRt         | access to genome databases                                                                 | @biomaRt2009       |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| cinaR           | combination of different packages                                                          | @cinaR             |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| cluster         | cluster analysis of data                                                                   | @cluster           |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| ComplexHeatmap  | arrange multiple heatmaps                                                                  | [@complexheatmap]  |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| edgeR           | assess differential expression in gene expression profiles                                 | @edgeR             |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| EnhancedVolcano | produce improved volcano plots                                                             | [@enhancedvolcano] |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| enrichplot      | visualization of gene set enrichment results (GSEA)                                        | @enrichplot        |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| FactoMineR      | perform principal component analysis (PCA)                                                 | @FactoMineR        |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| fgsea           | Run GSEA on a pre-ranked list                                                              | @fgsea             |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| ggplot2         | visualization of results in dot plots, bar plots and box plots                             | @ggplot2           |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| ggpubr          | formatting of ggplot2-based graphs                                                         | @ggpubr            |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| grid            | implements the primitive graphical functions that underlie the ggplot2 plotting system     | @grid              |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| gridExtra       | arrange multiple plots on a page                                                           | @gridExtra         |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| GSVA            | Run GSVA on a data set                                                                     | @GSVA              |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| gplots          | plotting data                                                                              |                    |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| gtools          | calculate foldchange, find NAs,                                                            | @R-gtools          |
+|                 |                                                                                            |                    |
+|                 | logratio2foldchange                                                                        |                    |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| knitr           | creation of citations using write_bib                                                      | @knitr2014         |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| limma           | "linear models for microarray data"                                                        | @limma2015         |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| msigdbr         | provides the 'Molecular Signatures Database' (MSigDB) gene sets                            | @msigdbr           |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| parallel        | allows for parallel computation through multi core processing                              | @parallel          |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| pheatmap        | draw clustered heatmaps                                                                    | @pheatmap          |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| RColorBrewer    | provides color schemes for maps                                                            | @RColorBrewer      |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| scales          | helps in visualization: r automatically determines breaks and labels for axes and legends  | @scales            |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| Seurat          | visualize gene set enrichment results in dot plots                                         | @R-SeuratObject    |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| tidyverse       | collection of R packages, including ggplot2                                                | @tidyverse         |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| uwot            | performs dimensionality reduction and Uniform Manifold Approxiamtion and Projection (UMAP) | @uwot              |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
 
 : **Tab. 1: Used packages in alphabetical order.**
 
@@ -136,7 +136,7 @@ Firstly, the genes are ranked according to their cumulative distribution functio
 
 The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set and it is assumed that that gene set is not involved in the development of LUAD.
 
-\[ @hanzelmann2013 \]
+[@hanzelmann2013]
 
 # Results
 
