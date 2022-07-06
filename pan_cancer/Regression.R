@@ -7,7 +7,7 @@ library(pROC)
 library(ComlpexHeatmap)
 
 ##clean and afterwards split dataset into train set and validation set
-cor.mat <- cor(all_gsva, method= "spearman")
+cor.mat <- cor(t(all_gsva), method= "spearman")
 
 
 
