@@ -16,120 +16,113 @@ library(grid)
 library(gplots)
 library(gtools)
 library(EnhancedVolcano)
+library(BiocParallel)
 
-
+tcga_exp_short <- readRDS("./data/tcga_exp_small.RDS")
+all_genesets_c5 <- readRDS("./data/genesetlist_whole_C5.RDS")
 ######################## enrichment test using ssGSVA
-gsva_list <- list()
-gsva_list <- mclapply(tumor_type_dfs, function(x){gsva(as.matrix(x), geneset, method = "zscore")}, mc.cores = 6)
+# gsva_list <- list()
+# gsva_list <- mclapply(tumor_type_dfs, function(x){gsva(as.matrix(x), geneset, method = "zscore")}, mc.cores = 6)
 
 # quality control
 
-qc_umap_gsva <- list()
-for(types in tumor_types){
-  qc_umap_gsva[[types]] <- as.data.frame(umap(RunPCA(as.matrix(gsva_list[[types]]), npcs = 25)@cell.embeddings, metric = "cosine"))
-}
-
-
-ggplot(as.data.frame(qc_umap_gsva$LUAD), aes(x=V1, y=V2))+
-  geom_point()
-
-
-###############################
-
-
-percent_metabol <- sapply(metabolism_list_gs, function(genesets){len.geneset = length(genesets); intersection = length(sum(which(genesets %in% rownames(exp_highvar)))); return(intersection/len.geneset)})
-percent_hallmark <- sapply(geneset, function(genesets){len.geneset = length(genesets); intersection = length(sum(which(genesets %in% rownames(exp_highvar)))); return(intersection/len.geneset)})
-
-
-write.csv(c(percent_hallmark, percent_metabol),file="output.csv",row.names=TRUE)
-
+# qc_umap_gsva <- list()
+# for(types in tumor_types){
+#   qc_umap_gsva[[types]] <- as.data.frame(umap(RunPCA(as.matrix(gsva_list[[types]]), npcs = 25)@cell.embeddings, metric = "cosine"))
+# }
+# 
+# 
+# ggplot(as.data.frame(qc_umap_gsva$LUAD), aes(x=V1, y=V2))+
+#   geom_point()
 
 
 #################################
 
-BRCA_and_LUAD <- saveRDS(list("BRCA" = tumor_type_dfs[["BRCA"]], "LUAD" =tumor_type_dfs[["LUAD"]]), "LUADandBRCA.RDS")
-
-
-test <- readRDS("LUADandBRCA.RDS")
-
 all_genesets <- append(geneset, metabolism_list_gs)
-
-saveRDS(all_genesets, "allGenesets.RDS")
-tes <- readRDS("allGenesets.RDS")
 
 
 ######################## Test with all genes / uncleaned dataset
-big_tumor_dfs <- list()
-tumor_types <- unique(tcga_anno$cancer_type_abbreviation)
-
-tcga_exp_backup <- tcga_exp
-#remove accession numbers
-IDs <- c()
-for (element in rownames(tcga_exp)) {
-  IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
-}
-rownames(tcga_exp) <- make.names(IDs, unique = TRUE)
-
-tcga_exp_clean <- tcga_exp[,]
-
-for(types in tumor_types){
-  big_tumor_dfs[[types]] <- as.data.frame(tcga_exp[,which(tcga_anno$cancer_type_abbreviation == types)])
-}
-
-big_umap <- list()
-for(types in tumor_types){
-  big_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(big_tumor_dfs[[types]]), npcs = 25)@cell.embeddings, metric = "cosine"))
-}
-
-big_ggplots <- list()
-for(plot in 1:length(big_umap)){
-  big_ggplots[[plot]] <- ggplot(big_umap[[plot]], aes(x = V1, y=V2))+
-          geom_point(size = 0.8)+
-          ggtitle(names(big_umap)[plot])
-}
-
-ggarrange(plotlist = big_ggplots)
-
-
-
-#gsva and umap
-
-
-big_gsva_list <- list()
-big_gsva_list <- mclapply(big_tumor_dfs, function(x){gsva(as.matrix(x), all_genesets, method = "zscore")}, mc.cores = 6)
-
-all_gsva_umap <- list()
-for(types in names(all_gsva_devided)){
-  all_gsva_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_devided[[types]]), npcs = 25, assay = "RNA-Seq")@cell.embeddings, metric = "cosine"))
-}
-
-all_ggplots_gsva <- list()
-for(plot in names(all_gsva_umap)){
-  all_ggplots_gsva[[plot]] <- ggplot(all_gsva_umap[[plot]], aes(x = V1, y=V2))+
-    geom_point(size = 0.8)+
-    ggtitle(plot)
-}
-
-ggarrange(plotlist = all_ggplots_gsva)
-
+# big_tumor_dfs <- list()
+# tumor_types <- unique(tcga_anno$cancer_type_abbreviation)
+# 
+# tcga_exp_backup <- tcga_exp
+# #remove accession numbers
+# IDs <- c()
+# for (element in rownames(tcga_exp)) {
+#   IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
+# }
+# rownames(tcga_exp) <- make.names(IDs, unique = TRUE)
+# 
+# tcga_exp_clean <- tcga_exp[,]
+# 
+# for(types in tumor_types){
+#   big_tumor_dfs[[types]] <- as.data.frame(tcga_exp[,which(tcga_anno$cancer_type_abbreviation == types)])
+# }
+# 
+# big_umap <- list()
+# for(types in tumor_types){
+#   big_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(big_tumor_dfs[[types]]), npcs = 25)@cell.embeddings, metric = "cosine"))
+# }
+# 
+# big_ggplots <- list()
+# for(plot in 1:length(big_umap)){
+#   big_ggplots[[plot]] <- ggplot(big_umap[[plot]], aes(x = V1, y=V2))+
+#           geom_point(size = 0.8)+
+#           ggtitle(names(big_umap)[plot])
+# }
+# 
+# ggarrange(plotlist = big_ggplots)
+# 
+# 
+# 
+# #gsva and umap
+# 
+# 
+# big_gsva_list <- list()
+# big_gsva_list <- mclapply(big_tumor_dfs, function(x){gsva(as.matrix(x), all_genesets, method = "zscore")}, mc.cores = 6)
+# 
+# all_gsva_umap <- list()
+# for(types in names(all_gsva_devided)){
+#   all_gsva_umap[[types]] <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_devided[[types]]), npcs = 25, assay = "RNA-Seq")@cell.embeddings, metric = "cosine"))
+# }
+# 
+# all_ggplots_gsva <- list()
+# for(plot in names(all_gsva_umap)){
+#   all_ggplots_gsva[[plot]] <- ggplot(all_gsva_umap[[plot]], aes(x = V1, y=V2))+
+#     geom_point(size = 0.8)+
+#     ggtitle(plot)
+# }
+# 
+# ggarrange(plotlist = all_ggplots_gsva)
+# 
 
 ################################################## pathway activity heatmap
 
 
 
-pathway_enrichment_means <- matrix(nrow = 87, ncol = 33, byrow = FALSE)
-for( type in 1:length(tumor_types)){
-  pathway_enrichment_means[,type] <- apply(as.data.frame(big_gsva_list[[type]]), 1, mean)
-}
-pathway_enrichment_means <- as.data.frame(pathway_enrichment_means)
-colnames(pathway_enrichment_means) <- tumor_types
-rownames(pathway_enrichment_means) <- rownames(big_gsva_list[["LUAD"]])
+# pathway_enrichment_means <- matrix(nrow = 87, ncol = 33, byrow = FALSE)
+# for( type in 1:length(tumor_types)){
+#   pathway_enrichment_means[,type] <- apply(as.data.frame(big_gsva_list[[type]]), 1, mean)
+# }
+# pathway_enrichment_means <- as.data.frame(pathway_enrichment_means)
+# colnames(pathway_enrichment_means) <- tumor_types
+# rownames(pathway_enrichment_means) <- rownames(big_gsva_list[["LUAD"]])
+# 
+# heatmap <- pheatmap(as.matrix(pathway_enrichment_means), color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
+# png(filename = "./output/enrichmentHeatmap.png", height = 1400, width = 2000, units = "px")
+# heatmap
+# dev.off()
+#################################### create second geneset list with C2 genesets from msigdb
+C2_pathways <- msigdbr(species = "Homo sapiens", category = "C2")
 
-heatmap <- pheatmap(as.matrix(pathway_enrichment_means), color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
-png(filename = "./output/enrichmentHeatmap.png", height = 1400, width = 2000, units = "px")
-heatmap
-dev.off()
+C2_list = list() #this creates an empty list to store the for loop in
+for (gene.name in unique(C2_pathways$gs_name)){
+  pathway = c(C2_pathways[C2_pathways$gs_name == gene.name, 7])
+  names(pathway) = paste(c(strsplit(gene.name, "_", fixed = TRUE)[[1]][-1]), collapse = "_") #to extract the "GOBP_" from each name, substring is used
+  C2_list[paste(c(strsplit(gene.name, "_", fixed = TRUE)[[1]][-1]), collapse = "_")] = pathway}
 
+#append C2 sets to rest of the genesets
+combined_genesets_C2 <- append(all_genesets, C2_list)
 
 #################################### GSVA for all Tumor types
 all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short))@cell.embeddings, metric = "cosine"))
@@ -137,9 +130,7 @@ all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short))@cell.embeddings
 ggplot(all_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()
 
-all_gsva <- gsva(as.matrix(tcga_exp),all_genesets, method = "zscore", min.sz = 5)
-
-umap()
+all_gsva_C5 <- gsva(as.matrix(tcga_exp_short),all_genesets_c5, method = "gsva", min.sz = 20, parallel.sz = 6)
 
 #################################### Intersections for Troubleshooting
 
@@ -182,32 +173,32 @@ boxplot(GO_intersect_overview$intersect)
 all_genesets_copy <- append(all_genesets, GO_list[which(names(GO_list) %in% rownames(GO_intersect_overview))])
 
 
-############################# delete dataset entris for genes not in pathways
+############################# delete dataset entries for genes not in pathways
 tcga_exp_short <- tcga_exp[which(rownames(tcga_exp) %in% unlist(unique(all_genesets_copy))),]
 
 
 ############################## new GSVA with short dataset
-short_types_dfs <- list()
-for(types in tumor_types){
-  short_types_dfs[[types]] <- as.data.frame(tcga_exp_short[,which(tcga_anno$cancer_type_abbreviation == types)])
-}
-
-short_gsva_list <- list()
-short_gsva_list <- mclapply(short_types_dfs, function(x){gsva(as.matrix(x), all_genesets_copy, method = "zscore")}, mc.cores = 6)
-
-
-pathway_enrichment_means <- matrix(nrow = 2941, ncol = 33, byrow = FALSE)
-for( type in 1:length(tumor_types)){
-  pathway_enrichment_means[,type] <- apply(as.data.frame(short_gsva_list[[type]]), 1, mean)
-}
-pathway_enrichment_means <- as.data.frame(pathway_enrichment_means)
-colnames(pathway_enrichment_means) <- tumor_types
-rownames(pathway_enrichment_means) <- rownames(short_gsva_list[["LUAD"]])
-
-heatmap <- pheatmap(as.matrix(pathway_enrichment_means), color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
-png(filename = "./output/enrichmentHeatmap.png", height = 6000, width = 5000, units = "px")
-heatmap
-dev.off()
+# short_types_dfs <- list()
+# for(types in tumor_types){
+#   short_types_dfs[[types]] <- as.data.frame(tcga_exp_short[,which(tcga_anno$cancer_type_abbreviation == types)])
+# }
+# 
+# short_gsva_list <- list()
+# short_gsva_list <- mclapply(short_types_dfs, function(x){gsva(as.matrix(x), all_genesets_copy, method = "zscore")}, mc.cores = 6)
+# 
+# 
+# pathway_enrichment_means <- matrix(nrow = 2941, ncol = 33, byrow = FALSE)
+# for( type in 1:length(tumor_types)){
+#   pathway_enrichment_means[,type] <- apply(as.data.frame(short_gsva_list[[type]]), 1, mean)
+# }
+# pathway_enrichment_means <- as.data.frame(pathway_enrichment_means)
+# colnames(pathway_enrichment_means) <- tumor_types
+# rownames(pathway_enrichment_means) <- rownames(short_gsva_list[["LUAD"]])
+# 
+# heatmap <- pheatmap(as.matrix(pathway_enrichment_means), color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
+# png(filename = "./output/enrichmentHeatmap.png", height = 6000, width = 5000, units = "px")
+# heatmap
+# dev.off()
 
 ######################### GSVA for all tumor types at once
 
