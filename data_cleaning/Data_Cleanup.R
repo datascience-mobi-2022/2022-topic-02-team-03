@@ -12,7 +12,7 @@ tcga_exp <- readRDS("./data/tcga_tumor_log2TPM.RDS")
 tcga_anno <- readRDS("./data/tcga_tumor_annotation.RDS")
 tumor_vs_norm <- readRDS("./data/tcga_tumor_normal_datascience_proj_2022.RDS")
 genesets <- readRDS("./data/hallmarks_genesets.rds")
-tcga_exp_copy <- as.data.frame(t(tcga_exp))
+tcga_exp_copy <- as.data.frame(tcga_exp)
 LUAD_patients <- tcga_exp_copy[which(tcga_anno$cancer_type_abbreviation=="LUAD")]
 #----------------------------------------------
 #extracting gene IDs and ensemble IDs
@@ -28,7 +28,7 @@ for (element in rownames(tcga_exp)) {
 
 rm(element)
 # setting row names to gene IDs; enumerate duplicates
-colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
+rownames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
 
 # check for NAs in both exp and anno
 print(paste0("There are " , sum(is.na(tcga_exp)) , " NAs in tcga_exp"))
@@ -78,20 +78,18 @@ genes_with_biotypes <- list()
 genes_with_biotypes <- mclapply(biotypes$ensembl_gene_id, function(gene){grep(gene, rownames(tcga_exp))}, mc.cores = detectCores())
 genes_with_biotypes <- unlist(genes_with_biotypes)
 
-genes_and_biotypes <- data.frame("ensembl_ID" = ensemble[genes_with_biotypes], "gene_name" = colnames(tcga_exp_copy)[genes_with_biotypes], "biotype" = biotypes$gene_biotype)
+genes_and_biotypes <- data.frame("ensembl_ID" = ensemble[genes_with_biotypes], "gene_name" = rownames(tcga_exp_copy)[genes_with_biotypes], "biotype" = biotypes$gene_biotype)
 
 # looking up biotypes of the hallmarks to delete all genes that do not fit biotype
-biotypes_hallmarks <- getBM(mart = ensembl, values = unique(unlist(genesets$genesets, use.names = FALSE)), filters = "hgnc_symbol", attributes = c("gene_biotype", "ensembl_gene_id", "hgnc_symbol"))
+biotypes_hallmarks <- getBM(mart = ensembl, values = unique(unlist(all_genesets_copy, use.names = FALSE)), filters = "hgnc_symbol", attributes = c("gene_biotype", "ensembl_gene_id", "hgnc_symbol"))
 relevant_biotypes <- levels(as.factor(biotypes_hallmarks$gene_biotype))
-
-biotypes_metabol <- getBM(mart = ensembl, values = unique(unlist(metabolism_list_gs, use.names = FALSE)), filters = "hgnc_symbol", attributes = c("gene_biotype", "ensembl_gene_id", "hgnc_symbol"))
-relevant_biotypes <- unique(append(relevant_biotypes, levels(as.factor(biotypes_metabol$gene_biotype))))
+relevant_biotypes <- relevant_biotypes[-c(2, 8, 9, 13, 16, 17, 18, 19, 20, 21, 22)]
 
 # delete all genes that do not fit biotype in biotypes df
 biotypes <- biotypes[which(biotypes$gene_biotype %in% relevant_biotypes),]
 
 #make tcga_copy smaller by deleting wrong biotype genes
-tcga_exp_copy <- tcga_exp_copy[,which(ensemble_noVersion %in% biotypes$ensembl_gene_id)]
+tcga_exp_copy <- tcga_exp_copy[which(ensemble_noVersion %in% biotypes$ensembl_gene_id),]
 #IDs <- c()
 #for (element in colnames(tcga_exp_copy)) {
 #  IDs <- c(IDs, strsplit(element, "|", fixed = TRUE)[[1]][2])
@@ -100,11 +98,11 @@ tcga_exp_copy <- tcga_exp_copy[,which(ensemble_noVersion %in% biotypes$ensembl_g
 #colnames(tcga_exp_copy) <- make.names(IDs, unique = TRUE)
 
 # finding the max variance genes
-gene_variances <- apply(tcga_exp_copy, 2, var)
+gene_variances <- apply(tcga_exp_copy, 1, var)
 #plot(gene_variances, type="l", xlab = "genes", ylab="variance")
 
 #delete the lowest 50% of genes 
-exp_highvar <- tcga_exp_copy[,which(gene_variances > quantile(gene_variances, 0.65))]
+exp_highvar <- tcga_exp_copy[which(gene_variances > quantile(gene_variances, 0.3)),]
 gene_variances_highvar <- sort(apply(exp_highvar, 2, var), decreasing = TRUE)
 
 
