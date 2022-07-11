@@ -130,7 +130,7 @@ all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short))@cell.embeddings
 ggplot(all_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()
 
-all_gsva_C5 <- gsva(as.matrix(tcga_exp_short),all_genesets_c5, method = "gsva", min.sz = 20, parallel.sz = 6)
+all_gsva_C5 <- gsva(as.matrix(tcga_exp_short),all_genesets_c5, method = "gsva", min.sz = 20, parallel.sz = 4)
 
 #################################### Intersections for Troubleshooting
 

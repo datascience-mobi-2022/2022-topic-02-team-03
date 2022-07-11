@@ -6,6 +6,7 @@ library(uwot)
 library(ggpubr)
 library(babyplots)
 library(cluster)
+library(EnhancedVolcano)
 
 
 tcga_anno <- readRDS("./data/tcga_tumor_annotation.RDS")
@@ -24,7 +25,8 @@ ggplot(tcga_exp_pca, aes(x = PC_1, y = PC_2, color = tcga_anno$cancer_type_abbre
 tcga_exp_umap <- as.data.frame(umap(tcga_exp_pca, n_threads = 8, metric = "cosine", n_components = 3))
 ggplot(tcga_exp_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()+
-  guides(color=guide_legend(title="cancer type"))
+  guides(color=guide_legend(title="cancer type"))+
+  theme(legend.text=element_text(size=14))
 
 pointCloud(as.matrix(tcga_exp_umap), colorBy = "categories", colorVar = tcga_anno$cancer_type_abbreviation, turntable = TRUE, rotationRate = 0.001, xScale = 0.25, yScale = 0.25, zScale = 0.25 )
 
@@ -56,6 +58,10 @@ for(types in tumor_types){
 #  tumor_type_umap[[types]] <- as.data.frame(umap(exp_highvar[,which(tcga_anno$cancer_type_abbreviation== types)]))
 #}
 
+ggplot(tumor_type_umap$LUAD, aes(x = V1, y = V2, color = anno_tumortypes$LUAD$gender))+
+  geom_point(size = 3)+
+  guides(color=guide_legend(title="gender"))+
+  theme(legend.text=element_text(size=20))
 
 ggplots <- list()
 for(plot in 1:length(tumor_type_umap)){
@@ -95,7 +101,7 @@ for (type in kmeans_type) {
 
 
 for (type in kmeans_type){
-  png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/Vulcanoplots_cluster/umap_clustering", type), width= 297,
+  png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/Vulcanoplots_cluster/umap_clustering_new", type), width= 297,
       height    = 210,
       units     = "mm",
       res       = 1200)
@@ -123,7 +129,7 @@ for(type in names(tumor_type_kmeans)){
 
 for(type in names(tumor_type_kmeans)){
   for (j in 1:length(unique(tumor_type_kmeans[[type]]$cluster))){
-      vulcano_list[[paste("foldchange",j,"toRest")]][[type]] <- vulcano_list[[j+4]][[type]] - apply(tumor_type_dfs[[type]][, -which(tumor_type_kmeans[[type]]$cluster==j)], 1, mean)}
+      vulcano_list[[paste("foldchange",j,"toRest")]][[type]] <- vulcano_list[[j+3]][[type]] - apply(tumor_type_dfs[[type]][, -which(tumor_type_kmeans[[type]]$cluster==j)], 1, mean)}
 }
 
 
@@ -133,7 +139,13 @@ for(type in names(tumor_type_kmeans)){
     vulcano_list[[paste("wilcox",j,"toRest")]][[type]][gene] <- wilcox.test(as.vector(t(vulcano_list[[j]][[type]][gene,])), as.vector(t(tumor_type_dfs[[type]][, -which(tumor_type_kmeans[[type]]$cluster==j)][gene,])), paired = FALSE, alternative = "two.sided")$p.value}
 }
 
-for (type in names(tumor_type_kmeans)){
+volcano_LUAD <- data.frame("gene" = rownames(vulcano_list$`Cluster 1`$LUAD), "pval" = vulcano_list$`wilcox 1 toRest`$LUAD, "foldchange" = vulcano_list$`foldchange 1 toRest`$LUAD)
+EnhancedVolcano(volcano_LUAD, lab = volcano_LUAD$gene, x = "foldchange", y="pval", pointSize = 1.5, labSize = 4, title = "Comparison of the two LUAD clusters", selectLab = c("FGB","KCNU1", "INSL4", "FGA", "CALCA", "SLC16A14", "S100P", "FGL1", "AKR1C2", "CX3CL1", "ADGRF1", "KRT32", "GLB1L3", "IVL", "SLC6A20", "CST6", "HPGDS", "IL87"))
+
+
+#######################
+
+ for (type in names(tumor_type_kmeans)){
   for (j in 1:length(unique(tumor_type_kmeans[[type]]$cluster))){
    
      alpha <- -log10(0.005/nrow(vulcano_list[[j]][[type]]))
@@ -155,10 +167,10 @@ for(type in names(tumor_type_kmeans)){
   for (j in 1:length(unique(tumor_type_kmeans[[type]]$cluster))){
     alpha <- -log10(0.005/nrow(vulcano_list[[j]][[type]]))
     
-    png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/Vulcanoplots_cluster/cluster",j, type), width= 297,
+    png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/Vulcanoplots_cluster/cluster_new",j, type), width= 297,
         height    = 210,
         units     = "mm",
-        res       = 1200)
+        res       = 800)
     print(ggplot(vulcano_list[[paste("plot_prep",j)]][[type]], aes(x=foldchange, y = -log10(logpval), color = expr))+
       geom_point()+
       geom_hline(yintercept = alpha, linetype = "dashed")+
