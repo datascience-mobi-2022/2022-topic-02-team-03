@@ -134,7 +134,7 @@ Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway
 
 GSVA estimates a cumulative distribution for each gene over all samples. The gene expression values are then converted according to these estimated cumulative distributions into scaled values. Based on these new values, the genes are ranked in each sample. Next, the genes are classified into two distributions and a Komogorow-Smirnow statistic is calculated to judge how similar the distributions are to each other and to obtain an ES.
 
-The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set and it is assumed that that gene set is not involved in the development of LUAD.
+The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set.
 
 [@hanzelmann2013]
 
