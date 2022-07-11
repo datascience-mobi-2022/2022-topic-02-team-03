@@ -9,7 +9,7 @@ bibliography: [packages.bib, Citations.bib]
 csl: cell.csl
 ---
 
-# Abstract
+# Introduction
 
 # Abbreviations
 
@@ -20,6 +20,7 @@ csl: cell.csl
 | LUAD | lung adenocarcinoma                           |
 | PC   | principal component                           |
 | PCA  | principal component analysis                  |
+| TCGA | The cancer genome atlas                       |
 | UMAP | uniform manifold approximation and projection |
 
 # Introduction
@@ -67,7 +68,7 @@ csl: cell.csl
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | GSVA            | Run GSVA on a data set                                                                     | @GSVA              |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| gplots          | plotting data                                                                              |                    |
+| gplots          | plotting data                                                                              | [@gplots]          |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | gtools          | calculate foldchange, find NAs,                                                            | @R-gtools          |
 |                 |                                                                                            |                    |
