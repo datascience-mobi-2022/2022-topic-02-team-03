@@ -1,6 +1,6 @@
 ---
 title: "tvn gsea"
-author: "Felipe Stünkel"
+author: "Felipe St?nkel"
 date: "12 7 2022"
 output: html_document
 ---
@@ -52,6 +52,7 @@ library(grid)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+rm(LUAD_tumor_vs_norm_clean)
 ```
 
 ```{r sort signed pvalues which are log10 transformed}
@@ -85,25 +86,23 @@ GSEA_p$rank = 1:dim(GSEA_p)[1]
 ggplot(GSEA_p, aes(padj, reorder(pathway, padj)))+
   geom_point()
 
-rm(Values)
+rm(metabolism_list_gs)
 ```
 
 ```{r GSEA witha all final genesets}
-all_genesets =  readRDS("C:/Users/felip/Desktop/all_final_genesets(C5).RDS")
+#all_genesets =  readRDS("C:/Users/felip/Desktop/all_final_genesets(C5).RDS")
 
-Values = ssorted_p_log10$spval
-names(Values) = rownames(ssorted_p_log10)
-
-GSEA_p_all = fgsea(pathways = all_genesets, stats = Values, scoreType = "pos")
-for (i in 1:dim(GSEA_p_all)[1]){
-  ifelse(GSEA_p_all$pval[i] >= 0.9, GSEA_p_all$col[i] <- "not important",
-         GSEA_p_all$col[i] <- "important")
-}
+#GSEA_p_all = fgsea(pathways = all_genesets, stats = Values, scoreType = "pos")
+#for (i in 1:dim(GSEA_p_all)[1]){
+ # ifelse(GSEA_p_all$pval[i] >= 0.9, GSEA_p_all$col[i] <- "not important",
+  #       GSEA_p_all$col[i] <- "important")
+#}
 
 
-rm(Values)
+#rm(Values)
 
-View(GSEA_p)
+#View(GSEA_p)
+#rm(ranked_gl, Values)
 ```
 
 ```{r}
@@ -244,7 +243,7 @@ View(plots$regulation)
 
 
 
-rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g)
+rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g, alpha, alpha.corr, mean, median, sel, vh, regulation)
 ```
 
 ```{r print plots information in volcano plots etc}
@@ -356,6 +355,7 @@ for (i in 1:dim(reg2down)[1]){
 
 reg2 = as.data.frame(rbind(reg2down, reg2up))
 
+rm(reg2up, reg2down, i)
 ```
 
 
@@ -413,6 +413,12 @@ grid.arrange(dot2, bar2, ncol = 2)
 grid.arrange(dot, dot2, ncol = 2)
 grid.arrange(bar, bar2, ncol = 2)
 
+
+```
+
+
+```{r}
+rm(dot2, bar2, reg3)
 ```
 
 ```{r boxplot with mean of pws}
@@ -483,14 +489,16 @@ p2 = p + geom_text(data = t5, aes(value, pw, label = gene_names),
               hjust = -.3, size = 3, col = "red")+
   geom_point(data = t5, aes(value, pw ), col = "red")
 p2
+
+rm(gene_expr, pathway, p, t2,t3,t5,tidy_out, col, g, gene_expr, genes,i,n,positions,pw,pw.genes,r,x, outliers)
 ```
-```{r select only most down- and up-regulated pw's}
+```{r select only most down and up regulated pws}
 most_up_down = as.data.frame(rbind(head(reg2, 5), tail(reg2, 5)))
 View(most_up_down)
 
 pathways = rownames(most_up_down)
-plots$pw.v.plots[pathways[1:3]]
+plots$pw.v.plots[pathways]
 
-grid.arrange(grobs = plots$pw.v.plots[pathways[1:5]])
+grid.arrange(grobs = plots$pw.v.plots[pathways])
 ```
 
