@@ -149,24 +149,6 @@ EnhancedVolcano(volcano_LUAD, lab = volcano_LUAD$gene, x = "foldchange", y="pval
 
 #######################
 
- for (type in names(tumor_type_kmeans)){
-  for (j in 1:length(unique(tumor_type_kmeans[[type]]$cluster))){
-   
-     alpha <- -log10(0.005/nrow(vulcano_list[[j]][[type]]))
-    
-     for (i in 1:nrow(vulcano_list[[j]][[type]])){ #setting up expression
-      
-      ifelse((   (vulcano_list[[j+8]][[type]][i] > 0) & (-log10(vulcano_list[[j+12]][[type]][i]) > alpha)   ), vulcano_list[[paste("expression",j)]][[type]][i] <- "up",
-             ifelse((   (vulcano_list[[j+8]][[type]][i] < 0) & (-log10(vulcano_list[[j+12]][[type]][i]) > alpha)   ),vulcano_list[[paste("expression",j)]][[type]][i] <- "down",
-                    vulcano_list[[paste("expression",j)]][[type]][i] <- "not sign."))
-      }
-    
-    vulcano_list[[paste("plot_prep",j)]][[type]] <- data.frame("foldchange" = vulcano_list[[j+8]][[type]], "logpval" = vulcano_list[[j+12]][[type]], "expr" = vulcano_list[[paste("expression",j)]][[type]])
-    
-    }
-}
-
-
 for(type in names(tumor_type_kmeans)){
   for (j in 1:length(unique(tumor_type_kmeans[[type]]$cluster))){
     alpha <- -log10(0.005/nrow(vulcano_list[[j]][[type]]))
