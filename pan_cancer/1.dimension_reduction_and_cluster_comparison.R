@@ -1,3 +1,7 @@
+#################################################
+# This script was used to perform dimension reduction on the original expression data in order to find clusters and similarities between tumour types, as well as comparing intra-cancer clusters to each other
+################################################
+
 library(parallel)
 library(FactoMineR)
 library(Seurat)
