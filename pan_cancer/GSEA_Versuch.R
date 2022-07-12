@@ -124,17 +124,88 @@ for (gene.name in unique(C2_pathways$gs_name)){
 #append C2 sets to rest of the genesets
 combined_genesets_C2 <- append(all_genesets, C2_list)
 
+
+#clean up c2 genesets
+combined_genesets_C2 <- combined_genesets_C2[[which(sum(duplicated(combined_genesets_C2))<1)]]
+
+pathway_intersections_C2 <- lapply(combined_genesets_C2, function(x){gene_intersection(pathway = x)})
+
+pathway_intersections_C2 <- pathway_intersections_C2[which(as.numeric(pathway_intersections_C2)>0.97)]
+
+combined_genesets_C2_short <- combined_genesets_C2[which(names(combined_genesets_C2) %in% names(pathway_intersections_C2))]
+
+saveRDS(combined_genesets_C2_short, "./data/pathwaysC2.RDS")
+
+#heatmap for c2 genesets
+all_gsva_c2 <- readRDS("./data/all_gsva_c2.RDS")
+all_gsva_c2 <- as.data.frame(all_gsva_c2)
+
+SDs <- apply(all_gsva_c2, 1, sd)
+all_gsva_C2_highSD <- all_gsva_c2[which(SDs > 0.295),]
+
+C2_PCAUMAP <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_c2))@cell.embeddings, metric = "cosine"))
+
+ggplot(C2_PCAUMAP, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
+  geom_point()
+
+C2_devided <- list()
+for(types in tumor_types){
+  C2_devided[[types]] <- as.data.frame(all_gsva_C2_highSD[,which(tcga_anno$cancer_type_abbreviation == types)])
+}
+
+C2_gsva_means <- lapply(C2_devided, function(x){apply(x, 1, mean)})
+
+pathway_enrichment_means_C2 <- matrix(nrow = 86, ncol = 33, byrow = FALSE)
+
+for( type in 1:length(tumor_types)){
+  pathway_enrichment_means_C2[,type] <- as.vector(C2_gsva_means[[type]])
+}
+
+
+colnames(pathway_enrichment_means_C2) <- tumor_types
+rownames(pathway_enrichment_means_C2) <- rownames(all_gsva_C2_highSD)
+
+Heatmap(pathway_enrichment_means_C2, column_km = 3, row_names_gp =  grid::gpar(fontsize=7), row_names_side = "left", show_row_dend = FALSE, heatmap_legend_param = list(title = "relative expression"), row_names_max_width = unit(14, "cm"))
 #################################### GSVA for all Tumor types
 all_umap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short))@cell.embeddings, metric = "cosine"))
 
 ggplot(all_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()
 
-all_gsva_C5 <- gsva(as.matrix(tcga_exp_short),all_genesets_c5, method = "gsva", min.sz = 20, parallel.sz = 4)
+all_gsva_C5 <- readRDS("./data/all_gsva_c5.RDS")
+all_gsva_C5 <- as.data.frame(all_gsva_C5)
 
+SDs <- apply(all_gsva_C5, 1, sd)
+
+all_gsva_C5_highSD <- all_gsva_C5[which(SDs > 0.28),]
+
+C5_PCAUMAP <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_C5))@cell.embeddings, metric = "cosine"))
+
+ggplot(C5_PCAUMAP, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
+  geom_point()
+
+#################################### C5 Heatmap
+C5_devided <- list()
+for(types in tumor_types){
+  C5_devided[[types]] <- as.data.frame(all_gsva_C5_highSD[,which(tcga_anno$cancer_type_abbreviation == types)])
+}
+
+C5_gsva_means <- lapply(C5_devided, function(x){apply(x, 1, mean)})
+
+pathway_enrichment_means_C5 <- matrix(nrow = 90, ncol = 33, byrow = FALSE)
+
+for( type in 1:length(tumor_types)){
+  pathway_enrichment_means_C5[,type] <- as.vector(C5_gsva_means[[type]])
+}
+
+
+colnames(pathway_enrichment_means_C5) <- tumor_types
+rownames(pathway_enrichment_means_C5) <- rownames(all_gsva_C5_highSD)
+
+Heatmap(pathway_enrichment_means_C5, column_km = 3, row_names_gp =  grid::gpar(fontsize=7), row_names_side = "left", show_row_dend = FALSE, heatmap_legend_param = list(title = "relative expression"), row_names_max_width = unit(14, "cm"))
 #################################### Intersections for Troubleshooting
 
-gene_intersection <- function(names.dataset = rownames(tcga_exp), pathway){
+gene_intersection <- function(names.dataset = rownames(tcga_exp_short), pathway){
   return(c(sum(pathway %in% names.dataset)/(length(pathway))))
 }
 
