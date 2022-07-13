@@ -69,7 +69,8 @@ all_gsva <- as.data.frame(gsva(as.matrix(tcga_exp_short), all_genesets_copy, met
 
 whole_gsva_umap <- as.data.frame(umap(t(all_gsva), metric = "cosine"))
 ggplot(whole_gsva_umap, aes(x=V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
-  geom_point()
+  geom_point()+
+  
 
 patients_heatmap <- pheatmap(all_gsva[, 1:200], color = colorRampPalette(brewer.pal(n = 7, name = "RdYlBu"))(100), angle_col = "45", fontsize_row = 12, cellheight = 13, fontsize_col = 18, fontsize = 18 )
 png(filename = "./output/patientsenrichmentHeatmap.png", height = 30000, width = 5000, units = "px")
@@ -160,7 +161,10 @@ all_gsva_C5_highSD <- all_gsva_C5[which(SDs > 0.28),]
 C5_PCAUMAP <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_C5))@cell.embeddings, metric = "cosine"))
 
 ggplot(C5_PCAUMAP, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
-  geom_point()
+  geom_point()+
+  guides(color=guide_legend(title="cancer type"))+
+  theme_classic()+
+  theme(legend.text=element_text(size=14))
 
 C5_devided <- list()
 for(types in tumor_types){
@@ -216,7 +220,10 @@ all_gsva_C2_highSD <- all_gsva_c2[which(SDs > 0.295),]
 C2_PCAUMAP <- as.data.frame(umap(RunPCA(as.matrix(all_gsva_c2))@cell.embeddings, metric = "cosine"))
 
 ggplot(C2_PCAUMAP, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
-  geom_point()
+  geom_point()+
+  guides(color=guide_legend(title="cancer type"))+
+  theme_classic()+
+  theme(legend.text=element_text(size=14))
 
 C2_devided <- list()
 for(types in tumor_types){

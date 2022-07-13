@@ -30,7 +30,9 @@ tcga_exp_umap <- as.data.frame(umap(tcga_exp_pca, n_threads = 8, metric = "cosin
 ggplot(tcga_exp_umap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
   geom_point()+
   guides(color=guide_legend(title="cancer type"))+
+  theme_classic()+
   theme(legend.text=element_text(size=14))
+  
 
 pointCloud(as.matrix(tcga_exp_umap), colorBy = "categories", colorVar = tcga_anno$cancer_type_abbreviation, turntable = TRUE, rotationRate = 0.001, xScale = 0.25, yScale = 0.25, zScale = 0.25 )
 
