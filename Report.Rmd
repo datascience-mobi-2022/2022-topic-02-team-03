@@ -51,41 +51,85 @@ csl: [report/cell.csl]
 bibliography: [report/packages.bib, report/Citations.bib]
 ---
 
+```{=tex}
 \begin{titlepage}
 \centering
-	{\Large Ruprecht-Karls-Universität Heidelberg\\
-		Fakultät für Biowissenschaften\\
-		Bachelorstudiengang Molekulare Biotechnologie\\}
+    {\Large Ruprecht-Karls-Universität Heidelberg\\
+        Fakultät für Biowissenschaften\\
+        Bachelorstudiengang Molekulare Biotechnologie\\}
 
-	{\vspace{\stretch{2}}}
-	{\triplespacing{\usekomafont{title}}
+    {\vspace{\stretch{2}}}
+    {\triplespacing{\usekomafont{title}}
 
-		{\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
+        {\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
 
-	  {\Huge Topic 02 Team 03}
+      {\Huge Topic 02 Team 03}
 
-		{\Huge Exploration of Lung Adenocarcinoma (LUAD)}
+        {\Huge Exploration of Lung Adenocarcinoma (LUAD)}
 
-	}
+    }
 
-	\vspace{\stretch{2}}
-	{\Large Data Science Project SoSe 2022}
+    \vspace{\stretch{2}}
+    {\Large Data Science Project SoSe 2022}
 
-	\vspace{\stretch{2}}
+    \vspace{\stretch{2}}
 
-	{\Large
-		\begin{tabular}{rl}
-			Autoren & Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler\\
-			Abgabetermin &18.07.2022\\
-		\end{tabular}
-	}
+    {\Large
+        \begin{tabular}{rl}
+            Autoren & Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler\\
+            Abgabetermin &18.07.2022\\
+        \end{tabular}
+    }
 
-	\vspace{\stretch{1}}
+    \vspace{\stretch{1}}
 
 \end{titlepage}
-
-
+```
 # Introduction
+
+## Biological Background
+
+## Principal Component Analysis (PCA)
+
+Principal component analysis (PCA) is a procedure used to perform linear dimension reduction. The goal is to reduce the dimension of a given data set whilst losing as little information as possible by retaining a maximum of the standardized data set's variation [@ringner2008].
+
+Principal components (PC) are a set of new orthogonal variables that are made up of a linear combination of the original variables. Principal components display the pattern of similarity of the observations and of the variables as points in maps [@abdi2010]. By convention, the PCs are ordered in decreasing  order according to the amount of variation they explain of the original data [@ringner2008]. It is important to note that all PCs are uncorrelated.
+
+PCA is a useful tool for genome-wide expression studies and often serves as a first step before clustering or classification of the data. Dimension reduction is a necessary step for easy data exploration and visualization [@ringner2008].
+
+## Uniform Manifold Approximation and Projection (UMAP)
+
+Uniform manifold approximation and projection (UMAP) is a k-neighbour graph based algorithm that is used for nonlinear dimension reduction [@smets2019] [@mcinnes2018].
+
+After data normalization, the Euclidean distances between points in a two-dimensional space of the graph are calculated and a local radius is determined [@VERMEULEN2021119547]. In general the closer two points are to each other, the more similar they are. UMAP makes a density estimation to find the right local radius. This variable radius is smaller in high density regions of data points and larger in low density regions. In general, the density is higher when the k-nearest neighbour is close and vice versa. The number of k-nearest neighbours controls the number of neighbours whose local topology is preserved. Precisely, a large number of neighbours will ensure that more global structure is preserved whereas a smaller number of neighbours will ensure the preservation of more local structure [@mcinnes2018].
+
+UMAP is a newer method tan PCA and it is generally believed to be easier to interpret and group data than by using PCA. Furthmore, UMAP has the advantage of not requiring linear data [@milosevic2022].
+
+## Gene Set Enrichment Analysis (GSEA)
+
+Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two gene expression states are significantly different from each other or not. In this project we compared gene expression profiles between healthy and tumorous tissue of LUAD[@subramanian2007].
+
+Two data sets are compared and the genes are sorted from the most to the least differential expression between the data sets according to their p-values. This creates a ranked list L.
+
+Referring to an *a priori* defined set of gene sets S, the goal is to locate for each pathway of S where its corresponding genes fall in L and find a discerning trend. If the genes of a given pathway are randomly distributed in L then the pathway is assumed to not significantly contribute to the particular tumor's phenotype. However if the genes are primarily clustered at the top or the bottom of L then a phenotypic significance of the given pathway can be assumed.
+
+To determine the location of the genes, an enrichment score is calculated for each pathway. For this, a running-sum statistic is calculated as the list L is ran through. The running-sum is increased every time a gene belonging to the pathway in question is encountered and decreased otherwise. An enrichment score is thus calculated for each pathway. The enrichment score is defined as the maximum deviation from zero of the running-sum.
+
+Lastly, adjustment for multiple hypothesis testing is performed by normalizing the enrichment score for each pathway to account for its size and a normalized enrichment score is obtained.
+
+GSEA is a useful tool for interpretation of gene expression data.
+
+[@subramanian2005]
+
+## Gene Set Variation Analysis (GSVA)
+
+Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway activities based on gene expression data. Contrarily to the aforementioned GSEA, GSVA does not rely on phenotypic characterisation of the data sets into two categories but rather quantifies enrichment in a sample-wise manner which makes GSVA the better choice to perform on the tcga_exp data set.
+
+GSVA estimates a cumulative distribution for each gene over all samples. The gene expression values are then converted according to these estimated cumulative distributions into scaled values. Based on these new values, the genes are ranked in each sample. Next, the genes are classified into two distributions and a Komogorow-Smirnow statistic is calculated to judge how similar the distributions are to each other and to obtain an ES.
+
+The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set.
+
+[@hanzelmann2013]
 
 # Abbreviations
 
@@ -98,7 +142,6 @@ bibliography: [report/packages.bib, report/Citations.bib]
 | PCA  | principal component analysis                  |
 | TCGA | The cancer genome atlas                       |
 | UMAP | uniform manifold approximation and projection |
-
 
 # Methods
 
@@ -172,53 +215,21 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 : **Tab. 1: Used packages in alphabetical order.**
 
-## Principal Component Analysis (PCA)
-
-Principal component analysis (PCA) is a procedure used to perform linear dimension reduction. The goal is to reduce the dimension of a given data set whilst losing as little information as possible by retaining a maximum of the standardized data set's variation [@ringner2008].
-
-Principal components (PC) are a set of new orthogonal variables that are made up of a linear combination of the original variables. Principal components display the pattern of similarity of the observations and of the variables as points in maps [@abdi2010]. By convention, the PCs are ordered in decreasing  order according to the amount of variation they explain of the original data [@ringner2008]. It is important to note that all PCs are uncorrelated.
-
-PCA is a useful tool for genome-wide expression studies and often serves as a first step before clustering or classification of the data. Dimension reduction is a necessary step for easy data exploration and visualization [@ringner2008].
-
-## Uniform Manifold Approximation and Projection (UMAP)
-
-Uniform manifold approximation and projection (UMAP) is a k-neighbour graph based algorithm that is used for nonlinear dimension reduction [@smets2019] [@mcinnes2018].
-
-After data normalization, the Euclidean distances between points in a two-dimensional space of the graph are calculated and a local radius is determined [@VERMEULEN2021119547]. In general the closer two points are to each other, the more similar they are. UMAP makes a density estimation to find the right local radius. This variable radius is smaller in high density regions of data points and larger in low density regions. In general, the density is higher when the k-nearest neighbour is close and vice versa. The number of k-nearest neighbours controls the number of neighbours whose local topology is preserved. Precisely, a large number of neighbours will ensure that more global structure is preserved whereas a smaller number of neighbours will ensure the preservation of more local structure [@mcinnes2018].
-
-UMAP is a newer method tan PCA and it is generally believed to be easier to interpret and group data than by using PCA. Furthmore, UMAP has the advantage of not requiring linear data [@milosevic2022].
-
-## Gene Set Enrichment Analysis (GSEA)
-
-Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two gene expression states are significantly different from each other or not. In this project we compared gene expression profiles between healthy and tumorous tissue of LUAD[@subramanian2007].
-
-Two data sets are compared and the genes are sorted from the most to the least differential expression between the data sets according to their p-values. This creates a ranked list L.
-
-Referring to an *a priori* defined set of gene sets S, the goal is to locate for each pathway of S where its corresponding genes fall in L and find a discerning trend. If the genes of a given pathway are randomly distributed in L then the pathway is assumed to not significantly contribute to the particular tumor's phenotype. However if the genes are primarily clustered at the top or the bottom of L then a phenotypic significance of the given pathway can be assumed.
-
-To determine the location of the genes, an enrichment score is calculated for each pathway. For this, a running-sum statistic is calculated as the list L is ran through. The running-sum is increased every time a gene belonging to the pathway in question is encountered and decreased otherwise. An enrichment score is thus calculated for each pathway. The enrichment score is defined as the maximum deviation from zero of the running-sum.
-
-Lastly, adjustment for multiple hypothesis testing is performed by normalizing the enrichment score for each pathway to account for its size and a normalized enrichment score is obtained.
-
-GSEA is a useful tool for interpretation of gene expression data.
-
-[@subramanian2005]
-
-## Gene Set Variation Analysis (GSVA)
-
-Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway activities based on gene expression data. Contrarily to the aforementioned GSEA, GSVA does not rely on phenotypic characterisation of the data sets into two categories but rather quantifies enrichment in a sample-wise manner which makes GSVA the better choice to perform on the tcga_exp data set.
-
-GSVA estimates a cumulative distribution for each gene over all samples. The gene expression values are then converted according to these estimated cumulative distributions into scaled values. Based on these new values, the genes are ranked in each sample. Next, the genes are classified into two distributions and a Komogorow-Smirnow statistic is calculated to judge how similar the distributions are to each other and to obtain an ES.
-
-The GSVA corresponds to either the maximum deviation between both running sums or the GSVA score can be defined as the difference of the maximum deviations in the positive and in the negative direction. A highly positive or negative GSVA score indicates that the studied gene set is positively or negatively enriched compared to the genes not in the gene set, respectively. If the GSVA score for a given gene set is close to zero, then the gene set is probably not differentially expressed compared to the genes not in the gene set.
-
-[@hanzelmann2013]
+## Our Data
 
 <!-- add your chapters here -->
+
 \tableofcontents
+
+# Result
+
+# Discussion
+
+# Outlook
 
 # References
 
-<div id="refs"></div>
+::: {#refs}
+:::
 
 # Appendix
