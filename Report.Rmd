@@ -59,7 +59,7 @@ bibliography: [report/packages.bib, report/Citations.bib]
         Bachelorstudiengang Molekulare Biotechnologie\\}
 
     {\vspace{\stretch{2}}}
-    {\triplespacing{\usekomafont{title}}
+    {\doublelespacing{\usekomafont{title}}
 
         {\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
 
