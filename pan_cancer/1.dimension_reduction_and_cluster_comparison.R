@@ -89,7 +89,7 @@ ggplot(tumor_type_umap[[1]], aes(x = V1, y=V2, color=anno_tumortypes[[1]]$gender
 # k-means on UMAP for comparison of clusters within cancer types
 
 tumor_type_kmeans <- list()
-kmeans_type <- c("LUAD", "COAD", "BRCA", "ESCA", "LAML", "SARC", "KIRC", "THCA", "TGCT")
+kmeans_type <- c("LUAD","BRCA", "ESCA", "SARC")
 
 temp_means <- vector()
 
@@ -107,7 +107,7 @@ for (type in kmeans_type) {
 
 
 for (type in kmeans_type){
-  png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/Vulcanoplots_cluster/umap_clustering_new", type), width= 297,
+  png(file = paste("/Users/paulbrunner/Pictures/BioInfo Zwischenspeicher/top4clusters/umap_clustering", type), width= 297,
       height    = 210,
       units     = "mm",
       res       = 1200)

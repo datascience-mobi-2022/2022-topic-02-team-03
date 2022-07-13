@@ -148,7 +148,7 @@ for(geneset in rownames(C5_devided$LUAD)){
 
 volcano_df <- data.frame("genset" = rownames(pathway_enrichment_means_C5), "pvalues" = pvalues_LUADvsRest, "foldchange" = foldchange_LUADvsRest)
 volcano_df <- volcano_df[-17,]
-EnhancedVolcano(volcano_df, lab = volcano_df$genset, x = "foldchange", y="pvalues", pointSize = 1.5, labSize = 4)
+EnhancedVolcano(volcano_df, lab = volcano_df$genset, x = "foldchange", y="pvalues", pointSize = 3.5, labSize = 4)
 
 #################################### C5 geneset
 all_gsva_C5 <- readRDS("./data/all_gsva_c5.RDS") #was calculated on a cluster
