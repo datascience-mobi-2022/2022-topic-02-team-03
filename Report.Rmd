@@ -1,13 +1,89 @@
 ---
-title: "Final Report"
-author: "Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler"
-date: "20/07/2022"
+title: " "
 output:
-  pdf_document: default
-  html_document: default
-bibliography: [packages.bib, Citations.bib]
-csl: cell.csl
+  pdf_document:
+    number_sections: TRUE
+  html_document:
+    code_folding: hide
+documentclass: scrreprt
+classoption: [parskip, oneside] # für drucken twoside
+header-includes:
+  - \usepackage[ngerman, main=english]{babel}
+  - \usepackage[utf8]{inputenc}
+  - \usepackage[T1]{fontenc}
+  - \usepackage{lmodern}
+  - \usepackage[onehalfspacing]{setspace}
+  - \usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm, bindingoffset=10mm, includehead, includefoot]{geometry}
+  - \usepackage[headsepline]{scrlayer-scrpage}
+  - \usepackage{url}
+  - \usepackage[backend=biber, style=authoryear, giveninits=true, maxbibnames=99, uniquename=init, maxcitenames=2, hyperref=true, date=year]{biblatex}
+  #- \usepackage{bib/cellstyle_it}
+  - \usepackage{setspace}
+  - \usepackage{xpatch}
+  - \usepackage{csquotes}
+  - \usepackage{amsmath}
+  - \usepackage{listings}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{multirow}
+  - \usepackage{rotating}
+  - \usepackage{subfigure}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{acronym}
+  - \usepackage{lipsum}
+  - \usepackage{scrhack}
+  - \emergencystretch=50pt
+  - \clubpenalty = 10000
+  - \widowpenalty = 10000
+  - \displaywidowpenalty = 10000
+  - \automark[section]{chapter}
+  - \renewcommand*{\chaptermarkformat}{}
+  - \renewcommand*{\sectionmarkformat}{}
+  - \setkomafont{title}{\sffamily}
+  - \setkomafont{disposition}{\usekomafont{title}}
+  - \setkomafont{author}{\usekomafont{title}}
+  - \setkomafont{date}{\usekomafont{title}}
+  - \setkomafont{caption}{\sffamily\small}
+  - \setkomafont{captionlabel}{\usekomafont{caption}\bfseries\small}
+  - \setkomafont{pagehead}{\normalfont\scshape}
+csl: [report/cell.csl]
+bibliography: [report/packages.bib, report/Citations.bib]
 ---
+
+\begin{titlepage}
+\centering
+	{\Large Ruprecht-Karls-Universität Heidelberg\\
+		Fakultät für Biowissenschaften\\
+		Bachelorstudiengang Molekulare Biotechnologie\\}
+
+	{\vspace{\stretch{2}}}
+	{\triplespacing{\usekomafont{title}}
+
+		{\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
+
+	  {\Huge Topic 02 Team 03}
+
+		{\Huge Exploration of Lung Adenocarcinoma (LUAD)}
+
+	}
+
+	\vspace{\stretch{2}}
+	{\Large Data Science Project SoSe 2022}
+
+	\vspace{\stretch{2}}
+
+	{\Large
+		\begin{tabular}{rl}
+			Autoren & Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler\\
+			Abgabetermin &18.07.2022\\
+		\end{tabular}
+	}
+
+	\vspace{\stretch{1}}
+
+\end{titlepage}
+
 
 # Introduction
 
@@ -23,7 +99,6 @@ csl: cell.csl
 | TCGA | The cancer genome atlas                       |
 | UMAP | uniform manifold approximation and projection |
 
-# Introduction
 
 # Methods
 
@@ -139,8 +214,11 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 [@hanzelmann2013]
 
-# Results
-
-# Conclusion
+<!-- add your chapters here -->
+\tableofcontents
 
 # References
+
+<div id="refs"></div>
+
+# Appendix
