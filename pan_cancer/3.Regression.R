@@ -10,7 +10,7 @@ library(Seurat)
 library(blorr)
 
 ##clean and afterwards split dataset into train set and validation set
-cor.mat <- cor(t(all_gsva), method= "spearman")
+cor.mat <- cor(t(all_gsva_C5_highSD), method= "spearman")
 cor.heatmap <- ComplexHeatmap::Heatmap(cor.mat)
 
 cor.mat_rm <- cor.mat

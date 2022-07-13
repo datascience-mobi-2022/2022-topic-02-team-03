@@ -70,7 +70,7 @@ ggplot(tumor_type_umap$LUAD, aes(x = V1, y = V2, color = anno_tumortypes$LUAD$ge
 ggplots <- list()
 for(plot in 1:length(tumor_type_umap)){
   ggplots[[plot]] <- ggplot(tumor_type_umap[[plot]], aes(x = V1, y=V2))+
-                      geom_point()+
+                      geom_point(size = 1)+
                       ggtitle(names(tumor_type_umap)[plot])
 }
 
