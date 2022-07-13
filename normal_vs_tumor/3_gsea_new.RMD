@@ -58,7 +58,7 @@ rm(LUAD_tumor_vs_norm_clean)
 ```{r sort signed pvalues which are log10 transformed}
 #create a ranked gene list
 ranked_gl = luad.info[rev(order(luad.info$spval)),c(14,13)]
-View(head(ranked_gl))
+View(ranked_gl[1:20,])
 
 ```
 
@@ -83,7 +83,7 @@ View(GSEA_p)
 #sort GSA by pvalues:
 
 GSEA_p$rank = 1:dim(GSEA_p)[1]
-ggplot(GSEA_p, aes(padj, reorder(pathway, padj)))+
+ggplot(GSEA_p, aes(pval, reorder(pathway, padj)))+
   geom_point()
 
 rm(metabolism_list_gs)
@@ -257,7 +257,7 @@ reg = plots$regulation
 up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "thistle1", high = "violetred4")+
-  labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
+  labs(title = paste("comparison of up regulated pathways"), x = "up regulated genes / genes in the pw", y = "pathways")+
   scale_color_manual(name = "up")+
   xlim(0,60)+
   theme(axis.text = element_text(size = 5)) 
@@ -265,7 +265,7 @@ up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "lightblue", high = "purple4")+
-  labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
+  labs(title = paste("comparison of down regulated pathways"), x = "down regulated genes / genes in pw", y = "pathways")+
   scale_color_manual(name = "down")+
   xlim(0,60)+
   theme(axis.text = element_text(size = 5))
@@ -274,7 +274,7 @@ total_genes = ggplot(reg, aes(fill= number_of_genes, x = number_of_genes,
                               y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "lightblue", high = "slategray")+
-  labs(title = paste("comparison in number of genes in the leading edge"), x = "number of genes in leading edge", y = "pathways")+
+  labs(title = paste("comparison of number of genes in the leading edge"), x = "number of genes in leading edge", y = "pathways")+
   scale_color_manual(name = "count")+
   theme(axis.text = element_text(size = 5))
 
@@ -368,7 +368,7 @@ dot = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regula
   geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
-  labs(title = paste("dotplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("dotplot mean expression rate of each pw"), x = "mean expression rate of each pw", y = "pathways")+
   theme(axis.text = element_text(size = 7))+
   scale_y_discrete(limits = rownames(reg2))# to get the pws in the correct order somehow...
 
@@ -378,7 +378,7 @@ bar = ggplot(reg2, aes(fill= regulation, x = mean,
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
   theme(axis.text = element_text(size =7))+
-  labs(title = paste("barplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("barplot mean expression rate of each pw"), x = "mean expression rate of each pw", y = "pathways")+
   scale_y_discrete(limits = rownames(reg2))
 
 
@@ -499,6 +499,7 @@ View(most_up_down)
 pathways = rownames(most_up_down)
 plots$pw.v.plots[pathways]
 
-grid.arrange(grobs = plots$pw.v.plots[pathways])
+grid.arrange(grobs = plots$pw.v.plots[pathways[1:5]])
+grid.arrange(grobs = plots$pw.v.plots[pathways[6:10]])
 ```
 
