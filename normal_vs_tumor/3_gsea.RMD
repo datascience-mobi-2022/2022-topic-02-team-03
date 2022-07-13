@@ -1,10 +1,8 @@
 ---
-title: "tumor_vs_normal_gsea"
-author: "Chloé"
-date: "31/05/2022"
+title: "tvn gsea"
+author: "Felipe St?nkel"
+date: "12 7 2022"
 output: html_document
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -54,106 +52,47 @@ library(grid)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
-
-
 rm(LUAD_tumor_vs_norm_clean)
 ```
 
-## create a sorted list of p-values
+```{r sort signed pvalues which are log10 transformed}
+#create a ranked gene list
+ranked_gl = luad.info[rev(order(luad.info$spval)),c(14,13)]
+View(ranked_gl[1:20,])
 
-```{r ranked p-values}
-
-#create a sorted list of p-values from wilcoxon test (see also: data cleanup)
-sorted_p = sort(luad.info$p.wilc, decreasing = F)
-head(sorted_p)
-
-#finalise ranked p-values dataframe
-ranked.pvalues = data.frame(p.wilc = sorted_p)
-rownames(ranked.pvalues) = make.names(rownames(luad.info))
-head(ranked.pvalues)
-
-rm(sorted_p)
 ```
 
-## run GSEA
-
-#### GSEA mit p-Werten
-
-```{r prepare and run GSEA}
-#load genesets
+```{r GSEA with splog10 (worked)}
 metabolism_list_gs = readRDS("./data/metabolism_list_gs.RDS")
 genesets <- readRDS("./data/hallmarks_genesets.rds")
 
 genesets$genesets = append(genesets$genesets, metabolism_list_gs)
 
 #stats argument (ranked p values) needs to be the right format
-Names = rownames(ranked.pvalues)
-Values = ranked.pvalues$p.wilc
-names(Values) = Names
 
-GSEA_p = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos", maxSize = 500)
+Values = ranked_gl$spval
 
-rm(Names, Values)
+names(Values) = rownames(ranked_gl)
 
-#View(GSEA_p)
+GSEA_p = fgsea(pathways = genesets$genesets, stats = Values, scoreType = "pos")
 
+
+
+View(GSEA_p)
+(GSEA_p$padj)
 #sort GSA by pvalues:
 
 GSEA_p$rank = 1:dim(GSEA_p)[1]
-ggplot(GSEA_p, aes(padj, reorder(pathway, padj)))+
+ggplot(GSEA_p, aes(pval, reorder(pathway, padj)))+
   geom_point()
-```
 
-Fehlermeldung beim obrigen Chunk: 70.51% der Liste sind ties
 
-```{r Einschub: Überprüfung der Warnmeldung beim obrigen Chunk}
-length(unique(ranked.pvalues$p.wilc)) #gibt die Anzahl der einzigartigen Werte in unserer Liste
 
-#Berechnung des Anteils von einzigartigen p Values
-length(unique(ranked.pvalues$p.wilc)) / length(ranked.pvalues$p.wilc) 
-#18,65% der p values sind einzigartig
-
-tail(sort(table(ranked.pvalues$p.wilc)),10) #gibt die 5 Werte die am meisten vorkommen und wie oft sie vorkommen
+rm(metabolism_list_gs)
 ```
 
 
-###volcano anfärben
-
-
-```{r hoch expr gene ansehen}
-LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
-luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
-rm(LUAD_tumor_vs_norm_clean)
-
-
-#naming the top over or under expressed genes
-sp4 = ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
-  geom_point(size = .5)+
-  scale_color_manual(values=c("blue", "gray", "red"))+
-  labs(title = "normal volcano plot", y = "fc", x = "pwilc")+
-  geom_text(aes(label =
-                  ifelse(abs(spval)>9 & abs(diff.mean)>5, as.character(name),""))
-            )
-sp4 # look at the highest fc genes
-
-
-#show names of the top min or max expressed genes
-names = c()
-for (i in 1:dim(luad.info)[1]){
-ifelse(abs(luad.info$spval)[i] >9 & abs(luad.info$diff.mean)[i] >5,
-       names[i] <- (luad.info$name)[i], "")
-}
-names <- names[!is.na(names)]
-length(names)
-names
-#x = grep("CA9", genesets$genesets) # example gene which is highly overexpressed
-#names = names(genesets$genesets[x])
-#names[1]
-```
-
-
-```{r pathways im volcano plot anfärben, saving all plots in a vector}
-
+```{r}
 alpha = 0.05
 alpha.corr = -log10(alpha/nrow(luad.info))
 
@@ -171,13 +110,12 @@ regulation = data.frame(up = c(1:z),
 
 for(i in 1:z){
   # select genes from one pwathway
-unique(GSEA_p$pathway) #all pathways
 x = i # choose pathway by position
 
 pw = GSEA_p$pathway[x] 
 pw
 
-pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway that are at the leading edge
 genes = luad.info$name #all genes
 
 positions = sort(match(pw.genes, genes))#compare to get positions
@@ -186,8 +124,8 @@ positions
 selection = luad.info[pw.genes,] # select rows from data frame
 selection$pathway = pw # make new column, called like the pw
 
-sel = luad.info$diff.mean[positions]#calculate mean expr of each pw
-mean = mean(sel)  
+sel = luad.info$diff.mean[positions]#select mean expr for genes in pw
+mean = mean(sel)  # calculate mean expression of the pathway the genes used are the ones in the leading edge
 median = median(sel)
 
 col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
@@ -225,7 +163,7 @@ plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = .7)
+             aes(y = abs(spval), diff.mean, color = pathway), size = 2)
 #2 ) singed volcano plot
 plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
   geom_point(size = .5)+
@@ -235,7 +173,7 @@ plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = spval, diff.mean, color = pathway), size = 1)
+             aes(y = spval, diff.mean, color = pathway), size = 2)
 #3 ) gradient plot
 plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
   geom_point(size = .5)+
@@ -245,7 +183,7 @@ plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(spval, abs(diff.mean), color = pathway), size = 1)
+             aes(spval, abs(diff.mean), color = pathway), size = 2)
 
 
 
@@ -273,9 +211,9 @@ message("name saved")
 }
 
 #rename list elements
-names(pw.v.plots) <- paste0(name, 1:length(pw.v.plots))
-names(pw.sv.plots) <- paste0(name, 1:length(pw.sv.plots))
-names(pw.grad.plots) <- paste0(name, 1:length(pw.grad.plots))
+names(pw.v.plots) <- paste0(name)
+names(pw.sv.plots) <- paste0(name)
+names(pw.grad.plots) <- paste0(name)
 
 #new list object with all plots
 plots = list(pw.v.plots = pw.v.plots, 
@@ -292,7 +230,7 @@ View(plots$regulation)
 
 
 
-rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g)
+rm( z, x, pw, pw.genes,name, genes, positions, selection, col, i, hits, p.down, p.up, percent.up,percent.down, rest, ns, pw.v.plots, pw.sv.plots, pw.grad.plots, plot.v, plot.s, plot.g, alpha, alpha.corr, mean, median, sel, vh, regulation)
 ```
 
 ```{r print plots information in volcano plots etc}
@@ -306,7 +244,7 @@ reg = plots$regulation
 up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "thistle1", high = "violetred4")+
-  labs(title = paste("comparison of up regulated genes"), x = "up.genes/genes.in.pw", y = "pathways")+
+  labs(title = paste("comparison of up regulated pathways"), x = "up regulated genes / genes in the pw", y = "pathways")+
   scale_color_manual(name = "up")+
   xlim(0,60)+
   theme(axis.text = element_text(size = 5)) 
@@ -314,48 +252,61 @@ up.reg = ggplot(reg, aes(fill=up, x=up, y=rownames(reg))) +
 down.reg = ggplot(reg, aes(fill=down, x=down, y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "lightblue", high = "purple4")+
-  labs(title = paste("comparison of down regulated genes"), x = "down.genes/genes.in.pw", y = "pathways")+
+  labs(title = paste("comparison of down regulated pathways"), x = "down regulated genes / genes in pw", y = "pathways")+
   scale_color_manual(name = "down")+
   xlim(0,60)+
   theme(axis.text = element_text(size = 5))
 
-total_genes = ggplot(reg, aes(fill= number_of_genes, x=number_of_genes,
+total_genes = ggplot(reg, aes(fill= number_of_genes, x = number_of_genes,
                               y=rownames(reg))) + 
   geom_bar(position="dodge", stat="identity")+
   scale_fill_gradient(low = "lightblue", high = "slategray")+
-  labs(title = paste("comparison in number of 'hits'"), x = "number of genes", y = "pathways")+
+  labs(title = paste("comparison of number of genes in the leading edge"), x = "number of genes in leading edge", y = "pathways")+
   scale_color_manual(name = "count")+
   theme(axis.text = element_text(size = 5))
 
 
 #log10 tf
-reg$singed_ratio = c(1:dim(reg)[1])
-for(i in 1:dim(reg)[1]){
-  ifelse(1 > reg$up_div_down[i] & reg$up_div_down[i] > 0,
-         reg$singed_ratio[i] <- -(reg$up_div_down[i]^(-1)),
-         reg$singed_ratio[i] <- reg$up_div_down[i]
-         )
-  }
-reg$singed_ratio[which(reg$singed_ratio == 0)] <- -Inf
+#reg$singed_ratio = c(1:dim(reg)[1])
+#for(i in 1:dim(reg)[1]){
+ # ifelse(1 > reg$up_div_down[i] & reg$up_div_down[i] > 0,
+  #       reg$singed_ratio[i] <- -(reg$up_div_down[i]^(-1)),
+   #      reg$singed_ratio[i] <- reg$up_div_down[i]
+    #     )
+#  }
+#reg$singed_ratio[which(reg$singed_ratio == 0)] <- -Inf
 
-r = c("über.expr", "unter.expr","nur.über.expr", "nur.unter.expr","gleich")# regulation info
-col = c("orange","lightblue","violetred4",  "royalblue3",  "green")
+#r = c("über.expr", "unter.expr","nur.über.expr", "nur.unter.expr","gleich")# regulation info
+#col = c("orange","lightblue","violetred4",  "royalblue3",  "green")
 
-reg$regulation[which(reg$singed_ratio > 0)] <- r[1]
-reg$regulation[which(reg$singed_ratio < 0)] <- r[2]
-reg$regulation[which(reg$singed_ratio == Inf)] <- r[3]
-reg$regulation[which(reg$singed_ratio == -Inf)] <- r[4]
-reg$regulation[which(reg$singed_ratio == 1)] <- r[5]
-View(reg)
-s = ggplot(reg, aes(fill= regulation, x= singed_ratio,
+#s = ggplot(reg, aes(fill= regulation, x= singed_ratio,
+  #                            y=rownames(reg)))+ 
+  #scale_fill_manual(breaks = r, # regulation information
+   #                   values = col)+
+  #geom_bar(position="dodge", stat="identity")+
+  #labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")+
+  #theme(axis.text = element_text(size = 5))
+
+
+
+
+for (i in 1:dim(reg)[1]){
+  ifelse(reg$up_div_down[i] == 0,
+         reg$up_down[i] <- "down regulated",reg$up_down[i] <- "up regulated")
+}
+r = c("up regulated", "down regulated")
+col = c("violetred4",  "royalblue3")
+
+s = ggplot(reg, aes(fill= up_down, x = mean,
                               y=rownames(reg)))+ 
   scale_fill_manual(breaks = r, # regulation information
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
-  labs(title = paste("more up or more down reg"), x = "regution level", y = "pathways")+
+  labs(title = paste("regulation of pathways"), x = "mean expression based on genes on leading edge", y = "pathways")+
   theme(axis.text = element_text(size = 5))
 
 
+ 
 
 
 grid.arrange(arrangeGrob(up.reg, down.reg), arrangeGrob(total_genes, s), ncol = 2)
@@ -366,19 +317,45 @@ total_genes
 s
 ```
 
-```{r dotplot and barplot}
-#calculate the mean expression of each pathway
+```{r reorder the df}
+#creorder by mean expression of each pathway
 
-reg2 = reg[order(reg$mean),]
-reg2$order = c(1:87)
+reg2 = reg[(order(reg$mean)),]
+reg2$order = c(1:dim(reg2)[1])
 View(reg2)
 
+#split into df with only up and only downregulated genes
+reg2up = reg2[which(reg2$up_down== "up regulated"),]
+reg2down = reg2[which(reg2$up_down== "down regulated"),]
+
+for (i in 1:dim(reg2up)[1]){
+  ifelse(reg2up$up[i] == 100.00,
+         reg2up$regulation[i] <- "only upregulated",
+         reg2up$regulation[i] <- "mostly upregulated")
+}
+
+for (i in 1:dim(reg2down)[1]){
+  ifelse(reg2down$down[i] == 100.00,
+         reg2down$regulation[i] <- "only downregulated",
+         reg2down$regulation[i] <- "mostly downregulated")
+}
+
+reg2 = as.data.frame(rbind(reg2down, reg2up))
+
+rm(reg2up, reg2down, i)
+```
+
+
+```{r dotplot and barplot}
+
+r = c("mostly upregulated", "mostly downregulated","only upregulated", "only downregulated")# regulation info
+col = c("orange","lightblue","violetred4",  "royalblue3")
 
 dot = ggplot(reg2, aes(x = mean, y = order, size = number_of_genes, col = regulation))+
   geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
-  labs(title = paste("dotplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("dotplot mean expression rate of each pw"), x = "mean expression rate of each pw", y = "pathways")+
   theme(axis.text = element_text(size = 7))+
   scale_y_discrete(limits = rownames(reg2))# to get the pws in the correct order somehow...
 
@@ -388,23 +365,23 @@ bar = ggplot(reg2, aes(fill= regulation, x = mean,
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
   theme(axis.text = element_text(size =7))+
-  labs(title = paste("barplot (mean)"), x = "mean expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("barplot mean expression rate of each pw"), x = "mean expression rate of each pw", y = "pathways")+
   scale_y_discrete(limits = rownames(reg2))
 
 
 grid.arrange(dot, bar, ncol = 2)
 
 #same with medians:
-reg3 = reg[order(reg$median),]
-reg3$order = c(1:87)
-View(reg2)
+reg3 = reg2[order(reg2$median),]
+reg3$order = c(1:dim(reg3)[1])
+View(reg3)
 
 
 dot2 = ggplot(reg3, aes(x = median, y = order, size = number_of_genes, col = regulation))+
   geom_point(stat = "identity")+
   scale_color_manual(breaks = r,
                      values = col)+
-  labs(title = paste("dotplot (median)"), x = "median expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("dotplot median expression rate of each pw"), x = "median expression rate of each pw", y = "pathways")+
   theme(axis.text = element_text(size = 7))+
   scale_y_discrete(limits = rownames(reg3))# to get the pws in the correct order somehow...
 
@@ -414,7 +391,7 @@ bar2 = ggplot(reg3, aes(fill= regulation, x = median,
                       values = col)+
   geom_bar(position="dodge", stat="identity")+
   theme(axis.text = element_text(size =7))+
-  labs(title = paste("barplot (median)"), x = "median expression rate (fold changes) of each pw", y = "pathways")+
+  labs(title = paste("barplot median expression rate of each pw"), x = "median expression rate of each pw", y = "pathways")+
   scale_y_discrete(limits = rownames(reg3))
 
 
@@ -423,6 +400,12 @@ grid.arrange(dot2, bar2, ncol = 2)
 grid.arrange(dot, dot2, ncol = 2)
 grid.arrange(bar, bar2, ncol = 2)
 
+
+```
+
+
+```{r}
+rm(dot2, bar2, reg3)
 ```
 
 ```{r boxplot with mean of pws}
@@ -452,6 +435,8 @@ pathway = append(pathway, selection$pathway)
 #save the genenames into a new vector
 n = append(n, rownames(selection))
 }
+
+
 
 boxplot_df = data.frame(genes = n,
                         gene_expr = gene_expr,
@@ -485,13 +470,24 @@ t3 = t2[match(unique(tidy_out$gene_names), t2$gene_names),]
 t3 = t3[order(t3$value),]
 dim(t3)
 #lets pick the top 10 over-expressed and under-expresssed genes
-t4 = rbind(t3[1:10,], t3[174:183,])
+t5 = rbind(head(t3,10), tail(t3,10))
 
-
-p2 = p + geom_text(data = t4, aes(value, pw, label = gene_names), 
+p2 = p + geom_text(data = t5, aes(value, pw, label = gene_names), 
               hjust = -.3, size = 3, col = "red")+
-  geom_point(data = t4, aes(value, pw ), col = "red")
+  geom_point(data = t5, aes(value, pw ), col = "red")
 p2
+
+rm(gene_expr, pathway, p, t2,t3,t5,tidy_out, col, g, gene_expr, genes,i,n,positions,pw,pw.genes,r,x, outliers)
+```
+```{r select only most down and up regulated pws}
+most_up_down = as.data.frame(rbind(head(reg2, 5), tail(reg2, 5)))
+View(most_up_down)
+
+pathways = rownames(most_up_down)
+plots$pw.v.plots[pathways]
+
+grid.arrange(grobs = plots$pw.v.plots[pathways[1:5]])
+grid.arrange(grobs = plots$pw.v.plots[pathways[6:10]])
 ```
 
 
@@ -504,7 +500,7 @@ head(boxplot_df)
 length(unique(boxplot_df$genes))
 ```
 
-```{r informationen über die gene für literatur reschrche}
+```{r informationen über die gene für literatur}
 for (i in 1:dim(luad.info)[1]){
   ifelse(luad.info$diff.mean[i] > 0,
          luad.info$hoch_runter[i] <- "hoch",
@@ -527,4 +523,5 @@ pos = grep("ADH7",rownames(luad.info))
 View(luad.info[pos,])
 
 ```
+
 
