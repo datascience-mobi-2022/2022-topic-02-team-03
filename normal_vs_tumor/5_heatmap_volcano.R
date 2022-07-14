@@ -1,7 +1,7 @@
 
 library(ComplexHeatmap)
 library(pheatmap)
-
+library(GSVA)
 #GSVA c5 results -> volcano & heatmap
 
 all_gsva_tvn <- readRDS("./data/all_gsva_tvn.RDS")
