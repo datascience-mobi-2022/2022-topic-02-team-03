@@ -2,6 +2,13 @@
 library(ComplexHeatmap)
 library(pheatmap)
 library(GSVA)
+library(ggplot2)
+library("gridExtra")
+library(gtools)
+library(parallel)
+library(grid)
+library(ggrepel)
+names(all_final_genesets_C5)
 #GSVA c5 results -> volcano & heatmap
 
 all_gsva_tvn <- readRDS("./data/all_gsva_tvn.RDS")
@@ -77,10 +84,149 @@ volcano = ggplot(volc_df, aes(fc, -log10(p.wilc), col = expr))+
   geom_hline(yintercept = alpha.corr,
              linetype = "dashed")+
   scale_color_manual(values=c("blue", "gray48", "red"))+
-  geom_text_repel(data = selection1,
-                  aes(fc, -log10(p.wilc), label = rownames(selection1)), size = 3.5, hjust = -.01, col = "black")+
   geom_point(data = selection1,
-                  aes(fc, -log10(p.wilc)), size = 4, col = "green", alpha = .5)
+             aes(fc, -log10(p.wilc)), size = 4, col = "green", alpha = .7)+
+  geom_text_repel(data = selection1,
+                  aes(fc, -log10(p.wilc), label = rownames(selection1)), size = 5, hjust = -.01, col = "black")
 
 volcano + theme_light()
 
+
+
+
+#costumized volcano
+
+select genesets
+all_final_genesets_C5 <- readRDS("./data/all_final_genesets(C5).RDS")
+genesets = all_final_genesets_C5[match(rownames(all_gsva_tvn_cut), names(all_final_genesets_C5))]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+alpha = 0.05
+alpha.corr = -log10(alpha/nrow(luad.info))
+
+
+z = length(genesets)
+pw.v.plots = list()
+
+name = c()
+regulation = data.frame(up = c(1:z),
+                        down = c(1:z),
+                        not_sign = c(1:z),
+                        number_of_genes = c(1:z))
+
+
+for(i in 1:z){
+  # select genes from one pwathway
+  x = i # choose pathway by position
+  
+  pw = names(genesets[x])
+  pw
+  
+  pw.genes = unlist(genesets[x], use.names = F)#genes in the pathway that are at the leading edge
+  
+  genes = luad.info$name #all genes
+  
+  positions = sort(match(pw.genes, genes))#compare to get positions
+  positions
+  
+  selection = luad.info[positions,] # select rows from data frame
+  selection$pathway = pw # make new column, called like the pw
+  
+  sel = luad.info$diff.mean[positions]#select mean expr for genes in pw
+  mean = mean(sel)  # calculate mean expression of the pathway the genes used are the ones in the leading edge
+  median = median(sel)
+  
+  
+  
+  
+  #calculate % genes by up or down regulation
+  hits = paste(dim(selection)[1], "genes in pathway")
+  p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
+  p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
+  
+  hits
+  percent.down = paste(round(p.down, digits = 2), "% down")
+  percent.up = paste(round(p.up, digits = 2), "% up")
+  rest = 100 - round(p.down, digits = 2) - round(p.up, digits = 2)
+  ns = paste(rest, "% not sign.")
+  vh = round(p.up/p.down, digits = 2)
+  
+  #calculate for each pw the menan expression of the genes
+  
+  
+  #
+  ##
+  ####
+  ##
+  #
+  selection2 = as.data.frame(rbind(selection[which(selection$expr == "up"),],
+                                   selection[which(selection$expr == "down"),]))
+  
+  col = c("gray0", "firebrick3", "deepskyblue", "gray75") # choosing the colours
+  ###plots
+  #1 ) normaler v.plot
+  plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
+    geom_point(size = .2)+
+    labs(title = paste(pw), x = "fc", y = "pwilc")+
+    scale_color_manual(name = "",
+                       breaks = c(pw, "up", "down", "not sign."),
+                       labels = c(hits, percent.up, percent.down, ns),
+                       values = col )+ 
+    geom_point(data = selection,
+               aes(y = abs(spval), diff.mean, color = pathway), size = 1)+
+    geom_text(data = selection2,
+              aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
+  
+  
+  ###saving
+  pw.v.plots[[i]] <- plot.v #save the plot in the list element
+
+  message("plot saved")
+  
+  regulation$up[i] = round(p.up, digits = 2)
+  regulation$down[i] = round(p.down, digits = 2)
+  regulation$not_sign[i] = rest
+  regulation$up_div_down[i] = vh
+  regulation$number_of_genes[i] = dim(selection)[1]
+  regulation$mean[i] = mean
+  regulation$median[i] = median
+  
+  message("regulation filled")
+  
+  name[i] <- paste(pw) #names for list elements
+  message("name saved",i)
+  
+  
+  
+}
+names(pw.v.plots) <- paste0(name)
+
+#new list object with all plots
+plots = list(pw.v.plots = pw.v.plots,
+             regulation = regulation)
+
+rownames(plots$regulation) <- name
+View(plots)
+
+
+plots$pw.v.plots$T_HELPER_17_TYPE_IMMUNE_RESPONSE
