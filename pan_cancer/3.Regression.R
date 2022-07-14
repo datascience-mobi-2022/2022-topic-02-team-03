@@ -9,6 +9,7 @@ library(caret)
 library(Seurat)
 library(blorr)
 library(ggplot2)
+library(ROCR)
 
 tcga_exp_short <- readRDS("./data/tcga_exp_small.RDS")
 tcga_anno <- readRDS(".data/tcga_tumor_annotation.RDS")
@@ -51,7 +52,7 @@ train_dataset <- as.data.frame(lowcor_all_gsva[1:6820,])
 test_dataset <- as.data.frame(lowcor_all_gsva[6820:9741,])
 
 
-#train the model with all pathways
+#train the model with genes
 model_all_genesets <- glm(classifier ~   SFTPB + EN1 + BPIFA1 + C10orf99 + C4BPA + HAND2, family = binomial(link = "logit"), data = train_dataset)
 blr_step_aic_both(model_all_genesets)
 plot(blr_step_aic_both(model_all_genesets))
@@ -64,7 +65,26 @@ tapply(predict_train, train_dataset$classifier, mean)
 
 # test
 predict_test <- predict(model_all_genesets, type = "response", newdata = test_dataset)
-addmargins(table(test_dataset$classifier, predict_test > 0.10))
+predict_test <- ifelse(predict_test > 0.5, 1, 0)
+addmargins(table(test_dataset$classifier, predict_test))
 
 #model evaluation
 blr_model_fit_stats(model_all_genesets)
+
+missing_classerr <- mean(predict_test != test_dataset$classifier)
+print(paste('Accuracy =', 1 - missing_classerr))
+
+ROCPred <- prediction(predict_test, test_dataset$classifier)
+ROCPer <- performance(ROCPred, measure = "tpr", x.measure = "fpr")
+
+
+auc <- performance(ROCPred, measure = "auc")
+auc <- auc@y.values[[1]]
+auc
+
+plot(ROCPer, colorize = TRUE, 
+     print.cutoffs.at = seq(0.1, by = 0.1), 
+     main = "ROC CURVE")
+abline(a = 0, b = 1)
+auc <- round(auc, 4)
+legend(.6, .4, auc, title = "AUC", cex = 1)
