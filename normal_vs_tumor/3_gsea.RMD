@@ -110,7 +110,7 @@ regulation = data.frame(up = c(1:z),
 
 for(i in 1:z){
   # select genes from one pwathway
-x = "ASCORBATE_AND_ALDARATE_METABOLISM" # choose pathway by position
+x = i # choose pathway by position
 
 pw = names(genesets$genesets[x])
 pw

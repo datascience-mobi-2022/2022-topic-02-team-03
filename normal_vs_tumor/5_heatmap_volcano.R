@@ -8,7 +8,6 @@ library(gtools)
 library(parallel)
 library(grid)
 library(ggrepel)
-names(all_final_genesets_C5)
 #GSVA c5 results -> volcano & heatmap
 
 all_gsva_tvn <- readRDS("./data/all_gsva_tvn.RDS")
@@ -16,7 +15,7 @@ sd = c(apply(all_gsva_tvn, 1, sd))
 q = quantile(sd, probs = c(.8,.9,.95,.98,1), names = F)
 q
 
-all_gsva_tvn_cut = all_gsva_tvn[which(sd >= q[3]),]
+all_gsva_tvn_cut = as.data.frame(all_gsva_tvn[which(sd >= q[3]),])
 
 dim(all_gsva_tvn_cut)
 
@@ -39,7 +38,7 @@ all_gsva_t = all_gsva_tvn[,59:116]
 
 p.wilc = c(1:pw)
 for(i in 1:pw){
-  p.wilc[i] = c(wilcox.test(all_gsva_t[i,],all_gsva_n[i,], paired = TRUE, alternative = "two.sided", exact = F, correct = F )$p.value)
+  p.wilc[i] = c(wilcox.test(all_gsva_n[i,],all_gsva_t[i,], paired = TRUE, alternative = "two.sided", exact = F, correct = F )$p.value)
 }
 
 mean_n = c(1:pw)
@@ -96,12 +95,16 @@ volcano + theme_light()
 
 #costumized volcano
 
-select genesets
+#select genesets
 all_final_genesets_C5 <- readRDS("./data/all_final_genesets(C5).RDS")
-genesets = all_final_genesets_C5[match(rownames(all_gsva_tvn_cut), names(all_final_genesets_C5))]
 
 
+genesets = all_final_genesets_C5[match(rownames(volc_df), names(all_final_genesets_C5))]
 
+
+LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
+luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
+rm(LUAD_tumor_vs_norm_clean)
 
 
 
@@ -135,6 +138,7 @@ regulation = data.frame(up = c(1:z),
                         number_of_genes = c(1:z))
 
 
+
 for(i in 1:z){
   # select genes from one pwathway
   x = i # choose pathway by position
@@ -142,10 +146,9 @@ for(i in 1:z){
   pw = names(genesets[x])
   pw
   
-  pw.genes = unlist(genesets[x], use.names = F)#genes in the pathway that are at the leading edge
+  pw.genes = unique(unlist(genesets[x], use.names = F))#genes in the pathway that are at the leading edge
   
   genes = luad.info$name #all genes
-  
   positions = sort(match(pw.genes, genes))#compare to get positions
   positions
   
@@ -160,7 +163,7 @@ for(i in 1:z){
   
   
   #calculate % genes by up or down regulation
-  hits = paste(dim(selection)[1], "genes in pathway")
+  hits = paste(dim(selection)[1], "genes")
   p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
   p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
   
@@ -186,16 +189,16 @@ for(i in 1:z){
   ###plots
   #1 ) normaler v.plot
   plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
-    geom_point(size = .2)+
+    geom_point(size = 2, alpha = .5)+
     labs(title = paste(pw), x = "fc", y = "pwilc")+
     scale_color_manual(name = "",
                        breaks = c(pw, "up", "down", "not sign."),
                        labels = c(hits, percent.up, percent.down, ns),
                        values = col )+ 
     geom_point(data = selection,
-               aes(y = abs(spval), diff.mean, color = pathway), size = 1)+
-    geom_text(data = selection2,
-              aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
+               aes(y = abs(spval), diff.mean, color = pathway), size = 2)+
+    geom_text_repel(data = selection2,
+              aes(y = abs(spval), diff.mean, color = pathway), size = 7, hjust = -.3)
   
   
   ###saving
@@ -226,7 +229,8 @@ plots = list(pw.v.plots = pw.v.plots,
              regulation = regulation)
 
 rownames(plots$regulation) <- name
-View(plots)
 
 
-plots$pw.v.plots$T_HELPER_17_TYPE_IMMUNE_RESPONSE
+pw = rownames(selection1)
+pw
+plots$pw.v.plots
