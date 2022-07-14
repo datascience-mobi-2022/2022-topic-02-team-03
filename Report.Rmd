@@ -227,6 +227,34 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 # Outlook
 
+## Analysis of metastasis formation in LUAD
+
+About a third of LUAD patients already present with brain metastases at the time of diagnosis and about half of all patients will eventually develop brain metastases \[@shih2020\]. As a cancer's ability to metastasize dramatically impacts a patient's chances of survival, an comprehensive analysis of the genetic alterations that most often lead to metastasis formation would allow to single out patients at risk of developing metastases early on.
+
+The comparison of genomic expression profiles of cancer cells taken from the metastases with those of the primary tumor might reveal which mutations enable a lung cancer cell to metastasize.
+
+## Smoker vs non-smoker
+
+It is a well-known fact that lung cancer is a smoker's disease. However, in recent years studies have found that lung cancer incidence is decreasing in smokers and increasing in non-smokers. Furthermore, the same study states that the genomic profile of lung cancer in non-smokers differs from that in smokers. \[@qiu2015\]. Inspired by this study, a possible approach would be to subgroup our data into smokers and non-smokers and to compare the two groups in order to determine which pathways are differentially expressed and if the results of Qui *et al* can be replicated with our data.
+
+## Immune signature
+
+Many different research groups have set out to subtype LUAD according to immune signature
+
+## Survival and therapy
+
+## Prediction of cancer stage
+
+Over the course of this project we trained a logistic regression model to predict whether an individual is at risk of eventually developing LUAD. This model could be further sophisticated to additionally predict the cancer stage on the grounds of a patient's genomic profile as well as other factors like age or smoking habits. With enough training, this model could ideally be used as a less invasive alternative to the current methods in LUAD diagnosis and therefore help determine an adequate treatment plan with less patient trauma.
+
+## Epigenetics
+
+The term epigenetics describes hereditary changes in gene expression that are not due to changes in the DNA sequence. The most common epigenetic alterations in cancer cells include global hypomethylation of repetitive DNA sequence regions or hypermethylation of tumor suppressor genes which are thus inactivated \[@esteller2008\]. Analysis of differences in methylation pattern between tumorous and healthy tissue would allow to determine which tumor suppressor genes are most commonly inactivated in LUAD. Furthermore differences in methylation patterns between LUAD and other cancer types could further help to distinguish the process of LUAD development from that of other cancers.
+
+## Experimental validation
+
+The ultimate step of any analysis would be to seek empirical confirmation of novel findings. Since TCGA holds immunohistochemistry stained samples of tumor tissue it would be possible to directly study in what way different genomic profiles impact the development of tumors *in vivo*.
+
 # References
 
 ::: {#refs}
