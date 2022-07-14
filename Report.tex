@@ -1,0 +1,624 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  parskip,
+  oneside]{scrreprt}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage[ngerman, main=english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[onehalfspacing]{setspace}
+\usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm, bindingoffset=10mm, includehead, includefoot]{geometry}
+\usepackage[headsepline]{scrlayer-scrpage}
+\usepackage{url}
+\usepackage[backend=biber, style=authoryear, giveninits=true, maxbibnames=99, uniquename=init, maxcitenames=2, hyperref=true, date=year]{biblatex}
+\usepackage{setspace}
+\usepackage{xpatch}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{acronym}
+\usepackage{lipsum}
+\usepackage{scrhack}
+\emergencystretch=50pt
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+\automark[section]{chapter}
+\renewcommand*{\chaptermarkformat}{}
+\renewcommand*{\sectionmarkformat}{}
+\setkomafont{title}{\sffamily}
+\setkomafont{disposition}{\usekomafont{title}}
+\setkomafont{author}{\usekomafont{title}}
+\setkomafont{date}{\usekomafont{title}}
+\setkomafont{caption}{\sffamily\small}
+\setkomafont{captionlabel}{\usekomafont{caption}\bfseries\small}
+\setkomafont{pagehead}{\normalfont\scshape}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+    {\Large Ruprecht-Karls-Universität Heidelberg\\
+        Fakultät für Biowissenschaften\\
+        Bachelorstudiengang Molekulare Biotechnologie\\}
+
+    {\vspace{\stretch{2}}}
+    {\doublelespacing{\usekomafont{title}}
+
+        {\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
+
+      {\Huge Topic 02 Team 03}
+
+        {\Huge Exploration of Lung Adenocarcinoma (LUAD)}
+
+    }
+
+    \vspace{\stretch{2}}
+    {\Large Data Science Project SoSe 2022}
+
+    \vspace{\stretch{2}}
+
+    {\Large
+        \begin{tabular}{rl}
+            Autoren & Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler\\
+            Abgabetermin &18.07.2022\\
+        \end{tabular}
+    }
+
+    \vspace{\stretch{1}}
+
+\end{titlepage}
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+\hypertarget{biological-background}{%
+\section{Biological Background}\label{biological-background}}
+
+\hypertarget{principal-component-analysis-pca}{%
+\section{Principal Component Analysis
+(PCA)}\label{principal-component-analysis-pca}}
+
+Principal component analysis (PCA) is a procedure used to perform linear
+dimension reduction. The goal is to reduce the dimension of a given data
+set whilst losing as little information as possible by retaining a
+maximum of the standardized data set's variation (Ringnér, 2008).
+
+Principal components (PC) are a set of new orthogonal variables that are
+made up of a linear combination of the original variables. Principal
+components display the pattern of similarity of the observations and of
+the variables as points in maps (Abdi and Williams, 2010). By
+convention, the PCs are ordered in decreasing ~order according to the
+amount of variation they explain of the original data (Ringnér, 2008).
+It is important to note that all PCs are uncorrelated.
+
+PCA is a useful tool for genome-wide expression studies and often serves
+as a first step before clustering or classification of the data.
+Dimension reduction is a necessary step for easy data exploration and
+visualization (Ringnér, 2008).
+
+\hypertarget{uniform-manifold-approximation-and-projection-umap}{%
+\section{Uniform Manifold Approximation and Projection
+(UMAP)}\label{uniform-manifold-approximation-and-projection-umap}}
+
+Uniform manifold approximation and projection (UMAP) is a k-neighbour
+graph based algorithm that is used for nonlinear dimension reduction
+(Smets et al., 2019) (McInnes et al., 2018).
+
+After data normalization, the Euclidean distances between points in a
+two-dimensional space of the graph are calculated and a local radius is
+determined (Vermeulen et al., 2021). In general the closer two points
+are to each other, the more similar they are. UMAP makes a density
+estimation to find the right local radius. This variable radius is
+smaller in high density regions of data points and larger in low density
+regions. In general, the density is higher when the k-nearest neighbour
+is close and vice versa. The number of k-nearest neighbours controls the
+number of neighbours whose local topology is preserved. Precisely, a
+large number of neighbours will ensure that more global structure is
+preserved whereas a smaller number of neighbours will ensure the
+preservation of more local structure (McInnes et al., 2018).
+
+UMAP is a newer method tan PCA and it is generally believed to be easier
+to interpret and group data than by using PCA. Furthmore, UMAP has the
+advantage of not requiring linear data (Milošević et al., 2022).
+
+\hypertarget{gene-set-enrichment-analysis-gsea}{%
+\section{Gene Set Enrichment Analysis
+(GSEA)}\label{gene-set-enrichment-analysis-gsea}}
+
+Gene set enrichment analysis (GSEA) is a computational method that is
+used to determine whether two gene expression states are significantly
+different from each other or not. In this project we compared gene
+expression profiles between healthy and tumorous tissue of
+LUAD(Subramanian et al., 2007).
+
+Two data sets are compared and the genes are sorted from the most to the
+least differential expression between the data sets according to their
+p-values. This creates a ranked list L.
+
+Referring to an \emph{a priori} defined set of gene sets S, the goal is
+to locate for each pathway of S where its corresponding genes fall in L
+and find a discerning trend. If the genes of a given pathway are
+randomly distributed in L then the pathway is assumed to not
+significantly contribute to the particular tumor's phenotype. However if
+the genes are primarily clustered at the top or the bottom of L then a
+phenotypic significance of the given pathway can be assumed.
+
+To determine the location of the genes, an enrichment score is
+calculated for each pathway. For this, a running-sum statistic is
+calculated as the list L is ran through. The running-sum is increased
+every time a gene belonging to the pathway in question is encountered
+and decreased otherwise. An enrichment score is thus calculated for each
+pathway. The enrichment score is defined as the maximum deviation from
+zero of the running-sum.
+
+Lastly, adjustment for multiple hypothesis testing is performed by
+normalizing the enrichment score for each pathway to account for its
+size and a normalized enrichment score is obtained.
+
+GSEA is a useful tool for interpretation of gene expression data.
+
+(Subramanian et al., 2005)
+
+\hypertarget{gene-set-variation-analysis-gsva}{%
+\section{Gene Set Variation Analysis
+(GSVA)}\label{gene-set-variation-analysis-gsva}}
+
+Gene set variation analysis (GSVA) is an unsupervised method to estimate
+pathway activities based on gene expression data. Contrarily to the
+aforementioned GSEA, GSVA does not rely on phenotypic characterisation
+of the data sets into two categories but rather quantifies enrichment in
+a sample-wise manner which makes GSVA the better choice to perform on
+the tcga\_exp data set.
+
+GSVA estimates a cumulative distribution for each gene over all samples.
+The gene expression values are then converted according to these
+estimated cumulative distributions into scaled values. Based on these
+new values, the genes are ranked in each sample. Next, the genes are
+classified into two distributions and a Komogorow-Smirnow statistic is
+calculated to judge how similar the distributions are to each other and
+to obtain an ES.
+
+The GSVA corresponds to either the maximum deviation between both
+running sums or the GSVA score can be defined as the difference of the
+maximum deviations in the positive and in the negative direction. A
+highly positive or negative GSVA score indicates that the studied gene
+set is positively or negatively enriched compared to the genes not in
+the gene set, respectively. If the GSVA score for a given gene set is
+close to zero, then the gene set is probably not differentially
+expressed compared to the genes not in the gene set.
+
+(Hänzelmann et al., 2013)
+
+\hypertarget{abbreviations}{%
+\chapter{Abbreviations}\label{abbreviations}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\endhead
+GSEA & gene set enrichment analysis \\
+GSVA & gene set variation analysis \\
+LUAD & lung adenocarcinoma \\
+PC & principal component \\
+PCA & principal component analysis \\
+TCGA & The cancer genome atlas \\
+UMAP & uniform manifold approximation and projection \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{methods}{%
+\chapter{Methods}\label{methods}}
+
+\hypertarget{overview-of-used-packages}{%
+\section{Overview of used packages}\label{overview-of-used-packages}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1364}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.7045}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1591}}@{}}
+\caption{\textbf{Tab. 1: Used packages in alphabetical
+order.}}\tabularnewline
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Package Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Application
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Reference}
+\end{minipage} \\
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Package Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Application
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Reference}
+\end{minipage} \\
+\midrule
+\endhead
+babyplots & create interactive 3D visualizations & Trost (2022) \\
+base & basic R functions & R Core Team (2022a) \\
+bayesbio & calculate Jaccard coefficients & McKenzie (2016) \\
+BiocParallel & novel implementations of functions for parallel
+evaluation & (Morgan et al., 2021) \\
+biomaRt & access to genome databases & Durinck et al. (2009) \\
+cinaR & combination of different packages & Karakaslar and Ucar
+(2022) \\
+cluster & cluster analysis of data & Maechler et al. (2021) \\
+ComplexHeatmap & arrange multiple heatmaps & (Gu et al., 2016) \\
+edgeR & assess differential expression in gene expression profiles &
+Chen et al. (2016) \\
+EnhancedVolcano & produce improved volcano plots & (Blighe et al.,
+2021) \\
+enrichplot & visualization of gene set enrichment results (GSEA) & Yu
+(2022) \\
+FactoMineR & perform principal component analysis (PCA) & Lê et al.
+(2008) \\
+fgsea & Run GSEA on a pre-ranked list & Korotkevich et al. (2019) \\
+ggplot2 & visualization of results in dot plots, bar plots and box plots
+& Wickham (2016) \\
+ggpubr & formatting of ggplot2-based graphs & Kassambara (2020) \\
+grid & implements the primitive graphical functions that underlie the
+ggplot2 plotting system & R Core Team (2022b) \\
+gridExtra & arrange multiple plots on a page & Auguie (2017) \\
+GSVA & Run GSVA on a data set & (\textbf{GSVA?}) \\
+gplots & plotting data & (Warnes et al., 2022a) \\
+gtools & calculate foldchange, find NAs,
+
+logratio2foldchange & Warnes et al. (2022b) \\
+knitr & creation of citations using write\_bib & Xie (2014) \\
+limma & ``linear models for microarray data'' & Ritchie et al. (2015) \\
+msigdbr & provides the `Molecular Signatures Database' (MSigDB) gene
+sets & Dolgalev (2022) \\
+parallel & allows for parallel computation through multi core processing
+& R Core Team (2022c) \\
+pheatmap & draw clustered heatmaps & Kolde (2019) \\
+RColorBrewer & provides color schemes for maps & Neuwirth (2022) \\
+scales & helps in visualization: r automatically determines breaks and
+labels for axes and legends & Wickham and Seidel (2022) \\
+Seurat & visualize gene set enrichment results in dot plots & Satija et
+al. (2022) \\
+tidyverse & collection of R packages, including ggplot2 & Wickham et al.
+(2019) \\
+uwot & performs dimensionality reduction and Uniform Manifold
+Approxiamtion and Projection (UMAP) & Melville (2021) \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{our-data}{%
+\section{Our Data}\label{our-data}}
+
+\tableofcontents
+
+\hypertarget{result}{%
+\chapter{Result}\label{result}}
+
+\hypertarget{discussion}{%
+\chapter{Discussion}\label{discussion}}
+
+\hypertarget{outlook}{%
+\chapter{Outlook}\label{outlook}}
+
+\hypertarget{references}{%
+\chapter{References}\label{references}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-abdi2010}{}}%
+Abdi, H., and Williams, L.J. (2010).
+\href{https://doi.org/10.1002/wics.101}{Principal component analysis}.
+WIREs Computational Statistics \emph{2}, 433--459.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gridExtra}{}}%
+Auguie, B. (2017).
+\href{https://CRAN.R-project.org/package=gridExtra}{gridExtra:
+Miscellaneous functions for "grid" graphics}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-enhancedvolcano}{}}%
+Blighe, K., Rana, S., and Lewis, M. (2021).
+\href{https://github.com/kevinblighe/EnhancedVolcano}{EnhancedVolcano:
+Publication-ready volcano plots with enhanced colouring and labeling}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-edgeR}{}}%
+Chen, Y., Lun, A.A.T., and Smyth, G.K. (2016).
+\href{https://doi.org/10.12688/f1000research.8987.2}{From reads to genes
+to pathways: Differential expression analysis of RNA-seq experiments
+using rsubread and the edgeR quasi-likelihood pipeline}. F1000Research
+\emph{5}, 1438.
+
+\leavevmode\vadjust pre{\hypertarget{ref-msigdbr}{}}%
+Dolgalev, I. (2022).
+\href{https://CRAN.R-project.org/package=msigdbr}{Msigdbr: MSigDB gene
+sets for multiple organisms in a tidy data format}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-biomaRt2009}{}}%
+Durinck, S., Spellman, P.T., Birney, E., and Huber, W. (2009). Mapping
+identifiers for the integration of genomic datasets with the
+r/bioconductor package biomaRt. Nature Protocols \emph{4}, 1184--1191.
+
+\leavevmode\vadjust pre{\hypertarget{ref-complexheatmap}{}}%
+Gu, Z., Eils, R., and Schlesner, M. (2016). Complex heatmaps reveal
+patterns and correlations in multidimensional genomic data.
+Bioinformatics.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hanzelmann2013}{}}%
+Hänzelmann, S., Castelo, R., and Guinney, J. (2013). GSVA: Gene set
+variation analysis for microarray and RNA-seq data. BMC Bioinformatics
+\emph{14}, 1--15.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cinaR}{}}%
+Karakaslar, O., and Ucar, D. (2022).
+\href{https://CRAN.R-project.org/package=cinaR}{cinaR: A computational
+pipeline for bulk 'ATAC-seq' profiles}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ggpubr}{}}%
+Kassambara, A. (2020).
+\href{https://CRAN.R-project.org/package=ggpubr}{Ggpubr: 'ggplot2' based
+publication ready plots}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pheatmap}{}}%
+Kolde, R. (2019).
+\href{https://CRAN.R-project.org/package=pheatmap}{Pheatmap: Pretty
+heatmaps}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fgsea}{}}%
+Korotkevich, G., Sukhov, V., and Sergushichev, A. (2019).
+\href{https://doi.org/10.1101/060012}{Fast gene set enrichment
+analysis}. bioRxiv.
+
+\leavevmode\vadjust pre{\hypertarget{ref-FactoMineR}{}}%
+Lê, S., Josse, J., and Husson, F. (2008).
+\href{https://doi.org/10.18637/jss.v025.i01}{{FactoMineR}: A package for
+multivariate analysis}. Journal of Statistical Software \emph{25},
+1--18.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cluster}{}}%
+Maechler, M., Rousseeuw, P., Struyf, A., Hubert, M., and Hornik, K.
+(2021). \href{https://CRAN.R-project.org/package=cluster}{Cluster:
+Cluster analysis basics and extensions}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mcinnes2018}{}}%
+McInnes, L., Healy, J., and Melville, J. (2018).
+\href{https://doi.org/10.48550/ARXIV.1802.03426}{UMAP: Uniform manifold
+approximation and projection for dimension reduction} (arXiv).
+
+\leavevmode\vadjust pre{\hypertarget{ref-bayesbio}{}}%
+McKenzie, A. (2016).
+\href{https://CRAN.R-project.org/package=bayesbio}{Bayesbio:
+Miscellaneous functions for bioinformatics and bayesian statistics}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-uwot}{}}%
+Melville, J. (2021).
+\href{https://CRAN.R-project.org/package=uwot}{Uwot: The uniform
+manifold approximation and projection (UMAP) method for dimensionality
+reduction}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-milosevic2022}{}}%
+Milošević, D., Medeiros, A.S., Stojković Piperac, M., Cvijanović, D.,
+Soininen, J., Milosavljević, A., and Predić, B. (2022).
+\href{https://doi.org/10.1016/j.scitotenv.2021.152365}{The application
+of uniform manifold approximation and projection (UMAP) for
+unconstrained ordination and classification of biological indicators in
+aquatic ecology}. Science of The Total Environment \emph{815}, 152365.
+
+\leavevmode\vadjust pre{\hypertarget{ref-biocparallel}{}}%
+Morgan, M., Wang, J., Obenchain, V., Lang, M., Thompson, R., and Turaga,
+N. (2021).
+\href{https://github.com/Bioconductor/BiocParallel}{BiocParallel:
+Bioconductor facilities for parallel evaluation}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-RColorBrewer}{}}%
+Neuwirth, E. (2022).
+\href{https://CRAN.R-project.org/package=RColorBrewer}{RColorBrewer:
+ColorBrewer palettes}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
+R Core Team (2022a). \href{https://www.R-project.org/}{R: A language and
+environment for statistical computing} (Vienna, Austria: R Foundation
+for Statistical Computing).
+
+\leavevmode\vadjust pre{\hypertarget{ref-grid}{}}%
+R Core Team (2022b). \href{https://www.R-project.org/}{R: A language and
+environment for statistical computing} (Vienna, Austria: R Foundation
+for Statistical Computing).
+
+\leavevmode\vadjust pre{\hypertarget{ref-parallel}{}}%
+R Core Team (2022c). \href{https://www.R-project.org/}{R: A language and
+environment for statistical computing} (Vienna, Austria: R Foundation
+for Statistical Computing).
+
+\leavevmode\vadjust pre{\hypertarget{ref-ringner2008}{}}%
+Ringnér, M. (2008). What is principal component analysis? Nature
+Biotechnology \emph{26}, 303--304.
+
+\leavevmode\vadjust pre{\hypertarget{ref-limma2015}{}}%
+Ritchie, M.E., Phipson, B., Wu, D., Hu, Y., Law, C.W., Shi, W., and
+Smyth, G.K. (2015). \href{https://doi.org/10.1093/nar/gkv007}{{limma}
+powers differential expression analyses for {RNA}-sequencing and
+microarray studies}. Nucleic Acids Research \emph{43}, e47.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-SeuratObject}{}}%
+Satija, R., Butler, A., Hoffman, P., and Stuart, T. (2022).
+\href{https://CRAN.R-project.org/package=SeuratObject}{SeuratObject:
+Data structures for single cell data}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-smets2019}{}}%
+Smets, T., Verbeeck, N., Claesen, M., Asperger, A., Griffioen, G.,
+Tousseyn, T., Waelput, W., Waelkens, E., and De Moor, B. (2019).
+\href{https://doi.org/10.1021/acs.analchem.8b05827}{Evaluation of
+distance metrics and spatial autocorrelation in uniform manifold
+approximation and projection applied to mass spectrometry imaging data}.
+Analytical Chemistry \emph{91}, 5706--5714.
+
+\leavevmode\vadjust pre{\hypertarget{ref-subramanian2005}{}}%
+Subramanian, A., Tamayo, P., Mootha, V.K., Mukherjee, S., Ebert, B.L.,
+Gillette, M.A., Paulovich, A., Pomeroy, S.L., Golub, T.R., Lander, E.S.,
+et al. (2005). \href{https://doi.org/10.1073/pnas.0506580102}{Gene set
+enrichment analysis: A knowledge-based approach for interpreting
+genome-wide expression profiles}. Proceedings of the National Academy of
+Sciences \emph{102}, 15545--15550.
+
+\leavevmode\vadjust pre{\hypertarget{ref-subramanian2007}{}}%
+Subramanian, A., Kuehn, H., Gould, J., Tamayo, P., and Mesirov, J.P.
+(2007). \href{https://doi.org/10.1093/bioinformatics/btm369}{{GSEA-P: a
+desktop application for Gene Set Enrichment Analysis}}. Bioinformatics
+\emph{23}, 3251--3253.
+
+\leavevmode\vadjust pre{\hypertarget{ref-babyplots}{}}%
+Trost, N. (2022). Babyplots: Easy, fast, interactive 3D visualizations
+for data exploration and presentation.
+
+\leavevmode\vadjust pre{\hypertarget{ref-VERMEULEN2021119547}{}}%
+Vermeulen, M., Smith, K., Eremin, K., Rayner, G., and Walton, M. (2021).
+\href{https://doi.org/10.1016/j.saa.2021.119547}{Application of uniform
+manifold approximation and projection (UMAP) in spectral imaging of
+artworks}. Spectrochimica Acta Part A: Molecular and Biomolecular
+Spectroscopy \emph{252}, 119547.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-gtools}{}}%
+Warnes, G.R., Bolker, B., and Lumley, T. (2022b).
+\href{https://github.com/r-gregmisc/gtools}{Gtools: Various r
+programming tools}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gplots}{}}%
+Warnes, G.R., Bolker, B., Bonebakker, L., Gentleman, R., Huber, W.,
+Liaw, A., Lumley, T., Maechler, M., Magnusson, A., Moeller, S., et al.
+(2022a). \href{https://CRAN.R-project.org/package=gplots}{Gplots:
+Various r programming tools for plotting data}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ggplot2}{}}%
+Wickham, H. (2016). \href{https://ggplot2.tidyverse.org}{ggplot2:
+Elegant graphics for data analysis} (Springer-Verlag New York).
+
+\leavevmode\vadjust pre{\hypertarget{ref-scales}{}}%
+Wickham, H., and Seidel, D. (2022).
+\href{https://CRAN.R-project.org/package=scales}{Scales: Scale functions
+for visualization}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-tidyverse}{}}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L.D., François,
+R., Grolemund, G., Hayes, A., Henry, L., Hester, J., et al. (2019).
+\href{https://doi.org/10.21105/joss.01686}{Welcome to the {tidyverse}}.
+Journal of Open Source Software \emph{4}, 1686.
+
+\leavevmode\vadjust pre{\hypertarget{ref-knitr2014}{}}%
+Xie, Y. (2014).
+\href{http://www.crcpress.com/product/isbn/9781466561595}{Knitr: A
+comprehensive tool for reproducible research in {R}}. In Implementing
+Reproducible Computational Research, V. Stodden, F. Leisch, and R.D.
+Peng, eds. (Chapman; Hall/CRC),.
+
+\leavevmode\vadjust pre{\hypertarget{ref-enrichplot}{}}%
+Yu, G. (2022).
+\href{https://yulab-smu.top/biomedical-knowledge-mining-book/}{Enrichplot:
+Visualization of functional enrichment result}.
+
+\end{CSLReferences}
+
+\hypertarget{appendix}{%
+\chapter{Appendix}\label{appendix}}
+
+\end{document}
