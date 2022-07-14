@@ -128,11 +128,11 @@ sel = luad.info$diff.mean[positions]#select mean expr for genes in pw
 mean = mean(sel)  # calculate mean expression of the pathway the genes used are the ones in the leading edge
 median = median(sel)
 
-col = c("slateblue4", "lightcoral", "slategray1", "gray84") # choosing the colours
+
 
 
 #calculate % genes by up or down regulation
-hits = paste(dim(selection)[1], "genes in", pw)
+hits = paste(dim(selection)[1], "genes in leading edge")
 p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
 p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
 
@@ -152,38 +152,45 @@ vh = round(p.up/p.down, digits = 2)
 ##
 #
 
-
+col = c("gray0", "firebrick3", "deepskyblue", "gray75") # choosing the colours
 ###plots
 #1 ) normaler v.plot
 plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
   geom_point(size = .2)+
-  labs(title = paste("volcano plot pw: ", pw), x = "fc", y = "pwilc")+
+  labs(title = paste(pw), x = "fc", y = "pwilc")+
   scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = 2)
+             aes(y = abs(spval), diff.mean, color = pathway), size = 2)+
+  geom_text(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
+
 #2 ) singed volcano plot
 plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
   geom_point(size = .5)+
-  labs(title = paste("singed volcano plot pw: ", pw), x = "fc", y = "spval")+
+  labs(title = paste(pw), x = "fc", y = "spval")+
   scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = spval, diff.mean, color = pathway), size = 2)
+             aes(y = spval, diff.mean, color = pathway), size = 2)+
+  geom_text(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
 #3 ) gradient plot
 plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
   geom_point(size = .5)+
-  labs(title = paste("gradient volcano plot pw: ", pw), x = "fc", y = "spval")+
+  labs(title = paste(pw), x = "fc", y = "spval")+
   scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(spval, abs(diff.mean), color = pathway), size = 2)
+             aes(spval, abs(diff.mean), color = pathway), size = 2)+
+  geom_text(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
 
 
 
