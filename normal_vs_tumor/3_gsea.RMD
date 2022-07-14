@@ -112,16 +112,16 @@ for(i in 1:z){
   # select genes from one pwathway
 x = i # choose pathway by position
 
-pw = GSEA_p$pathway[x] 
+pw = names(genesets$genesets[x])
 pw
 
-pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway that are at the leading edge
+pw.genes = unlist(genesets$genesets[x], use.names = F)#genes in the pathway that are at the leading edge
 genes = luad.info$name #all genes
 
 positions = sort(match(pw.genes, genes))#compare to get positions
 positions
 
-selection = luad.info[pw.genes,] # select rows from data frame
+selection = luad.info[positions,] # select rows from data frame
 selection$pathway = pw # make new column, called like the pw
 
 sel = luad.info$diff.mean[positions]#select mean expr for genes in pw
@@ -132,7 +132,7 @@ median = median(sel)
 
 
 #calculate % genes by up or down regulation
-hits = paste(dim(selection)[1], "genes in leading edge")
+hits = paste(dim(selection)[1], "genes in pathway")
 p.down = (length(which(selection$expr == "down"))/dim(selection)[1])*100
 p.up = (length(which(selection$expr == "up"))/dim(selection)[1])*100
 
@@ -151,6 +151,8 @@ vh = round(p.up/p.down, digits = 2)
 ####
 ##
 #
+selection2 = as.data.frame(rbind(selection[which(selection$expr == "up"),],
+                                    selection[which(selection$expr == "down"),]))
 
 col = c("gray0", "firebrick3", "deepskyblue", "gray75") # choosing the colours
 ###plots
@@ -163,8 +165,8 @@ plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = 2)+
-  geom_text(data = selection,
+             aes(y = abs(spval), diff.mean, color = pathway), size = 1)+
+  geom_text(data = selection2,
              aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
 
 #2 ) singed volcano plot
