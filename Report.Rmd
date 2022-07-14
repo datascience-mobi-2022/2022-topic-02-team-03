@@ -234,19 +234,11 @@ The Molecular Signature Database (MSigDB) is a database offering a variety of an
 
 \tableofcontents
 
-# Result
+# Results
 
 ## Cancer hallmark pathways
 
-By calculating the Jaccard index for each metabolism gene
-set to each hallmark gene set, the similarity between these pathways was
-measured and visualized in a heatmap (Fig. XXX). This highlights that there is
-a general low similarity between the selected pathways and only a few gene sets
-show a slightly higher similarity which don't exceed an index of 0.2. The most
-shared genes are found in the alanine aspartate and glutamate metabolism with glutamine
-metabolism. Additionally, large overlaps are found in purine and pyrimidine
-metabolism with genome repair and down regulation as well as in lipid and fatty
-acid metabolism with VEGF-induced angiogenesis.
+By calculating the Jaccard index for each metabolism gene set to each hallmark gene set, the similarity between these pathways was measured and visualized in a heatmap (**Fig. XXX**). This highlights that there is a general low similarity between the selected pathways and only a few gene sets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
 
 # Discussion
 
