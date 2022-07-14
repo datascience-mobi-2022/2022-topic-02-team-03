@@ -190,7 +190,7 @@ for(i in 1:z){
   #1 ) normaler v.plot
   plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
     geom_point(size = 2, alpha = .5)+
-    labs(title = paste(pw), x = "fc", y = "pwilc")+
+    labs(title = paste(pw), x = "log2(fc)", y = "-log10(pwilc)")+
     scale_color_manual(name = "",
                        breaks = c(pw, "up", "down", "not sign."),
                        labels = c(hits, percent.up, percent.down, ns),
@@ -198,7 +198,8 @@ for(i in 1:z){
     geom_point(data = selection,
                aes(y = abs(spval), diff.mean, color = pathway), size = 2)+
     geom_text_repel(data = selection2,
-              aes(y = abs(spval), diff.mean, color = pathway), size = 7, hjust = -.3)
+              aes(y = abs(spval), diff.mean, color = pathway), size = 7, hjust = -.3)+
+    theme_light()
   
   
   ###saving
@@ -233,4 +234,4 @@ rownames(plots$regulation) <- name
 
 pw = rownames(selection1)
 pw
-plots$pw.v.plots
+plots$pw.v.plots$REGULATION_OF_T_HELPER_1_TYPE_IMMUNE_RESPONSE
