@@ -5,6 +5,11 @@
 <br/> **Tutor:** Wangjun Hu
 
 # Abstract 
+## Biological Background and Motivation
+## Our Data
+Apart from the analysis of cancer hallmark pathways which was done on a dataset conatining a list of gene sets, all our analyses were performed on one of two datasets: **tcga_exp_log2TPM** and **tcga_tumor_normal**.
+- **tcga_exp_log2TPM** contains RNA-seq data from almost 10,000 TCGA cancer patients for 33 different tumor types, retrieved from The Cancer Genome Atlas (TCGA) and normalized through a TPM ('transcripts per million') normalization and a  log<sub>2</sub> transformation.
+- **tcga_tumor_normal** contains TCGA expression data of tumor tissue and of the corresponding healthy tissue for five different cancer types.
 
 # Folder structure
 
