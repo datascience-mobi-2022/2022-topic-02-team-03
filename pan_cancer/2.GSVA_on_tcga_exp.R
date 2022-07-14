@@ -22,6 +22,7 @@ library(gplots)
 library(gtools)
 library(EnhancedVolcano)
 library(BiocParallel)
+library(colorRamps)
 
 tcga_exp_short <- readRDS("./data/tcga_exp_small.RDS")
 all_genesets_c5 <- readRDS("./data/genesetlist_whole_C5.RDS")
@@ -183,7 +184,7 @@ for( type in 1:length(tumor_types)){
 colnames(pathway_enrichment_means_C5) <- tumor_types
 rownames(pathway_enrichment_means_C5) <- rownames(all_gsva_C5_highSD)
 
-Heatmap(pathway_enrichment_means_C5, column_km = 3, row_names_gp =  grid::gpar(fontsize=7), row_names_side = "left", show_row_dend = FALSE, heatmap_legend_param = list(title = "relative expression"), row_names_max_width = unit(14, "cm"))
+Heatmap(pathway_enrichment_means_C5, column_km = 3, row_names_gp =  grid::gpar(fontsize=7), row_names_side = "left", show_row_dend = FALSE, heatmap_legend_param = list(title = "relative expression"), row_names_max_width = unit(14, "cm"), height = unit(19, "cm"))
 
 
 #################################### create second geneset list with C2 genesets from msigdb

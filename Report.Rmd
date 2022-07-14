@@ -47,7 +47,7 @@ header-includes:
   - \setkomafont{caption}{\sffamily\small}
   - \setkomafont{captionlabel}{\usekomafont{caption}\bfseries\small}
   - \setkomafont{pagehead}{\normalfont\scshape}
-csl: report/cell.csl
+csl: [report/cell.csl]
 bibliography: [report/packages.bib, report/Citations.bib]
 ---
 
@@ -59,11 +59,11 @@ bibliography: [report/packages.bib, report/Citations.bib]
         Bachelorstudiengang Molekulare Biotechnologie\\}
 
     {\vspace{\stretch{2}}}
-    {\doublespacing{\usekomafont{title}}
+    {\doublelespacing{\usekomafont{title}}
 
         {\Huge Cancer Hallmark and Metabolic Pathways in Cancer}
 
-        {\Huge Topic 02 Team 03}
+      {\Huge Topic 02 Team 03}
 
         {\Huge Exploration of Lung Adenocarcinoma (LUAD)}
 
@@ -226,38 +226,6 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 # Discussion
 
 # Outlook
-
-Over the course of three months, we gained an understanding on how LUAD differs from other cancer types and which genes are the main drivers of LUAD development in individuals. With more time, we would have hoped to further analyse our data in the following ways:
-
-## Determine the genetic cause for metastases
-
-About a third of LUAD patients already present with brain metastases at the time of diagnosis and about half of all LUAD patients will eventually develop brain metastases [@shih2020]. As a cancer's ability to metastasize dramatically impacts chances of survival, it would be interested to determine the differences in the genetic profiles between the patients that develop metastases and those that don't. This would allow to single out patients at risk of developing brain metastases early on and to develop more efficient treatment of LUAD-induced brain metastases.
-
-To further concentrate on brain metastases in LUAD, RNAseq data specifically from the metastases would allow to check for genomic similarities and differences to the primary tumor to get a better understanding of which specific mutations allow for metastasizing.
-
-## Smoker vs non-smoker
-
-It is a well-known fact that lung cancer is a smoker's disease. However, new findings suggest that lung cancer incidence in smokers is decreasing whilst LUAD incidence in never-smokers is increasing [@qiu2015]. The same research states that LUAD in non smokers shows genomic and transcriptomic differences compared to LUAD in smokers. To confirm this thesis, the given LUAD data could be divided into smokers and non smokers and the two subgroups could have been checked for differences in gene expression profiles.
-
-## Immune subtyping
-
-Many research groups have already set out to subtype LUAD based on immune signatures such as PD-L1 expression or immune infiltration. In general, the more developed a cancer's immune signature, the better it can be targeted through immunotherapy and the higher the chances of survival [@xu2020]. An in-depth investigation of the expression of immune-related genes in our data and survival rate would allow to confirm the research of the likes of Xu *et al.* for ourselves.
-
-## Determine the significance of the clusters
-
-Performance of UMAP and PCA on LUAD data revealed two distinct clusters (see results Figure XXX). More in-depth analysis of the differences between these clusters might hopefully reveal two distinct subtypes of LUAD with distinct genomic profiles. Further exploration might aim at determining whether patients belonging to different clusters have different responses to various treatment options and may therefore differ in their chances of survival.
-
-## Prediction of cancer stage
-
-Over the course of this project we set out to train a regression model to predict LUAD development. Working off of this basis, the regression model could be further sophisticated by not only predicting whether a given person will develop LUAD based on their genomic profile but to in addition predict the cancer stage. Being able to predict the cancer stage on genomic expression profile might one day offer a less invasive diagnostic tool used to determine the most adequate therapy approach.
-
-## Epigenetics
-
-The most common epigenetic modification is DNA methylation. Epigenetic changes in tumors can include global hypomethylation of repetitive gene sequences and hypermethylation of tumor suppressor genes, leading to their inactivation [@esteller2008]. As information on epigenetic changes is available on TCGA, our existing data could be expanded to include methylation signatures in order to identify which specific tumor suppressor genes are most often inactivated through methylation in our samples.
-
-## Experimental validation
-
-The ultimate step of this analysis would be to seek experimental confirmation of our findings. TCGA offers access to immunohistochemistry treated samples of the tumorous tissue. Those samples could be used to study how different gene expression profiles influence tumor growth *in vivo*.
 
 # References
 

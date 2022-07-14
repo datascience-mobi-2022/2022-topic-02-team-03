@@ -65,16 +65,16 @@ View(GSEA_p_all)
   #theme(axis.text = element_text(size = 5))
 
 #density of pvalues
-ggplot(GSEA_p_all, aes(x=padj))  +
+ggplot(GSEA_p_all, aes(x=NES))  +
     geom_density(alpha=.2, fill="#FF6666")  # Overlay with transparent density plot
 
 #remove all pws with padj >=cutoff value
-cut = .75
+cut = 2
 for (i in 1:dim(GSEA_p_all)[1]){
-  ifelse(GSEA_p_all$pval[i] >= cut, GSEA_p_all$col[i] <- "not important",
+  ifelse(GSEA_p_all$pval[i] <= cut, GSEA_p_all$col[i] <- "not important",
        GSEA_p_all$col[i] <- "important")
 }
-GSEA_p_all = GSEA_p_all[which(GSEA_p_all$padj <= cut),]
+GSEA_p_all = GSEA_p_all[which(GSEA_p_all$NES >= cut),]
 GSEA_p_all$rank = 1:dim(GSEA_p_all)[1]
 View(GSEA_p_all)
 

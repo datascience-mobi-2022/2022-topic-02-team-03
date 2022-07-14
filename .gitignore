@@ -11,6 +11,9 @@ data
 # Icon must end with two \r
 Icon
 
+#LaTex
+Report.tex
+Report.log
 
 # Thumbnails
 ._*
