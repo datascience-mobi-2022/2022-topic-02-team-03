@@ -255,6 +255,16 @@ To decrease the amount of genes even further and focus our analysis on important
 
 In the end the expression dataset could be reduced from over 60.000 genes to roughly 17.000, while keeping all 9741 patients.
 
+## Data cleanup on TCGA tumor vs normal dataset
+
+In preparation for the focused analysis, the RNA-seq data from the small TCGA dataset for LUAD was extracted and cleaned.
+
+For LUAD, the raw gene expression data included roughly 20,000 genes for 58 patients in normal and tumor tissue.
+
+The first step was to check whether NA values were present, which was not the case. Next, all zero variance genes were removed which is prerequisite for the Shapiro-Wilk test performed in the focused analysis. In addition, the biotypes that were not present in the genesets relevant for later analysis were filtered out. For this the biomaRt package [@R-biomaRt] was used and all pseudogenes were removed. The remaining biotypes corresponded to the genesets which were predominantly protein-coding genes and few lncRNAs.
+
+The cleaned data consisting of roughly 17,000 genes was saved to a separate file.
+
 ## Pancancer analysis
 
 ### Dimensionality reduction
@@ -272,6 +282,32 @@ For quality control, a PCA and UMAP were used on the newly created pathway patie
 After subsetting the pathway patient enrichment matrix into one data frame for LUAD and the other cancer types, foldchanges were calculated and a two sided Wilcoxon test was conducted between the means per pathway for all LUAD patients and all other patients. With these values another volcano plot was created and the interesting pathways were extracted.
 
 The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and other cancer types and gave critical information for the following regression analysis.
+
+## Focused analysis
+
+### Signed-ranked list
+
+A Shapiro-Wilk test was applied to the cleaned data to check whether the genes were normally distributed. It turned out that over 50% of the genes were not normally distributed. Therefore, the Wilcoxon signed-rank test was used to determine how significant the change in gene expression between normal and tumor tissue was. A p-value was assigned to each gene.
+
+Lastly, for each gene the sign of the fold change was multiplied with the -log10 tranformed p-value to get signed p-values and sort them in decreasing order. This yielded a signed-ranked list which classified the genes by significance in gene expression to show which genes were differentially expressed in tumor tissue compared to normal tissue. This list was later used as input for the GSEA.
+
+### GSEA 
+
+To assess how the pathway expression differs between tumor and normal tissue, a GSEA was performed using the fgsea package [@fgsea]. As input for the genes the signed ranked list and for the pathways the hallmark and the metabolism genesets were used (87 genesets). An enrichment score and a leading edge containing the genes that contribute most to the enrichment score were calculated for each pathway.
+
+To sort the pathways by the expression rate, the mean expression of their leading edges was calculated and visualized in a dotplot using the packages ggplot [@gplots]. Therefore the pathways were sorted from most upregulated to most downregulated.
+
+### GSVA
+
+In the following, a GSVA was performed using the gsva package [@gsva] to illustrate the pathway expression of each patient. For this the gene ontology genesets (C5 BP) with about 3000 pathways were used.
+
+For each pathway of the resulting pathway enrichment matrix the standard deviation was calculated. Those with the greatest standard deviation were retained.
+
+The selected pathways and their expression rate for each patient were then shown in a heatmap using the package ComplexHeatmap [@complexheatmap].
+
+After the shortened matrix was divided into tumor and normal tissue, the foldchange of each pathway was calculated. This was calculated taking the difference between the mean expression of each pathway in tumor and normal tissue. In addition, the Wilcoxon tests for dependent samples was applied to each pathway. This was illustrated in a volcano plot using the package ggplot [@gplots] in which the -log10(p-values) were plotted against the foldchanges.
+
+Finally, volcano plots were created for selected pathways to see which genes were over expressed and under expressed in the individual pathways, for literature comparisons.
 
 ## Regression
 
