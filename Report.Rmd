@@ -333,6 +333,27 @@ By calculating the Jaccard index for each metabolism gene set to each hallmark g
 knitr::include_graphics("C:\\Users\\Marie Kleinert\\Documents\\GitHub\\GitHub-Ordner DataAnalysis\\output\\2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
 ```
 
+## Pan cancer analysis
+
+### Identification of clusters in gene expression data
+
+Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in **Fig. XXX**. To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
+
+![**UMAP plot on TCGA expression dataset.** The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients' cancer types.](output/3_pcaumap_on_big_dataset.png){width="80%"}
+
+### Pathway enrichment
+
+The diagnosis of the cancer type a patient suffers from is not only based on the cancer's location in the body but by the molecular signature it exhibits. Different molecular changes result in a different expression of genes and therefore an abnormal regulation of pathways. This deregulation of pathways is characteristic for each cancer type hence its analysis is a crucial part of this pan cancer analysis. In order to identify differences in pathway activities based on the cancer type, two geneset list were extracted from MSigDB. One list contained curated genesets whereas the other list contained ontology genesets. Following, GSVA was performed twice on the TCGA expression dataset; once using the curated geneset list and one time with the ontology geneset list. By using the genesets separately, the better fitting geneset for the analysed dataset can be selected. In Fig. XXX the pathway enrichment of each patient is shown with highlighted cancer type. The selected geneset list contains only ontology genesets that overlap with the genes from the expression data with more than 95%. The curated geneset list was not chosen due to less clustering after conducting GSVA (Appendix, Fig. XXX). Cancer types that result in an isolated and well defined cluster are LIHC (turquoise, upper left corner), KIRK (green, left top), THCA (pink, under KIRK), PRAD (blue, center), PCPG (blue, top), LGG (green, right center) and LAML (green right bottom).
+
+![**Pathway enrichment based on cancer type.** The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients' cancer types](output/3_gsva_pcaumap_c5.png){width="80%"}
+
+Based on the geneset enrichment matrix created with GSVA, a pathway enrichment heatmap was created (Fig. XXX). Performing kmeans, three clusters of cancer types were identified. Cancer types belonging to cluster one like UVM and KICH show a general strong down regulation of pathways in comparison to the other cancer types. Cluster 2 contains cancer types with a relatively neutral enrichment of pathways; for example BRCA and LUAD. The third cluster exhibits a strong deregulation of pathways relatively to the other cancer types, some being upregulated while others are severely downregulated. Examples for cancer types assigned to this cluster are DLBC and LAML. The pathways can approximately be divided into three subsets. The first cluster includes pathways that regulate the cell cycle, DNA replication and chromatid segregation. These genesets are highly downregulated in the first cancer type cluster and moderately downregulated in 5 cancer types assigned to cluster 2. However, in the majority of cluster 2 and in cluster 3, these pathways show a higher activity. A second cluster can be found in pathways important for morphogenesis, metastasis and cell adhesion. While the cancer types from the second cluster do not drastically over- nor downregulate these genesets in comparison to the other cancer types, cluster 1 and 3 exhibit a general downregulation. The last cluster of pathways comprises pathways involved in the regulation of the immune response. On the one hand, the second and third cluster of cancer types solely exhibit a moderate deregulation of these genesets. On the other hand, cancer types included in the first cluster inhibit immune activation.
+
+```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.85\\linewidth'}
+
+knitr::include_graphics("C:\\Users\\Marie Kleinert\\Documents\\GitHub\\GitHub-Ordner DataAnalysis\\output\\3_gsva_heatmap_C5.pdf")
+```
+
 # Discussion
 
 # Outlook
