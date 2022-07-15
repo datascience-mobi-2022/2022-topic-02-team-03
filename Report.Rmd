@@ -89,9 +89,13 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 ## Biological Background
 
+## The Pan Cancer Project
+
+The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles. [@tomczak2015]. In 2012 TCGA Research Network launched the Pan-Cancer analysis project as a globally coordinated initiative whose main objective is to assemble coherent, consistent TCGA data sets across twelve different tumor types, one of which being lung adenocarcinoma (LUAD). Each tumor type is characterized using six different genomic, proteomic, epigenomic, and transcriptional platforms. Data collected from thousands of patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. In the future, the aim is to analyse additional tumor types beyond the twelve original ones in the hopes that the pan cancer project will one day inform clinical decision-making and aid in the development of novel therapeutic options \[@weinstein2013\].
+
 ## Jaccard index
 
-The Jaccard index is a widely known measurement for the similarity between finite sample sets. The restricted domain is defined between zero and one. A Jaccard index close to one indicates a high similarity of the sample sets. [@jaccard1901]
+The Jaccard index is a widely known measurement for the similarity between finite sample sets. The restricted domain is defined between zero and one. A Jaccard index close to one indicates a high similarity of the sample sets \[@jaccard1901\].
 
 $$
 J(A,B)
@@ -142,17 +146,28 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 # Abbreviations
 
-|      |                                               |
-|------|-----------------------------------------------|
-| GSEA | gene set enrichment analysis                  |
-| GSVA | gene set variation analysis                   |
-| LUAD | lung adenocarcinoma                           |
-| PC   | principal component                           |
-| PCA  | principal component analysis                  |
-| TCGA | The cancer genome atlas                       |
-| UMAP | uniform manifold approximation and projection |
+|         |                                               |
+|---------|-----------------------------------------------|
+| GSEA    | gene set enrichment analysis                  |
+| GSVA    | gene set variation analysis                   |
+| LUAD    | lung adenocarcinoma                           |
+| PC      | principal component                           |
+| PCA     | principal component analysis                  |
+| RNA-seq | RNA sequencing                                |
+| TCGA    | The cancer genome atlas                       |
+| UMAP    | uniform manifold approximation and projection |
 
 # Methods
+
+## Our Data
+
+At the beginning of this project we were given four datasets of which two contained RNA-seq data, one contained clinical annotations pertaining to one of the RNA-seq data frames and one contained a list of gene sets for cancer hallmark analysis.
+
+The first RNA-seq dataset is a data frame containing RNA-seq data from almost 10,000 TCGA cancer patients for 33 different tumor types. The data stored within that data frame was used to perform pan cancer analysis and to create a logistic regression model. The second RNA-seq dataset is a smaller data frame containing the TCGA expression data of tumor tissue and the corresponding healthy tissue for five different cancer types. A focused analysis was performed on this second dataset.
+
+RNA sequencing (RNA-seq) data makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell, regulated by RNA synthesis, enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
+
+All expression data was $log_2$(TPM) transformed. $Log_2$ transformation is a commonly used tool to reduce skewness in data and to make it more conform to a normal distribution.Here, TPM stands for 'Transcripts per million' and refers to a method of RNA-seq normalization in which one first accounts for gene length before adjusting for sequencing depth, or count bias, in the data. A possible perk of TPM is the reduction of type I and type II errors which would otherwise falsify downstream analysis results by accounting for gene length first [@yuen2022].
 
 ## Overview of used packages
 
@@ -168,6 +183,8 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 | BiocParallel    | novel implementations of functions for parallel evaluation                                 | [@biocparallel]    |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | biomaRt         | access to genome databases                                                                 | @biomaRt2009       |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| blorr           | building and validating binary logistic regression models                                  | @blorr             |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | cinaR           | combination of different packages                                                          | @cinaR             |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
@@ -193,7 +210,7 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | gridExtra       | arrange multiple plots on a page                                                           | @gridExtra         |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| GSVA            | Run GSVA on a data set                                                                     | @GSVA              |
+| GSVA            | Run GSVA on a data set                                                                     | [@gsva]            |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | gplots          | plotting data                                                                              | [@gplots]          |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
@@ -213,6 +230,8 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | RColorBrewer    | provides color schemes for maps                                                            | @RColorBrewer      |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| ROCR            | visualizing classifier performance                                                         | @rocr              |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | scales          | helps in visualization: r automatically determines breaks and labels for axes and legends  | @scales            |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | Seurat          | visualize gene set enrichment results in dot plots                                         | @R-SeuratObject    |
@@ -227,8 +246,6 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 ## Gene Set Extraction
 
 The Molecular Signature Database (MSigDB) is a database offering a variety of annotated gene sets publicly available for analysis. The import of gene sets from MSigDB into RStudio can easily be performed using the R package "msigdbr" [@msigdbr] which allows the extraction of species-specific gene sets of the category of interest. In a final step, the prefix corresponding to the source of the gene set was removed. The resulting output was a list containing all selected gene sets with the comprising genes saved in a vector and each element named after the pathway stored in it.  This workflow was conducted to extract curated (C2) and ontology (C5 BP) gene sets which were used for focused analysis as well as pan cancer analysis. The curated gene sets that regulate the metabolism of cells were also used for comparison with known pathways deregulated in cancer cells.
-
-## Our Data
 
 <!-- add your chapters here -->
 
