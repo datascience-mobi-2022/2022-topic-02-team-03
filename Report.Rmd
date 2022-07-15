@@ -339,7 +339,7 @@ knitr::include_graphics("C:\\Users\\Marie Kleinert\\Documents\\GitHub\\GitHub-Or
 
 ### Identification of clusters in gene expression data
 
-Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in **Fig. XXX**. To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
+Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in **Fig. XXX**. To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Notably, BRCA, LIHC, KIRP, SKCM, UVM, THCR, PCPG and PARP exhibit a well defined clustering. Additionally, LGG and GBM form a united cluster. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
 
 ![**UMAP plot on TCGA expression dataset.** The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients' cancer types.](output/3_pcaumap_on_big_dataset.png){width="80%"}
 
