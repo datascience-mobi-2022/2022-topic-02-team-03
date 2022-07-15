@@ -319,7 +319,7 @@ To use the information gathered by the pan cancer analysis a regression model wi
 
 In an effort to find genes that could be used as explaining variables, gene foldchanges [@gtools] between LUAD and other cancer types were calculated using the cleaned dataset. The genes were additionally tested for correlation and for all highly correlating genes, one of them was removed from the dataset. The 10 most overexpressed and 10 most underexpressed genes were chosen for further testing. As a quality control PCA [@R-SeuratObject] and UMAP [@uwot] were conducted on all patients for these 20 chosen genes and the UMAP was plotted using ggplot2 [@ggplot2]. The colors represented the corresponding tumor type of the patient. We chose to continue with the chosen genes.
 
-A first rough model was trained using all 20 of the chosen genes and the glm function \[@R-base\] and specifying the model to use a binomial error distribution and a logit link. This model was then passed into the blr_step_aic_both function from the blorr package [@blorr]. This function calculates the best composition of the given 20 genes. With the best configuration the final model was trained on the training dataset.
+A first rough model was trained using all 20 of the chosen genes and the glm function [@R-base] and specifying the model to use a binomial error distribution and a logit link. This model was then passed into the blr_step_aic_both function from the blorr package [@blorr]. This function calculates the best composition of the given 20 genes. With the best configuration the final model was trained on the training dataset.
 
 To evaluate the model the first step was to predict whether the patients of the testing dataset were LUAD patients. For this the native predict function [@R-base] was used. The resulting probabilities were transformed into predictions for 1 or 0 using a cutoff value of 50%. Next a confusion table was used to estimate the false-positive and false-negative rates using the known tumor type of each patient and comparing that to the prediciton of the model. As a final evaluation step the package ROCR [@rocr] was used to create a ROC curve clearly showing the performance of the model.
 
@@ -355,7 +355,7 @@ Based on the geneset enrichment matrix created with GSVA, a pathway enrichment h
 
 ```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.85\\linewidth'}
 
-knitr::include_graphics("C:\\Users\\Marie Kleinert\\Documents\\GitHub\\GitHub-Ordner DataAnalysis\\output\\3_gsva_heatmap_C5.pdf")
+knitr::include_graphics(".\\output\\3_gsva_heatmap_C5.pdf")
 ```
 
 # Discussion
