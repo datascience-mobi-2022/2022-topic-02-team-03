@@ -355,7 +355,7 @@ Based on the geneset enrichment matrix created with GSVA, a pathway enrichment h
 
 ```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.85\\linewidth'}
 
-knitr::include_graphics("\\output\\3_gsva_heatmap_C5.pdf")
+knitr::include_graphics("output\\3_gsva_heatmap_C5.pdf")
 ```
 
 # Discussion
