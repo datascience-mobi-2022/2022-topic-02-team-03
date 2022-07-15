@@ -291,7 +291,7 @@ A Shapiro-Wilk test was applied to the cleaned data to check whether the genes w
 
 Lastly, for each gene the sign of the fold change was multiplied with the -log10 tranformed p-value to get signed p-values and sort them in decreasing order. This yielded a signed-ranked list which classified the genes by significance in gene expression to show which genes were differentially expressed in tumor tissue compared to normal tissue. This list was later used as input for the GSEA.
 
-### GSEA 
+### GSEA
 
 To assess how the pathway expression differs between tumor and normal tissue, a GSEA was performed using the fgsea package [@fgsea]. As input for the genes the signed ranked list and for the pathways the hallmark and the metabolism genesets were used (87 genesets). An enrichment score and a leading edge containing the genes that contribute most to the enrichment score were calculated for each pathway.
 
