@@ -334,7 +334,7 @@ To evaluate the model the first step was to predict whether the patients of the 
 By calculating the Jaccard index for each metabolism geneset to each hallmark geneset, the similarity between these pathways was measured and visualized in a heatmap (**Fig. XXX**). This highlights that there is a general low similarity between the selected pathways and only a few genesets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine, aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
 
 ```{r Jaccard, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Jaccard Coefficients of hallmark genesets and metabolism genesets.} The x-axis is defined by the given hallmark genesets, whereas the y-axis is assigned to the selected metabolism geneset.', out.width='0.75\\linewidth'}
-knitr::include_graphics("C:\\Users\\Marie Kleinert\\Documents\\GitHub\\GitHub-Ordner DataAnalysis\\output\\2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
+knitr::include_graphics("output\\2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
 ```
 
 ## Pan cancer analysis
