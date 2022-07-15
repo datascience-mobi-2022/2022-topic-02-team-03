@@ -106,7 +106,7 @@ $$
 
 Principal component analysis (PCA) is a procedure used to perform linear dimension reduction. The goal is to reduce the dimension of a given data set whilst losing as little information as possible by retaining a maximum of the standardized data set's variation [@ringner2008].
 
-Principal components (PC) are a set of new orthogonal variables that are made up of a linear combination of the original variables. Principal components display the pattern of similarity of the observations and of the variables as points in maps [@abdi2010]. By convention, the PCs are ordered in decreasing  order according to the amount of variation they explain of the original data [@ringner2008]. It is important to note that all PCs are uncorrelated.
+Principal components (PC) are a set of new orthogonal variables that are made up of a linear combination of the original variables. Principal components display the pattern of similarity of the observations and of the variables as points in maps [@abdi2010]. By convention, the PCs are ordered in decreasing  order according to the amount of variation they explain of the original data [@ringner2008]. It is important to note that all PCs are uncorrelated.
 
 PCA is a useful tool for genome-wide expression studies and often serves as a first step before clustering or classification of the data. Dimension reduction is a necessary step for easy data exploration and visualization [@ringner2008].
 
@@ -167,7 +167,7 @@ The first RNA-seq dataset is a data frame containing RNA-seq data from almost 10
 
 RNA sequencing (RNA-seq) data makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell, regulated by RNA synthesis, enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
 
-All expression data was $log_2$(TPM) transformed. $Log_2$ transformation is a commonly used tool to reduce skewness in data and to make it more conform to a normal distribution.Here, TPM stands for 'Transcripts per million' and refers to a method of RNA-seq normalization in which one first accounts for gene length before adjusting for sequencing depth, or count bias, in the data. A possible perk of TPM is the reduction of type I and type II errors which would otherwise falsify downstream analysis results by accounting for gene length first [@yuen2022].
+All expression data was log2(TPM) transformed. Log2 Transformation is a commonly used tool to reduce skewness in data and to make it more conform to a normal distribution. Here, TPM stands for 'Transcripts per million' and refers to a method of RNA-seq normalization in which one first accounts for gene length before adjusting for sequencing depth, or count bias, in the data. A possible perk of TPM is the reduction of type I and type II errors which would otherwise falsify downstream analysis results by accounting for gene length first [@yuen2022].
 
 ## Overview of used packages
 
