@@ -47,7 +47,7 @@ names(Values) = rownames(ranked_gl)
 
 
 
-all_genesets =  readRDS("C:/Users/felip/Desktop/all_final_genesets(C5).RDS")
+all_genesets =  readRDS("./data/all_final_genesets(C5).RDS")
 
 #gsea
 GSEA_p_all = fgsea(pathways = all_genesets, stats = Values, scoreType = "pos", minSize =5, maxSize = 500)

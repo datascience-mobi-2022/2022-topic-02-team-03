@@ -158,48 +158,26 @@ col = c("gray0", "firebrick3", "deepskyblue", "gray75") # choosing the colours
 ###plots
 #1 ) normaler v.plot
 plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label = name))+
-  geom_point(size = .2)+
+  geom_point(size = 2, alpha = .5)+
   labs(title = paste(pw), x = "fc", y = "pwilc")+
   scale_color_manual(name = "",
                      breaks = c(pw, "up", "down", "not sign."),
                      labels = c(hits, percent.up, percent.down, ns),
                      values = col )+ 
   geom_point(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = 1)+
+             aes(y = abs(spval), diff.mean, color = pathway), size = 4)+
   geom_text(data = selection2,
              aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
+  geom_text_repel(data = selection,
+                  aes(fc, -log10(p.wilc), label = rownames(selection)), size = 5, hjust = -.01, col = "black")
 
-#2 ) singed volcano plot
-plot.s = ggplot(luad.info, aes(y = spval, diff.mean, colour = expr))+
-  geom_point(size = .5)+
-  labs(title = paste(pw), x = "fc", y = "spval")+
-  scale_color_manual(name = "",
-                     breaks = c(pw, "up", "down", "not sign."),
-                     labels = c(hits, percent.up, percent.down, ns),
-                     values = col )+ 
-  geom_point(data = selection,
-             aes(y = spval, diff.mean, color = pathway), size = 2)+
-  geom_text(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
-#3 ) gradient plot
-plot.g = ggplot(luad.info, aes(spval, abs(diff.mean), colour = expr))+
-  geom_point(size = .5)+
-  labs(title = paste(pw), x = "fc", y = "spval")+
-  scale_color_manual(name = "",
-                     breaks = c(pw, "up", "down", "not sign."),
-                     labels = c(hits, percent.up, percent.down, ns),
-                     values = col )+ 
-  geom_point(data = selection,
-             aes(spval, abs(diff.mean), color = pathway), size = 2)+
-  geom_text(data = selection,
-             aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
+
 
 
 
 ###saving
 pw.v.plots[[i]] <- plot.v #save the plot in the list element
-pw.sv.plots[[i]] <- plot.s
-pw.grad.plots[[i]] <- plot.g
+
 message("plot saved")
 
 regulation$up[i] = round(p.up, digits = 2)
@@ -221,13 +199,10 @@ message("name saved")
 
 #rename list elements
 names(pw.v.plots) <- paste0(name)
-names(pw.sv.plots) <- paste0(name)
-names(pw.grad.plots) <- paste0(name)
+
 
 #new list object with all plots
-plots = list(pw.v.plots = pw.v.plots, 
-             pw.sv.plots = pw.sv.plots,
-             pw.grad.plots = pw.grad.plots,
+plots = list(pw.v.plots = pw.v.plots,
                description = list("1" = "vcolcano plots",
                                   "2" = "signed pvals volc plots",
                                   "3" = "gradient plots"),
