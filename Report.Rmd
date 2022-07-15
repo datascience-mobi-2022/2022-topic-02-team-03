@@ -245,7 +245,8 @@ All expression data was log2(TPM) transformed. Log2 Transformation is a commonly
 
 ## Gene Set Extraction
 
-The Molecular Signature Database (MSigDB) is a database offering a variety of annotated gene sets publicly available for analysis. The import of gene sets from MSigDB into RStudio can easily be performed using the R package "msigdbr" [@msigdbr] which allows the extraction of species-specific gene sets of the category of interest. In a final step, the prefix corresponding to the source of the gene set was removed. The resulting output was a list containing all selected gene sets with the comprising genes saved in a vector and each element named after the pathway stored in it.  This workflow was conducted to extract curated (C2) and ontology (C5 BP) gene sets which were used for focused analysis as well as pan cancer analysis. The curated gene sets that regulate the metabolism of cells were also used for comparison with known pathways deregulated in cancer cells.
+The Molecular Signature Database (MSigDB) is a database offering a variety of annotated gene sets publicly available for analysis. The import of gene sets from MSigDB into RStudio can easily be performed using the R package "msigdbr" [@msigdbr] which allows the extraction of species-specific gene sets of the category of interest. In a final step, the prefix corresponding to the source of the gene set was removed. The resulting output was a list containing all selected gene sets with the comprising genes saved in a vector and each element named after the pathway stored in it. 
+This workflow was conducted to extract curated (C2) and ontology (C5 BP) gene sets which were used for focused analysis as well as pan cancer analysis. The curated gene sets that regulate the metabolism of cells were also used for comparison with known pathways deregulated in cancer cells.
 
 ## Data cleanup on TCGA expression dataset
 
@@ -291,7 +292,12 @@ To evaluate the model the first step was to predict whether the patients of the 
 
 ## Cancer hallmark pathways
 
-By calculating the Jaccard index for each metabolism gene set to each hallmark gene set, the similarity between these pathways was measured and visualized in a heatmap (**Fig. XXX**). This highlights that there is a general low similarity between the selected pathways and only a few gene sets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
+By calculating the Jaccard index for each metabolism gene set to each hallmark gene set, the similarity between these pathways was measured and visualized in a heatmap (**Fig. XXX**). This highlights that there is a general low similarity between the selected pathways and only a few gene sets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine, aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
+
+```{r test, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Jaccard Coefficients of hallmark gene sets and metabolism gene sets.} The x-axis is defined by the given hallmark gene sets, whereas the y-axis assigned to the selected metabolism heatmap.', out.width='0.75\\linewidth'}
+
+knitr::include_graphics(".\output\2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
+```
 
 # Discussion
 
