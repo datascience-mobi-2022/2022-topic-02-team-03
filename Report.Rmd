@@ -151,6 +151,7 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 |         |                                                                  |
 |---------|------------------------------------------------------------------|
 | AML     | Acute myeloid leukemia                                           |
+| AUC     | Area under the curve                                             |
 | BRCA    | Breast cancer                                                    |
 | CALCA   |                                                                  |
 | CESC    | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
@@ -175,6 +176,7 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 | PCPG    | Pheochromocytoma and Paraganglioma                               |
 | PRAD    | Prostate adenocarcinoma                                          |
 | RNA-seq | RNA sequencing                                                   |
+| ROC     | Receiver operating characteristic                                |
 | SARC    | Sarcoma                                                          |
 | TCGA    | The Cancer Genome Atlas                                          |
 | TPM     | Transcripts per million                                          |
@@ -379,6 +381,16 @@ Based on the geneset enrichment matrix created with GSVA, a pathway enrichment h
 
 knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 ```
+
+## Regression
+
+The logistic model that was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table **(HIER VERLINKEN)** are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986 %.
+
+**!\[confusion table for prediction on test datast containing 2921 patients with 163 LUAD patients\](/Users/paulbrunner/2022-topic-02-team-03/output/5_confusion_matrix.png "Confusion table of trained logistic model"){width=40%}**
+
+For further evaluation a ROC plot was produced which enables an estimation of model performance in relation to the false-positive rate.**(HIER VERLINKEN)**. The ideal estimator would have an area under curve (AUC) of 1 and would fill out the top left corner. The trained regression model exhibits an AUC of 0.9159 and a nearly linear increase.
+
+**!\[ROC plot of the trained logistic model with a AUC value of 0.9159\](/Users/paulbrunner/2022-topic-02-team-03/output/5_aucroc_curve.png){width=40%}**
 
 # Discussion
 
