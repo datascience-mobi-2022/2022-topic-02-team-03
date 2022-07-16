@@ -95,7 +95,7 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 ## Biological Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases \[@wang2020\] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations \[@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
+To this day, lung cancer is the leading cause of cancer death worldwide \[@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases \[@wang2020\] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations \[@hanahan2011; @peng2018\]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
 
 ## The Pan Cancer Project
 
@@ -383,7 +383,7 @@ knitr::include_graphics("./output/4_barplot_ranked_expression_of_hallmark_and_me
 
 ```
 
-### GSVA heatmap
+### GSVA
 
 To visualize the pathway expression of each individual sample for normal and tumor tissue, a heatmap was created using the results of GSVA (\textbf{Fig. \ref{fig:heatmap GSVA}}). Two recognizable groups with different expression patterns have formed. The expression of each pathway is color coded, from high expression rate (red) to low expression rate (blue). The left half shows only tumor samples while the right half shows almost exclusively samples belonging to healthy tissue, with a few exceptions framed in black. This suggests that for some samples the tumor tissue has phenotypic manifestations that don't significantly differ from the overall expression patterns in normal tissue. Most pathways however present with a significantly different expression between tumor and normal tissue.
 
@@ -396,6 +396,38 @@ The pathways marked in blue are connected to immune response, for example „T-h
 knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")
 
 ```
+
+### GSVA volcano plot
+
+The expression of the pathways selected in the previous step is vizualized in the volcano plot shown in **Fig.XXX**. The higher the foldchange, the greater the difference in expression between tumor and normal tissue. Greater -log10(p value) corresponds to higher significance of this difference.
+
+As already seen in the heatmap **Fig. XXX** the pathways with the highest foldchanges and pvalues are those who relate to DNA replication and cell cycle and are therefore strongly upregulated. Pathways with less significant upregulation stand in relation to ribosome metabolism, such as ribosome assembly and ribosomal large subunit biogenesis.
+
+The pathways involved in immune response such as mast cell activation, are significantly downregulated, while the T-helper 17 pathway is less significantly downregulated.
+
+Other noteworthy pathways that are strongly downregulated include the cellular response to lipoprotein particle stimulus and the regulation of renal system process.
+
+\`\`\`{r volcano GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{volcano plot comparing pathway expression in normal and tumor tissue } The -log10 of the p values are plotted against the log2(foldchange) of each pathway. The regulation is colored accordingly)).', out.width='0.75\\\\linewidth'}
+
+knitr::include_graphics("./output/4_gsva_volcano_plot_tvn")
+
+\`\`\`
+
+**Schreib hier evtl 1 Satz nach welchem Kriterium die PWs ausgesucht wurden (ich kenn die Fig ja nt)** In **FigXXX**, genes of selected pathways are highlighted in black and some with particularly high p values are labeled. The red colored genes are all genes in our cleaned TCGA tumor normal dataset that are significantly over expressed over all patients in tumor tissue compared to normal tissue. The blue colored genes imply the opposite. In gray, one can see insignificantly up or downregulated genes. All genes mentioned in this section will be discussed in more detail in the discussion.
+
+Looking at the pathway of DNA replication initiation with 36 genes, overregulated genes like ORC and CDC6 seem to play an important role in this process. Over 60% of the genes are overexpressed and less than 2% are under expressed. Furthermore, PLK1 is significantly overexpressed in the metaphase anaphase transition of cell cycle. Out of 63 genes, over 50% are overexpressed and just under 10% under expressed. In both pathways, as already described in the section above, a clear up regulation of the pathways in tumor tissue can be seen in the gene expression patterns.
+
+Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen on the left side of **FigXXX**.
+
+Out of the 33 genes of the renal system regulation pathway, approximately 51% are downregulated and only 3% are significantly upregulated.
+
+A similar gene distribution can be observed in the pathway pertaining to lipoprotein particle stimulus.
+
+\`\`\`{r volcano pathways, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{volcano plot showing gene expression for selected pathways} The plots show the number of genes in each pathway and the percentage of significantly over expressed (red), significantly under expressed (blue) and not significant diferentially expressed genes (gray). The differential expression referes to the change of mean expression over all patients for each gene form normal to tumor tissue. The selected pathways were: dna replication initiation (top left), metaphase anaphase transition of cell cycle (bottom left), regulation of renal system process (top right) and cellular response to lipoprotein particles (bottom right) )).', out.width='0.75\\\\linewidth'}
+
+knitr::include_graphics("./output/4_volcano_2most_up_2most_down_pws")
+
+\`\`\`
 
 ## Pan cancer analysis
 
