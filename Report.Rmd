@@ -148,18 +148,33 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 # Abbreviations
 
-|         |                                               |
-|---------|-----------------------------------------------|
-| GSEA    | Gene Set Enrichment Analysis                  |
-| GSVA    | Gene Set Variation Analysis                   |
-| LUAD    | Lung adenocarcinoma                           |
-| MSigDB  | Molecular Signature Database                  |
-| PC      | Principal component                           |
-| PCA     | Principal Component Analysis                  |
-| RNA-seq | RNA sequencing                                |
-| TCGA    | The Cancer Genome Atlas                       |
-| TPM     | Transcripts per million                       |
-| UMAP    | Uniform Manifold Approximation and Projection |
+|         |                                                                  |
+|---------|------------------------------------------------------------------|
+| AML     |                                                                  |
+| BRCA    | Breast cancer                                                    |
+| CESC    | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
+| DLBC    | Lymphoid Neoplasm Diffuse Large B-cell Lymphoma                  |
+| EMT     |                                                                  |
+| GBM     | Glioblastoma multiformae                                         |
+| GSEA    | Gene Set Enrichment Analysis                                     |
+| GSVA    | Gene Set Variation Analysis                                      |
+| KICH    | Kidney chromophobe                                               |
+| KIRC    | Kidney renal clear-cell carcinoma                                |
+| KIRP    | Kidney renal papillary cell carcinoma                            |
+| LGG     | Low grade glioma                                                 |
+| LIHC    | Liver hepatocellular carcinoma                                   |
+| LUAD    | Lung adenocarcinoma                                              |
+| MSigDB  | Molecular Signature Database                                     |
+| PAAD    |                                                                  |
+| PC      | Principal component                                              |
+| PCA     | Principal Component Analysis                                     |
+| PCPG    | Pheochromocytoma and Paraganglioma                               |
+| PRAD    | Prostate adenocarcinoma                                          |
+| RNA-seq | RNA sequencing                                                   |
+| TCGA    | The Cancer Genome Atlas                                          |
+| TPM     | Transcripts per million                                          |
+| UMAP    | Uniform Manifold Approximation and Projection                    |
+| UVM     | Uveal melanoma                                                   |
 
 # Methods
 
@@ -209,6 +224,8 @@ All expression data was log2(TPM) transformed. Log2 Transformation is a commonly
 | ggplot2         | visualization of results in dot plots, bar plots and box plots                             | @ggplot2           |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | ggpubr          | formatting of ggplot2-based graphs                                                         | @ggpubr            |
++-----------------+--------------------------------------------------------------------------------------------+--------------------+
+| ggrepel         | creates non-overlapping text labels for ggplot2-based graphs                               | @ggrepel           |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | grid            | implements the primitive graphical functions that underlie the ggplot2 plotting system     | @grid              |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
@@ -359,6 +376,28 @@ knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 ```
 
 # Discussion
+
+## Pan cancer analysis
+
+### Identification of clusters in gene expression data
+
+Visualization of the data after dimension reduction reveals strong clustering based on the cancer types. This indicates that cancer cells derived from certain cancer types, particularly LUAD, BRCA, LIHC, KIRP, and UVM developed a unique gene expression pattern. Due to the fact that LGG and GBM cluster together, a similar transformation of gene expression can be concluded. The latter observation is unsurprising as both tumor types are glioma.
+
+### Pathway enrichment
+
+Comparison of the clusters resulting from GSVA to the clusters based on the gene expression highlights that the cancer types cluster less accoring to their pathway regulation. This is due to the fact that GSVA entails a certain degree of loss of information. To minimize the information loss, we performed GSVA with two different geneset lists and chose the geneset list that retained the most information. Therefore, several cancer types with a unique gene expression also show a specific pathway enrichment pattern. Cancer types that remain clustered are LIHC, LGG and PCPG.
+
+By visualizing the pathway enrichment relative to the cancer type the formation of three cancer type and approximately three geneset clusters can be observed. Notably, the first cluster of cancer types show a strong downregulation of pathways relative to other cancer types.
+
+This can be explained by the fact that several cancer types can be assigned to a joint cancer class like glioma and kidney carcinomata. No higher category could be assigned to the second cluster as it showed no distinct deregulation pattern. The third and last cluster contains cancer types related to cells exhibiting a high stemness like blood forming cells and germ cells [@weissman2000].
+
+The three clusters in the pathways axis resemble cell cycle and genome regulation, regulation of different phases of metastasis, and activation of the immune response.
+
+Cell cylce and genome deregulation resembles one of the hallmarks of cancer as it is the base for tumor progression [**QUELLE**\]. By increasing the activity of cell cylce promoting pathways, cancer cells activate proliferation and cell growth. It is important to highlight that our analysis is relative to different cancer types and does not have any informative value concerning the relation to healthy cells. Accordingly, cancer types that exhibit downregulation of cell cycle pathways do not have slower proliferation than normal cells but rather have less aggressive spread than other cancer types. The first cluster of cancer types, particularly kidney cancer and prostate adenocarcinoma, result in a downregulation of these pathways. While our findings in PRAD are according to expectations \[@sakr1997\], the strong downregulation in kidney cancer is not supported by other studies. There are several subtypes of kidney cancer, for example KIRC, KIRP and KICH. KIRC indeed is a slow growing cancer but KIRP and KICH both are subtypes that show a high proliferation rate \[@li2012\]. These aberrances to other studies may result from our selection of pathways or our data cleaning which inevitably leads to loss of information. Cancer types that show a strong increase in cell cycle pathway activity are CESC and DLBC. Since CESC leads to acute mortality among woman \[@small2017], our findings are as expected and proven by further studies [@ding2020]. CESC and DLBC are highly aggressive cancer types which explains the strongly increased activity in pathways regulating the genome and cell cycle [@said2013].
+
+Metastasizing is a complex and inefficient progress due to numerous regulation mechanisms [**QUELLE\]**. Therefore, the ability of a primary cancer depends on its location and molecular signature. As part of the analysis of metastatic landscapes, Budczies *et al.* found melanoma, breast cancer and kidney cancer to feature a high metastatic potential. However, cancer cells deriving from the liver and sexual organs show the lowest rates of metastasis \[@budczies2015\]. Our findings confirm this research. BRCA, SKCM, and especially KIRC result in upregulated mestastasis genesets in comparison to other cancer types. In addition, the high invasion and metastasis rate of SKCM is supported by further studies \[@huang2022\]. Secondly, our analysis revealed downregulated metastatic pathways in LIHC, PRAD, OV, CESC and UCEC which aligns with insufficient invasiveness in liver and reproductive cancers \[@budczies2015\]. Moreover, PAAD resulted in the most severe upregulation of metastasis related pathways which is supported by several studies\[@ayres2019\]. Epithelial mesenchymal transition (EMT) is an essential process of metastasis formation by enabling the cell to circulate through vessels \[@kalluri2009\]. Therefore, the upregulation of pathways involved in EMT in PAAD matches our expectations \[@rasheed2010]. In contrary, LAML shows a significantly low enrichment of pathways inducing metastasis. At first, this seems paradoxical as AML is highly invasive because it is not categorized as a solid tumor [@whiteley2021]. By nature myeloid cells possess a high motility and the ability to circulate through vessels. Consequently, transformed myeloid cells do not need to upregulate processes that enable cell migration or inhibit anoikis \[@trendowski2015\].
+
+While there is no significant deregulation of immune activation in the second and third cancer type clusters, cancer types of the first cluster transform a severe downregulation. This clustering is according to our expectations as cancer types of each cluster can be categorized by immune-infiltration CpG markers [@wang2020\]. As a result, these cancer types inhibit immune cell infiltration hence have a low immunogenicity \[@smyth2006\]. Notably, even though UCS is assigned to cluster two, it results in a strongly decreased immune pathway activity. This is confirmed by first studies \[@ali2020]. Unfortunately, its rareness entails a small research base for analysis. As part of cluster one, glioma like GBM and LGG cause a decline in pathway activity leading to a highly immunosuppressive tumor-microenvirnment [@guan2018]. PCPG is a solid tumor and thus develops a tumor microenvironment that surpesses immune cell infiltration. Furthermore, transformed cells lack leukocyte infiltration enabling tumor progression [@fishbein2017]. On the other hand DLBC and HNSC are examples for cancer types upregulating immune infiltration which seems to be contradictory at first. However, inflammation can support the tumor-mircoenvironment because it promotes tumorigenesis and tumor progression by supplying essential molecules like growth and survival factors. Tamma *et al.* observed this phenomenon in DLBC [@tamma2020]. Additionally, HNSC increasing inflammatory pathways is verified by the studies of He *et al.* [@he2022].
 
 # Outlook
 
