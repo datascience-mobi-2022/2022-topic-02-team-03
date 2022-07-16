@@ -361,6 +361,36 @@ By calculating the Jaccard index for each metabolism geneset to each hallmark ge
 knitr::include_graphics("output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
 ```
 
+## Focused analysis
+
+### GSEA
+
+In order to illustrate which pathways of the hallmark and metabolism genesets are most up or down regulated, a barplot was created. The genes crucial to the mean expression of a pathway are the ones that are in the leading edge of the GSEA result.
+
+Overall we observed more upregulated than downregulated pathways. Among the upregulated, Meta_HIF1 and the ascorbate and alderate metabolism pathways presented with the highest mean. In addition, some pathways associated with nucleotide, amino acid, and sugar metabolism also seem to be upregulated. Specific amino acids whose synthesis appears to be over expressed include methionine and cysteine. Pathways pertaining to telomerase activity and cell growth were also significantly upregulated.
+
+Downregulated pathways are mainly linked to the immune response but also to the metabolism of specific amino acids and fatty acids, such as histidine or arachidonic acid. Pathways that affect the cytochrome p450 system seem to be downregulated. The two most significantly downregulated pathways regulate linolenic acid and nitrogen metabolism.
+
+\`\`\`{r GSEA barplot, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{Barplot for the mean regultion of hallmark gene sets and metabolism gene sets.} The pathways are sorted by their mean expression and can be seen on the y axis, while the mean expression is plotted on the x axis. Furthermore each pathway is coloured by the regultion state, meaning the genes contained in the leading edge define weather the pathway is mostly or only upregulated and vice versa.', out.width='0.75\\\\linewidth'}
+
+knitr::include_graphics("./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png")
+
+\`\`\`
+
+### GSVA heatmap
+
+To visualize the pathway expression of each individual sample for normal and tumor tissue, a heatmap was created using the results of GSVA. Two recognizable groups with different expression patterns have formed. The expression of each pathway is color coded, from high expression rate (red) to low expression rate (blue). The left half shows only tumor samples, while the right half shows almost exclusively samples belonging to healthy tissue, with a few exceptions framed in black. This suggests that for some samples the tumor tissue has phenotypic manifestations that don't significantly differ from the overall expression patterns in normal tissue. Most pathways however present with a significantly different expression between tumor and normal tissue.
+
+Strong differences can be seen in the pathways marked in green. Many of them are associated with DNA replication or chromosome distribution during mitosis. Notable pathways include "DNA dependent DNA replication", "chromosome separation", and „metaphase anaphase transition off cell cycle". Many tumor samples present with a high expression rate of these pathways, whilst normal samples present with a low expression. This suggests that the aforementioned pathways play an important role in the differentiation between normal and tumor tissue.
+
+The pathways marked in blue are connected to immune response, for example „T-helper 17 type immune response ", „regulation of B-cell differentiation " or „dendritic cell migration". In this case, some tumor samples are upregulated, while most are downregulated. In normal tissue, the expression of most pathways is clearly upregulated, with a few exceptions near the right margin.
+
+\*\*\`\`\`{r heatmap GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{heatmap for comparing pathway expression in normal and tumor tissue } The heatmap shows the GSVA results for the small TCGA dataset. On the x axis one can see the normal and tumor samples, while the y axis shows the pathways with the highest standard deviation. The expression of each pathway is color-coded, from high expression (red), to low expression (blue).', out.width='0.75\\\\linewidth'}
+
+knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")\*\*
+
+\`\`\`
+
 ## Pan cancer analysis
 
 ### Identification of clusters in gene expression data
@@ -429,6 +459,8 @@ Cell cylce and genome deregulation resembles one of the hallmarks of cancer as i
 Metastasizing is a complex and inefficient progress due to numerous regulation mechanisms \[**QUELLE\]**. Therefore, the ability of a primary cancer depends on its location and molecular signature. As part of the analysis of metastatic landscapes, Budczies *et al.* found melanoma, breast cancer and kidney cancer to feature a high metastatic potential. However, cancer cells deriving from the liver and sexual organs show the lowest rates of metastasis \[ @budczies2015\]. Our findings confirm this research. BRCA, SKCM, and especially KIRC result in upregulated mestastasis genesets in comparison to other cancer types. In addition, the high invasion and metastasis rate of SKCM is supported by further studies \[@huang2022\]. Secondly, our analysis revealed downregulated metastatic pathways in LIHC, PRAD, OV, CESC and UCEC which aligns with insufficient invasiveness in liver and reproductive cancers \[@budczies2015\]. Moreover, PAAD resulted in the most severe upregulation of metastasis related pathways which is supported by several studies\[@ayres2019\]. Epithelial mesenchymal transition (EMT) is an essential process of metastasis formation by enabling the cell to circulate through vessels \[@kalluri2009\]. Therefore, the upregulation of pathways involved in EMT in PAAD matches our expectations \[@rasheed2010\]. In contrary, LAML shows a significantly low enrichment of pathways inducing metastasis. At first, this seems paradoxical as AML is highly invasive because it is not categorized as a solid tumor [@whiteley2021]. By nature myeloid cells possess a high motility and the ability to circulate through vessels. Consequently, transformed myeloid cells do not need to upregulate processes that enable cell migration or inhibit anoikis \[@trendowski2015\].
 
 While there is no significant deregulation of immune activation in the second and third cancer type clusters, cancer types of the first cluster transform a severe downregulation. This clustering is according to our expectations as cancer types of each cluster can be categorized by immune-infiltration CpG markers [@wang2020\]. As a result, these cancer types inhibit immune cell infiltration hence have a low immunogenicity \[@smyth2006]. Notably, even though UCS is assigned to cluster two, it results in a strongly decreased immune pathway activity. This is confirmed by first studies [@ali2020]. Unfortunately, its rareness entails a small research base for analysis. As part of cluster one, glioma like GBM and LGG cause a decline in pathway activity leading to a highly immunosuppressive tumor-microenvirnment [@guan2018]. PCPG is a solid tumor and thus develops a tumor microenvironment that surpesses immune cell infiltration. Furthermore, transformed cells lack leukocyte infiltration enabling tumor progression [@fishbein2017]. On the other hand DLBC and HNSC are examples for cancer types upregulating immune infiltration which seems to be contradictory at first. However, inflammation can support the tumor-mircoenvironment because it promotes tumorigenesis and tumor progression by supplying essential molecules like growth and survival factors. Tamma *et al.* observed this phenomenon in DLBC [@tamma2020]. Additionally, HNSC increasing inflammatory pathways is verified by the studies of He *et al.* [@he2022].
+
+Overall, our results show great compliance with previous studies. Nevertheless, some findings do not conform to expectations as they imply a different transformation of some cancer types relative to their actual behaviour. Possible reasons for these discrepancies are the chosen pathways and the general loss of information during conduction of GSVA.
 
 ### Geneset enrichment comparison between LUAD and other cancer types
 
