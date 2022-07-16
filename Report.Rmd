@@ -168,7 +168,7 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 | GBM     | Glioblastoma multiformae                                         |
 | GSEA    | Gene Set Enrichment Analysis                                     |
 | GSVA    | Gene Set Variation Analysis                                      |
-| HIF1α   |                                                                  |
+| HIF1a   |                                                                  |
 | INSL4   | Gene encoding insulin-like 4 protein                             |
 | KICH    | Kidney chromophobe                                               |
 | KIRC    | Kidney renal clear-cell carcinoma                                |
@@ -401,35 +401,35 @@ knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")
 
 ### GSVA volcano plot
 
-The expression of the pathways selected in the previous step is vizualized in the volcano plot shown in **Fig.XXX**. The higher the foldchange, the greater the difference in expression between tumor and normal tissue. Greater -log10(p value) corresponds to higher significance of this difference.
+The expression of the pathways selected in the previous step is visualized in the volcano plot shown in \textbf{Fig. \ref{fig:volcano GSVA}}. The higher the foldchange, the greater the difference in expression between tumor and normal tissue. Greater -log10(p value) corresponds to higher significance of this difference.
 
-As already seen in the heatmap **Fig. XXX** the pathways with the highest foldchanges and pvalues are those who relate to DNA replication and cell cycle and are therefore strongly upregulated. Pathways with less significant upregulation stand in relation to ribosome metabolism, such as ribosome assembly and ribosomal large subunit biogenesis.
+As already seen in the heatmap \textbf{Fig. \ref{fig:heatmap GSVA}} the pathways with the highest foldchanges and pvalues are those who relate to DNA replication and cell cycle and are therefore strongly upregulated. Pathways with less significant upregulation stand in relation to ribosome metabolism, such as ribosome assembly and ribosomal large subunit biogenesis.
 
 The pathways involved in immune response such as mast cell activation, are significantly downregulated, while the T-helper 17 pathway is less significantly downregulated.
 
 Other noteworthy pathways that are strongly downregulated include the cellular response to lipoprotein particle stimulus and the regulation of renal system process.
 
-\`\`\`{r volcano GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{volcano plot comparing pathway expression in normal and tumor tissue } The -log10 of the p values are plotted against the log2(foldchange) of each pathway. The regulation is colored accordingly)).', out.width='0.75\\\\linewidth'}
+```{r volcano GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{volcano plot comparing pathway expression in normal and tumor tissue } The -log10 of the p values are plotted against the log2(foldchange) of each pathway. The regulation is colored accordingly)).', out.width='0.75\\linewidth'}
 
-knitr::include_graphics("./output/4_gsva_volcano_plot_tvn")
+knitr::include_graphics("./output/4_gsva_volcano_plot_tvn.png")
 
-\`\`\`
+```
 
-**Schreib hier evtl 1 Satz nach welchem Kriterium die PWs ausgesucht wurden (ich kenn die Fig ja nt)** In **FigXXX**, genes of selected pathways are highlighted in black and some with particularly high p values are labeled. The red colored genes are all genes in our cleaned TCGA tumor normal dataset that are significantly over expressed over all patients in tumor tissue compared to normal tissue. The blue colored genes imply the opposite. In gray, one can see insignificantly up or downregulated genes. All genes mentioned in this section will be discussed in more detail in the discussion.
+**Schreib hier evtl 1 Satz nach welchem Kriterium die PWs ausgesucht wurden (ich kenn die Fig ja nt)** In \textbf{Fig. \ref{fig:volcano pathways}}, genes of selected pathways are highlighted in black and some with particularly high p values are labeled. The red colored genes are all genes in our cleaned TCGA tumor normal dataset that are significantly over expressed over all patients in tumor tissue compared to normal tissue. The blue colored genes imply the opposite. In gray, one can see insignificantly up or downregulated genes. All genes mentioned in this section will be discussed in more detail in the discussion.
 
 Looking at the pathway of DNA replication initiation with 36 genes, overregulated genes like ORC and CDC6 seem to play an important role in this process. Over 60% of the genes are overexpressed and less than 2% are under expressed. Furthermore, PLK1 is significantly overexpressed in the metaphase anaphase transition of cell cycle. Out of 63 genes, over 50% are overexpressed and just under 10% under expressed. In both pathways, as already described in the section above, a clear up regulation of the pathways in tumor tissue can be seen in the gene expression patterns.
 
-Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen on the left side of **FigXXX**.
+Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen on the left side of \textbf{Fig. \ref{fig:volcano pathways}}.
 
 Out of the 33 genes of the renal system regulation pathway, approximately 51% are downregulated and only 3% are significantly upregulated.
 
 A similar gene distribution can be observed in the pathway pertaining to lipoprotein particle stimulus.
 
-\`\`\`{r volcano pathways, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{volcano plot showing gene expression for selected pathways} The plots show the number of genes in each pathway and the percentage of significantly over expressed (red), significantly under expressed (blue) and not significant diferentially expressed genes (gray). The differential expression referes to the change of mean expression over all patients for each gene form normal to tumor tissue. The selected pathways were: dna replication initiation (top left), metaphase anaphase transition of cell cycle (bottom left), regulation of renal system process (top right) and cellular response to lipoprotein particles (bottom right) )).', out.width='0.75\\\\linewidth'}
+```{r volcano pathways, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{volcano plot showing gene expression for selected pathways} The plots show the number of genes in each pathway and the percentage of significantly over expressed (red), significantly under expressed (blue) and not significant diferentially expressed genes (gray). The differential expression referes to the change of mean expression over all patients for each gene form normal to tumor tissue. The selected pathways were: dna replication initiation (top left), metaphase anaphase transition of cell cycle (bottom left), regulation of renal system process (top right) and cellular response to lipoprotein particles (bottom right) )).', out.width='0.75\\linewidth'}
 
-knitr::include_graphics("./output/4_volcano_2most_up_2most_down_pws")
+knitr::include_graphics("./output/4_volcano_2most_up_2most_down_pws.png")
 
-\`\`\`
+```
 
 ## Pan cancer analysis
 
@@ -460,7 +460,7 @@ Based on the geneset enrichment matrix created with GSVA, a pathway enrichment h
 knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 ```
 
-\pagebreak
+
 
 ### Geneset enrichment comparison between LUAD and other cancer types
 
@@ -504,25 +504,25 @@ knitr::include_graphics("./output/5_aucroc_curve_biggertitle.png")
 
 ### GSEA
 
-Literature confirms that the hypoxia-inducible factor-1α (HIF1α) plays an important role in tumor progression and metastasis \\\[\@Weiwei2013\\. Expression of this factor is much higher in lung cancer tissue than in normal tissue, which can also be seen in metastatic tissues\\\[\@Yang2016\\.
+Literature confirms that the hypoxia-inducible factor-1 alpha (HIF1 alpha) plays an important role in tumor progression and metastasis [@Weiwei2013]. Expression of this factor is much higher in lung cancer tissue than in normal tissue, which can also be seen in metastatic tissues [@Yang2016].
 
-Pathways linked to nucleotide, amino acid and sugar metabolism like ascorbate and aldarate metabolism are generally enriched in tumor tissue \\\[\@Araujo2018\\\].
+Pathways linked to nucleotide, amino acid and sugar metabolism like ascorbate and aldarate metabolism are generally enriched in tumor tissue [@Araujo2018].
 
-Adenocarcinoma cell samples are often associated with high telomerase activity and with higher immortality \\\[\@Hiyama1995\\\].
+Adenocarcinoma cell samples are often associated with high telomerase activity and with higher immortality [@Hiyama1995].
 
-As seen in (**FigXXX**) CYP is downregulated in LUAD. This is coherent with our expectations as cytochrome p450 (CYP) is known to metabolize carcinogens , thus inactivating them \\\[\@Oyama2012\\\]. However, it is not mentioned if the expression rate is significantly higher or lower than in normal cells. One factor that could influence the result seen in **FigXXX** is that only 58 samples were available.
+As seen in (**FigXXX**) CYP is downregulated in LUAD. This is coherent with our expectations as cytochrome p450 (CYP) is known to metabolize carcinogens , thus inactivating them [@Oyama2012]. However, it is not mentioned if the expression rate is significantly higher or lower than in normal cells. One factor that could influence the result seen in **FigXXX** is that only 58 samples were available.
 
-Gamma linolenic acid suppresses HIF1α induced proliferation and invasion of non-small cell lung cancer cells through inhibition of HIF1α \\\[\@Wang2020\\\]. As previously mentioned HIF1α induces proliferation therefore it downregulation of its inhibitor conforms to our expectations.
+Gamma linolenic acid suppresses HIF1 alpha induced proliferation and invasion of non-small cell lung cancer cells through inhibition of HIF1 alpha [@Wang2020]. As previously mentioned HIF1a induces proliferation therefore it downregulation of its inhibitor conforms to our expectations.
 
 ### GSVA
 
-As indicated in the heatmap (**FigXXX**) and the volcano plot (**FigXXX**), pathways linked to DNA replication and cell cycle regulation were strongly overexpressed in tumor tissue compared to normal tissue. ORC (Origin Recognition Complex) binds to chromatin, marking the location for replication \\\[ \@ Feng2021\\\]. Furthermore ORC is linked to CDC6 thus being activated and replication can be induced. Research has also shown, that the expression of ORC plays a significant role in the development of lung cancer \\\[\@deng2021systemic \\\]. This confirms the results seen in **FigXXX** (top left).
+As indicated in the heatmap (**FigXXX**) and the volcano plot (**FigXXX**), pathways linked to DNA replication and cell cycle regulation were strongly overexpressed in tumor tissue compared to normal tissue. ORC (Origin Recognition Complex) binds to chromatin, marking the location for replication [@ Feng2021. Furthermore ORC is linked to CDC6 thus being activated and replication can be induced. Research has also shown, that the expression of ORC plays a significant role in the development of lung cancer [@deng2021systemic]. This confirms the results seen in **FigXXX** (top left).
 
-Immune response mechanisms like T-helper 17 type immune response were partly up and partly downregulated in tumor tissue, which can be seen in **Fig heatmap**. Overall, this circumstance lead to immune mechanisms to not be significantly downregulated as seen in **Fig volcano gsva**. IL-17--producing CD4 helper T cells (Th17 cells) play a crucial role in promoting chronic tissue inflammation which has often been linked to the development of cancer \\\[ \@Chang2014\\\]. Further research showed that the Th17 function may vary according to cancer type, location, and stage of disease \\\[\@Wilke2011\\\]. This suggests that the expression rate of the **named pathway** can vary between samples.
+Immune response mechanisms like T-helper 17 type immune response were partly up and partly downregulated in tumor tissue, which can be seen in **Fig heatmap**. Overall, this circumstance lead to immune mechanisms to not be significantly downregulated as seen in **Fig volcano gsva**. IL-17--producing CD4 helper T cells (Th17 cells) play a crucial role in promoting chronic tissue inflammation which has often been linked to the development of cancer [@Chang2014]. Further research showed that the Th17 function may vary according to cancer type, location, and stage of disease [@Wilke2011]. This suggests that the expression rate of the **named pathway** can vary between samples.
 
-Looking at the down regulated pathways, the renal system shows particularly low expression rate of AGTR1 and EDNRB **Fig** (top right). The renin-angiotensin system (RAS) plays an important role in lung cancer \\\[ \@Xiong2021\\\]. Furthermore the angiotensin II receptor 1 (AGTR1) is part of the RAS system in the kidney and was found to be lowly expressed in most examined tumors, including in lung cancer. Another research group found, that the endothelin receptor type B (EDNRB) inhibited proliferation and migration of LUAD cells and was lowly expressed in LUAD patients \\\[\@Wei2020\\\]. This leads to higher proliferation and migration rates, which are cancer hallmarks.
+Looking at the down regulated pathways, the renal system shows particularly low expression rate of AGTR1 and EDNRB **Fig** (top right). The renin-angiotensin system (RAS) plays an important role in lung cancer [@Xiong2021]. Furthermore the angiotensin II receptor 1 (AGTR1) is part of the RAS system in the kidney and was found to be lowly expressed in most examined tumors, including in lung cancer. Another research group found, that the endothelin receptor type B (EDNRB) inhibited proliferation and migration of LUAD cells and was lowly expressed in LUAD patients [@Wei2020]. This leads to higher proliferation and migration rates, which are cancer hallmarks.
 
-The results indicate low cellular response to LDL particles in tumor tissue samples. As seen in **Fig**, peroxisome proliferator-activated receptor gamma (PPAR<i>γ</i>) is significantly downregulated. PPAR<i>γ</i> is proven to be involved in inhibition of development of primary tumors and metastases formation in lung cancer and may also function as a tumor suppressor \\\[\@Aravind2016\\\]. Moreover CD36 has different expression rates at different cancer stages. CD36 expression is invariably low in the *in situ* stage but rises when cells begin to metastasize \\\[\@Wang2019\\\].
+The results indicate low cellular response to LDL particles in tumor tissue samples. As seen in **Fig**, peroxisome proliferator-activated receptor gamma (PPAR<i>gamma</i>) is significantly downregulated. PPAR<i>gamma</i> is proven to be involved in inhibition of development of primary tumors and metastases formation in lung cancer and may also function as a tumor suppressor [@Aravind2016]. Moreover CD36 has different expression rates at different cancer stages. CD36 expression is invariably low in the *in situ* stage but rises when cells begin to metastasize [@Wang2019].
 
 ## Pan Cancer Analysis
 
@@ -574,7 +574,7 @@ It was shown that the two clusters found do differ in very specific aspects of b
 
 ## Regression
 
-Since LUAD patients clustered clearly throughout the UMAP plot before, we expected to be able to built a rather robust logistic regression to differentiate between LUAD and non-LUAD patients. This expectation was further fueled by the LUAD patients also clustering during quality control using only the genes we chose as our explaining variables (APPENDIX). The confusion table that was acquired from predicting values in the testing dataset shows a low amount false-positives and a high number of true-negatives. The model seems to be able to recognize clear non-LUAD patients fairly easily. However there are 27 false-negatives, which means that 16.6 % of all LUAD patients have not been labelled right. The reason for those false-negatives could be the fact that while LUAD patients show a clear cluster there are some non-LUAD patients in the same cluster. The patients that are close to these other cancer types are at risk of wrongfully being labelled as the neighbouring cancer type, as it is shown in the quality control plot (APPENDIX). Nevertheless due to the high amount of patients in general (2921 total patients in the testing dataset) the accuracy of 98.6 % shows a rather reliable model. The models performance is further underlined by the ROC curve that was created during analysis. Generally the further the curve protrudes into the top left corner, the better the model is. In this case the ROC curve shows a steep progression at first and then inclines linearly. The area under curve of 0.9159 ranks this model as reliable, as generally AUC to 1 are regarded as good [@narkhede2018understanding]. In conclusion this model could be used to reduce the amount of genes that have to be screened by RNA-seq in order to diagnose a patient with LUAD. However there still is potential to differentiate between more cancer types by using a multinomial logistic regression. Additionally neural-networks have been shown to be a more reliable and functional alternative to logistic regression. Way et al. even showed this possible solution on the same TCGA dataset [@way2018machine].
+Since LUAD patients clustered clearly throughout the UMAP plot before, we expected to be able to built a rather robust logistic regression to differentiate between LUAD and non-LUAD patients. This expectation was further fueled by the LUAD patients also clustering during quality control using only the genes we chose as our explaining variables (\textbf{Fig. \ref{fig:appendix_regressionqc1}}). The confusion table that was acquired from predicting values in the testing dataset shows a low amount false-positives and a high number of true-negatives. The model seems to be able to recognize clear non-LUAD patients fairly easily. However there are 27 false-negatives, which means that 16.6 % of all LUAD patients have not been labelled right. The reason for those false-negatives could be the fact that while LUAD patients show a clear cluster there are some non-LUAD patients in the same cluster. The patients that are close to these other cancer types are at risk of wrongfully being labelled as the neighbouring cancer type, as it is shown in the quality control plot (\textbf{Fig. \ref{fig:appendix_regressionqc2}}). Nevertheless due to the high amount of patients in general (2921 total patients in the testing dataset) the accuracy of 98.6 % shows a rather reliable model. The models performance is further underlined by the ROC curve that was created during analysis. Generally the further the curve protrudes into the top left corner, the better the model is. In this case the ROC curve shows a steep progression at first and then inclines linearly. The area under curve of 0.9159 ranks this model as reliable, as generally AUC to 1 are regarded as good [@narkhede2018understanding]. In conclusion this model could be used to reduce the amount of genes that have to be screened by RNA-seq in order to diagnose a patient with LUAD. However there still is potential to differentiate between more cancer types by using a multinomial logistic regression. Additionally neural-networks have been shown to be a more reliable and functional alternative to logistic regression. Way et al. even showed this possible solution on the same TCGA dataset [@way2018machine].
 
 # Outlook
 
