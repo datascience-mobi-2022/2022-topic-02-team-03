@@ -79,7 +79,7 @@ rm(i, j, j_value)
 Visualizing the similarity using a heatmap:
 
 ```{r}
-pheatmap(Jaccard_coefficients, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", angle_col = "315", fontsize_row = 5.25, fontsize_col = 6)
+pheatmap(Jaccard_coefficients, color = colorRampPalette(brewer.pal(n = 7, name ="PuBu"))(100), main = "Jaccard Coefficients of hallmark genesets and metabolism genesets", angle_col = "315", fontsize_row = 7.5, fontsize_col = 8)
 ```
 
 Calculating the Jaccard-Coefficient for the metabolism genesets to each other:

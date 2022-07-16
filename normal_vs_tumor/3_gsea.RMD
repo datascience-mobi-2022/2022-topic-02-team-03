@@ -49,6 +49,7 @@ library("gridExtra")
 library(gtools)
 library(parallel)
 library(grid)
+library(ggrepel)
 
 LUAD_tumor_vs_norm_clean <- readRDS("./data/LUAD_tumor_vs_norm_clean.RDS")
 luad.info = LUAD_tumor_vs_norm_clean[["infomatrix"]]
@@ -107,15 +108,16 @@ regulation = data.frame(up = c(1:z),
                         not_sign = c(1:z),
                         number_of_genes = c(1:z))
 
+x = which(GSEA_p$pathway == "METABOLISM_OF_XENOBIOTICS_BY_CYTOCHROME_P450")
 
 for(i in 1:z){
   # select genes from one pwathway
-x = i # choose pathway by position
+x =  which(GSEA_p$pathway == "METABOLISM_OF_XENOBIOTICS_BY_CYTOCHROME_P450")# choose pathway by position
 
-pw = names(genesets$genesets[x])
+pw = (GSEA_p$pathway[x])
 pw
 
-pw.genes = unlist(genesets$genesets[x], use.names = F)#genes in the pathway that are at the leading edge
+pw.genes = unlist(GSEA_p$leadingEdge[x], use.names = F)#genes in the pathway that are at the leading edge
 genes = luad.info$name #all genes
 
 positions = sort(match(pw.genes, genes))#compare to get positions
@@ -166,10 +168,11 @@ plot.v <- ggplot(luad.info, aes(y = abs(spval), diff.mean, colour = expr, label 
                      values = col )+ 
   geom_point(data = selection,
              aes(y = abs(spval), diff.mean, color = pathway), size = 4)+
+  geom_text_repel(data = selection,
+                  aes(diff.mean, abs(spval), label = rownames(selection)),
+                  size = 5, hjust = -.01, col = "black")
   geom_text(data = selection2,
              aes(y = abs(spval), diff.mean, color = pathway), size = 4, hjust = -.3)
-  geom_text_repel(data = selection,
-                  aes(fc, -log10(p.wilc), label = rownames(selection)), size = 5, hjust = -.01, col = "black")
 
 
 
