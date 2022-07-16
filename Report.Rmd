@@ -382,6 +382,20 @@ Based on the geneset enrichment matrix created with GSVA, a pathway enrichment h
 knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 ```
 
+### Geneset enrichment comparison between LUAD and other cancer types
+
+The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The volcano plot **(HIER NUMMER EINFÜGEN)** helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients. It shows the log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the Wilcoxon test.
+
+**!\[Volcano plot for geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset, dotted lines indicating the alpha value and foldchange values of -1 and 1\](/Users/paulbrunner/2022-topic-02-team-03/output/3_volcano_plot_gsva_luad_vs_rest.png){width=85%}**
+
+The volcano plot shows several differently expressed pathways in LUAD. The majority of them are upregulated. Most notably, a group of pathways related to inflammation and immune activation show a significant increase in activity in LUAD. Additionally, a pathway regulating mast cell activation is upregulated. Pathways concerning DNA replication and RNA translation seem to be downregulated in LUAD, as well as genesets concerning angiogenesis. Several genesets show a significant difference in expression, however the absolute value difference between the two groups does not meet our criteria of being at least 1.
+
+### Comparison of Clusters Within LUAD
+
+After running separate PCA and UMAP analysis on patients for each tumor type the question arose how the clusters within one tumor type differ from each other. The UMAP plots for three of the most clearly clustering tumor types can be seen in Figure **HIER EINFÜGEN**.
+
+**!\[UMAP plots for SARC, ESCA and BRCA run on the corresponding subset of the gene expression datatset, colored by the cluster assigned to each datapoint by k-means clustering\](/Users/paulbrunner/2022-topic-02-team-03/output/3_UMAPs.png){width=100%}**
+
 ## Regression
 
 The logistic model that was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table **(HIER VERLINKEN)** are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986 %.
