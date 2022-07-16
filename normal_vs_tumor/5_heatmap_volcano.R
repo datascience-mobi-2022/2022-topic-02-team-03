@@ -178,10 +178,10 @@ regulation = data.frame(up = c(1:z),
                         number_of_genes = c(1:z))
 
 
-which(names(genesets) == "METAPHASE_ANAPHASE_TRANSITION_OF_CELL_CYCLE")
+which(names(genesets) == "CELLULAR_RESPONSE_TO_LIPOPROTEIN_PARTICLE_STIMULUS")
 for(i in 1:z){
   # select genes from one pwathway
-  x = 7 # choose pathway by position
+  x = 116 # choose pathway by position
   
   pw = names(genesets[x])
   pw
@@ -222,7 +222,7 @@ for(i in 1:z){
   ####
   ##
   #
-  selection2 = selection[(order(selection$p.wilc)),]
+  selection2 = selection[(order(selection$diff.med)),]
   selection2 = head(selection2,5)
   
   col = c("gray0", "firebrick3", "deepskyblue", "gray75") # choosing the colours
@@ -276,7 +276,7 @@ rownames(plots$regulation) <- name
 
 pw = rownames(selection1)
 pw
-plots$pw.v.plots$RIBOSOME_ASSEMBLY
+plots$pw.v.plots$CELLULAR_RESPONSE_TO_LIPOPROTEIN_PARTICLE_STIMULUS
 
 
 h2 = Heatmap(all_gsva_tvn_cut[which(rownames(all_gsva_tvn_cut)== "DNA_REPLICATION_INITIATION"),],
