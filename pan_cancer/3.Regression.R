@@ -10,6 +10,7 @@ library(Seurat)
 library(blorr)
 library(ggplot2)
 library(ROCR)
+library(uwot)
 
 tcga_exp_short <- readRDS("./data/tcga_exp_small.RDS")
 tcga_anno <- readRDS(".data/tcga_tumor_annotation.RDS")
@@ -39,7 +40,8 @@ gene_candidates <- names(gene_candidates)
 QC_pcaumap <- as.data.frame(umap(RunPCA(as.matrix(tcga_exp_short[gene_candidates,]), npcs = 5)@cell.embeddings, metric = "cosine"))
 
 ggplot(QC_pcaumap, aes(x = V1, y = V2, color = tcga_anno$cancer_type_abbreviation))+
-  geom_point()
+  geom_point()+
+  guides(color=guide_legend(title="cancer type"))
 
 
 
@@ -88,3 +90,10 @@ plot(ROCPer, colorize = TRUE,
 abline(a = 0, b = 1)
 auc <- round(auc, 4)
 legend(.6, .4, auc, title = "AUC", cex = 1)
+
+
+#QC of assignments in plot
+test_UMAP <- as.data.frame(umap(RunPCA(as.matrix(t(test_dataset[,gene_candidates])), npcs = 5)@cell.embeddings, metric = "cosine"))
+ggplot(test_UMAP, aes(x = V1, y = V2, color = predict_test))+
+  geom_point()+
+  guides(color=guide_legend(title="assigned value"))
