@@ -13,7 +13,6 @@ header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage{lmodern}
   - \usepackage[onehalfspacing]{setspace}
-  - \usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm, bindingoffset=10mm, includehead, includefoot]{geometry}
   - \usepackage[headsepline]{scrlayer-scrpage}
   - \usepackage{url}
   - \usepackage[backend=biber, style=authoryear, giveninits=true, maxbibnames=99, uniquename=init, maxcitenames=2, hyperref=true, date=year]{biblatex}
@@ -47,6 +46,13 @@ header-includes:
   - \setkomafont{caption}{\sffamily\small}
   - \setkomafont{captionlabel}{\usekomafont{caption}\bfseries\small}
   - \setkomafont{pagehead}{\normalfont\scshape}
+geometry:
+  - left=2.50cm
+  - right=2.50cm
+  - top=2.50cm
+  - bottom=2.50cm
+  - includehead
+  - includefoot
 csl: [report/cell.csl]
 bibliography: [report/packages.bib, report/Citations.bib]
 ---
@@ -89,7 +95,7 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 ## Biological Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinomam (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases [@wang2020] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations \[@hanahan2011\]\[@peng2018\]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinomam (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases [@wang2020] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations [@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
 
 ## The Pan Cancer Project
 
@@ -114,7 +120,7 @@ PCA is a useful tool for genome-wide expression studies and often serves as a fi
 
 ## Uniform Manifold Approximation and Projection (UMAP)
 
-Uniform manifold approximation and projection (UMAP) is a k-neighbour graph based algorithm that is used for nonlinear dimension reduction [@smets2019] [@mcinnes2018].
+Uniform manifold approximation and projection (UMAP) is a k-neighbour graph based algorithm that is used for non-linear dimension reduction [@smets2019] [@mcinnes2018].
 
 After data normalization, the Euclidean distances between points in a two-dimensional space of the graph are calculated and a local radius is determined [@VERMEULEN2021119547]. In general the closer two points are to each other, the more similar they are. UMAP makes a density estimation to find the right local radius. This variable radius is smaller in high density regions of data points and larger in low density regions. In general, the density is higher when the k-nearest neighbour is close and vice versa. The number of k-nearest neighbours controls the number of neighbours whose local topology is preserved. Precisely, a large number of neighbours will ensure that more global structure is preserved whereas a smaller number of neighbours will ensure the preservation of more local structure [@mcinnes2018].
 
@@ -266,7 +272,7 @@ All expression data was log2(TPM) transformed. Log2 Transformation is a commonly
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | tidyverse       | collection of R packages, including ggplot2                                                | @tidyverse         |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| uwot            | performs dimensionality reduction and Uniform Manifold Approxiamtion and Projection (UMAP) | @uwot              |
+| uwot            | performs dimensionality reduction and Uniform Manifold Approximation and Projection (UMAP) | @uwot              |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 
 : **Tab. 1: Used packages in alphabetical order.**
@@ -355,7 +361,7 @@ To evaluate the model the first step was to predict whether the patients of the 
 
 ## Cancer hallmark pathways
 
-By calculating the Jaccard index for each metabolism geneset to each hallmark geneset, the similarity between these pathways was measured and visualized in a heatmap (**Fig. XXX**). This highlights that there is a general low similarity between the selected pathways and only a few genesets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine, aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
+By calculating the Jaccard index for each metabolism geneset to each hallmark geneset, the similarity between these pathways was measured and visualized in a heatmap (\textbf{Fig. \ref{fig:Jaccard}}). This highlights that there is a general low similarity between the selected pathways and only a few genesets show a slightly higher similarity which don't exceed an index of 0.2. The most shared genes are found in the alanine, aspartate and glutamate metabolism with glutamine metabolism. Additionally, large overlaps are found in purine and pyrimidine metabolism with genome repair and down regulation as well as in lipid and fatty acid metabolism with VEGF-induced angiogenesis.
 
 ```{r Jaccard, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Jaccard Coefficients of hallmark genesets and metabolism genesets.} The x-axis is defined by the given hallmark genesets, whereas the y-axis is assigned to the selected metabolism geneset.', out.width='0.75\\linewidth'}
 knitr::include_graphics("output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
@@ -365,76 +371,106 @@ knitr::include_graphics("output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
 
 ### GSEA
 
-In order to illustrate which pathways of the hallmark and metabolism genesets are most up or down regulated, a barplot was created. The genes crucial to the mean expression of a pathway are the ones that are in the leading edge of the GSEA result.
+In order to illustrate which pathways of the hallmark and metabolism genesets are most up or down regulated, a barplot was created (\textbf{Fig. \ref{fig:GSEA barplot}}). The genes crucial to the mean expression of a pathway are the ones that are in the leading edge of the GSEA result.
 
 Overall we observed more upregulated than downregulated pathways. Among the upregulated, Meta_HIF1 and the ascorbate and alderate metabolism pathways presented with the highest mean. In addition, some pathways associated with nucleotide, amino acid, and sugar metabolism also seem to be upregulated. Specific amino acids whose synthesis appears to be over expressed include methionine and cysteine. Pathways pertaining to telomerase activity and cell growth were also significantly upregulated.
 
 Downregulated pathways are mainly linked to the immune response but also to the metabolism of specific amino acids and fatty acids, such as histidine or arachidonic acid. Pathways that affect the cytochrome p450 system seem to be downregulated. The two most significantly downregulated pathways regulate linolenic acid and nitrogen metabolism.
 
-\`\`\`{r GSEA barplot, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{Barplot for the mean regultion of hallmark gene sets and metabolism gene sets.} The pathways are sorted by their mean expression and can be seen on the y axis, while the mean expression is plotted on the x axis. Furthermore each pathway is coloured by the regultion state, meaning the genes contained in the leading edge define weather the pathway is mostly or only upregulated and vice versa.', out.width='0.75\\\\linewidth'}
+```{r GSEA barplot, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Barplot for the mean regultion of hallmark gene sets and metabolism gene sets.} The pathways are sorted by their mean expression and can be seen on the y axis, while the mean expression is plotted on the x axis. Furthermore each pathway is coloured by the regultion state, meaning the genes contained in the leading edge define weather the pathway is mostly or only upregulated and vice versa.', out.width='75%'}
 
 knitr::include_graphics("./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png")
 
-\`\`\`
+```
 
 ### GSVA heatmap
 
-To visualize the pathway expression of each individual sample for normal and tumor tissue, a heatmap was created using the results of GSVA. Two recognizable groups with different expression patterns have formed. The expression of each pathway is color coded, from high expression rate (red) to low expression rate (blue). The left half shows only tumor samples, while the right half shows almost exclusively samples belonging to healthy tissue, with a few exceptions framed in black. This suggests that for some samples the tumor tissue has phenotypic manifestations that don't significantly differ from the overall expression patterns in normal tissue. Most pathways however present with a significantly different expression between tumor and normal tissue.
+To visualize the pathway expression of each individual sample for normal and tumor tissue, a heatmap was created using the results of GSVA (\textbf{Fig. \ref{fig:heatmap GSVA}}). Two recognizable groups with different expression patterns have formed. The expression of each pathway is color coded, from high expression rate (red) to low expression rate (blue). The left half shows only tumor samples, while the right half shows almost exclusively samples belonging to healthy tissue, with a few exceptions framed in black. This suggests that for some samples the tumor tissue has phenotypic manifestations that don't significantly differ from the overall expression patterns in normal tissue. Most pathways however present with a significantly different expression between tumor and normal tissue.
 
 Strong differences can be seen in the pathways marked in green. Many of them are associated with DNA replication or chromosome distribution during mitosis. Notable pathways include "DNA dependent DNA replication", "chromosome separation", and „metaphase anaphase transition off cell cycle". Many tumor samples present with a high expression rate of these pathways, whilst normal samples present with a low expression. This suggests that the aforementioned pathways play an important role in the differentiation between normal and tumor tissue.
 
 The pathways marked in blue are connected to immune response, for example „T-helper 17 type immune response ", „regulation of B-cell differentiation " or „dendritic cell migration". In this case, some tumor samples are upregulated, while most are downregulated. In normal tissue, the expression of most pathways is clearly upregulated, with a few exceptions near the right margin.
 
-\*\*\`\`\`{r heatmap GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\\\textbf{heatmap for comparing pathway expression in normal and tumor tissue } The heatmap shows the GSVA results for the small TCGA dataset. On the x axis one can see the normal and tumor samples, while the y axis shows the pathways with the highest standard deviation. The expression of each pathway is color-coded, from high expression (red), to low expression (blue).', out.width='0.75\\\\linewidth'}
+```{r heatmap GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{heatmap for comparing pathway expression in normal and tumor tissue } The heatmap shows the GSVA results for the small TCGA dataset. On the x axis one can see the normal and tumor samples, while the y axis shows the pathways with the highest standard deviation. The expression of each pathway is color-coded, from high expression (red), to low expression (blue).', out.width='0.75\\linewidth'}
 
-knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")\*\*
+knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")
 
-\`\`\`
+```
 
 ## Pan cancer analysis
 
 ### Identification of clusters in gene expression data
 
-Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in **Fig. XXX**. To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Notably, BRCA, LIHC, KIRP, SKCM, UVM, THCR, PCPG and PARP exhibit a well defined clustering. Additionally, LGG and GBM form a united cluster. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
+Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in (\textbf{Fig. \ref{fig:UMAPexpression}}). To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Notably, BRCA, LIHC, KIRP, SKCM, UVM, THCR, PCPG and PARP exhibit a well defined clustering. Additionally, LGG and GBM form a united cluster. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
 
-![**UMAP plot on TCGA expression dataset.** The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients' cancer types.](output/3_pcaumap_on_big_dataset.png){width="80%"}
+```{r UMAPexpression, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{UMAP plot on TCGA expression dataset} The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients cancer type', out.width='0.8\\linewidth'}
+
+knitr::include_graphics("./output/3_pcaumap_on_big_dataset.png")
+
+```
+
 
 ### Pathway enrichment
 
-The diagnosis of the cancer type a patient suffers from is not only based on the cancer's location in the body but by the molecular signature it exhibits. Different molecular changes result in a different expression of genes and therefore an abnormal regulation of pathways. This deregulation of pathways is characteristic for each cancer type hence its analysis is a crucial part of this pan cancer analysis. In order to identify differences in pathway activities based on the cancer type, two geneset list were extracted from MSigDB. One list contained curated genesets whereas the other list contained ontology genesets. Following, GSVA was performed twice on the TCGA expression dataset; once using the curated geneset list and one time with the ontology geneset list. By using the genesets separately, the better fitting geneset for the analysed dataset can be selected. In Fig. XXX the pathway enrichment of each patient is shown with highlighted cancer type. The selected geneset list contains only ontology genesets that overlap with the genes from the expression data with more than 95%. The curated geneset list was not chosen due to less clustering after conducting GSVA (Appendix, Fig. XXX). Cancer types that result in an isolated and well defined cluster are LIHC (turquoise, upper left corner), KIRK (green, left top), THCA (pink, under KIRK), PRAD (blue, center), PCPG (blue, top), LGG (green, right center) and LAML (green right bottom).
+The diagnosis of the cancer type a patient suffers from is not only based on the cancer's location in the body but by the molecular signature it exhibits. Different molecular changes result in a different expression of genes and therefore an abnormal regulation of pathways. This deregulation of pathways is characteristic for each cancer type hence its analysis is a crucial part of this pan cancer analysis. In order to identify differences in pathway activities based on the cancer type, two geneset list were extracted from MSigDB. One list contained curated genesets whereas the other list contained ontology genesets. Following, GSVA was performed twice on the TCGA expression dataset; once using the curated geneset list and one time with the ontology geneset list. By using the genesets separately, the better fitting geneset for the analysed dataset can be selected. In \textbf{Fig. \ref{fig:UMAPc5}} the pathway enrichment of each patient is shown with highlighted cancer type. The selected geneset list contains only ontology genesets that overlap with the genes from the expression data with more than 95%. The curated geneset list was not chosen due to less clustering after conducting GSVA (Appendix, Fig. XXX). Cancer types that result in an isolated and well defined cluster are LIHC (turquoise, upper left corner), KIRK (green, left top), THCA (pink, under KIRK), PRAD (blue, center), PCPG (blue, top), LGG (green, right center) and LAML (green right bottom).
 
-![**Pathway enrichment based on cancer type.** The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients' cancer types](output/3_gsva_pcaumap_c5.png){width="80%"}
+```{r UMAPc5, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Pathway enrichment based on cancer type.} The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients cancer type', out.width='0.8\\linewidth'}
 
-Based on the geneset enrichment matrix created with GSVA, a pathway enrichment heatmap was created (Fig. XXX). Performing kmeans, three clusters of cancer types were identified. The cancer types allocated to the first cluster can be categorized into kidney carcinomata, gliomata, carcinomata of the sexual organ as well as thyroid and liver carcinoma. The other two clusters exhibit no specific subcategories explaining similar pathway deregulation patterns. Cancer types belonging to cluster one show a general strong down regulation of pathways in comparison to the other cancer types. Cluster 2 contains cancer types with a relatively neutral enrichment of pathways. The third cluster exhibits a strong deregulation of pathways relatively to the other cancer types, some being upregulated while others are severely downregulated. The pathways can approximately be divided into three subsets. The first cluster includes pathways that regulate the cell cycle, DNA replication and chromatid segregation. These genesets are highly downregulated in the first cancer type cluster and moderately downregulated in 5 cancer types assigned to cluster 2. However, in the majority of cluster 2 and in cluster 3, these pathways show a higher activity. A second cluster can be found in pathways important for morphogenesis, metastasis and cell adhesion. While the cancer types from the second cluster do not drastically over- nor downregulate these genesets in comparison to the other cancer types, cluster 1 and 3 exhibit a general downregulation. The last cluster of pathways comprises pathways involved in the regulation of the immune response. On the one hand, the second and third cluster of cancer types solely exhibit a moderate deregulation of these genesets. On the other hand, cancer types included in the first cluster inhibit immune activation.
+knitr::include_graphics("./output/3_gsva_pcaumap_c5.png")
+
+```
+
+
+Based on the geneset enrichment matrix created with GSVA, a pathway enrichment heatmap was created (\textbf{Fig. \ref{fig:GSVAheatmap}}). Performing kmeans, three clusters of cancer types were identified. The cancer types allocated to the first cluster can be categorized into kidney carcinomata, gliomata, carcinomata of the sexual organ as well as thyroid and liver carcinoma. The other two clusters exhibit no specific subcategories explaining similar pathway deregulation patterns. Cancer types belonging to cluster one show a general strong down regulation of pathways in comparison to the other cancer types. Cluster 2 contains cancer types with a relatively neutral enrichment of pathways. The third cluster exhibits a strong deregulation of pathways relatively to the other cancer types, some being upregulated while others are severely downregulated. The pathways can approximately be divided into three subsets. The first cluster includes pathways that regulate the cell cycle, DNA replication and chromatid segregation. These genesets are highly downregulated in the first cancer type cluster and moderately downregulated in 5 cancer types assigned to cluster 2. However, in the majority of cluster 2 and in cluster 3, these pathways show a higher activity. A second cluster can be found in pathways important for morphogenesis, metastasis and cell adhesion. While the cancer types from the second cluster do not drastically over- nor downregulate these genesets in comparison to the other cancer types, cluster 1 and 3 exhibit a general downregulation. The last cluster of pathways comprises pathways involved in the regulation of the immune response. On the one hand, the second and third cluster of cancer types solely exhibit a moderate deregulation of these genesets. On the other hand, cancer types included in the first cluster inhibit immune activation.
 
 ```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.85\\linewidth'}
 
 knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 ```
 
+\pagebreak
+
 ### Geneset enrichment comparison between LUAD and other cancer types
 
-The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The volcano plot **(HIER NUMMER EINFÜGEN)** helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients. It shows the log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the Wilcoxon test.
+The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The volcano plot (\textbf{Fig. \ref{fig:VolcanoplotLUADrest}}) helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients. It shows the log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the Wilcoxon test.
 
-**!\[Volcano plot for geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset, dotted lines indicating the alpha value and foldchange values of -1 and 1\](/Users/paulbrunner/2022-topic-02-team-03/output/3_volcano_plot_gsva_luad_vs_rest.png){width=85%}**
+```{r VolcanoplotLUADrest, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot for geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset.} dotted lines indicating the alpha value and foldchange values of -1 and 1.', out.width = '0.85\\linewidth'}
+
+knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
+```
+
 
 The volcano plot shows several differently expressed pathways in LUAD. The majority of them are upregulated. Most notably, a group of pathways related to inflammation and immune activation show a significant increase in activity in LUAD. Additionally, a pathway regulating mast cell activation is upregulated. Pathways concerning DNA replication and RNA translation seem to be downregulated in LUAD, as well as genesets concerning angiogenesis. Several genesets show a significant difference in expression, however the absolute value difference between the two groups does not meet our criteria of being at least 1.
 
 ### Comparison of Clusters Within LUAD
 
-After running separate PCA and UMAP analysis on patients for each tumor type the question arose how the clusters within one tumor type differ from each other. The UMAP plots for three of the most clearly clustering tumor types can be seen in Figure **HIER EINFÜGEN**.
+After running separate PCA and UMAP analysis on patients for each tumor type the question arose how the clusters within one tumor type differ from each other. The UMAP plots for three of the most clearly clustering tumor types can be seen in Figure (\textbf{Fig. \ref{fig:threeUMAPs}}).
 
-**!\[UMAP plots for SARC, ESCA and BRCA run on the corresponding subset of the gene expression datatset, colored by the cluster assigned to each datapoint by k-means clustering\](/Users/paulbrunner/2022-topic-02-team-03/output/3_UMAPs.png){width=100%}**
+```{r threeUMAPs, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{UMAP plots for SARC, ESCA and BRCA} run on the corresponding subset of the gene expression datatset, colored by the cluster assigned to each datapoint by k-means clustering.', out.width = '0.85\\linewidth'}
+
+knitr::include_graphics("./output/3_UMAPs.png")
+```
+
 
 ## Regression
 
-The logistic model that was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table **(HIER VERLINKEN)** are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986 %.
+The logistic model that was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table (\textbf{Fig. \ref{fig:confusionmatrix}}) are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986 %.
 
-**!\[confusion table for prediction on test datast containing 2921 patients with 163 LUAD patients\](/Users/paulbrunner/2022-topic-02-team-03/output/5_confusion_matrix.png "Confusion table of trained logistic model"){width=40%}**
 
-For further evaluation a ROC plot was produced which enables an estimation of model performance in relation to the false-positive rate.**(HIER VERLINKEN)**. The ideal estimator would have an area under curve (AUC) of 1 and would fill out the top left corner. The trained regression model exhibits an AUC of 0.9159 and a nearly linear increase.
+```{r confusionmatrix, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Confusion table} for prediction on test datast containing 2921 patients with 163 LUAD patients.', out.width = '0.4\\linewidth'}
 
-**!\[ROC plot of the trained logistic model with a AUC value of 0.9159\](/Users/paulbrunner/2022-topic-02-team-03/output/5_aucroc_curve.png){width=40%}**
+knitr::include_graphics("./output/5_confusion_matrix.png")
+```
+
+
+For further evaluation a ROC plot was produced which enables an estimation of model performance in relation to the false-positive rate (\textbf{Fig. \ref{fig:rocplot}}). The ideal estimator would have an area under curve (AUC) of 1 and would fill out the top left corner. The trained regression model exhibits an AUC of 0.9159 and a nearly linear increase.
+
+```{r rocplot, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{ROC plot} of the trained logistic model with an AUC value of \\textbf{0.9159}.', out.width = '0.85\\linewidth'}
+
+knitr::include_graphics("./output/5_aucroc_curve_biggertitle.png")
+```
+
+
 
 # Discussion
 
@@ -454,11 +490,11 @@ This can be explained by the fact that several cancer types can be assigned to a
 
 The three clusters in the pathways axis resemble cell cycle and genome regulation, regulation of different phases of metastasis, and activation of the immune response.
 
-Cell cylce and genome deregulation resembles one of the hallmarks of cancer as it is the base for tumor progression \[**QUELLE**\]. By increasing the activity of cell cylce promoting pathways, cancer cells activate proliferation and cell growth. It is important to highlight that our analysis is relative to different cancer types and does not have any informative value concerning the relation to healthy cells. Accordingly, cancer types that exhibit downregulation of cell cycle pathways do not have slower proliferation than normal cells but rather have less aggressive spread than other cancer types. The first cluster of cancer types, particularly kidney cancer and prostate adenocarcinoma, result in a downregulation of these pathways. While our findings in PRAD are according to expectations \[ @sakr1997\], the strong downregulation in kidney cancer is not supported by other studies. There are several subtypes of kidney cancer, for example KIRC, KIRP and KICH. KIRC indeed is a slow growing cancer but KIRP and KICH both are subtypes that show a high proliferation rate \[@li2012\]. These aberrances to other studies may result from our selection of pathways or our data cleaning which inevitably leads to loss of information. Cancer types that show a strong increase in cell cycle pathway activity are CESC and DLBC. Since CESC leads to acute mortality among woman \[@small2017\], our findings are as expected and proven by further studies [@ding2020]. CESC and DLBC are highly aggressive cancer types which explains the strongly increased activity in pathways regulating the genome and cell cycle [@said2013].
+Cell cylce and genome deregulation resembles one of the hallmarks of cancer as it is the base for tumor progression \[**QUELLE**\]. By increasing the activity of cell cylce promoting pathways, cancer cells activate proliferation and cell growth. It is important to highlight that our analysis is relative to different cancer types and does not have any informative value concerning the relation to healthy cells. Accordingly, cancer types that exhibit downregulation of cell cycle pathways do not have slower proliferation than normal cells but rather have less aggressive spread than other cancer types. The first cluster of cancer types, particularly kidney cancer and prostate adenocarcinoma, result in a downregulation of these pathways. While our findings in PRAD are according to expectations [@sakr1997], the strong downregulation in kidney cancer is not supported by other studies. There are several subtypes of kidney cancer, for example KIRC, KIRP and KICH. KIRC indeed is a slow growing cancer but KIRP and KICH both are subtypes that show a high proliferation rate [@li2012]. These aberrances to other studies may result from our selection of pathways or our data cleaning which inevitably leads to loss of information. Cancer types that show a strong increase in cell cycle pathway activity are CESC and DLBC. Since CESC leads to acute mortality among woman [@small2017], our findings are as expected and proven by further studies [@ding2020]. CESC and DLBC are highly aggressive cancer types which explains the strongly increased activity in pathways regulating the genome and cell cycle [@said2013].
 
-Metastasizing is a complex and inefficient progress due to numerous regulation mechanisms \[**QUELLE\]**. Therefore, the ability of a primary cancer depends on its location and molecular signature. As part of the analysis of metastatic landscapes, Budczies *et al.* found melanoma, breast cancer and kidney cancer to feature a high metastatic potential. However, cancer cells deriving from the liver and sexual organs show the lowest rates of metastasis \[ @budczies2015\]. Our findings confirm this research. BRCA, SKCM, and especially KIRC result in upregulated mestastasis genesets in comparison to other cancer types. In addition, the high invasion and metastasis rate of SKCM is supported by further studies \[@huang2022\]. Secondly, our analysis revealed downregulated metastatic pathways in LIHC, PRAD, OV, CESC and UCEC which aligns with insufficient invasiveness in liver and reproductive cancers \[@budczies2015\]. Moreover, PAAD resulted in the most severe upregulation of metastasis related pathways which is supported by several studies\[@ayres2019\]. Epithelial mesenchymal transition (EMT) is an essential process of metastasis formation by enabling the cell to circulate through vessels \[@kalluri2009\]. Therefore, the upregulation of pathways involved in EMT in PAAD matches our expectations \[@rasheed2010\]. In contrary, LAML shows a significantly low enrichment of pathways inducing metastasis. At first, this seems paradoxical as AML is highly invasive because it is not categorized as a solid tumor [@whiteley2021]. By nature myeloid cells possess a high motility and the ability to circulate through vessels. Consequently, transformed myeloid cells do not need to upregulate processes that enable cell migration or inhibit anoikis \[@trendowski2015\].
+Metastasizing is a complex and inefficient progress due to numerous regulation mechanisms \[**QUELLE\]**. Therefore, the ability of a primary cancer depends on its location and molecular signature. As part of the analysis of metastatic landscapes, Budczies *et al.* found melanoma, breast cancer and kidney cancer to feature a high metastatic potential. However, cancer cells deriving from the liver and sexual organs show the lowest rates of metastasis [@budczies2015]. Our findings confirm this research. BRCA, SKCM, and especially KIRC result in upregulated mestastasis genesets in comparison to other cancer types. In addition, the high invasion and metastasis rate of SKCM is supported by further studies [@huang2022]. Secondly, our analysis revealed downregulated metastatic pathways in LIHC, PRAD, OV, CESC and UCEC which aligns with insufficient invasiveness in liver and reproductive cancers [@budczies2015]. Moreover, PAAD resulted in the most severe upregulation of metastasis related pathways which is supported by several studies[@ayres2019]. Epithelial mesenchymal transition (EMT) is an essential process of metastasis formation by enabling the cell to circulate through vessels [@kalluri2009]. Therefore, the upregulation of pathways involved in EMT in PAAD matches our expectations [@rasheed2010]. In contrary, LAML shows a significantly low enrichment of pathways inducing metastasis. At first, this seems paradoxical as AML is highly invasive because it is not categorized as a solid tumor [@whiteley2021]. By nature myeloid cells possess a high motility and the ability to circulate through vessels. Consequently, transformed myeloid cells do not need to upregulate processes that enable cell migration or inhibit anoikis [@trendowski2015].
 
-While there is no significant deregulation of immune activation in the second and third cancer type clusters, cancer types of the first cluster transform a severe downregulation. This clustering is according to our expectations as cancer types of each cluster can be categorized by immune-infiltration CpG markers [@wang2020\]. As a result, these cancer types inhibit immune cell infiltration hence have a low immunogenicity \[@smyth2006]. Notably, even though UCS is assigned to cluster two, it results in a strongly decreased immune pathway activity. This is confirmed by first studies [@ali2020]. Unfortunately, its rareness entails a small research base for analysis. As part of cluster one, glioma like GBM and LGG cause a decline in pathway activity leading to a highly immunosuppressive tumor-microenvirnment [@guan2018]. PCPG is a solid tumor and thus develops a tumor microenvironment that surpesses immune cell infiltration. Furthermore, transformed cells lack leukocyte infiltration enabling tumor progression [@fishbein2017]. On the other hand DLBC and HNSC are examples for cancer types upregulating immune infiltration which seems to be contradictory at first. However, inflammation can support the tumor-mircoenvironment because it promotes tumorigenesis and tumor progression by supplying essential molecules like growth and survival factors. Tamma *et al.* observed this phenomenon in DLBC [@tamma2020]. Additionally, HNSC increasing inflammatory pathways is verified by the studies of He *et al.* [@he2022].
+While there is no significant deregulation of immune activation in the second and third cancer type clusters, cancer types of the first cluster transform a severe downregulation. This clustering is according to our expectations as cancer types of each cluster can be categorized by immune-infiltration CpG markers [@wang2020]. As a result, these cancer types inhibit immune cell infiltration hence have a low immunogenicity [@smyth2006]. Notably, even though UCS is assigned to cluster two, it results in a strongly decreased immune pathway activity. This is confirmed by first studies [@ali2020]. Unfortunately, its rareness entails a small research base for analysis. As part of cluster one, glioma like GBM and LGG cause a decline in pathway activity leading to a highly immunosuppressive tumor microenvirnment [@guan2018]. PCPG is a solid tumor and thus develops a tumor microenvironment that surpesses immune cell infiltration. Furthermore, transformed cells lack leukocyte infiltration enabling tumor progression [@fishbein2017]. On the other hand DLBC and HNSC are examples for cancer types upregulating immune infiltration which seems to be contradictory at first. However, inflammation can support the tumor mircoenvironment because it promotes tumorigenesis and tumor progression by supplying essential molecules like growth and survival factors. Tamma *et al.* observed this phenomenon in DLBC [@tamma2020]. Additionally, HNSC increasing inflammatory pathways is verified by the studies of He *et al.* [@he2022].
 
 Overall, our results show great compliance with previous studies. Nevertheless, some findings do not conform to expectations as they imply a different transformation of some cancer types relative to their actual behaviour. Possible reasons for these discrepancies are the chosen pathways and the general loss of information during conduction of GSVA.
 
@@ -470,7 +506,7 @@ Due to the overexpression of inflammatory and immune activity pathways, it can b
 
 Furthermore, the increased expression of alveolal developmental genes fits our expectation, as LUAD is a non-small cell lung cancer and thus growth of alveoli should be increased by overexpression of the corresponding genes. Sainz de Aja *et al.* even suspect the affected alveolar progenitor cells to be the source of the tumor growth [@sainz2021].
 
-The downregulation of genesets involved in replication compared to other genesets leads to the conclusion that LUAD does not exhibit the same increase in replication as other cancer types do. Furthermore, angiogenesis seems to be less advanced in LUAD as in other cancer types. Tataroğlu *et al.* suggest that the level of angiogenesis expression in LUAD patients is connected to the cancer stage the patients find themselves in. As our dataset provided patients over all stages the expression level of angiogenesis could have been skewed by patients in low angiogenesis stages \[@tatarouglu2004\].
+The downregulation of genesets involved in replication compared to other genesets leads to the conclusion that LUAD does not exhibit the same increase in replication as other cancer types do. Furthermore, angiogenesis seems to be less advanced in LUAD as in other cancer types. Tataroğlu *et al.* suggest that the level of angiogenesis expression in LUAD patients is connected to the cancer stage the patients find themselves in. As our dataset provided patients over all stages the expression level of angiogenesis could have been skewed by patients in low angiogenesis stages [@tatarouglu2004].
 
 In conclusion LUAD could be described as a rather immunogenic and pro-inflammatory cancer, protruding from alveolar progenitor cells. Immunotherapy is a promising therapy approach for LUAD patients, especially for the immunity high subtype.
 
@@ -480,11 +516,16 @@ The UMAP plots of SARC, ESCA and BRCA show perfectly clear clusters, which were 
 
 Most of the genes that are differentially expressed are connected to signal transmission over various pathways. For example ADGRF1 which influences the way GPCRs behave in the two LUAD clusters and thus even influences CREB activity, which can promote anti-tumor cell programs [@abdulkareem2021].
 
-Another crucial gene for biological processes is FGA, which is overexpressed in cluster one. This codes for the fibrinogen alpha chain and thus is needed for secondary haemostasis. Patients from both clusters seem to differ in their blood clotting capabilities [@freissmuth2016]. Additionally the CALCA gene, which controls the calcium household is also differentially expressed and thus further fuels the difference in blood clotting, as calcium is needed for secondary haemostasis \[@singh2019\].
+Another crucial gene for biological processes is FGA, which is overexpressed in cluster one. This codes for the fibrinogen alpha chain and thus is needed for secondary haemostasis. Patients from both clusters seem to differ in their blood clotting capabilities [@freissmuth2016]. Additionally the CALCA gene, which controls the calcium household is also differentially expressed and thus further fuels the difference in blood clotting, as calcium is needed for secondary haemostasis [@singh2019].
 
 INSL4 is normally found during embryonic development as it can bind the insulin-like growth factor receptor. In LUAD it is significantly overexpressed. Such genes were expected to be found as often cancer progression results in reactivation of early development genes [@veitia1998].
 
 It was shown that the two clusters found do differ in very specific aspects of biological processes. We expected to find distinct clusters corresponding to the LUAD subtypes found by Qin *et al.* [@qin2020] which are characterized by immune activity. However even in the most differentially expressed genes twe found no significant difference in immune activity between the clusters. Qin *et al.* had access to both genomic and transcriptomic data and analysed the datasets specifically for changes in immune response which influences the results.
+
+## Regression
+Since LUAD patients clustered clearly throughout the UMAP plot before, we expected to be able to built a rather robust logistic regression to differentiate between LUAD and non-LUAD patients. This expectation was further fueled by the LUAD patients also clustering during quality control using only the genes we chose as our explaining variables (APPENDIX).
+The confusion table that was acquired from predicting values in the testing dataset shows a low amount false-positives and a high number of true-negatives. The model seems to be able to recognize clear non-LUAD patients fairly easily. However there are 27 false-negatives, which means that 16.6 % of all LUAD patients have not been labelled right. The reason for those false-negatives could be the fact that while LUAD patients show a clear cluster there are some non-LUAD patients in the same cluster. The patients that are close to these other cancer types are at risk of wrongfully being labelled as the neighbouring cancer type, as it is shown in the quality control plot (APPENDIX). Nevertheless due to the high amount of patients in general (2921 total patients in the testing dataset) the accuracy of 98.6 % shows a rather reliable model. 
+The models performance is further underlined by the ROC curve that was created during analysis. Generally the further the curve protrudes into the top left corner, the better the model is. In this case the ROC curve shows a steep progression at first and then inclines linearly. The area under curve of 0.9159 ranks this model as reliable, as generally AUC to 1 are regarded as good [@narkhede2018understanding]. In conclusion this model could be used to reduce the amount of genes that have to be screened by RNA-seq in order to diagnose a patient with LUAD. However there still is potential to differentiate between more cancer types by using a multinomial logistic regression. Additionally neural-networks have been shown to be a more reliable and functional alternative to logistic regression. Way et al. even showed this possible solution on the same TCGA dataset [@way2018machine].
 
 # Outlook
 
@@ -504,7 +545,7 @@ Many different research groups have already set out to subtype LUAD according to
 
 ## Find defining trends between LUAD clusters
 
-Performance of UMAP and PCA on our data (**Figure XXX**) showed that LUAD forms two distinct clusters. Further analysis may reveal the genetic differences within LUAD that lead to clustering as well as the genetic similarities shared by samples belonging to the same cluster. Additionally, response to therapy might differ between clusters and thus patients belonging to one cluster or another might face vastly different chances of survival.
+Performance of UMAP and PCA on our data (\textbf{Fig. \ref{fig:appendix_luadumap}}) showed that LUAD forms two distinct clusters. Further analysis may reveal the genetic differences within LUAD that lead to clustering as well as the genetic similarities shared by samples belonging to the same cluster. Additionally, response to therapy might differ between clusters and thus patients belonging to one cluster or another might face vastly different chances of survival.
 
 ## Prediction of cancer stage
 
@@ -523,4 +564,20 @@ The ultimate step of any analysis would be to seek empirical confirmation of nov
 ::: {#refs}
 :::
 
+
 # Appendix
+
+```{r appendix_luadumap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{PCA UMAP plot of LUAD} ', out.width = '0.85\\linewidth'}
+
+knitr::include_graphics("./output/3_umap_clustering_LUAD.png")
+```
+
+```{r appendix_regressionqc1, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Quality control UMAP plot for regression.} Shows that LUAD cluster when gene expression dataset is subset to only include explaining variables, colored by cancer type ', out.width = '0.80\\linewidth'}
+
+knitr::include_graphics("./output/5_QC_plot_cancercolor.pdf")
+```
+
+```{r appendix_regressionqc2, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Quality control UMAP plot for regression.} Colored by assigned value by the trained model to asses quality of model', out.width = '0.80\\linewidth'}
+
+knitr::include_graphics("./output/5_QC_assigned.pdf")
+```
