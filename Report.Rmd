@@ -95,13 +95,17 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 ## Biological Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide \[@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases \[@wang2020\] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations \[@hanahan2011; @peng2018\]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases [@wang2020] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations [@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
 
 ## The Pan Cancer Project
 
-The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles. [@tomczak2015]. In 2012 TCGA Research Network launched the Pan-Cancer analysis project as a globally coordinated initiative whose main objective is to assemble coherent, consistent TCGA datasets across twelve different tumor types, one of which being lung adenocarcinoma (LUAD). Each tumor type is characterized using six different genomic, proteomic, epigenomic, and transcriptional platforms. Data collected from thousands of patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. In the future, the aim is to analyse additional tumor types beyond the twelve original ones in the hopes that the pan cancer project will one day inform clinical decision-making and aid in the development of novel therapeutic options [@weinstein2013].
+The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In 2012 TCGA Research Network launched the Pan-Cancer analysis project as a globally coordinated initiative whose main objective is to assemble coherent, consistent TCGA datasets across 33 different tumor types, one of which being lung adenocarcinoma (LUAD). Each tumor type is characterized using six different genomic, proteomic, epigenomic, and transcriptional platforms. Data collected from thousands of patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. In the future, the aim is to analyse additional tumor types beyond the twelve original ones in the hopes that the pan cancer project will one day inform clinical decision-making and aid in the development of novel therapeutic options [@weinstein2013].
 
-## Jaccard index
+The TCGA project provides a vast amount of RNA-seq data. RNA sequencing (RNA-seq) data makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
+
+## Computational Tools
+
+### Jaccard index
 
 The Jaccard index is a widely known measure for the similarity between finite sample sets. The restricted domain ranges from zero to one. A Jaccard index close to one indicates a high similarity of the sample sets [@jaccard1901].
 
@@ -110,7 +114,8 @@ J(A,B)
 = \frac{A \cap B}{A \cup B}
 $$
 
-## Principal Component Analysis (PCA)
+## Methods for Dimensional Reduction
+### Principal Component Analysis (PCA)
 
 Principal component analysis (PCA) is a procedure used to perform linear dimension reduction. The goal is to reduce the dimension of a given dataset whilst losing as little information as possible by retaining a maximum of the standardized dataset's variation [@ringner2008].
 
@@ -118,7 +123,7 @@ Principal components (PC) are a set of new orthogonal variables that are made up
 
 PCA is a useful tool for genome-wide expression studies and often serves as a first step before clustering or classification of the data. Dimension reduction is a necessary step for easy data exploration and visualization [@ringner2008].
 
-## Uniform Manifold Approximation and Projection (UMAP)
+### Uniform Manifold Approximation and Projection (UMAP)
 
 Uniform manifold approximation and projection (UMAP) is a k-neighbor graph based algorithm that is used for non-linear dimension reduction [@smets2019] [@mcinnes2018].
 
@@ -126,15 +131,16 @@ After data normalization, the Euclidean distances between points in a two-dimens
 
 UMAP is a newer method than PCA and it is generally believed to be easier to interpret and to group data than by using PCA. Furthermore, UMAP has the advantage of not requiring linear data [@milosevic2022].
 
-## Gene Set Enrichment Analysis (GSEA)
+## Methods for Gene Scoring
+### Gene Set Enrichment Analysis (GSEA)
 
-Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two gene expression states are significantly different from each other or not [@subramanian2007]. In this project we compared gene expression profiles between healthy and tumorous tissue of LUAD.
+Gene set enrichment analysis (GSEA) is a computational method that is used to determine whether two pathway expression states are significantly different from each other or not [@subramanian2007]. In this project we compared pathway expression profiles between healthy and tumorous tissue of LUAD.
 
-Two datasets are compared and the genes are sorted from the most to the least differential expression between the datasets according to their p-values. This creates a ranked list L.
+Two datasets are compared and the genes are sorted from the most to the least differential expression between the datasets according to their p-values, which are calculated using a statistical test like a t- or Wilcoxon test between the the genes of the datasets. This creates a ranked list \(L\).
 
-Referring to an *a priori* defined set of genesets S, the goal is to locate for each pathway of S where its corresponding genes fall in L and find a discerning trend. If the genes of a given pathway are randomly distributed in L then the pathway is assumed to not significantly contribute to the particular tumor's phenotype. However if the genes are primarily clustered at the top or the bottom of L then a phenotypic significance of the given pathway can be assumed.
+Referring to an *a priori* defined set of genesets \(S\), the goal is to locate for each pathway of \(S\) where its corresponding genes fall in \(L\) and find a discerning trend. If the genes of a given pathway are randomly distributed in \(L\) then the pathway is assumed to not significantly contribute to the particular phenotype. However if the genes are primarily clustered at the top or the bottom of \(L\) then a phenotypic significance of the given pathway can be assumed.
 
-To determine the location of the genes, an enrichment score is calculated for each pathway. For this, a running-sum statistic is calculated as the list L is ran through. The running-sum is increased every time a gene belonging to the pathway in question is encountered and decreased otherwise. An enrichment score is thus calculated for each pathway. The enrichment score is defined as the maximum deviation from zero of the running-sum.
+To determine the distribution of the genes from pathway \(S\)<i>i</i> in L, an enrichment score is calculated for each pathway. For this, a running-sum statistic is calculated as the list \(L\) is ran through. The running-sum is increased every time a gene belonging to the pathway in question is encountered and decreased otherwise. An enrichment score is thus calculated for each pathway. The enrichment score is defined as the maximum deviation from zero of the running-sum.
 
 Lastly, adjustment for multiple hypothesis testing is performed by normalizing the enrichment score for each pathway to account for its size and a normalized enrichment score is obtained.
 
@@ -142,9 +148,9 @@ GSEA is a useful tool for interpretation of gene expression data.
 
 [@subramanian2005]
 
-## Gene Set Variation Analysis (GSVA)
+### Gene Set Variation Analysis (GSVA)
 
-Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway activities based on gene expression data. Contrarily to the aforementioned GSEA, GSVA does not rely on phenotypic characterization of the datasets into two categories but rather quantifies enrichment in a sample-wise manner which makes GSVA the better choice to perform on the tcga_exp dataset.
+Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway activities based on gene expression data. Contrarily to the aforementioned GSEA, GSVA does not rely on phenotypic characterization of the datasets into two categories but rather quantifies enrichment in a sample-wise manner which makes GSVA the better choice to perform on the `tcga_exp`.
 
 GSVA estimates a cumulative distribution for each gene over all samples. The gene expression values are then converted according to these estimated cumulative distributions into scaled values. Based on these new values, the genes are ranked in each sample. Next, the genes are classified into two distributions and a Komogorow-Smirnow statistic is calculated to judge how similar the distributions are to each other and to obtain an ES.
 
@@ -152,7 +158,7 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 [@hanzelmann2013]
 
-# Abbreviations
+\addchap{Abbreviations}
 
 |         |                                                                  |
 |---------|------------------------------------------------------------------|
@@ -199,9 +205,8 @@ At the beginning of this project we were given four datasets, two of which conta
 
 The first RNA-seq dataset is a data frame containing RNA-seq data from almost 10,000 TCGA cancer patients for 33 different tumor types. The data stored within that data frame was used to perform pan cancer analysis and to create a logistic regression model. The second RNA-seq dataset is a smaller data frame containing the TCGA expression data of tumor tissue and the corresponding healthy tissue for five different cancer types. A focused analysis was performed on this second dataset.
 
-RNA sequencing (RNA-seq) data makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
 
-All expression data was log2(TPM) transformed. Log2 Transformation is a commonly used tool to reduce skewness in data and to make it more conform to a normal distribution. Here, TPM stands for 'Transcripts per million' and refers to a method of RNA-seq normalization in which one first accounts for gene length before adjusting for sequencing depth. A possible perk of TPM is the reduction of type I and type II errors which would otherwise falsify downstream analysis results by accounting for gene length first [@yuen2022].
+All expression data were already log2(TPM) transformed. Log2 Transformation is a commonly used tool to reduce skewness in data and to make it more conform to a normal distribution. Here, TPM stands for 'Transcripts per million' and refers to a method of RNA-seq normalization in which one first accounts for gene length before adjusting for sequencing depth. A possible perk of TPM is the reduction of type I and type II errors which would otherwise falsify downstream analysis results by accounting for gene length first [@yuen2022].
 
 ## Overview of used packages
 
@@ -285,11 +290,10 @@ The Molecular Signature Database (MSigDB) is a database offering a variety of an
 
 ## Data cleanup on TCGA expression dataset
 
-In order to enable an efficient workflow on the big TCGA dataset containing cancer patient RNA-seq expression data, the total amount of genes had to be reduced. In a first cleanup step the amount and distribution of NAs was analysed. There were no NAs in the dataset itself, which means that no patients had to be removed. Next all genes that showed a very low standard deviation were removed from the dataset. As a cutoff value the value of the 50% quantile of the standard deviation distribution was used.
+In order to enable an efficient workflow on the big TCGA dataset containing cancer patient RNA-seq expression data, the total amount of genes had to be reduced. In a first cleanup step the amount and distribution of NAs was analysed. Next all genes that showed a very low standard deviation were removed from the dataset. As a cutoff value the value of the 50% quantile of the standard deviation distribution was used.
 
 To decrease the amount of genes even further and focus the analysis on important genes a biotype analysis was conducted. Using the BiomaRt package [@biomaRt2005] the biotypes of all genes in the dataset were retrieved and compared to biotypes of the given geneset list, as well as the geneset lists retrieved from MSigDB by using the native msigdbr package [@msigdbr]. All genes linked to biotypes that were not found in the biotypes of said genesets and possible pseudogenes were removed. However genes belonging to lncRNA or siRNA were kept as they also have a significance in various biological processes [@ondrej2016].
 
-In the end the expression dataset could be reduced from over 60.000 genes to roughly 17.000 while keeping all 9741 patients.
 
 ## Data cleanup on TCGA tumor vs normal dataset
 
@@ -305,7 +309,7 @@ The cleaned data consisting of roughly 17,000 genes was saved to a separate file
 
 ### Dimensionality reduction
 
-The first step to pan cancer comparison was to evaluate potential clusters in our data. To uncover these, a combination of a PCA and UMAP was conducted on the cleaned tcga expression dataset. First, the PCA using the RunPCA command from the Seurat package [@R-SeuratObject] and later on the UMAP analysis was done on the produced principle components using the uwot package [@uwot]. Performing the PCA before the UMAP analysis was necessary to minimize artefacts caused by correlating variables in the dataset. Principle components do not correlate by nature. The UMAP results per patient were then plotted with ggplot2 [@ggplot2] and colored according to their corresponding tumor type in order to gain insight into cluster formation.
+To uncover clusters in the data, a combination of a PCA and UMAP was conducted on the cleaned tcga expression dataset. First, the PCA using the `RunPCA` command from the Seurat package [@R-SeuratObject] and later on the UMAP analysis was done on the produced principle components using the uwot package [@uwot]. For this UMAO calculation the "cosine" metric was used. These two methods enable us to reduce the multidimensional dataset into a low dimension plot. Performing the PCA before the UMAP analysis was necessary to minimize artefacts caused by correlating variables in the dataset [@mcinnes2018]. Principle components do not correlate by nature. The UMAP results per patient were then plotted with ggplot2 [@ggplot2] and colored according to their corresponding tumor type in order to gain insight into cluster formation.
 
 The dataset was subsetted into dataframes containing only patients of one cancer type. The aforementioned workflow was then used on each of the cancer type subsets. All of the created plots were then collected into one overview of intra-cancer clusters. To analyse these, clusters k-means clustering [@R-base] was performed aiming to assign each of the patients to their corresponding cluster. The ideal number of clusters was evaluated using the silhouette method with the help of the function from the cluster package [@cluster]. Based on these assignments, foldchanges between each cluster and the rest of the patients were calculated using the foldchange function [@gtools]. Additionally, a two sided Wilcoxon test was conducted on each cluster and the rest of the data points. These two metrics were used to create a volcano plot showing the -log10 of the Wilcoxon p-values plotted against log2 foldchanges of each gene between the clusters. These plots were created using the EnhancedVolcano package [@enhancedvolcano]. From these plots the most significant and over or under expressed genes were extracted.
 
@@ -313,11 +317,6 @@ The dataset was subsetted into dataframes containing only patients of one cancer
 
 In order to compare cancer types with each other, the genes needed to be condensed into more easily understandable metrics. For this we evaluated the enrichment of genes that play a role in the same pathways over all cancer types by conducting a GSVA. Two different geneset lists were used: gene ontology genesets and curated genesets, both retrieved from MSigDB, as mentioned above. Genesets that showed little overlap with the dataset genes, meaning below 95% of the pathways genes could be found in the dataset, were removed. Going into the GSVA, both geneset lists consisted of roughly 3,000 genesets. To conduct the GSVA a package of the same name was used, that also enables multi-core calculations. This was crucial in order to cut down on calculation time [@gsva]. Afterwards, pathways that showed a low standard deviation were removed from the resulting pathway enrichment matrix. The patient pathway enrichment matrix was turned into a tumor type pathway enrichment matrix by subsetting it into the different tumor types and calculating the means per pathway over all patients of one tumor type. A heatmap was produced using the ComplexHeatmap package [@complexheatmap]. To compare these two geneset lists concerning their information value, this workflow was repeated for each geneset list.
 
-For quality control, PCA and UMAP were conducted on the newly created pathway patient enrichment matrices, to check whether the clusters that could be seen on the first UMAP plot could in part be found again. After quality control we decided to keep working with the gene ontology genesets (C5 BP).
-
-After subsetting the pathway patient enrichment matrix into one data frame for LUAD and the other cancer types, foldchanges were calculated and a two sided Wilcoxon test was conducted between the means per pathway for all LUAD patients and all other patients. With these values another volcano plot was created and the interesting pathways were extracted.
-
-The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis.
 
 ## Focused analysis
 
@@ -347,12 +346,16 @@ Finally, volcano plots were created for selected pathways to see which genes wer
 
 ## Regression
 
-To use the information gathered by the pan cancer analysis a regression model with the purpose of identifying potential LUAD patients from RNA-seq data was added to the project. In order to make the binary decision between LUAD and non-LUAD patients, a logistic regression model was trained. First of all, the cleaned dataset was split 70/30 into a training and testing dataset respectively. Additionally, every LUAD patient in these datasets was marked with a 1 and non-LUAD patients with a 0, so that the model can be evaluated later on.
+### Goal of Regression
+To use the information gathered by the pan cancer analysis a regression model with the purpose of identifying  LUAD risk patients from RNA-seq data was added to the project. In order to make the binary classification between LUAD and non-LUAD patients, a logistic regression model was trained. First of all, the cleaned dataset was split into a 70 to 30 percent ratio into a training and testing dataset respectively. Additionally, every LUAD patient in these datasets was marked with a 1 and all other cancer type patients with a 0, so that the model can be evaluated later on.
 
+### Feature Selection
 In an effort to find genes that could be used as explaining variables, gene foldchanges [@gtools] between LUAD and other cancer types were calculated using the cleaned dataset. The genes were additionally tested for correlation and for all highly correlating genes, one of them was removed from the dataset. The 10 most overexpressed and 10 most underexpressed genes were chosen for further testing. As a quality control PCA [@R-SeuratObject] and UMAP [@uwot] were conducted on all patients for these 20 chosen genes and the UMAP was plotted using ggplot2 [@ggplot2]. The colors represented the corresponding tumor type of the patient. We chose to continue with the chosen genes.
 
-A first rough model was trained using all 20 of the chosen genes and the glm function [@R-base] and specifying the model to use a binomial error distribution and a logit link. This model was then passed into the blr_step_aic_both function from the blorr package [@blorr]. This function calculates the best composition of the given 20 genes. With the best configuration the final model was trained on the training dataset.
+### Model optimization
+A first rough model was trained using all 20 of the chosen genes and the glm function [@R-base] and specifying the model to use a binomial error distribution and a logit link. The blorr package was used to dtermine the best composition of the given 20 genes [@blorr]. With the best configuration the final model was trained on the training dataset.
 
+### Performance measurments
 To evaluate the model the first step was to predict whether the patients of the testing dataset were LUAD patients. For this the native predict function [@R-base] was used. The resulting probabilities were transformed into predictions for 1 or 0 using a cutoff value of 50%. Next a confusion table was used to estimate the false-positive and false-negative rates using the known tumor type of each patient and comparing that to the predicition of the model. As a final evaluation step the package ROCR [@rocr] was used to create a ROC curve clearly showing the performance of the model.
 
 <!-- add your chapters here -->
@@ -360,6 +363,9 @@ To evaluate the model the first step was to predict whether the patients of the 
 \tableofcontents
 
 # Results
+
+## Data cleaning
+The analysis of the expression dataset showed no NAs in any of the patients, which meant none of the patients had to be removed in order to continue working with the dataset. After the further clean-up process described in part 3.4 the expression dataset could be reduced from over 60.000 genes to roughly 17.000 while keeping all 9741 patients.
 
 ## Cancer hallmark pathways
 
@@ -433,9 +439,9 @@ knitr::include_graphics("./output/4_volcano_2most_up_2most_down_pws.png")
 
 ## Pan cancer analysis
 
-### Identification of clusters in gene expression data
+### Visualisation of TCGA patients of different tumor types
 
-Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in (\textbf{Fig. \ref{fig:UMAPexpression}}). To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Notably, BRCA, LIHC, KIRP, SKCM, UVM, THCR, PCPG and PARP exhibit a well defined clustering. Additionally, LGG and GBM form a united cluster. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
+The first step to pan cancer comparison was to evaluate potential clusters in our data. Dimension reduction of the cleaned data conducted by performing PCA and UMAP results in the plot shown in (\textbf{Fig. \ref{fig:UMAPexpression}}). To identify clustering of different cancer types, the data points of each patient was colored accordingly. Based on the 33 different types occurring in the dataset, the reduced data results in approximately 16 clusters. Notably, BRCA, LIHC, KIRP, SKCM, UVM, THCR, PCPG and PARP exhibit a well defined clustering. Additionally, LGG and GBM form a united cluster. Patients suffering from LUAD show a similar gene expression indicated by the isolated, turquoise cluster in the right, bottom corner.
 
 ```{r UMAPexpression, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{UMAP plot on TCGA expression dataset} The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients cancer type', out.width='0.8\\linewidth'}
 
@@ -445,7 +451,8 @@ knitr::include_graphics("./output/3_pcaumap_on_big_dataset.png")
 
 ### Pathway enrichment
 
-The diagnosis of the cancer type a patient suffers from is not only based on the cancer's location in the body but by the molecular signature it exhibits. Different molecular changes result in a different expression of genes and therefore an abnormal regulation of pathways. This deregulation of pathways is characteristic for each cancer type. Hence, its analysis is a crucial part of this pan cancer analysis. Aiming to identify differences in pathway activities based on the cancer type, two geneset list were extracted from MSigDB. One list contained curated genesets whereas the other list contained ontology genesets. Following, GSVA was performed twice on the TCGA expression dataset; once using the curated geneset list and one time with the ontology geneset list. By utilizing the genesets separately, the better fitting geneset for the analysed dataset can be selected. In \textbf{Fig. \ref{fig:UMAPc5}} the pathway enrichment of each patient is shown with highlighted cancer type. The selected geneset list contains only ontology genesets that overlap with the genes from the expression data with more than 95%. The curated geneset list was not chosen due to less clustering after conducting GSVA (Appendix, \textbf{Fig. \ref{fig:appendix_umapC2}}) . Cancer types that result in an isolated and well defined cluster are LIHC (turquoise, upper left corner), KIRK (green, left top), THCA (pink, under KIRK), PRAD (blue, center), PCPG (blue, top), LGG (green, right center) and LAML (green right bottom).
+
+The diagnosis of the cancer type a patient suffers from is not only based on the cancer's location in the body but by the molecular signature it exhibits. Different molecular changes result in a different expression of genes and therefore an abnormal regulation of pathways. This deregulation of pathways is characteristic for each cancer type. A pathway enrichment analysis, for example using GSVA, makes the data easier to be interpreted as a pathway upregulation conveys more information than a single gene.  Hence, its analysis is a crucial part of this pan cancer analysis. Aiming to identify differences in pathway activities based on the cancer type, two geneset list were extracted from MSigDB, as described in section 3.3. One list contained curated genesets whereas the other list contained ontology genesets. Following, GSVA was performed twice on the TCGA expression dataset; once using the curated geneset list and one time with the ontology geneset list for quality control. By utilizing the genesets separately, the better fitting geneset for the analysed dataset can be selected. In \textbf{Fig. \ref{fig:UMAPc5}} the pathway enrichment of each patient is shown with highlighted cancer type. The selected geneset list contains only ontology genesets that overlap with the genes from the expression data with more than 95%. The curated geneset list was not chosen due to less clustering after conducting GSVA (Appendix, \textbf{Fig. \ref{fig:appendix_umapC2}}) . Cancer types that result in an isolated and well defined cluster are LIHC (turquoise, upper left corner), KIRK (green, left top), THCA (pink, under KIRK), PRAD (blue, center), PCPG (blue, top), LGG (green, right center) and LAML (green right bottom).
 
 ```{r UMAPc5, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Pathway enrichment based on cancer type.} The x-axis is defined by the first umap component, whereas the y-axis assigned to the second component. The data plots are colored by the patients cancer type', out.width='0.8\\linewidth'}
 
@@ -462,9 +469,10 @@ knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 
 
 
+
 ### Geneset enrichment comparison between LUAD and other cancer types
 
-The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The volcano plot (\textbf{Fig. \ref{fig:VolcanoplotLUADrest}}) helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients. It shows the log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the Wilcoxon test.
+The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis. The volcano plot (\textbf{Fig. \ref{fig:VolcanoplotLUADrest}}) helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients. It shows the log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the two-sided Wilcoxon test.
 
 ```{r VolcanoplotLUADrest, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot for geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset.} dotted lines indicating the alpha value and foldchange values of -1 and 1.', out.width = '0.85\\linewidth'}
 
