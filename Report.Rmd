@@ -289,23 +289,14 @@ All expression data were already log2(TPM) transformed. Log2 Transformation is a
 
 The Molecular Signature Database (MSigDB) is a database offering a variety of annotated genesets publicly available for analysis. The import of genesets from MSigDB into RStudio can easily be performed using the R package "msigdbr" [@msigdbr] which allows the extraction of species-specific genesets of the category of interest. Afterwards, the prefix corresponding to the source of the geneset was removed so as to achieve coherent and well-arranged pathway names. The resulting output was a list containing all selected genesets with the comprising genes saved in a vector and each element named after the pathway stored within. The aim of this was to extract curated (C2) and ontology (C5 BP) genesets which were used for focused analysis as well as pan cancer analysis. The curated genesets that regulate the metabolism of cells were also used for comparison with known pathways that are often deregulated in cancer cells.
 
-## Data cleanup on TCGA expression dataset
+## Data cleanup on TCGA datasets
 
-In order to enable an efficient workflow on the big TCGA dataset containing cancer patient RNA-seq expression data, the total amount of genes had to be reduced. In a first cleanup step the amount and distribution of NAs was analysed. Next all genes that showed a very low standard deviation were removed from the dataset. As a cutoff value the value of the 50% quantile of the standard deviation distribution was used.
+In order to enable an efficient workflow on the big TCGA dataset containing cancer patient RNA-seq expression data, the total amount of genes had to be reduced. In a first cleanup step the amount and distribution of NAs was analysed. Next all genes that showed a very low standard deviation were removed from the dataset. As a cutoff value the value of the 50% quantile of the standard deviation distribution was used.To decrease the amount of genes even further and focus the analysis on important genes a biotype analysis was conducted. Using the BiomaRt package [@biomaRt2005] the biotypes of all genes in the dataset were retrieved and compared to biotypes of the given geneset list, as well as the geneset lists retrieved from MSigDB by using the native msigdbr package [@msigdbr]. All genes linked to biotypes that were not found in the biotypes of said genesets and possible pseudogenes were removed. However genes belonging to lncRNA or siRNA were kept as they also have a significance in various biological processes [@ondrej2016].
 
-To decrease the amount of genes even further and focus the analysis on important genes a biotype analysis was conducted. Using the BiomaRt package [@biomaRt2005] the biotypes of all genes in the dataset were retrieved and compared to biotypes of the given geneset list, as well as the geneset lists retrieved from MSigDB by using the native msigdbr package [@msigdbr]. All genes linked to biotypes that were not found in the biotypes of said genesets and possible pseudogenes were removed. However genes belonging to lncRNA or siRNA were kept as they also have a significance in various biological processes [@ondrej2016].
+In preparation for the focused analysis, the RNA-seq data from the small TCGA dataset for LUAD patients was extracted and cleaned using the same workflow as explained before. However this time only zero variance genes were deleted instead of low variance.
 
-## Data cleanup on TCGA tumor vs normal dataset
 
-In preparation for the focused analysis, the RNA-seq data from the small TCGA dataset for LUAD was extracted and cleaned.
-
-For LUAD, the raw gene expression data included roughly 20,000 genes for 58 patients in normal and tumor tissue.
-
-The first step was to check whether NA values were present, which was not the case. Next, all zero variance genes were removed which is prerequisite for the Shapiro-Wilk test performed in the focused analysis. In addition, the biotypes that were not present in the genesets relevant for later analysis were filtered out. For this the biomaRt package [@R-biomaRt] was used and all pseudogenes were removed. The remaining biotypes corresponded to the genesets which were predominantly protein-coding genes and few lncRNAs.
-
-The cleaned data consisting of roughly 17,000 genes was saved to a separate file.
-
-## Pancancer analysis
+## Pan cancer analysis
 
 ### Dimensionality reduction
 
@@ -369,7 +360,7 @@ To evaluate the model the first step was to predict whether the patients of the 
 
 ## Data cleaning
 
-The analysis of the expression dataset showed no NAs in any of the patients, which meant none of the patients had to be removed in order to continue working with the dataset. After the further clean-up process described in part 3.4 the expression dataset could be reduced from over 60.000 genes to roughly 17.000 while keeping all 9741 patients.
+The analysis of the expression dataset showed no NAs in any of the patients, which meant none of the patients had to be removed in order to continue working with the dataset. After the further clean-up process described in part 3.4 the expression dataset could be reduced from over 60.000 genes to roughly 17.000 while keeping all 9741 patients. The tumor vs. normal datset for LUAD patients was reduced to around 17.000 genes for 58 patients.
 
 ## Cancer hallmark pathways
 
