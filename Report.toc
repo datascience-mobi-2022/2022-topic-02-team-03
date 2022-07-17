@@ -50,14 +50,7 @@
 \contentsline {subsection}{\numberline {4.2.3}Geneset Enrichment Comparison Between LUAD and Other Cancer Types}{29}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Comparison of Clusters Within LUAD}{29}{subsection.4.2.4}%
 \contentsline {section}{\numberline {4.3}Regression}{30}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Outlook}{32}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Analysis of Metastasis Formation in LUAD}{32}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Smoker vs non-smoker}{32}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Identification of Immune Subtypes}{32}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Finding Defining Trends Between LUAD Clusters}{33}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Prediction of Cancer Stage}{33}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Epigenetics}{33}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Experimental Validation}{33}{section.5.7}%
-\contentsline {chapter}{\numberline {6}References}{34}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Appendix}{41}{chapter.7}%
+\contentsline {section}{\numberline {4.4}Outlook}{31}{section.4.4}%
+\contentsline {chapter}{\numberline {5}References}{33}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Appendix}{40}{chapter.6}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

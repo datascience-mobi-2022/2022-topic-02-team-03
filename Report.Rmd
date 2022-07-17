@@ -162,49 +162,91 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 \addchap{Abbreviations}
 
-|         |                                                                  |
-|---------|------------------------------------------------------------------|
-| AML     | Acute myeloid leukemia                                           |
-| AUC     | Area under the curve                                             |
-| BRCA    | Breast cancer                                                    |
-| CALCA   | Calcitonin Related Polypeptide Alpha                             |
-| CESC    | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
-| DLBC    | Lymphoid Neoplasm Diffuse Large B-cell Lymphoma                  |
-| EMT     | Epithelial to mesenchymal transition                             |
-| ESCA    | Esophageal carcinoma                                             |
-| FGA     | Fibrinogen alpha chain                                           |
-| GBM     | Glioblastoma multiformae                                         |
-| GSEA    | Gene Set Enrichment Analysis                                     |
-| GSVA    | Gene Set Variation Analysis                                      |
-| HIF1a   |                                                                  |
-| HNSC    | Head and neck squamous cell carcinoma                            |
-| INSL4   | Gene encoding insulin-like 4 protein                             |
-| KICH    | Kidney chromophobe                                               |
-| KIRC    | Kidney renal clear-cell carcinoma                                |
-| KIRP    | Kidney renal papillary cell carcinoma                            |
-| LAML    | Acute Myeloid Leukemia                                           |
-| LGG     | Low grade glioma                                                 |
-| LIHC    | Liver hepatocellular carcinoma                                   |
-| LUAD    | Lung adenocarcinoma                                              |
-| MSigDB  | Molecular Signature Database                                     |
-| ORC     |                                                                  |
-| OV      | Ovarian serous cystadenocarcinoma                                |
-| PAAD    | Pancreatic adenocarcinoma                                        |
-| PC      | Principal component                                              |
-| PCA     | Principal Component Analysis                                     |
-| PCPG    | Pheochromocytoma and Paraganglioma                               |
-| PRAD    | Prostate adenocarcinoma                                          |
-| RNA-seq | RNA sequencing                                                   |
-| ROC     | Receiver operating characteristic                                |
-| SARC    | Sarcoma                                                          |
-| SKCM    | Skin Cutaneous Melanoma                                          |
-| TCGA    | The Cancer Genome Atlas                                          |
-| THCA    | Thyroid carcinoma                                                |
-| TPM     | Transcripts per million                                          |
-| UCEC    | Uterine Corpus Endometrial Carcinoma                             |
-| UMAP    | Uniform Manifold Approximation and Projection                    |
-| UVM     | Uveal melanoma                                                   |
-| VEGF    | Vascular endothelial growth factor                               |
++-------------+------------------------------------------------------------------+
+| ADGRF1      | Adhesion G protein-coupled receptor F1                           |
++-------------+------------------------------------------------------------------+
+| AML         | Acute myeloid leukemia                                           |
++-------------+------------------------------------------------------------------+
+| AUC         | Area under the curve                                             |
++-------------+------------------------------------------------------------------+
+| BRCA        | Breast cancer                                                    |
++-------------+------------------------------------------------------------------+
+| CALCA       | Calcitonin Related Polypeptide Alpha                             |
++-------------+------------------------------------------------------------------+
+| CESC        | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
++-------------+------------------------------------------------------------------+
+| DLBC        | Lymphoid Neoplasm Diffuse Large B-cell Lymphoma                  |
++-------------+------------------------------------------------------------------+
+| EMT         | Epithelial to mesenchymal transition                             |
++-------------+------------------------------------------------------------------+
+| ESCA        | Esophageal carcinoma                                             |
++-------------+------------------------------------------------------------------+
+| FGA         | Fibrinogen alpha chain                                           |
++-------------+------------------------------------------------------------------+
+| GBM         | Glioblastoma multiformae                                         |
++-------------+------------------------------------------------------------------+
+| GSEA        | Gene Set Enrichment Analysis                                     |
++-------------+------------------------------------------------------------------+
+| GSVA        | Gene Set Variation Analysis                                      |
++-------------+------------------------------------------------------------------+
+| HIF1a       | hypoxia inducible factor 1 subunit alpha                         |
++-------------+------------------------------------------------------------------+
+| HNSC        | Head and neck squamous cell carcinoma                            |
++-------------+------------------------------------------------------------------+
+| INSL4       | Gene encoding insulin-like 4 protein                             |
++-------------+------------------------------------------------------------------+
+| KICH        | Kidney chromophobe                                               |
++-------------+------------------------------------------------------------------+
+| KIRC        | Kidney renal clear-cell carcinoma                                |
++-------------+------------------------------------------------------------------+
+| KIRP        | Kidney renal papillary cell carcinoma                            |
++-------------+------------------------------------------------------------------+
+| LAML        | Acute Myeloid Leukemia                                           |
++-------------+------------------------------------------------------------------+
+| LGG         | Low grade glioma                                                 |
++-------------+------------------------------------------------------------------+
+| LIHC        | Liver hepatocellular carcinoma                                   |
++-------------+------------------------------------------------------------------+
+| LUAD        | Lung adenocarcinoma                                              |
++-------------+------------------------------------------------------------------+
+| MSigDB      | Molecular Signature Database                                     |
++-------------+------------------------------------------------------------------+
+| ORC         |                                                                  |
++-------------+------------------------------------------------------------------+
+| OV          | Ovarian serous cystadenocarcinoma                                |
++-------------+------------------------------------------------------------------+
+| PAAD        | Pancreatic adenocarcinoma                                        |
++-------------+------------------------------------------------------------------+
+| PC          | Principal component                                              |
++-------------+------------------------------------------------------------------+
+| PCA         | Principal Component Analysis                                     |
++-------------+------------------------------------------------------------------+
+| PCPG        | Pheochromocytoma and Paraganglioma                               |
++-------------+------------------------------------------------------------------+
+| PRAD        | Prostate adenocarcinoma                                          |
++-------------+------------------------------------------------------------------+
+| RNA-seq     | RNA sequencing                                                   |
++-------------+------------------------------------------------------------------+
+| ROC         | Receiver operating characteristic                                |
++-------------+------------------------------------------------------------------+
+| SARC        | Sarcoma                                                          |
++-------------+------------------------------------------------------------------+
+| SKCM        | Skin Cutaneous Melanoma                                          |
++-------------+------------------------------------------------------------------+
+| TCGA        | The Cancer Genome Atlas                                          |
++-------------+------------------------------------------------------------------+
+| THCA        | Thyroid carcinoma                                                |
++-------------+------------------------------------------------------------------+
+| TPM         | Transcripts per million                                          |
++-------------+------------------------------------------------------------------+
+| UCEC        | Uterine Corpus Endometrial Carcinoma                             |
++-------------+------------------------------------------------------------------+
+| UMAP        | Uniform Manifold Approximation and Projection                    |
++-------------+------------------------------------------------------------------+
+| UVM         | Uveal melanoma                                                   |
++-------------+------------------------------------------------------------------+
+| VEGF        | Vascular endothelial growth factor                               |
++-------------+------------------------------------------------------------------+
 
 # Methods
 
@@ -392,11 +434,13 @@ knitr::include_graphics("./output/3_UMAPs.png")
 ```
 
 LUAD also clustered into two clusters, however these were not as clear as the ones shown before (Appendix, \textbf{Fig. \ref{fig:appendix_luadumap}}). To further our understanding of LUAD the gene activity of the clusters was compared using a volcano plot (\textbf{Fig. \ref{fig:volcanoinnerluad}}).
+
 ```{r volcanoinnerluad, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot comparing the two observed clusters.} Each datapoint is one gene, the most differentially expressed genes are marked by name.', out.width = '0.80\\linewidth'}
 
 knitr::include_graphics("./output/3_volcano_plot_comparison_LUAD_clusters.pdf")
 ```
-A variety of genes seem to differ significantly between the two LUAD clusters. 
+
+A variety of genes seem to differ significantly between the two LUAD clusters.
 
 ## Regression
 
@@ -487,37 +531,9 @@ It was shown that the two clusters found do differ in very specific aspects of b
 
 Since LUAD patients clustered clearly throughout the UMAP plot before, we expected to be able to built a rather robust logistic regression to differentiate between LUAD and non-LUAD patients. This expectation was further fueled by the LUAD patients also clustering during quality control using only the genes we chose as our explaining variables (\textbf{Fig. \ref{fig:appendix_regressionqc1}}). The confusion table that was acquired from predicting values in the testing dataset shows a low amount false-positives and a high number of true-negatives. The model seems to be able to recognize clear non-LUAD patients fairly easily. However there are 27 false-negatives, which means that 16.6 % of all LUAD patients have not been labelled right. The reason for those false-negatives could be the fact that while LUAD patients show a clear cluster there are some non-LUAD patients in the same cluster. The patients that are close to these other cancer types are at risk of wrongfully being labelled as the neighbouring cancer type, as it is shown in the quality control plot (\textbf{Fig. \ref{fig:appendix_regressionqc2}}). Nevertheless due to the high amount of patients in general (2921 total patients in the testing dataset) the accuracy of 98.6 % shows a rather reliable model. The models performance is further underlined by the ROC curve that was created during analysis. Generally the further the curve protrudes into the top left corner, the better the model is. In this case the ROC curve shows a steep progression at first and then inclines linearly. The area under curve of 0.9159 ranks this model as reliable, as generally AUC to 1 are regarded as good [@narkhede2018]. In conclusion this model could be used to reduce the amount of genes that have to be screened by RNA-seq in order to diagnose a patient with LUAD. However there still is potential to differentiate between more cancer types by using a multinomial logistic regression. Additionally neural-networks have been shown to be a more reliable and functional alternative to logistic regression. Way et al. even showed this possible solution on the same TCGA dataset [@way2018].
 
-# Outlook
+## Outlook
 
-## Analysis of Metastasis Formation in LUAD
-
-About a third of LUAD patients already present with brain metastases at the time of diagnosis and about half of all patients will eventually develop brain metastases [@shih2020]. As a cancer's ability to metastasize dramatically impacts a patient's chances of survival, a comprehensive analysis of the genetic alterations that most often lead to metastasis formation would allow to single out patients at risk for developing metastases and to treat them accordingly.
-
-The comparison of genomic expression profiles of cancer cells taken from the metastases with those taken from the primary tumor might reveal which mutations enable a lung cancer cell to metastasize.
-
-## Smoker vs non-smoker
-
-It is a well-known fact that lung cancer is a smoker's disease. However, in recent years studies have found that lung cancer incidence is decreasing in smokers and increasing in non-smokers. Furthermore, the same study states that the genomic profile of lung cancer in non-smokers differs from that in smokers. [@qiu2015]. Inspired by this study, a possible next step would be to subgroup the data into smokers and non-smokers and to compare the two groups in order to determine which pathways are differentially expressed and if the results of Qui *et al* can be replicated with our data.
-
-## Identification of Immune Subtypes
-
-Many different research groups have already set out to subtype LUAD according to immune signature defined for instance by PD-L1 expression or immune cell infiltration. Generally, the more pronounced a cancer's immune signature is, the better the cancer will respond to immunotherapy and the better a patient's chances of survival [@xu2020]. Based on the findings of the likes of Xu *et al.*, our own data could be divided according to immune signature and determining trends within each subgroup such as survival rate could be identified.
-
-## Finding Defining Trends Between LUAD Clusters
-
-Performance of UMAP and PCA on our data (\textbf{Fig. \ref{fig:appendix_luadumap}}) showed that LUAD forms two distinct clusters. Further analysis may reveal the genetic differences within LUAD that lead to clustering as well as the genetic similarities shared by samples belonging to the same cluster. Additionally, response to therapy might differ between clusters and thus patients belonging to one cluster or another might face vastly different chances of survival.
-
-## Prediction of Cancer Stage
-
-Over the course of this project we trained a logistic regression model to predict whether an individual is at risk of eventually developing LUAD. This model could be further sophisticated to additionally predict the cancer stage on the grounds of a patient's genomic profile as well as other factors like age or smoking habits. With enough training, this model could ideally be used as a less invasive alternative to the current diagnostic methods and therefore help determine an adequate treatment plan with reduced patient trauma.
-
-## Epigenetics
-
-The term epigenetics describes hereditary changes in gene expression that are not due to changes in the DNA sequence. The most common epigenetic alterations in cancer cells include global hypomethylation of repetitive DNA sequence regions and hypermethylation of tumor suppressor genes which are consequently inactivated [@esteller2008]. Analysis of the differences in methylation patterns between tumorous and healthy tissue would allow to determine which tumor suppressor genes are most commonly inactivated in LUAD through methylation. Furthermore differences in methylation patterns between LUAD and other cancer types could further help to distinguish the process of LUAD development from that of other cancers.
-
-## Experimental Validation
-
-The ultimate step of any analysis would be to seek empirical confirmation of novel findings. Since TCGA holds immunohistochemistry stained samples of tumor tissue it would be possible to directly study in what way different genomic profiles impact the development of tumors *in vivo*.
+Performance of UMAP and PCA on our data (\textbf{Fig. \ref{fig:appendix_luadumap}}) showed that LUAD forms two distinct clusters. Further analysis may reveal the genetic differences within LUAD that lead to clustering as well as the genetic similarities shared by samples belonging to the same cluster. Additionally, response to therapy might differ between clusters and thus patients belonging to one cluster or another might face vastly different chances of survival. A specific topic regarding the comparison of LUAD patient clusters would be the analysis of immune subtypes of LUAD. Many different research groups have already set out to find such subtypes according to the patients immune signature, which is defined for instance by PD-L1 expression or immune cell infiltration. Generally, the more pronounced a cancer's immune signature is, the better the cancer will respond to immunotherapy and the better a patient's chances of survival [@xu2020]. Based on the findings of the likes of Xu *et al.*, our own data could be divided according to immune signature and determining trends within each subgroup such as survival rate could be identified. Additionally, a link between immune activity and metastasis could be researched further, as roughly half of LUAD patients develop a brain metastasis [@shih2020]. This could be fueled by an immune down regulation or immunomodelling. Another clinically relevant topic for further research would be to investigate differences in smokers and non-smokers that suffer from LUAD. It is a well-known fact that lung cancer is a smoker's disease. However, in recent years studies have found that lung cancer incidence is decreasing in smokers and increasing in non-smokers. Furthermore, the same study states that the genomic profile of lung cancer in non-smokers differs from that in smokers. [@qiu2015]. Inspired by this study, a possible next step would be to subgroup the data into smokers and non-smokers and to compare the two groups in order to determine which pathways are differentially expressed and if the results of Qui *et al* can be replicated with our data. For an easier diagnosis during biopsy of early stage cancer cells an improved logistic regression model could be developed. Over the course of this project we trained a logistic regression model to predict whether an individual is at risk of eventually developing LUAD. This model could be further sophisticated to additionally predict the cancer stage on the grounds of a patient's genomic profile as well as other factors like age or smoking habits. With enough training, this model could ideally be used as a less invasive alternative to the current diagnostic methods and therefore help determine an adequate treatment plan with reduced patient trauma. In order to really enhance analysis and modelling, not only transcriptomic data but also epigenetic data could be used to gain more insights into the cancers behaviour, as especially DNA methylation and a lack of such is a crucial driver in many cancer types [@esteller2008]. This would enable a more precise knowledge of the mutagen mechanisms, like tumor suppressor inactivation and proto-oncogene activation. In the end on of the most important steps following our bioinformatical analysis would be experimental validation of our findings and hypothesis. Especially differences in tissue and cells could be studied with different methods like immuno-histochemic staining. The TCGA project also holds slides of stained cancer tissue, which could be used as a first step for studying the impact of genomic mutations on *in vivo* tumor cells.
 
 # References
 
@@ -545,11 +561,15 @@ The ultimate step of any analysis would be to seek empirical confirmation of nov
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | cluster         | cluster analysis of data                                                                   | @cluster           |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| ComplexHeatmap  | arrange multiple heatmaps                                                                  | [@complexheatmap]  |
+| Complex         | arrange multiple heatmaps                                                                  | [@complexheatmap]  |
+|                 |                                                                                            |                    |
+| Heatmap         |                                                                                            |                    |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | edgeR           | assess differential expression in gene expression profiles                                 | @edgeR             |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| EnhancedVolcano | produce improved volcano plots                                                             | [@enhancedvolcano] |
+| Enhanced        | produce improved volcano plots                                                             | [@enhancedvolcano] |
+|                 |                                                                                            |                    |
+| Volcano         |                                                                                            |                    |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | enrichplot      | visualization of geneset enrichment results (GSEA)                                         | @enrichplot        |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
