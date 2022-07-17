@@ -5,7 +5,7 @@
 <br/> **Tutor:** Wangjun Hu
 
 # Abstract 
-## Biological Background and Motivation
+## Biological Background and Objectives
 Lung adenocarcinoma (LUAD) is the most common type of non-small cell lung cancer. It distinguishes itself through its particularly low 5-year overall survival rate of merely 18%. Knowing those facts it becomes evident as to why LUAD is an intriguing research topic and so over the course of our project, we set out to analyse gene expression profiles of LUAD patients before and after developing the disease as well as compare LUAD to 32 other cancer types. 
 <br/>By doing so we managed to gain a better understanding over which specific gain-of-function and loss-of-function gene mutations drive the development of LUAD through gene expression deregulation and we were able to create a logistic regression model that can predict whether a person will eventually develop LUAD based on their current gene expression profiles.
 ## Our Data
