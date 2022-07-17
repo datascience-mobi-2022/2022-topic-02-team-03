@@ -80,7 +80,7 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
     \vspace{\stretch{2}}
 
-    {\Large
+    {\normalsize
         \begin{tabular}{rl}
             Authors & Paul Brunner, Marie Kleinert, Felipe Stünkel, Chloé Weiler\\
             Submitted on &18.07.2022\\
