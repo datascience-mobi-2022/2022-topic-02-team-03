@@ -97,14 +97,13 @@ linestretch: 1.15
 
 \end{titlepage}
 ```
-
 \tableofcontents
 
 # Introduction
 
 ## Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases [@wang2020]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations [@hanahan2011; @peng2018]. This pan cancer project helps to gain an insight into which mutations drive cancer development, by deciphering the gene expression within tumor cells.\newline The Cancer Genome Atlas (TCGA) is a is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles[@tomczak2015]. It also provides a vast amount of RNA-seq data that makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional activity of a cell [@marguerat2010].
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@wang2020; @li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that drive tumor formation due to numerous genetic mutations \[@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development we revert back to the pan cancer project. The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In the Pan Cancer project, data is collected from thousands of cancer patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. The TCGA project provides a vast amount of RNA sequencing (RNA-seq) data which makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
 
 ## Computational Tools
 
