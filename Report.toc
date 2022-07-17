@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {1.3.1}Jaccard index}{3}{subsection.1.3.1}%
 \contentsline {section}{\numberline {1.4}Methods for Dimensional Reduction}{3}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}Principal Component Analysis (PCA)}{3}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Uniform Manifold Approximation and Projection (UMAP)}{4}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.2}Uniform Manifold Approximation and Projection (UMAP)}{3}{subsection.1.4.2}%
 \contentsline {section}{\numberline {1.5}Methods for Gene Scoring}{4}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Gene Set Enrichment Analysis (GSEA)}{4}{subsection.1.5.1}%
 \contentsline {subsection}{\numberline {1.5.2}Gene Set Variation Analysis (GSVA)}{5}{subsection.1.5.2}%
