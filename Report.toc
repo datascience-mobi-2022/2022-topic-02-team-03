@@ -13,53 +13,51 @@
 \contentsline {chapter}{\nonumberline Abbreviations}{6}{chapter*.1}%
 \contentsline {chapter}{\numberline {2}Methods}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Our Data}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Overview of used packages}{8}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Gene Set Extraction}{10}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Data cleanup on TCGA expression dataset}{11}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Data cleanup on TCGA tumor vs normal dataset}{11}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Pancancer analysis}{12}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Dimensionality reduction}{12}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}GSVA}{12}{subsection.2.6.2}%
-\contentsline {section}{\numberline {2.7}Focused analysis}{13}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Signed-ranked list}{13}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}GSEA}{13}{subsection.2.7.2}%
-\contentsline {subsection}{\numberline {2.7.3}GSVA}{14}{subsection.2.7.3}%
-\contentsline {section}{\numberline {2.8}Regression}{14}{section.2.8}%
-\contentsline {subsection}{\numberline {2.8.1}Goal of Regression}{14}{subsection.2.8.1}%
-\contentsline {subsection}{\numberline {2.8.2}Feature Selection}{14}{subsection.2.8.2}%
-\contentsline {subsection}{\numberline {2.8.3}Model optimization}{15}{subsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.8.4}Performance measurments}{15}{subsection.2.8.4}%
-\contentsline {chapter}{\numberline {3}Results}{19}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Data cleaning}{19}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Cancer hallmark pathways}{19}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Focused analysis}{19}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}GSEA}{19}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}GSVA}{20}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}GSVA volcano plot}{22}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Pan cancer analysis}{25}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Visualisation of TCGA patients of different tumor types}{25}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Pathway enrichment}{25}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Geneset enrichment comparison between LUAD and other cancer types}{27}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Comparison of Clusters Within LUAD}{28}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Regression}{29}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Discussion}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Focused Analysis}{31}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}GSEA}{31}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}GSVA}{31}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Pan Cancer Analysis}{32}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Identification of Clusters in Gene Expression Data}{32}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Pathway Enrichment}{33}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Geneset Enrichment Comparison Between LUAD and Other Cancer Types}{35}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Comparison of Clusters Within LUAD}{36}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Regression}{37}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Outlook}{38}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Analysis of Metastasis Formation in LUAD}{38}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Smoker vs non-smoker}{38}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Identification of Immune Subtypes}{38}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Finding Defining Trends Between LUAD Clusters}{39}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Prediction of Cancer Stage}{39}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Epigenetics}{39}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Experimental Validation}{40}{section.5.7}%
-\contentsline {chapter}{\numberline {6}References}{41}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Appendix}{48}{chapter.7}%
+\contentsline {section}{\numberline {2.2}Gene Set Extraction}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Data cleanup on TCGA datasets}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Pan cancer analysis}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Dimensionality reduction}{9}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}GSVA}{10}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Focused analysis}{11}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Signed-ranked list}{11}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}GSEA}{11}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}GSVA}{11}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Regression}{12}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Goal of Regression}{12}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Feature Selection}{12}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Model optimization}{12}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Performance measurments}{13}{subsection.2.6.4}%
+\contentsline {chapter}{\numberline {3}Results}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Data cleaning}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Cancer hallmark pathways}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Focused analysis}{16}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}GSEA}{16}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}GSVA}{17}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}GSVA volcano plot}{17}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Pan cancer analysis}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Visualization of TCGA patients of different tumor types}{19}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Pathway enrichment}{20}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Geneset enrichment comparison between LUAD and other cancer types}{21}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Comparison of Clusters Within LUAD}{23}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Regression}{23}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Discussion}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Focused Analysis}{25}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}GSEA}{25}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}GSVA}{25}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Pan Cancer Analysis}{26}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Identification of Clusters in Gene Expression Data}{26}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Pathway Enrichment}{27}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Geneset Enrichment Comparison Between LUAD and Other Cancer Types}{29}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Comparison of Clusters Within LUAD}{29}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Regression}{30}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Outlook}{32}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Analysis of Metastasis Formation in LUAD}{32}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Smoker vs non-smoker}{32}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Identification of Immune Subtypes}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Finding Defining Trends Between LUAD Clusters}{33}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Prediction of Cancer Stage}{33}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Epigenetics}{33}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Experimental Validation}{33}{section.5.7}%
+\contentsline {chapter}{\numberline {6}References}{35}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Appendix}{42}{chapter.7}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
