@@ -1,45 +1,42 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Background}{4}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Computational Tools}{4}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Jaccard index}{4}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Uniform Manifold Approximation and Projection (UMAP)}{4}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Methods for Gene Scoring}{5}{subsection.1.2.3}%
-\contentsline {subsubsection}{\numberline {1.2.3.1}Gene Set Enrichment Analysis (GSEA)\newline }{5}{subsubsection.1.2.3.1}%
-\contentsline {subsubsection}{\numberline {1.2.3.2}Gene Set Variation Analysis (GSVA)}{5}{subsubsection.1.2.3.2}%
-\contentsline {section}{\numberline {1.3}Objective}{5}{section.1.3}%
-\contentsline {chapter}{\nonumberline Abbreviations}{6}{chapter*.2}%
-\contentsline {chapter}{\numberline {2}Methods}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Our Data}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Gene Set Extraction}{7}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Data cleanup on TCGA datasets}{7}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Differential Expression Analysis}{8}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}GSVA}{8}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}GSEA}{8}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Regression}{9}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Results}{10}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Data cleaning}{10}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Cancer hallmark pathways}{10}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Focused analysis}{10}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}GSEA}{10}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}GSVA}{10}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Pan cancer analysis}{12}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Visualization of TCGA patients of different tumor types}{12}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Pathway enrichment}{13}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Geneset enrichment comparison between LUAD and other cancer types}{14}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Comparison of Clusters Within LUAD}{15}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Regression}{17}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Discussion}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Focused Analysis}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Pan Cancer Analysis}{19}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Identification of Clusters in Gene Expression Data}{19}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Pathway Enrichment}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Geneset Enrichment Comparison Between LUAD and Other Cancer Types}{21}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Comparison of Clusters Within LUAD}{21}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Regression}{22}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Conclusion}{22}{subsection.4.2.6}%
-\contentsline {subsection}{\numberline {4.2.7}Outlook}{23}{subsection.4.2.7}%
-\contentsline {chapter}{\numberline {5}References}{24}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Appendix}{29}{chapter.6}%
-\contentsline {subsubsection}{\numberline {6.0.0.1}Principal Component Analysis (PCA)}{30}{subsubsection.6.0.0.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Computational Tools}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Jaccard index}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Uniform Manifold Approximation and Projection (UMAP)}{3}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Methods for Gene Scoring}{4}{subsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.3.1}Gene Set Enrichment Analysis (GSEA)\newline }{4}{subsubsection.1.2.3.1}%
+\contentsline {subsubsection}{\numberline {1.2.3.2}Gene Set Variation Analysis (GSVA)}{4}{subsubsection.1.2.3.2}%
+\contentsline {section}{\numberline {1.3}Objective}{4}{section.1.3}%
+\contentsline {chapter}{\nonumberline Abbreviations}{4}{chapter*.2}%
+\contentsline {chapter}{\numberline {2}Methods}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Our Data and Geneset Extraction}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Data cleanup on TCGA datasets}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Differential Expression Analysis}{6}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Regression}{7}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Results}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Data cleaning}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Cancer hallmark pathways}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Focused analysis}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}GSEA}{7}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}GSVA}{8}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Pan cancer analysis}{9}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Visualization of TCGA patients of different tumor types}{9}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Pathway enrichment}{10}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Geneset enrichment comparison between LUAD and other cancer types}{11}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Comparison of Clusters Within LUAD}{12}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Regression}{13}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Discussion}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Focused Analysis}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Pan Cancer Analysis}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Identification of Clusters in Gene Expression Data}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Pathway Enrichment}{15}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Geneset Enrichment Comparison Between LUAD and Other Cancer Types}{17}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Comparison of Clusters Within LUAD}{17}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Regression}{18}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Conclusion}{18}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}Outlook}{18}{subsection.4.2.7}%
+\contentsline {chapter}{\numberline {5}References}{19}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Appendix}{23}{chapter.6}%
+\contentsline {subsubsection}{\numberline {6.0.0.1}Principal Component Analysis (PCA)}{24}{subsubsection.6.0.0.1}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
