@@ -162,42 +162,75 @@ The GSVA corresponds to either the maximum deviation between both running sums o
 
 \addchap{Abbreviations}
 
-|         |                                                                  |
-|---------|------------------------------------------------------------------|
-| AML     | Acute myeloid leukemia                                           |
-| AUC     | Area under the curve                                             |
-| BRCA    | Breast cancer                                                    |
-| CALCA   | Calcitonin Related Polypeptide Alpha                             |
-| CESC    | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
-| DLBC    | Lymphoid Neoplasm Diffuse Large B-cell Lymphoma                  |
-| EMT     | Epithelial to mesenchymal transition                             |
-| ESCA    | Esophageal carcinoma                                             |
-| FGA     | Fibrinogen alpha chain                                           |
-| GBM     | Glioblastoma multiformae                                         |
-| GSEA    | Gene Set Enrichment Analysis                                     |
-| GSVA    | Gene Set Variation Analysis                                      |
-| HIF1a   |                                                                  |
-| INSL4   | Gene encoding insulin-like 4 protein                             |
-| KICH    | Kidney chromophobe                                               |
-| KIRC    | Kidney renal clear-cell carcinoma                                |
-| KIRP    | Kidney renal papillary cell carcinoma                            |
-| LGG     | Low grade glioma                                                 |
-| LIHC    | Liver hepatocellular carcinoma                                   |
-| LUAD    | Lung adenocarcinoma                                              |
-| MSigDB  | Molecular Signature Database                                     |
-| ORC     |                                                                  |
-| PAAD    | Pancreatic adenocarcinoma                                        |
-| PC      | Principal component                                              |
-| PCA     | Principal Component Analysis                                     |
-| PCPG    | Pheochromocytoma and Paraganglioma                               |
-| PRAD    | Prostate adenocarcinoma                                          |
-| RNA-seq | RNA sequencing                                                   |
-| ROC     | Receiver operating characteristic                                |
-| SARC    | Sarcoma                                                          |
-| TCGA    | The Cancer Genome Atlas                                          |
-| TPM     | Transcripts per million                                          |
-| UMAP    | Uniform Manifold Approximation and Projection                    |
-| UVM     | Uveal melanoma                                                   |
++------------+------------------------------------------------------------------+
+| AML        | Acute myeloid leukemia                                           |
++------------+------------------------------------------------------------------+
+| AUC        | Area under the curve                                             |
++------------+------------------------------------------------------------------+
+| BRCA       | Breast cancer                                                    |
++------------+------------------------------------------------------------------+
+| CALCA      | Calcitonin Related Polypeptide Alpha                             |
++------------+------------------------------------------------------------------+
+| CESC       | Cervical squamous cell carcinoma and endocervical adenocarcinoma |
++------------+------------------------------------------------------------------+
+| DLBC       | Lymphoid Neoplasm Diffuse Large B-cell Lymphoma                  |
++------------+------------------------------------------------------------------+
+| EMT        | Epithelial to mesenchymal transition                             |
++------------+------------------------------------------------------------------+
+| ESCA       | Esophageal carcinoma                                             |
++------------+------------------------------------------------------------------+
+| FGA        | Fibrinogen alpha chain                                           |
++------------+------------------------------------------------------------------+
+| GBM        | Glioblastoma multiformae                                         |
++------------+------------------------------------------------------------------+
+| GSEA       | Gene Set Enrichment Analysis                                     |
++------------+------------------------------------------------------------------+
+| GSVA       | Gene Set Variation Analysis                                      |
++------------+------------------------------------------------------------------+
+| HIF1a      |                                                                  |
++------------+------------------------------------------------------------------+
+| INSL4      | Gene encoding insulin-like 4 protein                             |
++------------+------------------------------------------------------------------+
+| KICH       | Kidney chromophobe                                               |
++------------+------------------------------------------------------------------+
+| KIRC       | Kidney renal clear-cell carcinoma                                |
++------------+------------------------------------------------------------------+
+| KIRP       | Kidney renal papillary cell carcinoma                            |
++------------+------------------------------------------------------------------+
+| LGG        | Low grade glioma                                                 |
++------------+------------------------------------------------------------------+
+| LIHC       | Liver hepatocellular carcinoma                                   |
++------------+------------------------------------------------------------------+
+| LUAD       | Lung adenocarcinoma                                              |
++------------+------------------------------------------------------------------+
+| MSigDB     | Molecular Signature Database                                     |
++------------+------------------------------------------------------------------+
+| ORC        |                                                                  |
++------------+------------------------------------------------------------------+
+| PAAD       | Pancreatic adenocarcinoma                                        |
++------------+------------------------------------------------------------------+
+| PC         | Principal component                                              |
++------------+------------------------------------------------------------------+
+| PCA        | Principal Component Analysis                                     |
++------------+------------------------------------------------------------------+
+| PCPG       | Pheochromocytoma and Paraganglioma                               |
++------------+------------------------------------------------------------------+
+| PRAD       | Prostate adenocarcinoma                                          |
++------------+------------------------------------------------------------------+
+| RNA-seq    | RNA sequencing                                                   |
++------------+------------------------------------------------------------------+
+| ROC        | Receiver operating characteristic                                |
++------------+------------------------------------------------------------------+
+| SARC       | Sarcoma                                                          |
++------------+------------------------------------------------------------------+
+| TCGA       | The Cancer Genome Atlas                                          |
++------------+------------------------------------------------------------------+
+| TPM        | Transcripts per million                                          |
++------------+------------------------------------------------------------------+
+| UMAP       | Uniform Manifold Approximation and Projection                    |
++------------+------------------------------------------------------------------+
+| UVM        | Uveal melanoma                                                   |
++------------+------------------------------------------------------------------+
 
 # Methods
 
@@ -262,8 +295,6 @@ All expression data were already log2(TPM) transformed. Log2 Transformation is a
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | knitr           | creation of citations using write_bib                                                      | @knitr2014         |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
-| limma           | "linear models for microarray data"                                                        | @limma2015         |
-+-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | msigdbr         | provides the 'Molecular Signatures Database' (MSigDB) genesets                             | @msigdbr           |
 +-----------------+--------------------------------------------------------------------------------------------+--------------------+
 | parallel        | allows for parallel computation through multi core processing                              | @parallel          |
@@ -294,7 +325,6 @@ The Molecular Signature Database (MSigDB) is a database offering a variety of an
 In order to enable an efficient workflow on the big TCGA dataset containing cancer patient RNA-seq expression data, the total amount of genes had to be reduced. In a first cleanup step the amount and distribution of NAs was analysed. Next all genes that showed a very low standard deviation were removed from the dataset. As a cutoff value the value of the 50% quantile of the standard deviation distribution was used.To decrease the amount of genes even further and focus the analysis on important genes a biotype analysis was conducted. Using the BiomaRt package [@biomaRt2005] the biotypes of all genes in the dataset were retrieved and compared to biotypes of the given geneset list, as well as the geneset lists retrieved from MSigDB by using the native msigdbr package [@msigdbr]. All genes linked to biotypes that were not found in the biotypes of said genesets and possible pseudogenes were removed. However genes belonging to lncRNA or siRNA were kept as they also have a significance in various biological processes [@ondrej2016].
 
 In preparation for the focused analysis, the RNA-seq data from the small TCGA dataset for LUAD patients was extracted and cleaned using the same workflow as explained before. However this time only zero variance genes were deleted instead of low variance.
-
 
 ## Pan cancer analysis
 
