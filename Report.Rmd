@@ -49,8 +49,8 @@ header-includes:
 geometry:
   - left=2.50cm
   - right=2.50cm
-  - top=2.1cm
-  - bottom=2.1cm
+  - top=2.0cm
+  - bottom=2.0cm
   - includehead
   - includefoot
 csl: [report/cell.csl]
@@ -95,7 +95,7 @@ bibliography: [report/packages.bib, report/Citations.bib]
 
 ## Biological Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases \[@wang2020\] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations \[@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases [@wang2020] and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that essentially cause metabolic reprogramming, immune evasion and uncontrolled proliferation due to numerous genetic mutations [@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development and how to best treat different cancer types, one must start by deciphering the intricate workings of gene expression regulation within a tumor cell. In our case this feat was achieved with the help of the pan cancer project.
 
 ## The Pan Cancer Project
 
@@ -391,6 +391,13 @@ After running separate PCA and UMAP analysis on patients for each tumor type the
 knitr::include_graphics("./output/3_UMAPs.png")
 ```
 
+LUAD also clustered into two clusters, however these were not as clear as the ones shown before (Appendix, \textbf{Fig. \ref{fig:appendix_luadumap}}). To further our understanding of LUAD the gene activity of the clusters was compared using a volcano plot (\textbf{Fig. \ref{fig:volcanoinnerluad}}).
+```{r volcanoinnerluad, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot comparing the two observed clusters.} Each datapoint is one gene, the most differentially expressed genes are marked by name.', out.width = '0.80\\linewidth'}
+
+knitr::include_graphics("./output/3_volcano_plot_comparison_LUAD_clusters.pdf")
+```
+A variety of genes seem to differ significantly between the two LUAD clusters. 
+
 ## Regression
 
 The logistic model that was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table (Appendix, \textbf{Fig. \ref{fig:confusionmatrix}}) are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986 %.
@@ -622,7 +629,7 @@ knitr::include_graphics("./output/3_gsva_pcaumap_c5.png")
 
 ```{r appendix_umapC2, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Clustering after GSVA performed with curated genesets.} Colored by assigned value by the trained model to asses quality of model', out.width = '0.80\\linewidth'}
 
-knitr::include_graphics("./output/5_QC_assigned.pdf")
+knitr::include_graphics("./output/3_gsva_pcaumap _c2.pdf")
 ```
 
 ```{r confusionmatrix, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Confusion table} for prediction on test datast containing 2921 patients with 163 LUAD patients.', out.width = '0.4\\linewidth'}

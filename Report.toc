@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {1.3.1}Jaccard index}{3}{subsection.1.3.1}%
 \contentsline {section}{\numberline {1.4}Methods for Dimensional Reduction}{3}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}Principal Component Analysis (PCA)}{3}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Uniform Manifold Approximation and Projection (UMAP)}{3}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.2}Uniform Manifold Approximation and Projection (UMAP)}{4}{subsection.1.4.2}%
 \contentsline {section}{\numberline {1.5}Methods for Gene Scoring}{4}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Gene Set Enrichment Analysis (GSEA)}{4}{subsection.1.5.1}%
 \contentsline {subsection}{\numberline {1.5.2}Gene Set Variation Analysis (GSVA)}{5}{subsection.1.5.2}%
@@ -18,15 +18,15 @@
 \contentsline {section}{\numberline {2.4}Pan cancer analysis}{9}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Dimensionality reduction}{9}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}GSVA}{10}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Focused analysis}{11}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Signed-ranked list}{11}{subsection.2.5.1}%
+\contentsline {section}{\numberline {2.5}Focused analysis}{10}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Signed-ranked list}{10}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}GSEA}{11}{subsection.2.5.2}%
 \contentsline {subsection}{\numberline {2.5.3}GSVA}{11}{subsection.2.5.3}%
 \contentsline {section}{\numberline {2.6}Regression}{12}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Goal of Regression}{12}{subsection.2.6.1}%
 \contentsline {subsection}{\numberline {2.6.2}Feature Selection}{12}{subsection.2.6.2}%
 \contentsline {subsection}{\numberline {2.6.3}Model optimization}{12}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Performance measurments}{13}{subsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.6.4}Performance measurments}{12}{subsection.2.6.4}%
 \contentsline {chapter}{\numberline {3}Results}{16}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Data cleaning}{16}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Cancer hallmark pathways}{16}{section.3.2}%
@@ -58,6 +58,6 @@
 \contentsline {section}{\numberline {5.5}Prediction of Cancer Stage}{33}{section.5.5}%
 \contentsline {section}{\numberline {5.6}Epigenetics}{33}{section.5.6}%
 \contentsline {section}{\numberline {5.7}Experimental Validation}{33}{section.5.7}%
-\contentsline {chapter}{\numberline {6}References}{35}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Appendix}{42}{chapter.7}%
+\contentsline {chapter}{\numberline {6}References}{34}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Appendix}{41}{chapter.7}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
