@@ -101,14 +101,17 @@ linestretch: 1.15
 
 \end{titlepage}
 ```
+```{=tex}
+\abstract
+\clearpage
 \tableofcontents
 \clearpage
-
+```
 # Introduction
 
 ## Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@wang2020; @li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that drive tumor formation due to numerous genetic mutations [@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development we revert back to the pan cancer project. The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In the Pan Cancer project, data is collected from thousands of cancer patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. The TCGA project provides a vast amount of RNA sequencing (RNA-seq) data which makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@wang2020; @li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that drive tumor formation due to numerous genetic mutations \[@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development we revert back to the pan cancer project. The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In the Pan Cancer project, data is collected from thousands of cancer patients is analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. The TCGA project provides a vast amount of RNA sequencing (RNA-seq) data which makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
 
 ## Computational Tools
 
@@ -134,9 +137,10 @@ Gene set variation analysis (GSVA) is an unsupervised method to estimate pathway
 
 Knowing the devastating impact of LUAD on all those affected by the disease, we set out to learn more about its underlying genetic mutations. By comparing gene expression patterns in tumorous tissue to that in healthy tissue within one patient as well as to other cancer types, we hope to gain a better understanding of which metabolic deregulations are the root cause of LUAD and what makes LUAD unique. Identifying the precise genes that are up- or downregulated in LUAD tumor cells reveals the pathways most involved in tumor development and opens up new doors for cancer diagnostics. Not only do we hope to find a way to predict LUAD based on a cell's gene expression pattern but by revealing the driver genes of the disease, whole genome sequencing could be replaced by more efficient panel sequencing methods.
 
+```{=tex}
 \addchap{Abbreviations}
 \clearpage
-
+```
 +------------+------------------------------------------------------------------+------------+--------------------------------------------------+
 | ADGRF1     | Adhesion G protein-coupled receptor F1                           | LGG        | Low grade glioma                                 |
 +------------+------------------------------------------------------------------+------------+--------------------------------------------------+
@@ -209,8 +213,7 @@ To assess how strongly pathway activty differs between tumor and normal tissue, 
 
 ## Regression
 
-In order to identifying LUAD risk patients from RNA-seq data, a logistic regression model was trained by making a binary classification between LUAD and non-LUAD patients. First of all, the cleaned dataset was split by a 70 to 30 percent ratio into a training and testing dataset respectively. In an effort to find genes that could be used as explaining variables, gene foldchanges [@gtools] between LUAD and other cancer types were calculated using the cleaned dataset.The genes were additionally tested for correlation and for all highly correlating genes, one of them was removed. The 10 most over- and 10 most underexpressed genes were chosen for further testing. As a quality control PCA [@R-SeuratObject] and UMAP [@uwot] were conducted on all patients for these 20 chosen genes. A first rough model was trained using all 20 of the chosen genes and the glm function [@R-base]. The blorr package was used to determine the best composition of the given 20 genes [@blorr]. With the best configuration the final model was trained on the training dataset. Using the native predict function [@R-base], the model was evaluated by predicting whether the patients of the testing dataset were LUAD patients. The resulting probabilities were transformed into predictions for LUAD or non-LUAD using a cutoff value of 50%. Next a confusion table was used to estimate the false-positive and false-negative rates using the known tumor type of each patient and comparing that to the prediction of the model. As a final evaluation step the package ROCR [@rocr] was used to create a ROC curve.
-<!-- add your chapters here -->
+In order to identifying LUAD risk patients from RNA-seq data, a logistic regression model was trained by making a binary classification between LUAD and non-LUAD patients. First of all, the cleaned dataset was split by a 70 to 30 percent ratio into a training and testing dataset respectively. In an effort to find genes that could be used as explaining variables, gene foldchanges [@gtools] between LUAD and other cancer types were calculated using the cleaned dataset.The genes were additionally tested for correlation and for all highly correlating genes, one of them was removed. The 10 most over- and 10 most underexpressed genes were chosen for further testing. As a quality control PCA [@R-SeuratObject] and UMAP [@uwot] were conducted on all patients for these 20 chosen genes. A first rough model was trained using all 20 of the chosen genes and the glm function [@R-base]. The blorr package was used to determine the best composition of the given 20 genes [@blorr]. With the best configuration the final model was trained on the training dataset. Using the native predict function [@R-base], the model was evaluated by predicting whether the patients of the testing dataset were LUAD patients. The resulting probabilities were transformed into predictions for LUAD or non-LUAD using a cutoff value of 50%. Next a confusion table was used to estimate the false-positive and false-negative rates using the known tumor type of each patient and comparing that to the prediction of the model. As a final evaluation step the package ROCR [@rocr] was used to create a ROC curve. <!-- add your chapters here -->
 
 # Results
 
@@ -375,7 +378,7 @@ Performance of UMAP and PCA on our data (\textbf{Fig. \ref{fig:appendix_luadumap
 
 # Appendix
 
-All statistical analyses were done in an R-environment \[@R-base\].
+All statistical analyses were done in an R-environment [@R-base].
 
 +--------------+--------------------------------------------------------------------------------------------+--------------------+
 | Package Name | Application                                                                                | **Reference**      |
