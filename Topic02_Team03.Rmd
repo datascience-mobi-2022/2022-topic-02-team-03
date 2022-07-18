@@ -81,7 +81,7 @@ linestretch: 1.15
 
       {\Huge Topic 02 Team 03}
 
-        {\Huge Exploration of Lung Adenocarcinoma (LUAD)}
+        {\Huge Exploration of Biomarkers in Lung Adenocarcinoma (LUAD)}
 
     }
 
@@ -280,7 +280,7 @@ After running separate PCA and UMAP analysis on patients for each tumor type the
 
 ## Regression
 
-The logistic model was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table (\textbf{Fig. \ref{fig:confusionmatrix}} (A)) are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986.
+The logistic model was trained on the TCGA expression dataset. The model's goal was to predict whether a cancer patient suffers from LUAD or not. In order to be used reliably, the model has to be precise enough. Testing of our model revealed the following characteristics: The model predicts 136 LUAD patients correctly, as well as 2752 non-LUAD cases. Also shown in the confusion table (\textbf{Fig. \ref{fig:rocplot}} (A)) are the 27 false-negative occurrences and 7 false-positive occurrences. This results in an accuracy of 0.986.
 
 For further evaluation a ROC plot was produced which enables an estimation of model performance in relation to the false-positive rate (\textbf{Fig. \ref{fig:rocplot}} (B)). The ideal estimator would have an area under the curve (AUC) of 1 and would fill out the top left corner. The trained regression model exhibits an AUC of 0.9159 and a nearly linear increase.
 
@@ -481,10 +481,6 @@ knitr::include_graphics("./output/3_UMAPs.png")
 knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
 ```
 
-```{r confusionmatrix, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Confusion table} for prediction on test datast containing 2921 patients with 163 LUAD patients.', out.width = '0.4\\linewidth'}
-
-knitr::include_graphics("./output/5_confusion_matrix.png")
-```
 
 ```{r appendix_regressionqc1, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Quality control UMAP plot for regression.} Shows that LUAD cluster when gene expression dataset is subset to only include explaining variables, colored by cancer type ', out.width = '0.80\\linewidth'}
 
