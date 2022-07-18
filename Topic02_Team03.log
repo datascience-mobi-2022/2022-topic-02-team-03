@@ -1,49 +1,29 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.7.14)  18 JUL 2022 06:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.15)  18 JUL 2022 06:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./Topic02_Team03.tex
-(Topic02_Team03.tex
-LaTeX2e <2022-06-01> patch level 3
-L3 programming layer <2022-06-16>
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rreprt.cls
+**Topic02_Team03.tex
+(./Topic02_Team03.tex
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-07-14> (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
 Document Class: scrreprt 2022/07/04 v3.37 KOMA-Script document class (report)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rkbase.sty
-Package: scrkbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-dependent b
-asics and keyval usage)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rbase.sty
-Package: scrbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-independent 
-basics and keyval usage)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rlfile.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2022/07/04 v3.37 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile.sty
 Package: scrlfile 2022/07/04 v3.37 KOMA-Script package (file load hooks)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rlfile-hook.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
 Package: scrlfile-hook 2022/07/04 v3.37 KOMA-Script package (using LaTeX hooks)
-
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rlogo.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlogo.sty
 Package: scrlogo 2022/07/04 v3.37 KOMA-Script package (logo)
-)))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyva
-l.sty
+))) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
-Already applied: [0000/00/00] Usage of raw or classic option list on input line
- 368.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\to
-cbasic.sty
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/tocbasic.sty
 Package: tocbasic 2022/07/04 v3.37 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip47
 \scr@dte@tocline@numbox=\box51
@@ -62,16 +42,10 @@ Class scrreprt Info: You've used standard option `oneside'.
 (scrreprt)           If you'd like to set the option with \KOMAoptions,
 (scrreprt)           you'd have to use `twoside=false' there
 (scrreprt)           instead of `oneside', too.
-Class scrreprt Info: File `scrsize10pt.clo' used to setup font sizes on input l
-ine 2566.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rsize10pt.clo
-File: scrsize10pt.clo 2022/07/04 v3.37 KOMA-Script font size class option (10pt
-)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\ty
-pearea.sty
+Class scrreprt Info: File `scrsize10pt.clo' used to setup font sizes on input line 2566.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrsize10pt.clo
+File: scrsize10pt.clo 2022/07/04 v3.37 KOMA-Script font size class option (10pt)
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
 Package: typearea 2022/07/04 v3.37 KOMA-Script package (type area)
 \ta@bcor=\skip48
 \ta@div=\count185
@@ -146,40 +120,28 @@ Class scrreprt Info: using compatibility default `afterindent=bysign'
 \c@pti@nb@sid@b@x=\box52
 Package tocbasic Info: babel extension for `lof' omitted
 (tocbasic)             because of missing \bbl@set@language on input line 7031.
-
 \scr@dte@figure@maxnumwidth=\skip62
 \c@figure=\count193
 Package tocbasic Info: babel extension for `lot' omitted
 (tocbasic)             because of missing \bbl@set@language on input line 7048.
-
 \scr@dte@table@maxnumwidth=\skip63
 \c@table=\count194
 Class scrreprt Info: Redefining `\numberline' on input line 7219.
 \bibindent=\dimen138
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmat
-h.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
 \@mathmargin=\skip64
 For additional information on amsmath, use the `?' option.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstex
-t.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen
-.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen139
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy
-.sty
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen140
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn
-.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count195
@@ -229,21 +191,16 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssy
-mb.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfo
-nts.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -277,88 +234,30 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setsp
-ace.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.
-sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.s
-ty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
-2.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 112.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.
-sty
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks22
 \inpenc@posthook=\toks23
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.
-sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquot
-e.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micr
-otype.sty
-Package: microtype 2022/06/23 v3.0f Micro-typographical refinements (RS)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etool
-box.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count273
-)
-\MT@toks=\toks24
-\MT@tempbox=\box55
-\MT@count=\count274
-LaTeX Info: Redefining \noprotrusionifhmode on input line 1045.
-LaTeX Info: Redefining \leftprotrusion on input line 1046.
-LaTeX Info: Redefining \rightprotrusion on input line 1056.
-LaTeX Info: Redefining \textls on input line 1234.
-\MT@outer@kern=\dimen148
-LaTeX Info: Redefining \textmicrotypecontext on input line 1858.
-\MT@listname@count=\count275
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micr
-otype-pdftex.def
-File: microtype-pdftex.def 2022/06/23 v3.0f Definitions specific to pdftex (RS)
-
-LaTeX Info: Redefining \lsstyle on input line 900.
-LaTeX Info: Redefining \lslig on input line 900.
-\MT@outer@space=\skip67
-)
-Package microtype Info: Loading configuration file microtype.cfg.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micr
-otype.cfg
-File: microtype.cfg 2022/06/23 v3.0f microtype main configuration file (RS)
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.
-sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\c
-olor.cfg
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 227.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\p
-dftex.def
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex-dev/graphics\m
-athcolor.ltx)
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
 Package xcolor Info: Model `RGB' extended on input line 1369.
@@ -368,102 +267,57 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
-) (C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.st
-y
-Package: xurl 2022/01/09 v 0.10 modify URL breaks
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
-\Urlmuskip=\muskip17
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookm
-ark.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyper
-ref.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2022-06-20 v7.00s Hypertext links for LaTeX
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxc
-mds.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\p
-dftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\in
-fwarerr.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kv
-setkeys.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys
-\kvdefinekeys.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pd
-fescape.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolo
-r.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\le
-tltxmacro.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhoo
-k.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namer
-ef.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refco
-unt.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestri
-ng\gettitlestring.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvop
-tions.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count276
+\c@section@level=\count273
 )
-\@linkdim=\dimen149
-\Hy@linkcounter=\count277
-\Hy@pagecounter=\count278
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1en
-c.def
+\@linkdim=\dimen148
+\Hy@linkcounter=\count274
+\Hy@pagecounter=\count275
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intc
-alc.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\ete
-xcmds.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count279
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc
-.def
+\Hy@SavedSpaceFactor=\count276
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -476,22 +330,21 @@ Package hyperref Info: Plain pages OFF on input line 4177.
 Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4408.
-\c@Hy@tempcnt=\count280
-LaTeX Info: Redefining \url on input line 4746.
-\XeTeXLinkMargin=\dimen150
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitse
-t.sty
-Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\b
-igintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+\c@Hy@tempcnt=\count277
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
+LaTeX Info: Redefining \url on input line 4746.
+\XeTeXLinkMargin=\dimen149
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count281
-\Field@Width=\dimen151
-\Fld@charsize=\dimen152
+\Fld@menulength=\count278
+\Field@Width=\dimen150
+\Fld@charsize=\dimen151
 Package hyperref Info: Hyper figures OFF on input line 6024.
 Package hyperref Info: Link nesting OFF on input line 6029.
 Package hyperref Info: Hyper index ON on input line 6032.
@@ -499,462 +352,375 @@ Package hyperref Info: backreferencing OFF on input line 6039.
 Package hyperref Info: Link coloring OFF on input line 6044.
 Package hyperref Info: Link coloring with OCG OFF on input line 6049.
 Package hyperref Info: PDF/A mode OFF on input line 6054.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-
-ltx.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count282
-\c@Item=\count283
-\c@Hfootnote=\count284
+\Hy@abspage=\count279
+\c@Item=\count280
+\c@Hfootnote=\count281
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdft
-ex.def
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2022-06-20 v7.00s Hyperref driver for pdfTeX
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend
--ltx.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
-kage
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count285
-\c@bookmark@seq@number=\count286
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck
-\rerunfilecheck.sty
+\Fld@listcount=\count282
+\c@bookmark@seq@number=\count283
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounte
-r\uniquecounter.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-85.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip68
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-p
-dftex.def
+\Hy@SectionHShift=\skip67
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
-\BKM@id=\count287
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geome
-try.sty
+\BKM@id=\count284
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex
-.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count288
-\Gm@cntv=\count289
-\c@Gm@tempcnt=\count290
-\Gm@bindingoffset=\dimen153
-\Gm@wd@mp=\dimen154
-\Gm@odd@mp=\dimen155
-\Gm@even@mp=\dimen156
-\Gm@layoutwidth=\dimen157
-\Gm@layoutheight=\dimen158
-\Gm@layouthoffset=\dimen159
-\Gm@layoutvoffset=\dimen160
-\Gm@dimlist=\toks25
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geome
-try.cfg))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtabl
-e.sty
+\Gm@cnth=\count285
+\Gm@cntv=\count286
+\c@Gm@tempcnt=\count287
+\Gm@bindingoffset=\dimen152
+\Gm@wd@mp=\dimen153
+\Gm@odd@mp=\dimen154
+\Gm@even@mp=\dimen155
+\Gm@layoutwidth=\dimen156
+\Gm@layoutheight=\dimen157
+\Gm@layouthoffset=\dimen158
+\Gm@layoutvoffset=\dimen159
+\Gm@dimlist=\toks24
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip69
-\LTright=\skip70
-\LTpre=\skip71
-\LTpost=\skip72
-\LTchunksize=\count291
-\LTcapwidth=\dimen161
-\LT@head=\box56
-\LT@firsthead=\box57
-\LT@foot=\box58
-\LT@lastfoot=\box59
-\LT@gbox=\box60
-\LT@cols=\count292
-\LT@rows=\count293
-\c@LT@tables=\count294
-\c@LT@chunks=\count295
-\LT@p@ftn=\toks26
+\LTleft=\skip68
+\LTright=\skip69
+\LTpre=\skip70
+\LTpost=\skip71
+\LTchunksize=\count288
+\LTcapwidth=\dimen160
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@gbox=\box59
+\LT@cols=\count289
+\LT@rows=\count290
+\c@LT@tables=\count291
+\c@LT@chunks=\count292
+\LT@p@ftn=\toks25
 )
 Class scrreprt Info: longtable captions redefined on input line 50.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bookt
-abs.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen162
-\lightrulewidth=\dimen163
-\cmidrulewidth=\dimen164
-\belowrulesep=\dimen165
-\belowbottomsep=\dimen166
-\aboverulesep=\dimen167
-\abovetopsep=\dimen168
-\cmidrulesep=\dimen169
-\cmidrulekern=\dimen170
-\defaultaddspace=\dimen171
-\@cmidla=\count296
-\@cmidlb=\count297
-\@aboverulesep=\dimen172
-\@belowrulesep=\dimen173
-\@thisruleclass=\count298
-\@lastruleclass=\count299
-\@thisrulewidth=\dimen174
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.st
-y
-Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
-\col@sep=\dimen175
-\ar@mcellbox=\box61
-\extrarowheight=\dimen176
-\NC@list=\toks27
-\extratabsurround=\skip73
-\backup@length=\skip74
-\ar@cellbox=\box62
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+\heavyrulewidth=\dimen161
+\lightrulewidth=\dimen162
+\cmidrulewidth=\dimen163
+\belowrulesep=\dimen164
+\belowbottomsep=\dimen165
+\aboverulesep=\dimen166
+\abovetopsep=\dimen167
+\cmidrulesep=\dimen168
+\cmidrulekern=\dimen169
+\defaultaddspace=\dimen170
+\@cmidla=\count293
+\@cmidlb=\count294
+\@aboverulesep=\dimen171
+\@belowrulesep=\dimen172
+\@thisruleclass=\count295
+\@lastruleclass=\count296
+\@thisrulewidth=\dimen173
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/03/10 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen174
+\ar@mcellbox=\box60
+\extrarowheight=\dimen175
+\NC@list=\toks26
+\extratabsurround=\skip72
+\backup@length=\skip73
+\ar@cellbox=\box61
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count300
-\calc@Bcount=\count301
-\calc@Adimen=\dimen177
-\calc@Bdimen=\dimen178
-\calc@Askip=\skip75
-\calc@Bskip=\skip76
+\calc@Acount=\count297
+\calc@Bcount=\count298
+\calc@Adimen=\dimen176
+\calc@Bdimen=\dimen177
+\calc@Askip=\skip74
+\calc@Bskip=\skip75
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count302
-\calc@Cskip=\skip77
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/footnotehyper\
-footnotehyper.sty
-Package: footnotehyper 2021/08/13 v1.1e hyperref aware footnote.sty (JFB)
-\FNH@notes=\box63
-\FNH@width=\dimen179
-\FNH@toks=\toks28
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
-icx.sty
+\calc@Ccount=\count299
+\calc@Cskip=\skip76
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count300
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box62
+\fn@width=\dimen178
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
-ics.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.
-sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\g
-raphics.cfg
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
-\Gin@req@height=\dimen180
-\Gin@req@width=\dimen181
+\Gin@req@height=\dimen179
+\Gin@req@width=\dimen180
 )
-\cslhangindent=\skip78
-\csllabelwidth=\skip79
-\cslentryspacingunit=\skip80
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.
-sty
-Package: babel 2022/06/06 3.76 The Babel package
-\babel@savecnt=\count303
-\U@D=\dimen182
-\l@unhyphenated=\language79
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbab
-el.def)
+\cslhangindent=\skip77
+\csllabelwidth=\skip78
+\cslentryspacingunit=\skip79
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2022/06/26 3.77 The Babel package
+\babel@savecnt=\count301
+\U@D=\dimen181
+\l@unhyphenated=\language6
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count304
-*************************************
-* Local config file bblopts.cfg used
-*
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.
-cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
+\bbl@dirlevel=\count302
 Package babel Info: Main language set with 'main='. Except if you have
 (babel)             problems, prefer the default mechanism for setting
-(babel)             the main language. Reported on input line 4290.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/babel-german\n
-german.ldf
-Language: ngerman 2021/02/27 v2.13 German support for babel (post-1996 orthogra
-phy)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/babel-german\n
-germanb.ldf
-Language: ngermanb 2021/02/27 v2.13 German support for babel (post-1996 orthogr
-aphy)
+(babel)             the main language. Reported on input line 4323.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/ngerman.ldf
+Language: ngerman 2021/02/27 v2.13 German support for babel (post-1996 orthography)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-german/ngermanb.ldf
+Language: ngermanb 2021/02/27 v2.13 German support for babel (post-1996 orthography)
 Package babel Info: Making " an active character on input line 122.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\
-english.ldf
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'british' set to \l@english
+(babel)             (\language0). Reported on input line 82.
+Package babel Info: Hyphen rules for 'UKenglish' set to \l@english
+(babel)             (\language0). Reported on input line 83.
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
-Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language73). Reported on input line 105.
-Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language73). Reported on input line 108.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale
-/en\babel-english.tex
+Package babel Info: Hyphen rules for 'australian' set to \l@english
+(babel)             (\language0). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@english
+(babel)             (\language0). Reported on input line 108.
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
 Package babel Info: Importing font and identification data for english
 (babel)             from babel-en.ini. Reported on input line 11.
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale
-/de\babel-ngerman.tex
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale
-/de\babel-german.tex
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/locale/de/babel-ngerman.tex
 Package babel Info: Importing font and identification data for ngerman
 (babel)             from babel-de.ini. Reported on input line 11.
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.s
-ty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rlayer-scrpage.sty
-Package: scrlayer-scrpage 2022/07/04 v3.37 KOMA-Script package (end user interf
-ace for scrlayer)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rlayer.sty
-Package: scrlayer 2022/07/04 v3.37 KOMA-Script package (defining layers and pag
-e styles)
-Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 215
-5.
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlayer-scrpage.sty
+Package: scrlayer-scrpage 2022/07/04 v3.37 KOMA-Script package (end user interface for scrlayer)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlayer.sty
+Package: scrlayer 2022/07/04 v3.37 KOMA-Script package (defining layers and page styles)
+Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 2155.
 )
 Package scrlayer-scrpage Info: Makeing stand-alone element `pagehead' from
 (scrlayer-scrpage)             alias to `pageheadfoot' on input line 1089.
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\bibla
-tex.sty
-Package: biblatex 2022/06/22 v3.18 programmable bibliographies (PK/MW)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.
-sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2022/07/12 v3.18b programmable bibliographies (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count305
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.
-def
+\lrq@indent=\count303
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.st
-y
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count306
-\c@listtotal=\count307
-\c@listcount=\count308
-\c@liststart=\count309
-\c@liststop=\count310
-\c@citecount=\count311
-\c@citetotal=\count312
-\c@multicitecount=\count313
-\c@multicitetotal=\count314
-\c@instcount=\count315
-\c@maxnames=\count316
-\c@minnames=\count317
-\c@maxitems=\count318
-\c@minitems=\count319
-\c@citecounter=\count320
-\c@maxcitecounter=\count321
-\c@savedcitecounter=\count322
-\c@uniquelist=\count323
-\c@uniquename=\count324
-\c@refsection=\count325
-\c@refsegment=\count326
-\c@maxextratitle=\count327
-\c@maxextratitleyear=\count328
-\c@maxextraname=\count329
-\c@maxextradate=\count330
-\c@maxextraalpha=\count331
-\c@abbrvpenalty=\count332
-\c@highnamepenalty=\count333
-\c@lownamepenalty=\count334
-\c@maxparens=\count335
-\c@parenlevel=\count336
-\blx@tempcnta=\count337
-\blx@tempcntb=\count338
-\blx@tempcntc=\count339
-\c@blx@maxsection=\count340
-\blx@maxsegment@0=\count341
-\blx@notetype=\count342
-\blx@parenlevel@text=\count343
-\blx@parenlevel@foot=\count344
-\blx@sectionciteorder@0=\count345
-\blx@sectionciteorderinternal@0=\count346
-\blx@entrysetcounter=\count347
-\blx@biblioinstance=\count348
-\labelnumberwidth=\skip81
-\labelalphawidth=\skip82
-\biblabelsep=\skip83
-\bibitemsep=\skip84
-\bibnamesep=\skip85
-\bibinitsep=\skip86
-\bibparsep=\skip87
-\bibhang=\skip88
+\c@tabx@nest=\count304
+\c@listtotal=\count305
+\c@listcount=\count306
+\c@liststart=\count307
+\c@liststop=\count308
+\c@citecount=\count309
+\c@citetotal=\count310
+\c@multicitecount=\count311
+\c@multicitetotal=\count312
+\c@instcount=\count313
+\c@maxnames=\count314
+\c@minnames=\count315
+\c@maxitems=\count316
+\c@minitems=\count317
+\c@citecounter=\count318
+\c@maxcitecounter=\count319
+\c@savedcitecounter=\count320
+\c@uniquelist=\count321
+\c@uniquename=\count322
+\c@refsection=\count323
+\c@refsegment=\count324
+\c@maxextratitle=\count325
+\c@maxextratitleyear=\count326
+\c@maxextraname=\count327
+\c@maxextradate=\count328
+\c@maxextraalpha=\count329
+\c@abbrvpenalty=\count330
+\c@highnamepenalty=\count331
+\c@lownamepenalty=\count332
+\c@maxparens=\count333
+\c@parenlevel=\count334
+\blx@tempcnta=\count335
+\blx@tempcntb=\count336
+\blx@tempcntc=\count337
+\c@blx@maxsection=\count338
+\blx@maxsegment@0=\count339
+\blx@notetype=\count340
+\blx@parenlevel@text=\count341
+\blx@parenlevel@foot=\count342
+\blx@sectionciteorder@0=\count343
+\blx@sectionciteorderinternal@0=\count344
+\blx@entrysetcounter=\count345
+\blx@biblioinstance=\count346
+\labelnumberwidth=\skip80
+\labelalphawidth=\skip81
+\biblabelsep=\skip82
+\bibitemsep=\skip83
+\bibnamesep=\skip84
+\bibinitsep=\skip85
+\bibparsep=\skip86
+\bibhang=\skip87
 \blx@bcfin=\read3
 \blx@bcfout=\write3
-\blx@langwohyphens=\language80
-\c@mincomprange=\count349
-\c@maxcomprange=\count350
-\c@mincompwidth=\count351
+\blx@langwohyphens=\language7
+\c@mincomprange=\count347
+\c@maxcomprange=\count348
+\c@mincompwidth=\count349
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-d
-m.def
-File: blx-dm.def 2022/06/22 v3.18 biblatex localization (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2022/07/12 v3.18b biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'authoryear.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count352
-\c@savedafterword=\count353
-\c@annotator=\count354
-\c@savedannotator=\count355
-\c@author=\count356
-\c@savedauthor=\count357
-\c@bookauthor=\count358
-\c@savedbookauthor=\count359
-\c@commentator=\count360
-\c@savedcommentator=\count361
-\c@editor=\count362
-\c@savededitor=\count363
-\c@editora=\count364
-\c@savededitora=\count365
-\c@editorb=\count366
-\c@savededitorb=\count367
-\c@editorc=\count368
-\c@savededitorc=\count369
-\c@foreword=\count370
-\c@savedforeword=\count371
-\c@holder=\count372
-\c@savedholder=\count373
-\c@introduction=\count374
-\c@savedintroduction=\count375
-\c@namea=\count376
-\c@savednamea=\count377
-\c@nameb=\count378
-\c@savednameb=\count379
-\c@namec=\count380
-\c@savednamec=\count381
-\c@translator=\count382
-\c@savedtranslator=\count383
-\c@shortauthor=\count384
-\c@savedshortauthor=\count385
-\c@shorteditor=\count386
-\c@savedshorteditor=\count387
-\c@labelname=\count388
-\c@savedlabelname=\count389
-\c@institution=\count390
-\c@savedinstitution=\count391
-\c@lista=\count392
-\c@savedlista=\count393
-\c@listb=\count394
-\c@savedlistb=\count395
-\c@listc=\count396
-\c@savedlistc=\count397
-\c@listd=\count398
-\c@savedlistd=\count399
-\c@liste=\count400
-\c@savedliste=\count401
-\c@listf=\count402
-\c@savedlistf=\count403
-\c@location=\count404
-\c@savedlocation=\count405
-\c@organization=\count406
-\c@savedorganization=\count407
-\c@origlocation=\count408
-\c@savedoriglocation=\count409
-\c@origpublisher=\count410
-\c@savedorigpublisher=\count411
-\c@publisher=\count412
-\c@savedpublisher=\count413
-\c@language=\count414
-\c@savedlanguage=\count415
-\c@origlanguage=\count416
-\c@savedoriglanguage=\count417
-\c@pageref=\count418
-\c@savedpageref=\count419
-\shorthandwidth=\skip89
-\shortjournalwidth=\skip90
-\shortserieswidth=\skip91
-\shorttitlewidth=\skip92
-\shortauthorwidth=\skip93
-\shorteditorwidth=\skip94
-\locallabelnumberwidth=\skip95
-\locallabelalphawidth=\skip96
-\localshorthandwidth=\skip97
-\localshortjournalwidth=\skip98
-\localshortserieswidth=\skip99
-\localshorttitlewidth=\skip100
-\localshortauthorwidth=\skip101
-\localshorteditorwidth=\skip102
+\c@afterword=\count350
+\c@savedafterword=\count351
+\c@annotator=\count352
+\c@savedannotator=\count353
+\c@author=\count354
+\c@savedauthor=\count355
+\c@bookauthor=\count356
+\c@savedbookauthor=\count357
+\c@commentator=\count358
+\c@savedcommentator=\count359
+\c@editor=\count360
+\c@savededitor=\count361
+\c@editora=\count362
+\c@savededitora=\count363
+\c@editorb=\count364
+\c@savededitorb=\count365
+\c@editorc=\count366
+\c@savededitorc=\count367
+\c@foreword=\count368
+\c@savedforeword=\count369
+\c@holder=\count370
+\c@savedholder=\count371
+\c@introduction=\count372
+\c@savedintroduction=\count373
+\c@namea=\count374
+\c@savednamea=\count375
+\c@nameb=\count376
+\c@savednameb=\count377
+\c@namec=\count378
+\c@savednamec=\count379
+\c@translator=\count380
+\c@savedtranslator=\count381
+\c@shortauthor=\count382
+\c@savedshortauthor=\count383
+\c@shorteditor=\count384
+\c@savedshorteditor=\count385
+\c@labelname=\count386
+\c@savedlabelname=\count387
+\c@institution=\count388
+\c@savedinstitution=\count389
+\c@lista=\count390
+\c@savedlista=\count391
+\c@listb=\count392
+\c@savedlistb=\count393
+\c@listc=\count394
+\c@savedlistc=\count395
+\c@listd=\count396
+\c@savedlistd=\count397
+\c@liste=\count398
+\c@savedliste=\count399
+\c@listf=\count400
+\c@savedlistf=\count401
+\c@location=\count402
+\c@savedlocation=\count403
+\c@organization=\count404
+\c@savedorganization=\count405
+\c@origlocation=\count406
+\c@savedoriglocation=\count407
+\c@origpublisher=\count408
+\c@savedorigpublisher=\count409
+\c@publisher=\count410
+\c@savedpublisher=\count411
+\c@language=\count412
+\c@savedlanguage=\count413
+\c@origlanguage=\count414
+\c@savedoriglanguage=\count415
+\c@pageref=\count416
+\c@savedpageref=\count417
+\shorthandwidth=\skip88
+\shortjournalwidth=\skip89
+\shortserieswidth=\skip90
+\shorttitlewidth=\skip91
+\shortauthorwidth=\skip92
+\shorteditorwidth=\skip93
+\locallabelnumberwidth=\skip94
+\locallabelalphawidth=\skip95
+\localshorthandwidth=\skip96
+\localshortjournalwidth=\skip97
+\localshortserieswidth=\skip98
+\localshorttitlewidth=\skip99
+\localshortauthorwidth=\skip100
+\localshorteditorwidth=\skip101
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-c
-ompat.def
-File: blx-compat.def 2022/06/22 v3.18 biblatex compatibility (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
 )
 Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\bibla
-tex.def
-File: biblatex.def 2022/06/22 v3.18 biblatex compatibility (PK/MW)
-\c@textcitecount=\count420
-\c@textcitetotal=\count421
-\c@textcitemaxnames=\count422
-\c@biburlbigbreakpenalty=\count423
-\c@biburlbreakpenalty=\count424
-\c@biburlnumpenalty=\count425
-\c@biburlucpenalty=\count426
-\c@biburllcpenalty=\count427
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
+\c@textcitecount=\count418
+\c@textcitetotal=\count419
+\c@textcitemaxnames=\count420
+\c@biburlbigbreakpenalty=\count421
+\c@biburlbreakpenalty=\count422
+\c@biburlnumpenalty=\count423
+\c@biburlucpenalty=\count424
+\c@biburllcpenalty=\count425
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count428
+\c@smartand=\count426
 )
 Package biblatex Info: Trying to load bibliography style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.bbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\a
-uthoryear.bbx
-File: authoryear.bbx 2022/06/22 v3.18 biblatex bibliography style (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\s
-tandard.bbx
-File: standard.bbx 2022/06/22 v3.18 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count429
-\c@bbx:relatedtotal=\count430
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count427
+\c@bbx:relatedtotal=\count428
 ))
 Package biblatex Info: Trying to load citation style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.cbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\a
-uthoryear.cbx
-File: authoryear.cbx 2022/06/22 v3.18 biblatex citation style (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+File: authoryear.cbx 2022/07/12 v3.18b biblatex citation style (PK/MW)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -965,202 +731,143 @@ Package biblatex Info: Redefining '\textcites'.
 )
 Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\bibla
-tex.cfg
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Document encoding is UTF8 ....
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3
-.sty
-Package: expl3 2022-06-16 L3 programming layer (loader) 
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3ba
-ckend-pdftex.def
-File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count431
-\l__pdf_internal_box=\box64
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2022-07-14 L3 programming layer (loader) 
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count429
+\l__pdf_internal_box=\box63
 ))
 Package biblatex Info: ... and expl3
-(biblatex)             2022-06-16 L3 programming layer (loader) 
+(biblatex)             2022-07-14 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-c
-ase-expl3.sty
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xpa
-rse\xparse.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2022-06-22 L3 Experimental document command parser
 )
-Package: blx-case-expl3 2022/06/22 v3.18 expl3 case changing code for biblatex
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/xpatch\xpatch.
-sty
+Package: blx-case-expl3 2022/07/12 v3.18b expl3 case changing code for biblatex
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquo
-tes.sty
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
-\csq@reset=\count432
-\csq@gtype=\count433
-\csq@glevel=\count434
-\csq@qlevel=\count435
-\csq@maxlvl=\count436
-\csq@tshold=\count437
-\csq@ltx@everypar=\toks29
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquo
-tes.def
+\csq@reset=\count430
+\csq@gtype=\count431
+\csq@glevel=\count432
+\csq@qlevel=\count433
+\csq@maxlvl=\count434
+\csq@tshold=\count435
+\csq@ltx@everypar=\toks27
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2021-02-22 v5.2l csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquo
-tes.cfg
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
-))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
-ngs.sty
-\lst@mode=\count438
-\lst@gtempboxa=\box65
-\lst@token=\toks30
-\lst@length=\count439
-\lst@currlwidth=\dimen183
-\lst@column=\count440
-\lst@pos=\count441
-\lst@lostspace=\dimen184
-\lst@width=\dimen185
-\lst@newlines=\count442
-\lst@lineno=\count443
-\lst@maxwidth=\dimen186
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmi
-sc.sty
+)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count436
+\lst@gtempboxa=\box64
+\lst@token=\toks28
+\lst@length=\count437
+\lst@currlwidth=\dimen182
+\lst@column=\count438
+\lst@pos=\count439
+\lst@lostspace=\dimen183
+\lst@width=\dimen184
+\lst@newlines=\count440
+\lst@lineno=\count441
+\lst@maxwidth=\dimen185
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count444
-\lst@skipnumbers=\count445
-\lst@framebox=\box66
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
-ngs.cfg
+\c@lstnumber=\count442
+\lst@skipnumbers=\count443
+\lst@framebox=\box65
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multi
-row.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip103
-\multirow@cntb=\count446
-\multirow@dima=\skip104
-\bigstrutjot=\dimen187
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/graphics\rotat
-ing.sty
+\multirow@colwidth=\skip102
+\multirow@cntb=\count444
+\multirow@dima=\skip103
+\bigstrutjot=\dimen186
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count447
-\rotFPtop=\skip105
-\rotFPbot=\skip106
-\rot@float@box=\box67
-\rot@mess@toks=\toks31
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subf
-igure.sty
-Package: subfigure 2002/07/30 v2.1.4 subfigure package
-\subfigtopskip=\skip107
-\subfigcapskip=\skip108
-\subfigcaptopadj=\dimen188
-\subfigbottomskip=\skip109
-\subfigcapmargin=\dimen189
-\subfiglabelskip=\skip110
-\c@subfigure=\count448
-\c@lofdepth=\count449
-\c@subtable=\count450
-\c@lotdepth=\count451
+\c@r@tfl@t=\count445
+\rotFPtop=\skip104
+\rotFPbot=\skip105
+\rot@float@box=\box66
+\rot@mess@toks=\toks29
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip106
+\subfigcapskip=\skip107
+\subfigcaptopadj=\dimen187
+\subfigbottomskip=\skip108
+\subfigcapmargin=\dimen188
+\subfiglabelskip=\skip109
+\c@subfigure=\count446
+\c@lofdepth=\count447
+\c@subtable=\count448
+\c@lotdepth=\count449
 ****************************************
 * Local config file subfigure.cfg used *
 ****************************************
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subf
-igure.cfg)
-\subfig@top=\skip111
-\subfig@bottom=\skip112
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/float\float.st
-y
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip110
+\subfig@bottom=\skip111
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count452
-\float@exts=\toks32
-\float@box=\box68
-\@float@everytoks=\toks33
-\@floatcapt=\box69
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/acronym\acrony
-m.sty
+\c@float@type=\count450
+\float@exts=\toks30
+\float@box=\box67
+\@float@everytoks=\toks31
+\@floatcapt=\box68
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/acronym/acronym.sty
 Package: acronym 2020/04/17 v1.47 Support for acronyms (Tobias Oetiker)
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/bigfoot\suffix
-.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bigfoot/suffix.sty
 Package: suffix 2006/07/15 1.5a Variant command support
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/xstring\xstrin
-g.sty
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/generic/xstring\xstr
-ing.tex
-\integerpart=\count453
-\decimalpart=\count454
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xstring/xstring.sty (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xstring/xstring.tex
+\integerpart=\count451
+\decimalpart=\count452
 )
 Package: xstring 2021/07/21 v1.84 String manipulations (CT)
 )
-\AC@clearlist=\toks34
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.
-sty
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3k
-eys2e\l3keys2e.sty
+\AC@clearlist=\toks32
+) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.sty (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2022-06-22 LaTeX2e option processing using LaTeX3 keys
 )
 Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
-\g__lipsum_par_int=\count455
-\l__lipsum_a_int=\count456
-\l__lipsum_b_int=\count457
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.
-ltd.tex))
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
-rhack.sty
+\g__lipsum_par_int=\count453
+\l__lipsum_a_int=\count454
+\l__lipsum_b_int=\count455
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex)) (c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrhack.sty
 Package: scrhack 2022/07/04 v3.37 KOMA-Script package (hacking other packages)
 Package scrhack Info: hyperref hack deactivated because of
 (scrhack)             detection of hyperref version, that doesn't
 (scrhack)             need that hack, on input line 162.
 Package scrhack Info: loading float hack on input line 178.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\fl
-oat.hak
-File: float.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package floa
-t)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/float.hak
+File: float.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package float)
 Package scrhack Info: redefining \newfloat on input line 163.
 Package scrhack Info: redefining \listof on input line 163.
 Package scrhack Info: undefining \float@addtolists on input line 163.
 )
 Package scrhack Info: loading listings hack on input line 185.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\li
-stings.hak
-File: listings.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package l
-istings)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/listings.hak
+File: listings.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package listings)
 Package tocbasic Info: setting babel extension for `lol' on input line 143.
 Package scrhack Info: redefining \lstlistoflistings on input line 143.
 )
 Package scrhack Info: loading setspace hack on input line 199.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\se
-tspace.hak
-File: setspace.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package s
-etspace)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/setspace.hak
+File: setspace.hak 2022/07/04 v3.37 KOMA-Script scrhack part (hacking package setspace)
 ))
 1: section
 1: chapter
@@ -1170,7 +877,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-(Topic02_Team03.aux)
+(./Topic02_Team03.aux)
 \openout1 = `Topic02_Team03.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
@@ -1202,51 +909,11 @@ Package scrbase Info: activating english \listfigurename on input line 147.
 Package scrbase Info: activating english \listtablename on input line 147.
 Package scrbase Info: activating english \bibname on input line 147.
 Package scrbase Info: activating english \indexname on input line 147.
-LaTeX Info: Redefining \microtypecontext on input line 147.
-Package microtype Info: Applying patch `item' on input line 147.
-Package microtype Info: Applying patch `toc' on input line 147.
-Package microtype Info: Applying patch `eqnum' on input line 147.
-Package microtype Info: Applying patch `footnote' on input line 147.
-Package microtype Info: Generating PDF output.
-Package microtype Info: Character protrusion enabled (level 2).
-Package microtype Info: Using protrusion set `basicmath'.
-Package microtype Info: Automatic font expansion enabled (level 2),
-(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
-Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 147.
-Package microtype Info: No adjustment of tracking.
-Package microtype Info: No adjustment of interword spacing.
-Package microtype Info: No adjustment of character kerning.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-c
-mr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
-(RS)
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\su
-pp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count458
-\scratchdimen=\dimen190
-\scratchbox=\box70
-\nofMPsegments=\count459
-\nofMParguments=\count460
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count461
-\MPscratchDim=\dimen191
-\MPnumerator=\count462
-\makeMPintoPDFobject=\count463
-\everyMPtoPDFconversion=\toks36
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\e
-pstopdf-base.sty
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-85.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epsto
-pdf-sys.cfg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 147.
 *geometry* driver: auto-detecting
@@ -1285,30 +952,22 @@ Package hyperref Info: Link coloring OFF on input line 147.
 
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\e
-nglish.lbx
-File: english.lbx 2022/06/22 v3.18 biblatex localization (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load language 'ngerman'...
 Package biblatex Info: ... file 'ngerman.lbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\n
-german.lbx
-File: ngerman.lbx 2022/06/22 v3.18 biblatex localization (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+File: ngerman.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 Package biblatex Info: Trying to load language 'german'...
 Package biblatex Info: ... file 'german.lbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\g
-erman.lbx
-File: german.lbx 2022/06/22 v3.18 biblatex localization (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/german.lbx
+File: german.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load language 'german'...
 Package biblatex Info: ... file 'german.lbx' found.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\g
-erman.lbx
-File: german.lbx 2022/06/22 v3.18 biblatex localization (PK/MW)
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/german.lbx
+File: german.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 ))
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
@@ -1320,35 +979,26 @@ Package biblatex Info: ... file 'Topic02_Team03.bbl' not found.
 No file Topic02_Team03.bbl.
 Package biblatex Info: Reference section=0 on input line 147.
 Package biblatex Info: Reference segment=0 on input line 147.
-\c@lstlisting=\count464
+\c@lstlisting=\count456
 Package scrhack Info: undefining \float@addtolists on input line 147.
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-57.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 157.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-73.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-73.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-173.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-173.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1357,40 +1007,20 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 173.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 173.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 173
-.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.
-fd
+LaTeX Font Info:    Trying to load font information for U+msa on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-m
-sa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 173
-.
-
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.
-fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 173.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-m
-sb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 
 
-{C:/Users/Marie Kleinert/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+{c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 chapter without number
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/lmr/m/sc/10'.
-(microtype)             Ignoring protrusion settings for this character.
-[2]
-Package tocbasic Info: character protrusion at toc deactivated on input line 19
-4.
-(Topic02_Team03.toc)
+[2] (./Topic02_Team03.toc)
 \tf@toc=\write4
 \openout4 = `Topic02_Team03.toc'.
 
@@ -1402,239 +1032,199 @@ chapter without number
 
 ]
 chapter 1.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-18.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 317.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [5
 
 ]
 chapter 2.
-[6]
+[6] [7]
 chapter 3.
-[7]
-<./output/4_gsva_heatmap_tvn.png, id=138, 1586.92876pt x 941.01563pt>
+<./output/4_gsva_heatmap_tvn.png, id=141, 1586.92876pt x 941.01563pt>
 File: ./output/4_gsva_heatmap_tvn.png Graphic file (type png)
 <use ./output/4_gsva_heatmap_tvn.png>
-Package pdftex.def Info: ./output/4_gsva_heatmap_tvn.png  used on input line 53
-1.
+Package pdftex.def Info: ./output/4_gsva_heatmap_tvn.png  used on input line 524.
 (pdftex.def)             Requested size: 358.49644pt x 212.5809pt.
 [8]
-<./output/3_pcaumap_on_big_dataset.png, id=155, 1437.37pt x 844.15375pt>
+<./output/3_pcaumap_on_big_dataset.png, id=159, 1437.37pt x 844.15375pt>
 File: ./output/3_pcaumap_on_big_dataset.png Graphic file (type png)
 <use ./output/3_pcaumap_on_big_dataset.png>
-Package pdftex.def Info: ./output/3_pcaumap_on_big_dataset.png  used on input l
-ine 575.
+Package pdftex.def Info: ./output/3_pcaumap_on_big_dataset.png  used on input line 564.
 (pdftex.def)             Requested size: 332.89105pt x 195.50375pt.
 [9
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
        <./output/4_gsva_heatmap_tvn.png>]
-<output/3_gsva_heatmap_C5.pdf, id=170, 844.15375pt x 597.23125pt>
+<output/3_gsva_heatmap_C5.pdf, id=174, 844.15375pt x 597.23125pt>
 File: output/3_gsva_heatmap_C5.pdf Graphic file (type pdf)
 <use output/3_gsva_heatmap_C5.pdf>
-Package pdftex.def Info: output/3_gsva_heatmap_C5.pdf  used on input line 622.
+Package pdftex.def Info: output/3_gsva_heatmap_C5.pdf  used on input line 611.
 (pdftex.def)             Requested size: 435.34299pt x 308.00128pt.
 [10
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.628 
+l.617 
        <./output/3_pcaumap_on_big_dataset.png>]
-<./output/3_volcano_kombi.png, id=181, 670.9065pt x 597.6729pt>
+<./output/3_volcano_kombi.png, id=185, 670.9065pt x 597.6729pt>
 File: ./output/3_volcano_kombi.png Graphic file (type png)
 <use ./output/3_volcano_kombi.png>
-Package pdftex.def Info: ./output/3_volcano_kombi.png  used on input line 644.
+Package pdftex.def Info: ./output/3_volcano_kombi.png  used on input line 633.
 (pdftex.def)             Requested size: 399.48607pt x 355.8797pt.
 [11
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.650 
+l.639 
        <./output/3_gsva_heatmap_C5.pdf>]
 
-LaTeX Warning: Reference `fig:threeUMAPs' on page 12 undefined on input line 67
-0.
+LaTeX Warning: Reference `fig:threeUMAPs' on page 12 undefined on input line 659.
 
 [12
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.690 
+l.679 
        <./output/3_volcano_kombi.png (PNG copy)>]
-<./output/5_regression_kombiplot.png, id=205, 766.7847pt x 263.0628pt>
+<./output/5_regression_kombiplot.png, id=209, 766.7847pt x 263.0628pt>
 File: ./output/5_regression_kombiplot.png Graphic file (type png)
 <use ./output/5_regression_kombiplot.png>
-Package pdftex.def Info: ./output/5_regression_kombiplot.png  used on input lin
-e 700.
+Package pdftex.def Info: ./output/5_regression_kombiplot.png  used on input line 689.
 (pdftex.def)             Requested size: 435.32849pt x 149.34926pt.
 chapter 4.
 [13
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.756 
+l.745 
        <./output/5_regression_kombiplot.png (PNG copy)>] [14] [15] [16]
 chapter 5.
 [17
 
 ] [18]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-263.
-(C:\Users\Marie Kleinert\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1234.
+(c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [19] [20]
+) [19]
 chapter 6.
 
-Overfull \hbox (1.9275pt too wide) in paragraph at lines 1423--1423
-[]|\T1/lmr/m/n/10 (-20) RColorBrewer|  
+Overfull \hbox (3.17361pt too wide) in paragraph at lines 1389--1389
+[]|\T1/lmr/m/n/10 RColorBrewer|  
  []
 
-[21
+[20
 
 ]
-<output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf, id=349, 844.15375pt x 59
-7.23125pt>
-File: output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf Graphic file (type p
-df)
+<output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf, id=345, 844.15375pt x 597.23125pt>
+File: output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf Graphic file (type pdf)
 <use output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf>
-Package pdftex.def Info: output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf  
-used on input line 1495.
+Package pdftex.def Info: output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf  used on input line 1461.
 (pdftex.def)             Requested size: 384.11632pt x 271.75887pt.
-[22]
-<./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png, 
-id=358, 807.015pt x 874.76813pt>
-File: ./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.
-png Graphic file (type png)
-<use ./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.p
-ng>
-Package pdftex.def Info: ./output/4_barplot_ranked_expression_of_hallmark_and_m
-etabolism_pathways.png  used on input line 1504.
+[21]
+<./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png, id=354, 807.015pt x 874.76813pt>
+File: ./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png Graphic file (type png)
+<use ./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png>
+Package pdftex.def Info: ./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png  used on input line 1470.
 (pdftex.def)             Requested size: 384.1119pt x 416.36009pt.
-[23
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) 
-has been already used, duplicate ignored
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1510 
+l.1476 
         <./output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf>]
-<./output/4_gsva_volcano_plot_tvn.png, id=369, 1406.25375pt x 956.07187pt>
+<./output/4_gsva_volcano_plot_tvn.png, id=366, 1406.25375pt x 956.07187pt>
 File: ./output/4_gsva_volcano_plot_tvn.png Graphic file (type png)
 <use ./output/4_gsva_volcano_plot_tvn.png>
-Package pdftex.def Info: ./output/4_gsva_volcano_plot_tvn.png  used on input li
-ne 1513.
+Package pdftex.def Info: ./output/4_gsva_volcano_plot_tvn.png  used on input line 1479.
 (pdftex.def)             Requested size: 384.0924pt x 261.13348pt.
-[24
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) 
-has been already used, duplicate ignored
+[23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1519 
-        <./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathwa
-ys.png>]
-<output/4_volcano_2most_up_2most_down_pws.png, id=374, 3351.52126pt x 1906.1212
-5pt>
+l.1485 
+        <./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png>]
+<output/4_volcano_2most_up_2most_down_pws.png, id=371, 3351.52126pt x 1906.12125pt>
 File: output/4_volcano_2most_up_2most_down_pws.png Graphic file (type png)
 <use output/4_volcano_2most_up_2most_down_pws.png>
-Package pdftex.def Info: output/4_volcano_2most_up_2most_down_pws.png  used on 
-input line 1522.
+Package pdftex.def Info: output/4_volcano_2most_up_2most_down_pws.png  used on input line 1488.
 (pdftex.def)             Requested size: 384.11278pt x 218.45766pt.
-<./output/3_umap_clustering_LUAD.png, id=375, 14083.61626pt x 9958.20375pt>
+<./output/3_umap_clustering_LUAD.png, id=372, 14083.61626pt x 9958.20375pt>
 File: ./output/3_umap_clustering_LUAD.png Graphic file (type png)
 <use ./output/3_umap_clustering_LUAD.png>
-Package pdftex.def Info: ./output/3_umap_clustering_LUAD.png  used on input lin
-e 1531.
+Package pdftex.def Info: ./output/3_umap_clustering_LUAD.png  used on input line 1497.
 (pdftex.def)             Requested size: 435.16927pt x 307.69826pt.
-[25
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.3}) 
-has been already used, duplicate ignored
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1537 
+l.1503 
        
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.4}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1537 
-        <./output/4_gsva_volcano_plot_tvn.png> <./output/4_volcano_2most_up_2mo
-st_down_pws.png>]
-<./output/3_gsva_pcaumap_c5.png, id=382, 1436.36626pt x 837.1275pt>
+l.1503 
+        <./output/4_gsva_volcano_plot_tvn.png> <./output/4_volcano_2most_up_2most_down_pws.png>]
+<./output/3_gsva_pcaumap_c5.png, id=378, 1436.36626pt x 837.1275pt>
 File: ./output/3_gsva_pcaumap_c5.png Graphic file (type png)
 <use ./output/3_gsva_pcaumap_c5.png>
-Package pdftex.def Info: ./output/3_gsva_pcaumap_c5.png  used on input line 154
-0.
+Package pdftex.def Info: ./output/3_gsva_pcaumap_c5.png  used on input line 1506.
 (pdftex.def)             Requested size: 409.71931pt x 238.7882pt.
-<./output/3_gsva_pcaumap _c2.pdf, id=383, 844.15375pt x 597.23125pt>
+<./output/3_gsva_pcaumap _c2.pdf, id=379, 844.15375pt x 597.23125pt>
 File: ./output/3_gsva_pcaumap _c2.pdf Graphic file (type pdf)
 <use ./output/3_gsva_pcaumap _c2.pdf>
-Package pdftex.def Info: ./output/3_gsva_pcaumap _c2.pdf  used on input line 15
-49.
+Package pdftex.def Info: ./output/3_gsva_pcaumap _c2.pdf  used on input line 1515.
 (pdftex.def)             Requested size: 409.72322pt x 289.87552pt.
-[26
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.5}) 
-has been already used, duplicate ignored
+[25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1555 
+l.1521 
        
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.6}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1555 
+l.1521 
         <./output/3_umap_clustering_LUAD.png> <./output/3_gsva_pcaumap_c5.png>]
-<./output/5_confusion_matrix.png, id=390, 911.405pt x 713.66624pt>
+<./output/5_confusion_matrix.png, id=387, 911.405pt x 713.66624pt>
 File: ./output/5_confusion_matrix.png Graphic file (type png)
 <use ./output/5_confusion_matrix.png>
-Package pdftex.def Info: ./output/5_confusion_matrix.png  used on input line 15
-58.
+Package pdftex.def Info: ./output/5_confusion_matrix.png  used on input line 1524.
 (pdftex.def)             Requested size: 204.84866pt x 160.40462pt.
-<./output/5_QC_plot_cancercolor.pdf, id=391, 1436.36626pt x 835.12pt>
+<./output/5_QC_plot_cancercolor.pdf, id=388, 1436.36626pt x 835.12pt>
 File: ./output/5_QC_plot_cancercolor.pdf Graphic file (type pdf)
 <use ./output/5_QC_plot_cancercolor.pdf>
-Package pdftex.def Info: ./output/5_QC_plot_cancercolor.pdf  used on input line
- 1567.
+Package pdftex.def Info: ./output/5_QC_plot_cancercolor.pdf  used on input line 1533.
 (pdftex.def)             Requested size: 409.71931pt x 238.21555pt.
-[27
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.7}) 
-has been already used, duplicate ignored
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1573 
+l.1539 
        
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.8}) 
-has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1573 
+l.1539 
         <./output/3_gsva_pcaumap _c2.pdf> <./output/5_confusion_matrix.png>]
-<./output/5_QC_assigned.pdf, id=402, 844.15375pt x 597.23125pt>
+<./output/5_QC_assigned.pdf, id=399, 844.15375pt x 597.23125pt>
 File: ./output/5_QC_assigned.pdf Graphic file (type pdf)
 <use ./output/5_QC_assigned.pdf>
-Package pdftex.def Info: ./output/5_QC_assigned.pdf  used on input line 1576.
+Package pdftex.def Info: ./output/5_QC_assigned.pdf  used on input line 1542.
 (pdftex.def)             Requested size: 409.72322pt x 289.87552pt.
-[28
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.9}) 
-has been already used, duplicate ignored
+[27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1583 \end{document}
+l.1549 \end{document}
                      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6.10})
- has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1583 \end{document}
-                      <./output/5_QC_plot_cancercolor.pdf> <./output/5_QC_assig
-ned.pdf>] (Topic02_Team03.aux)
+l.1549 \end{document}
+                      <./output/5_QC_plot_cancercolor.pdf> <./output/5_QC_assigned.pdf>] (./Topic02_Team03.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1643,34 +1233,18 @@ Package logreq Info: Writing requests to 'Topic02_Team03.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30348 strings out of 478351
- 584346 string characters out of 2832768
- 1625202 words of memory out of 3000000
- 47916 multiletter control sequences out of 15000+600000
- 529783 words of font info for 153 fonts, out of 8000000 for 9000
- 1143 hyphenation exceptions out of 8191
- 108i,20n,106p,10620b,2367s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-
-ts1.enc}{C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/
-lm/lm-mathit.enc}{C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/e
-nc/dvips/lm/lm-ec.enc}<C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/lm/lmbx10.pfb><C:/Users/Marie Kleinert/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Marie Kleinert/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Marie Kleinert/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Marie Klein
-ert/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Mar
-ie Kleinert/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/U
-sers/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.
-pfb><C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
-m/lmss10.pfb><C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/lm/lmss12.pfb><C:/Users/Marie Kleinert/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/lm/lmss17.pfb><C:/Users/Marie Kleinert/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/Marie Kleinert/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Marie Kleinert/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Topic02_Team03.pdf (28 pages, 5648205 bytes).
+ 28044 strings out of 479953
+ 540615 string characters out of 5884592
+ 1548943 words of memory out of 5000000
+ 45639 multiletter control sequences out of 15000+600000
+ 520952 words of font info for 59 fonts, out of 8000000 for 9000
+ 16 hyphenation exceptions out of 8191
+ 108i,20n,106p,10618b,2367s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss17.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/chloe/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on Topic02_Team03.pdf (27 pages, 5587099 bytes).
 PDF statistics:
- 632 PDF objects out of 1000 (max. 8388607)
- 200 named destinations out of 1000 (max. 500000)
- 35204 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 634 PDF objects out of 1000 (max. 8388607)
+ 546 compressed objects within 6 object streams
+ 195 named destinations out of 1000 (max. 500000)
+ 388 words of extra memory for PDF output out of 10000 (max. 10000000)
 
