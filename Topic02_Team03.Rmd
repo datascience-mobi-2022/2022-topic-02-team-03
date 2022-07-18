@@ -441,7 +441,7 @@ Gene set enrichment analysis (GSEA) is a computational method that is used to de
 knitr::include_graphics("output/2_geneset_heatmap_metabolism_vs_hallmarks.pdf")
 ```
 
-```{r GSEA barplot, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Barplot for the mean regultion of hallmark gene sets and metabolism gene sets.} The pathways are sorted by their mean expression and can be seen on the y axis, while the mean expression is plotted on the x axis. Furthermore each pathway is coloured by the regultion state, meaning the genes contained in the leading edge define weather the pathway is mostly or only upregulated and vice versa.', out.width='75%'}
+```{r GSEA barplot, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Barplot for the mean regultion of hallmark gene sets and metabolism gene sets.} Pathways are sorted by their mean expression. The x-achsis shows the mean expression and the y-achsis shows the pathways. Each pathway is colored according to regulation state.', out.width='75%'}
 
 knitr::include_graphics("./output/4_barplot_ranked_expression_of_hallmark_and_metabolism_pathways.png")
 
