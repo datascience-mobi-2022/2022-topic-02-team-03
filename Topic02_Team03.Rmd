@@ -236,7 +236,7 @@ knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")
 
 ```
 
-A total of four pathways with particularly significant p values were selected. They showed high absolute fold changes. In (\textbf{Appendix Fig. \ref{fig:volcano pathways}}), genes of these pathways are highlighted in black and some with particularly low p values are labeled. The red colored genes are all genes in our cleaned TCGA tumor normal dataset that are significantly over expressed over all patients in tumor tissue compared to normal tissue. The blue colored genes imply the opposite. In gray, one can see insignificantly up or downregulated genes. Pathways involved in DNA replication and cell cycle progression were globally overexpressed (\textbf{Appendix Fig. \ref{fig:volcano pathways}}). Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen in \textbf{Appendix Fig. \ref{fig:volcano pathways}}(D, E). PPAR gamma or CD36 seem to be significantly down-regulated in the latter pathway.
+A total of four pathways with particularly significant p values and high absolute foldchanges were selected.In (\textbf{Appendix Fig. \ref{fig:volcano pathways}}), genes of these pathways are highlighted in black and some with particularly low p values are labeled. Pathways involved in DNA replication and cell cycle progression were globally overexpressed (\textbf{Appendix Fig. \ref{fig:volcano pathways}}). Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen in \textbf{Appendix Fig. \ref{fig:volcano pathways}}(D, E). PPAR gamma or CD36 seem to be significantly down-regulated in the latter pathway.
 
 ## Pan cancer analysis
 
