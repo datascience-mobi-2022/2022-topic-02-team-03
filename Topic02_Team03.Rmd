@@ -236,7 +236,7 @@ knitr::include_graphics("./output/4_gsva_heatmap_tvn.png")
 
 ```
 
-A total of four pathways with particularly significant p values and high absolute foldchanges were selected.In (\textbf{Appendix Fig. \ref{fig:volcano pathways}}), genes of these pathways are highlighted in black and some with particularly low p values are labeled. Pathways involved in DNA replication and cell cycle progression were globally overexpressed (\textbf{Appendix Fig. \ref{fig:volcano pathways}}). Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen in \textbf{Appendix Fig. \ref{fig:volcano pathways}}(D, E). PPAR gamma or CD36 seem to be significantly down-regulated in the latter pathway.
+A total of four pathways with particularly significant p values and high absolute foldchanges were selected.In (\textbf{Appendix Fig. \ref{fig:volcano pathways}}), genes of these pathways are highlighted in black and some with particularly low p values are labeled. Pathways involved in DNA replication and cell cycle progression were globally overexpressed (\textbf{Appendix Fig. \ref{fig:volcano pathways}}). Two down regulated pathways, namely renal system regulation and cellular response to lipoprotein particle stimulus are seen in \textbf{Appendix Fig. \ref{fig:volcano pathways}}(C, D). PPAR gamma or CD36 seem to be significantly down-regulated in the latter pathway.
 
 ## Pan cancer analysis
 
@@ -264,9 +264,9 @@ knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 
 ### Geneset enrichment comparison between LUAD and other cancer types
 
-The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis. The volcano plot (\textbf{Fig. \ref{fig:Volcano LUAD vs rest}} helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients.
+The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis. The volcano plot (\textbf{Fig. \ref{fig:Volcano LUAD vs rest}}) helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients.
 
-```{r Volcano LUAD vs rest, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot of geneset ernichment in LUAD compared to all other cancer types of the TCGA dataset.} log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the two sided Wilcoxon test are shown. Dotted lines indicate the alpha value and foldchange values of -1 and 1', out.width = '0.70\\linewidth'}
+```{r Volcano LUAD vs rest, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot of geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset.} log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the two sided Wilcoxon test are shown. Dotted lines indicate the alpha value and foldchange values of -1 and 1', out.width = '0.70\\linewidth'}
 
 knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
 
@@ -478,7 +478,7 @@ knitr::include_graphics("./output/3_UMAPs.png")
 
 ```{r Volcano intraLUAD, echo=FALSE, fig.align='center', fig.cap='\\textbf{Volcano plot comparing the two observed clusters.} Each datapoint is one gene, the most differentially expressed genes are marked by name.', out.width= '0.7\\linewidth'}
 
-knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
+knitr::include_graphics("./output/3_volcano_plot_comparison_LUAD_clusters.pdf")
 ```
 
 
