@@ -105,9 +105,9 @@ linestretch: 1.15
 \addchap{Abstract}
 Lung adenocarcinoma (LUAD) is the most common type of lung cancer. Its poor early diagnosis rate and high mortality create a great demand to identify biomarkers improving diagnosis and prognosis. This study aims to determine driver genes suitable to predict LUAD based on a patient's gene expression pattern.
 
-To this end a two RNA-seq datasets from The Cancer Genome Atlas, one containing molecular data from 33 different cancer types and one containing data from LUAD tissue and from corresponding healthy tissue were analysed based on gene expression and pathway enrichment. In an effort to characterize LUAD-specific deregulations, Gene Set Enrichment Analysis and Gene Set Variation Analysis were performed using the geneset list provided by the Molecular Signatures Database. 
+To this end, two RNA-seq datasets from The Cancer Genome Atlas, one containing molecular data from 33 different cancer types and one containing data from LUAD tissue and from corresponding healthy tissue were analysed based on gene expression and pathway enrichment. In an effort to characterize LUAD-specific deregulations, Gene Set Enrichment Analysis and Gene Set Variation Analysis were performed using the geneset list provided by the Molecular Signatures Database. 
 
-Patients suffering from LUAD exhibit a general downregulation of the renal system but upregulation of HIF1 alpha. In comparison to other cancer types, LUAD expresses a more immunogenic and pro-inflammatory molecular signature. Moreover, genes involved in alveolal development show a notably higher expression rate. 
+Patients suffering from LUAD exhibit a general downregulation of the renal system but upregulation of HIF1 alpha. In comparison to other cancer types, LUAD expresses a more immunogenic and pro-inflammatory molecular signature. Moreover, genes involved in alveolal development show a notably higher expression rate. Further analysis revealed two subclasses of LUAD differing mainly in their blood clotting capabilities.
 
 With the help of these findings a regression model was developed that helps predict LUAD and non-LUAD patients with 98.6 percent accuracy.
 
@@ -176,7 +176,7 @@ Our study provides a diverse analysis of driver genes and pathways underlying LU
 
 ## Background
 
-To this day, lung cancer is the leading cause of cancer death worldwide \[@zhang2020\]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases and which is characterized by a remarkably low 5-year overall survival rate of merely 18% \[@wang2020; @li2022\]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that drive tumor formation due to numerous genetic mutations \[@hanahan2011; @peng2018\]. In order to gain an insight into which mutations drive cancer development we revert back to the pan cancer project. The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In the Pan Cancer project, data is collected from thousands of cancer patients and subsequently analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. The TCGA project provides a vast amount of RNA sequencing (RNA-seq) data which makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
+To this day, lung cancer is the leading cause of cancer death worldwide [@zhang2020]. Lung adenocarcinoma (LUAD) is a form of non-small cell lung cancer which accounts for approximately 40% of lung cancer cases and which is characterized by a remarkably low 5-year overall survival rate of merely 18% [@wang2020; @li2022]. In theory, every cell is capable of developing into a cancer cell through acquisition of so-called hallmark capabilities that drive tumor formation due to numerous genetic mutations [@hanahan2011; @peng2018]. In order to gain an insight into which mutations drive cancer development we revert back to the pan cancer project. The Cancer Genome Atlas (TCGA) is a publicly available collection of datasets that store the most important cancer-causing genomic alterations in order to create an 'atlas' of cancer genomic profiles [@tomczak2015]. In the Pan Cancer project, data is collected from thousands of cancer patients and subsequently analysed and interpreted in an attempt to gain a deeper understanding of the genomic changes that drive a normal cell to become cancerous. The TCGA project provides a vast amount of RNA sequencing (RNA-seq) data which makes it possible to go beyond static genome analysis and to gain an insight into the transcriptional landscape of a cell. Studying gene expression profiles of a given cell through monitoring RNA synthesis enables researchers to gain a deeper understanding of how gene expression is regulated in cells and its impact on the cell's phenotype [@marguerat2010].
 
 ## Computational Tools
 
@@ -228,7 +228,7 @@ The similarity between chosen pathways was measured using the Jaccard index and 
 
 Overall, as shown in \textbf{Fig. \ref{fig:GSEA barplot}} more upregulated than downregulated pathways were observed. Among the upregulated, Meta_HIF1 and the ascorbate and alderate metabolism pathways presented with the highest mean as well as some pathways associated with nucleotide, amino acid, and sugar metabolism. Downregulated pathways are mainly linked to the immune response but also to the metabolism of specific amino acids and fatty acids. The two most significantly downregulated pathways regulate linolenic acid and nitrogen metabolism.
 
-The heatmap (\textbf{Fig. \ref{fig:heatmap GSVA}}) shows two recognizable groups with different expression patterns. The left half shows only tumor samples while the right half shows almost exclusively healthy samples, with a few tumor samples among them framed in black. \\newline Strong differences can be seen in the pathways marked in violet. Many of the pathways that are strongly upregulated in tumor cells are associated with DNA replication or chromosome distribution during mitosis.The pathways marked in blue are connected to immune response, for example that of T-helper 17 cells. In this case, some tumor samples show upregulation while most show downregulation. In normal tissue the expression of most pathways is clearly upregulated with a few exceptions near the right margin. The volcano plot (\textbf{Fig. \ref{fig:volcano GSVA}}) confirms these findings.
+The heatmap (\textbf{Fig. \ref{fig:heatmap GSVA}}) shows two recognizable groups with different expression patterns. The left half shows only tumor samples while the right half shows almost exclusively healthy samples, with a few tumor samples among them framed in black. \newline Strong differences can be seen in the pathways marked in violet. Many of the pathways that are strongly upregulated in tumor cells are associated with DNA replication or chromosome distribution during mitosis.The pathways marked in blue are connected to immune response, for example that of T-helper 17 cells. In this case, some tumor samples show upregulation while most show downregulation. In normal tissue the expression of most pathways is clearly upregulated with a few exceptions near the right margin. The volcano plot (\textbf{Fig. \ref{fig:volcano GSVA}}) confirms these findings.
 
 ```{r heatmap GSVA, echo = FALSE, message=FALSE, fig.align='center', fig.cap='\\textbf{Heatmap for comparing pathway expression in normal and tumor tissue } The heatmap shows the GSVA results for the small TCGA dataset. On the x axis one can see the normal and tumor samples, while the y axis shows the pathways with the highest standard deviation. The expression of each pathway is color-coded, from high expression (red), to low expression (blue).', out.width='0.7\\linewidth'}
 
@@ -256,7 +256,7 @@ The diagnosis of the cancer type a patient suffers from is not only based on the
 
 Based on the geneset enrichment matrix created with GSVA, a pathway enrichment heatmap was created (\textbf{Fig. \ref{fig:GSVAheatmap}}). Performing k-means clustering, three clusters of cancer types were identified. The cancer types allocated to the first cluster can be categorized into kidney carcinomata, gliomata, carcinomata of the sexual organ as well as thyroid and liver carcinoma. The other two clusters exhibit no specific subcategories explaining similar pathway deregulation patterns. Cancer types belonging to cluster one show a general strong down regulation of pathways in comparison to the other cancer types. Cluster 2 contains cancer types with distinct deregulation of pathways. The third cluster exhibits a strong deregulation of pathways relatively to the other cancer types, some being upregulated while others are severely downregulated. The first cluster includes pathways that regulate the cell cycle, DNA replication and chromatid segregation.Cancer types included in the first cluster inhibit immune activation.
 
-```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.85\\linewidth'}
+```{r GSVAheatmap, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Pathway enrichment heatmap.} The clustering of cancer types was conducted using kmeans.', out.width = '0.75\\linewidth'}
 
 knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 
@@ -264,11 +264,11 @@ knitr::include_graphics("output/3_gsva_heatmap_C5.pdf")
 
 ### Geneset enrichment comparison between LUAD and other cancer types
 
-The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis. The volcano plot (\textbf{Fig. \ref{fig:VolcanoplotKombi}} A) helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients.
+The identification of marker pathways for LUAD and the comparison of geneset enrichment is a central part of this project. The resulting heatmap and volcano plot could then be used to gather information of the different molecular signatures of LUAD and of other cancer types and gave critical information for the following regression analysis. The volcano plot (\textbf{Fig. \ref{fig:Volcano LUAD vs rest}} helps with analysing the exact pathways that differ in activity between LUAD patients and other cancer patients.
 
-```{r VolcanoplotKombi, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{A Volcano plot for geneset enrichment in LUAD compared to all other cancer types of the TCGA dataset} log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the two-sided Wilcoxon test are shown. Dotted lines indicate the alpha value and foldchange values of -1 and 1.\\textbf{B Volcano plot comparing the two observed clusters.} Each datapoint is one gene, the most differentially expressed genes are marked by name.', out.width = '0.78\\linewidth'}
+```{r Volcano LUAD vs rest, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Volcano plot of geneset ernichment in LUAD compared to all other cancer types of the TCGA dataset.} log2 foldchange values between LUAD and non-LUAD patients as well as the -log10 values of the corresponding p-values from the two sided Wilcoxon test are shown. Dotted lines indicate the alpha value and foldchange values of -1 and 1', out.width = '0.70\\linewidth'}
 
-knitr::include_graphics("./output/3_volcano_kombi.png")
+knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
 
 ```
 
@@ -276,9 +276,7 @@ The volcano plot shows several differentially expressed pathways in LUAD. The ma
 
 ### Comparison of Clusters Within LUAD
 
-After running separate PCA and UMAP analysis on patients for each tumor type the question arose how the patients within one tumor type differ from each other. The UMAP plots for three of the most clearly clustering tumor types can be seen in Figure (Appendix \textbf{Fig. \ref{fig:threeUMAPs}}).
-
-LUAD also clustered into two clusters, however these were not as clear as the ones shown before (Appendix, \textbf{Fig. \ref{fig:appendix_luadumap}}). To further our understanding of LUAD the gene activity of the clusters was compared using a volcano plot (\textbf{Fig. \ref{fig:VolcanoplotKombi}} B).
+After running separate PCA and UMAP analysis on patients for each tumor type the question arose how the patients within one tumor type differ from each other. The UMAP plots for three of the most clearly clustering tumor types can be seen in Figure (Appendix \textbf{Fig. \ref{fig:threeUMAPs}}). \newline LUAD also clustered into two clusters, however these were not as clear as the ones shown before (Appendix, \textbf{Fig. \ref{fig:appendix_luadumap}}). To further our understanding of LUAD the gene activity of the clusters was compared using a volcano plot (Appendix, \textbf{Fig. \ref{fig:Volcano intraLUAD}}).
 
 ## Regression
 
@@ -471,6 +469,16 @@ knitr::include_graphics("./output/3_gsva_pcaumap_c5.png")
 ```{r appendix_umapC2, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Clustering after GSVA performed with curated genesets.} Colored by assigned value by the trained model to asses quality of model', out.width = '0.80\\linewidth'}
 
 knitr::include_graphics("./output/3_gsva_pcaumap _c2.pdf")
+```
+
+```{r threeUMAPs, echo=FALSE, fig.align='center', fig.cap='\\textbf{UMAP plots for SARC, ESCA and BRCA}  run on the correspending subset of the gene expression dataset, colored by the cluster assigned to each datapoint by k-means clustering.', out.width= '0.7\\linewidth'}
+
+knitr::include_graphics("./output/3_UMAPs.png")
+```
+
+```{r Volcano intraLUAD, echo=FALSE, fig.align='center', fig.cap='\\textbf{Volcano plot comparing the two observed clusters.} Each datapoint is one gene, the most differentially expressed genes are marked by name.', out.width= '0.7\\linewidth'}
+
+knitr::include_graphics("./output/3_volcano_plot_gsva_luad_vs_rest.png")
 ```
 
 ```{r confusionmatrix, echo = FALSE, message = FALSE, fig.align = 'center', fig.cap = '\\textbf{Confusion table} for prediction on test datast containing 2921 patients with 163 LUAD patients.', out.width = '0.4\\linewidth'}
