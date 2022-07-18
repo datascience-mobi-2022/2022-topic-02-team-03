@@ -136,8 +136,8 @@ ggplot(LUAD_expression_df, aes( y = expressions, x = reorder(genes, expressions)
   theme(axis.text.x = element_text(angle = 45))
 
 # calculate fold change between LUAD and all other cancer types and perform a vulcano plot
-
-foldchange_LUADvsRest <- foldchange(rest_means, as.data.frame(pathway_enrichment_means_C5)$LUAD)
+foldchange_LUADvsRest <- as.data.frame(pathway_enrichment_means_C5)$LUAD - rest_means
+foldchange_LUADvsRest <- foldchange(as.data.frame(pathway_enrichment_means_C5)$LUAD, rest_means )
 foldchange_LUADvsRest <- sapply(foldchange_LUADvsRest, function(x){log2(x)})
 
 all_gsva_rest <- as.data.frame(all_gsva_C5_highSD[,which(tcga_anno$cancer_type_abbreviation != "LUAD")])
